@@ -14,6 +14,7 @@ app.set('views', path.join(__dirname, '/src/views'))
 
 //Middlewares
 app.use(express.static('./src/public'))
+app.use(express.static('./src/views'))
 
 //Routes
 app.use(indexRoutes);

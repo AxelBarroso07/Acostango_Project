@@ -27,6 +27,10 @@ SET time_zone = "+00:00";
 -- Table structure for table `calendar_class`
 --
 
+CREATE DATABASE acostango;
+
+USE acostango;
+
 CREATE TABLE `calendar_class` (
     `id_class` int(11) NOT NULL,
     `title` varchar(100) NOT NULL,

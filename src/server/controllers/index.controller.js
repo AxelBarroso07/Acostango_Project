@@ -49,3 +49,40 @@ export const delIndex = async (req, res) => {
         })
     }
 }
+
+export const getCalendar = async (req, res) => {
+    try {
+        const date = new Date()
+        
+        const year = date.getFullYear()
+        const month = date.getMonth()
+
+        const nameMonth = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+        const positonMonth = nameMonth[date.getMonth()]
+
+        function daysOfTheMonth(currentYear, currentMonth){
+            const startDate = new Date(currentYear, currentMonth, 1)
+            const endDate = new Date(currentYear, currentMonth + 1, 1)
+            let dates = []
+            while(startDate < endDate) {
+                dates.push(new Date(startDate))
+                startDate.setDate(startDate.getDate() + 1)
+            }
+                return dates
+            }
+        
+        
+        const daysMonth = daysOfTheMonth(year, month)
+        const lengthDaysMonth = daysMonth.length
+        console.log(lengthDaysMonth)
+        // console.log(daysMonth)
+        // console.log(date)
+        // console.log(nameMonth)
+        return res.status(200).render("calendar", { positonMonth, daysMonth, lengthDaysMonth })
+    } catch(error) {
+        console.log(error)
+        return res.status(500).json({
+            message: "Internal server error"
+        })
+    }
+}

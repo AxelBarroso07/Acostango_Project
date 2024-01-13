@@ -1,0 +1,27 @@
+<%- include('./partials/headerStart.ejs') %>
+<title>Calendar set</title>
+<link rel='stylesheet' type='text/css' media='screen' href='./styles/calendar.css'>
+<%- include('./partials/headerEnd.ejs') %>
+
+<h1>form calendar - <%- positonMonth %></h1>
+
+<table border="1">
+    <% for(let i = 0; i < daysMonth.length; i++) { %>
+        <tr>
+            <td><%= daysMonth[i] %></td>
+            <td><%=[i]%></td>
+        </tr>
+    <% } %>
+</table>
+
+<form action="" method="post" enctype="multipart/form-data">
+    <label for="class_name">Class name</label>
+    <input type="radio" id="1" value="option1" name="class">
+    <label for="1">sdasd</label>
+    <input type="radio" id="2" value="option2" name="class">
+    <label for="2">sdasd</label>
+    <input type="radio" id="3" value="option3" name="class">
+    <label for="3">sdasd</label>
+</form>
+
+<%- include('./partials/footer.ejs') %>
