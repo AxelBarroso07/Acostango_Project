@@ -1,27 +1,81 @@
 <%- include('./partials/headerStart.ejs') %>
 <title>Calendar set</title>
-<link rel='stylesheet' type='text/css' media='screen' href='./styles/calendar.css'>
+<link
+  rel="stylesheet"
+  type="text/css"
+  media="screen"
+  href="./styles/calendar.css"
+/>
 <%- include('./partials/headerEnd.ejs') %>
-
-<h1>form calendar - <%- positonMonth %></h1>
-
+<p>Schedule</p>
+<p><%- positonMonth %></p>
 <table border="1">
-    <% for(let i = 0; i < daysMonth.length; i++) { %>
-        <tr>
-            <td><%= daysMonth[i] %></td>
-            <td><%=[i]%></td>
-        </tr>
-    <% } %>
+  <thead>
+    <tr>
+      <% for(let i = 0; i < weekDay.length; i++) { %>
+      <th><%= weekDay[i] %></th>
+      <% } %>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Fisrt row -->
+    <tr>
+      <td></td>
+      <td></td>
+      <td>Beginners</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <!-- Second row -->
+    <tr>
+      <td></td>
+      <td></td>
+      <td>Intermediate</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <!-- Third row -->
+    <tr>
+      <td></td>
+      <td>Acostango afterwork Milonga</td>
+      <td>Tango strong</td>
+      <td>Practica</td>
+      <td>Newcomers course</td>
+      <td></td>
+      <td>Special workshop</td>
+    </tr>
+    <!-- Fourth row -->
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>Acostango Milonga</td>
+    </tr>
+  </tbody>
 </table>
 
+<!-- <% for(let i = 1; i < daysMonth.length; i++) { %> -->
+<!-- <tr> -->
+<!-- <td><%= daysMonth[i] %></td>
+      <td><%=[i+1]%></td> -->
+<!-- </tr> -->
+<!-- <% } %> -->
+
 <form action="" method="post" enctype="multipart/form-data">
-    <label for="class_name">Class name</label>
-    <input type="radio" id="1" value="option1" name="class">
-    <label for="1">sdasd</label>
-    <input type="radio" id="2" value="option2" name="class">
-    <label for="2">sdasd</label>
-    <input type="radio" id="3" value="option3" name="class">
-    <label for="3">sdasd</label>
+  <label for="class_name">Class name</label>
+  <input type="radio" id="1" value="option1" name="class" />
+  <label for="1">sdasd</label>
+  <input type="radio" id="2" value="option2" name="class" />
+  <label for="2">sdasd</label>
+  <input type="radio" id="3" value="option3" name="class" />
+  <label for="3">sdasd</label>
 </form>
 
 <%- include('./partials/footer.ejs') %>
