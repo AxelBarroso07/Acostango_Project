@@ -1,81 +1,96 @@
 <%- include('./partials/headerStart.ejs') %>
 <title>Calendar set</title>
-<link
-  rel="stylesheet"
-  type="text/css"
-  media="screen"
-  href="./styles/calendar.css"
-/>
+<link rel="stylesheet" type="text/css" media="screen" href="./styles/calendar.css" />
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <%- include('./partials/headerEnd.ejs') %>
+
 <p>Schedule</p>
+
 <p><%- positonMonth %></p>
+
 <table border="1">
-  <thead>
-    <tr>
-      <% for(let i = 0; i < weekDay.length; i++) { %>
-      <th><%= weekDay[i] %></th>
-      <% } %>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- Fisrt row -->
-    <tr>
-      <td></td>
-      <td></td>
-      <td>Beginners</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <!-- Second row -->
-    <tr>
-      <td></td>
-      <td></td>
-      <td>Intermediate</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <!-- Third row -->
-    <tr>
-      <td></td>
-      <td>Acostango afterwork Milonga</td>
-      <td>Tango strong</td>
-      <td>Practica</td>
-      <td>Newcomers course</td>
-      <td></td>
-      <td>Special workshop</td>
-    </tr>
-    <!-- Fourth row -->
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>Acostango Milonga</td>
-    </tr>
-  </tbody>
+    <thead>
+        <tr>
+            <th>Hours</th>
+            <% for(let i = 0; i < weekDay.length; i++) {%>
+                <th> <%- weekDay[i] %> </th>
+            <% } %>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- First row -->
+        <% for (let i = 0; i < hourClassesArray.length; i++) { %>
+            <tr>
+                <td><%- hourClassesArray[i] %></td>
+        
+                <% for (let j = 0; j < weekDay.length; j++) { %>
+                    <% const classForCell = rows.find(row => row.day === weekDay[j] && parseInt(row.time_start.slice(0, 2)) <= hourClassesArray[i] && parseInt(row.time_finish.slice(0, 2)) >= hourClassesArray[i]) %>
+                    
+                    <% if (classForCell) { %>
+                        <td><%- classForCell.title %></td>
+                    <% } else { %>
+                        <td></td>
+                    <% } %>
+                <% } %>
+            </tr>
+        <% } %>
+        
+    </tbody>
 </table>
+<p>
 
-<!-- <% for(let i = 1; i < daysMonth.length; i++) { %> -->
-<!-- <tr> -->
-<!-- <td><%= daysMonth[i] %></td>
-      <td><%=[i+1]%></td> -->
-<!-- </tr> -->
-<!-- <% } %> -->
+<!-- <form action="" method="post" enctype="multipart/form-data">
+    <label for="class_name">Class</label>
+    <input type="radio" id="1" value="option1" name="class" />
+    <label for="1">sdasd</label>
+    <input type="radio" id="2" value="option2" name="class" />
+    <label for="2">sdasd</label>
+    <input type="radio" id="3" value="option3" name="class" />
+    <label for="3">sdasd</label>
+</form> -->
 
-<form action="" method="post" enctype="multipart/form-data">
-  <label for="class_name">Class name</label>
-  <input type="radio" id="1" value="option1" name="class" />
-  <label for="1">sdasd</label>
-  <input type="radio" id="2" value="option2" name="class" />
-  <label for="2">sdasd</label>
-  <input type="radio" id="3" value="option3" name="class" />
-  <label for="3">sdasd</label>
-</form>
+<button type="button" onclick="openModal()">Edit</button>
+
+<div id="react-root"></div>
+
+<!-- Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+
+<script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+<script src="../components/testing.jsx"></script>
+
+<!-- Script para renderizar el componente Modal -->
+<script>
+    // Obtener el contenedor para React
+    const reactRoot = document.getElementById('react-root');
+    console.log(reactRoot);
+    // Renderizar el componente Modal en el contenedor
+    ReactDOM.render(
+    React.createElement(ModalComponent, { isOpen: false, onClose: () => {} }),
+    reactRoot
+    );
+
+    // Función para abrir el modal
+    function openModal() {
+    ReactDOM.render(
+        React.createElement(ModalComponent, { isOpen: true, onClose: closeModal }),
+        reactRoot
+    );
+    }
+
+    // Función para cerrar el modal
+    function closeModal() {
+    ReactDOM.render(
+        React.createElement(ModalComponent, { isOpen: false, onClose: () => {} }),
+        reactRoot
+    );
+    }
+</script>
 
 <%- include('./partials/footer.ejs') %>
