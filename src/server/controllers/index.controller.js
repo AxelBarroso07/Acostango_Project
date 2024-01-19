@@ -92,30 +92,48 @@ export const getCalendar = async (req, res) => {
             WHEN day = 'Friday' THEN 6
             WHEN day = 'Saturday' THEN 7
             END`);
-        console.log(rows)
+        // console.log(rows)
+
+        let hourClassesArray = []
+        let rowsParse = []
 
         //Format hour classes
-        let hourClassesSet = new Set();
+        if(rows && rows.length > 0) {
+        
+            let hourClassesSet = new Set();
 
-        for (let i = 0; i < rows.length; i++) {
-            const temporalHour = parseInt(rows[i].time_start.slice(0, 2));
-            const temporalHourF = parseInt(rows[i].time_finish.slice(0, 2));
+            for (let i = 0; i < rows.length; i++) {
+                const temporalHour = parseInt(rows[i].time_start.slice(0, 2));
+                const temporalHourF = parseInt(rows[i].time_finish.slice(0, 2));
 
-            hourClassesSet.add(temporalHour);
+                hourClassesSet.add(temporalHour);
 
-            if (temporalHour !== temporalHourF) {
-                hourClassesSet.add(temporalHourF);
+                if (temporalHour !== temporalHourF) {
+                    hourClassesSet.add(temporalHourF);
+                }
             }
+
+            hourClassesArray = Array.from(hourClassesSet).sort((minorHour, higherHour) => minorHour - higherHour);
+            // console.log("hourClassesArray", hourClassesArray);
+
+            rowsParse = rows.map(row => {
+                return {
+                    idCalendar : row.id_calendar,
+                    title : row.title,
+                    day : row.day,
+                    timeStartParse : row.time_start.slice(0, 5),
+                    timeFinishParse : row.time_finish.slice(0, 5)
+                }
+            })
         }
 
-        let hourClassesArray = Array.from(hourClassesSet).sort((minorHour, higherHour) => minorHour - higherHour);
-        // console.log("hourClassesArray", hourClassesArray);
+        console.log("rowsParse", rowsParse)
 
         return res.status(200).render("calendar", {
             positonMonth,
             weekDay,
             hourClassesArray,
-            rows
+            rowsParse
         });
     } catch (error) {
         console.log(error);
@@ -124,3 +142,18 @@ export const getCalendar = async (req, res) => {
         });
     }
 };
+
+export const postEditClass = async (req, res) => {
+    try {
+        console.log(req.body)
+        console.log("Llega")
+        return res.json({
+            "message": "todo pelotaaaaaaaaa"
+        })
+    } catch(error) {
+        console.log(error)
+        return res.status(500).json({
+            'message': 'Internal server error'
+        })
+    }
+}

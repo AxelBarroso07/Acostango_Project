@@ -1,5 +1,5 @@
 import { Router, json } from 'express';
-import { getIndex, postIndex, updIndex, delIndex, getCalendar } from '../controllers/index.controller.js';
+import { getIndex, postIndex, updIndex, delIndex, getCalendar, postEditClass } from '../controllers/index.controller.js';
 
 const router = Router();
 
@@ -14,5 +14,7 @@ router.put('/put', updIndex);
 router.delete('/delete', delIndex);
 
 router.get('/calendar', getCalendar);
+
+router.post('/editClass/:idCalendar', postEditClass);
 
 export default router;
