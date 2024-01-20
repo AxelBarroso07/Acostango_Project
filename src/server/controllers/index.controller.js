@@ -174,8 +174,10 @@ export const postEditClass = async (req, res) => {
         console.log(result)
 
         if(result) {
-            return res.redirect('back')
-        }        
+            return res.json({
+                "location": "/calendar"
+            })
+        }
     } catch(error) {
         console.log(error)
         return res.status(500).json({

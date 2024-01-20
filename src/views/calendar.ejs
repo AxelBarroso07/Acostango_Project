@@ -36,7 +36,6 @@
         <% } %>
     </tbody>
 </table>
-<p>
 
 <% if(rowsParse && rowsParse.length > 0){ %>
     <div class="divClassesDB">
@@ -48,7 +47,7 @@
                 <span><%- rowParse.timeStartParse %> - </span>
                 <span><%- rowParse.timeFinishParse %></span>
                 <button onclick="editClass('<%- rowParse.idCalendar %>')" class="modal">Edit</button>
-                <button>Delete</button>
+                <button onclick="deleteClass('<%- rowParse.idCalendar %>')">Delete</button>
 
                 <div class="dialogContainer">
                     <dialog class="dialog" style="display: none;" id="<%- 'editFields_' + rowParse.idCalendar %>" >
@@ -71,20 +70,22 @@
     </div>
 <% } %>
 
+<button onclick="">Create new class</button>
+
 <script>
     document.querySelectorAll('.modal').forEach(modalButton => {
         const dialog = modalButton.closest('.classesDB').querySelector('.dialog')
 
         modalButton.addEventListener('click', () => {
             dialog.showModal()
-        });
+        })
 
         dialog.querySelector('.closeModal').addEventListener('click', () => {
             // console.log("Modal cerrado")
             dialog.style.display = 'none'
             dialog.close()
-        });
-    });
+        })
+    })
 
     function editClass(idCalendarDB) {
         // console.log("idCalendar:", idCalendarDB)
@@ -105,19 +106,20 @@
         const port = '<%= process.env.PORT %>'
         const host = '<%= process.env.DB_HOST %>'
 
+        const newData = {}
+
         if (dialog) {
             dialog.close()
         }
 
-        const newData = {}
         if (newTitle !== titleDB) {
-            newData.newTitle = newTitle;
+            newData.newTitle = newTitle
         }
         if (newTimeStart !== timeStartDB) {
-            newData.newTimeStart = newTimeStart;
+            newData.newTimeStart = newTimeStart
         }
         if (newTimeFinish !== timeFinishDB) {
-            newData.newTimeFinish = newTimeFinish;
+            newData.newTimeFinish = newTimeFinish
         }
         
         if(Object.keys(newData).length > 0) {
@@ -136,14 +138,21 @@
                 console.log("Cambios confirmados:", data)
                 dialog.style.display = 'none'
                 dialog.close()
+                // console.log(window.location.href)
+                location.reload()
             })
             .catch(error => {
                 console.log("Error al confirmar cambios:", error)
-            });
+            })
         } else {
             console.log("Cambia algún dato")
         }
     }
+
+    function deleteClass() {
+        
+    }
+
 </script>
     
 
