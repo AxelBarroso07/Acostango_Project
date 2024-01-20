@@ -127,7 +127,7 @@ export const getCalendar = async (req, res) => {
             })
         }
 
-        console.log("rowsParse", rowsParse)
+        // console.log("rowsParse", rowsParse)
 
         return res.status(200).render("calendar", {
             positonMonth,
@@ -145,11 +145,37 @@ export const getCalendar = async (req, res) => {
 
 export const postEditClass = async (req, res) => {
     try {
-        console.log(req.body)
-        console.log("Llega")
-        return res.json({
-            "message": "todo pelotaaaaaaaaa"
-        })
+        // console.log("req.params", req.params)
+        // console.log("req.body", req.body)
+        const id = parseInt(req.params.idCalendar)
+        const newData = req.body.newData
+
+        const params = []
+        const values = []
+
+        if (newData.newTitle) {
+            params.push('title = ?');
+            values.push(newData.newTitle);
+        }
+
+        if (newData.newTimeStart) {
+            params.push('time_start = ?');
+            values.push(newData.newTimeStart);
+        }
+
+        if (newData.newTimeFinish) {
+            params.push('time_finish = ?');
+            values.push(newData.newTimeFinish);
+        }
+
+        const query = `UPDATE calendar_class SET ${params.join(', ')} WHERE id_calendar = ?`
+
+        const [ result ] = await pool.query(query, [...values, id])
+        console.log(result)
+
+        if(result) {
+            return res.redirect('back')
+        }        
     } catch(error) {
         console.log(error)
         return res.status(500).json({

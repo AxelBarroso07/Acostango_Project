@@ -34,88 +34,117 @@
                 <% } %>
             </tr>
         <% } %>
-        
     </tbody>
 </table>
 <p>
 
-    <% if(rowsParse && rowsParse.length > 0){ %>
-        <div class="divClassesDB">
-            <% rowsParse.map(rowParse => { %>
-                <div class="classesDB">
-                    <span><%- rowParse.idCalendar %></span>
-                    <span><%- rowParse.title %></span>
-                    <span><%- rowParse.day %></span>
-                    <span><%- rowParse.timeStartParse %> - </span>
-                    <span><%- rowParse.timeFinishParse %></span>
-                    <button onclick="editClass('<%- rowParse.idCalendar %>')" id="modal">Edit</button>
-                    <button>Delete</button>
-                    <div class="dialogContainer">
+<% if(rowsParse && rowsParse.length > 0){ %>
+    <div class="divClassesDB">
+        <% rowsParse.map(rowParse => { %>
+            <div class="classesDB">
+                <span><%- rowParse.idCalendar %></span>
+                <span><%- rowParse.title %></span>
+                <span><%- rowParse.day %></span>
+                <span><%- rowParse.timeStartParse %> - </span>
+                <span><%- rowParse.timeFinishParse %></span>
+                <button onclick="editClass('<%- rowParse.idCalendar %>')" class="modal">Edit</button>
+                <button>Delete</button>
+
+                <div class="dialogContainer">
                     <dialog class="dialog" style="display: none;" id="<%- 'editFields_' + rowParse.idCalendar %>" >
-                    <div class="dialogContent">
-                        <!-- Campos de edición -->
-                        <label for="<%- 'editTitle_' + rowParse.idCalendar %>">Title:</label>
-                        <input type="text" id="<%- 'editTitle_' + rowParse.idCalendar %>" name="<%- 'editTitle_' + rowParse.idCalendar %>" value="<%- rowParse.title %>">
-                        <label for="<%- 'editTimeStart_' + rowParse.idCalendar %>">Time start:</label>
-                        <input type="time" id="<%- 'editTimeStart_' + rowParse.idCalendar %>" name="<%- 'editTimeStart_' + rowParse.idCalendar %>" value="<%- rowParse.timeStartParse %>">
-                        <label for="<%- 'editFinishStart_' + rowParse.idCalendar %>">Time finish:</label>
-                        <input type="time" id="<%- 'editFinishStart_' + rowParse.idCalendar %>" name="<%- 'editFinishStart_' + rowParse.idCalendar %>" value="<%- rowParse.timeFinishParse %>">
-                        <!-- Otros campos de edición... -->
-                        <button onclick="confirmEdit('<%- rowParse.idCalendar %>')">Save Changes</button>
-                        <button class="closeModal">Close</button>
-                    </div>
-                </dialog>
-            </div>
+                        <div class="dialogContent">
+                            <!-- Campos de edición -->
+                            <label for="<%- 'editTitle_' + rowParse.idCalendar %>">Title:</label>
+                            <input type="text" id="<%- 'editTitle_' + rowParse.idCalendar %>" name="<%- 'editTitle_' + rowParse.idCalendar %>" value="<%- rowParse.title %>">
+                            <label for="<%- 'editTimeStart_' + rowParse.idCalendar %>">Time start:</label>
+                            <input type="time" id="<%- 'editTimeStart_' + rowParse.idCalendar %>" name="<%- 'editTimeStart_' + rowParse.idCalendar %>" value="<%- rowParse.timeStartParse %>">
+                            <label for="<%- 'editTimeFinish_' + rowParse.idCalendar %>">Time finish:</label>
+                            <input type="time" id="<%- 'editTimeFinish_' + rowParse.idCalendar %>" name="<%- 'editTimeFinish_' + rowParse.idCalendar %>" value="<%- rowParse.timeFinishParse %>">
+                            <!-- Otros campos de edición... -->
+                            <button onclick="confirmEdit('<%- rowParse.idCalendar %>', '<%- rowParse.title %>', '<%- rowParse.timeStartParse %>', '<%- rowParse.timeFinishParse %>')">Save Changes</button>
+                            <button class="closeModal">Close</button>
+                        </div>
+                    </dialog>
                 </div>
-            <% }) %>
-        </div>
-    <% } %>
-    
-    <script>
-        const modal = document.getElementById("modal");
-        const dialog = document.querySelector(".dialog");
-        const closeModal = document.querySelector(".closeModal");
+            </div>
+        <% }) %>
+    </div>
+<% } %>
 
-        modal.addEventListener('click', () =>{
-            dialog.showModal();
-        })
+<script>
+    document.querySelectorAll('.modal').forEach(modalButton => {
+        const dialog = modalButton.closest('.classesDB').querySelector('.dialog')
 
-        closeModal.addEventListener('click', () =>{
-            dialog.style.display = "none";
-        })
+        modalButton.addEventListener('click', () => {
+            dialog.showModal()
+        });
 
-        function editClass(idCalendar) {
-            // Ocultar divs de edición para todos los elementos
-            document.querySelectorAll('[id^="editFields_"]').forEach(el => el.style.display = 'none');
-            
-            // Mostrar el div de edición específico para el elemento seleccionado
-            document.getElementById('editFields_' + idCalendar).style.display = 'block';
+        dialog.querySelector('.closeModal').addEventListener('click', () => {
+            // console.log("Modal cerrado")
+            dialog.style.display = 'none'
+            dialog.close()
+        });
+    });
+
+    function editClass(idCalendarDB) {
+        // console.log("idCalendar:", idCalendarDB)
+
+        const dialog = document.getElementById('editFields_' + idCalendarDB)
+        if (dialog) {
+            dialog.style.display = 'block'
+        }
+    }
+
+    function confirmEdit(idCalendarDB, titleDB, timeStartDB, timeFinishDB) {
+        const dialog = document.getElementById('editFields_' + idCalendarDB)
+
+        const newTitle = document.getElementById('editTitle_' + idCalendarDB).value
+        const newTimeStart = document.getElementById('editTimeStart_' + idCalendarDB).value
+        const newTimeFinish = document.getElementById('editTimeFinish_' + idCalendarDB).value
+
+        const port = '<%= process.env.PORT %>'
+        const host = '<%= process.env.DB_HOST %>'
+
+        if (dialog) {
+            dialog.close()
         }
 
-        function confirmEdit(idCalendar) {
-            dialog.close();
-            const port = '<%= process.env.PORT %>';
-            const host = '<%= process.env.DB_HOST %>';
-            
+        const newData = {}
+        if (newTitle !== titleDB) {
+            newData.newTitle = newTitle;
+        }
+        if (newTimeStart !== timeStartDB) {
+            newData.newTimeStart = newTimeStart;
+        }
+        if (newTimeFinish !== timeFinishDB) {
+            newData.newTimeFinish = newTimeFinish;
+        }
+        
+        if(Object.keys(newData).length > 0) {
             // Realizar la solicitud de fetch con los datos del formulario
-            const title = document.getElementById('editTitle_' + idCalendar).value;
-            fetch(`http://${host}:${port}/editClass/${idCalendar}`, {
+            fetch(`http://${host}:${port}/editClass/${idCalendarDB}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ title })
+                body: JSON.stringify({
+                    newData
+                })
             })
             .then(response => response.json())
             .then(data => {
-                console.log("Cambios confirmados:", data);
+                console.log("Cambios confirmados:", data)
+                dialog.style.display = 'none'
+                dialog.close()
             })
             .catch(error => {
-                console.log("Error al confirmar cambios:", error);
+                console.log("Error al confirmar cambios:", error)
             });
+        } else {
+            console.log("Cambia algún dato")
         }
-
-    </script>
+    }
+</script>
     
 
 <%- include('./partials/footer.ejs') %>
