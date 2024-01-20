@@ -10,14 +10,15 @@
 <table border="1">
     <thead>
         <tr>
-            <th>Hours</th>
+            <!-- Hour column -->
+            <th>Hour</th>
             <% for(let i = 0; i < weekDay.length; i++) {%>
                 <th> <%- weekDay[i] %> </th>
             <% } %>
         </tr>
     </thead>
     <tbody>
-        <!-- First row -->
+        <!-- Days and classes colummns -->
         <% for (let i = 0; i < hourClassesArray.length; i++) { %>
             <tr>
                 <td><%- hourClassesArray[i] %></td>
@@ -38,7 +39,6 @@
 </table>
 <p>
 
-
     <% if(rowsParse && rowsParse.length > 0){ %>
         <div class="divClassesDB">
             <% rowsParse.map(rowParse => { %>
@@ -46,24 +46,44 @@
                     <span><%- rowParse.idCalendar %></span>
                     <span><%- rowParse.title %></span>
                     <span><%- rowParse.day %></span>
-                    <span><%- rowParse.timeStartParse %></span>
+                    <span><%- rowParse.timeStartParse %> - </span>
                     <span><%- rowParse.timeFinishParse %></span>
-                    <button onclick="editClass('<%- rowParse.idCalendar %>')" >Edit</button>
+                    <button onclick="editClass('<%- rowParse.idCalendar %>')" id="modal">Edit</button>
                     <button>Delete</button>
-    
-                    <div style="display: none;" id="<%- 'editFields_' + rowParse.idCalendar %>">
+                    <div class="dialogContainer">
+                    <dialog class="dialog" style="display: none;" id="<%- 'editFields_' + rowParse.idCalendar %>" >
+                    <div class="dialogContent">
                         <!-- Campos de edición -->
                         <label for="<%- 'editTitle_' + rowParse.idCalendar %>">Title:</label>
                         <input type="text" id="<%- 'editTitle_' + rowParse.idCalendar %>" name="<%- 'editTitle_' + rowParse.idCalendar %>" value="<%- rowParse.title %>">
+                        <label for="<%- 'editTimeStart_' + rowParse.idCalendar %>">Time start:</label>
+                        <input type="time" id="<%- 'editTimeStart_' + rowParse.idCalendar %>" name="<%- 'editTimeStart_' + rowParse.idCalendar %>" value="<%- rowParse.timeStartParse %>">
+                        <label for="<%- 'editFinishStart_' + rowParse.idCalendar %>">Time finish:</label>
+                        <input type="time" id="<%- 'editFinishStart_' + rowParse.idCalendar %>" name="<%- 'editFinishStart_' + rowParse.idCalendar %>" value="<%- rowParse.timeFinishParse %>">
                         <!-- Otros campos de edición... -->
                         <button onclick="confirmEdit('<%- rowParse.idCalendar %>')">Save Changes</button>
+                        <button class="closeModal">Close</button>
                     </div>
+                </dialog>
+            </div>
                 </div>
             <% }) %>
         </div>
     <% } %>
     
     <script>
+        const modal = document.getElementById("modal");
+        const dialog = document.querySelector(".dialog");
+        const closeModal = document.querySelector(".closeModal");
+
+        modal.addEventListener('click', () =>{
+            dialog.showModal();
+        })
+
+        closeModal.addEventListener('click', () =>{
+            dialog.style.display = "none";
+        })
+
         function editClass(idCalendar) {
             // Ocultar divs de edición para todos los elementos
             document.querySelectorAll('[id^="editFields_"]').forEach(el => el.style.display = 'none');
@@ -71,8 +91,9 @@
             // Mostrar el div de edición específico para el elemento seleccionado
             document.getElementById('editFields_' + idCalendar).style.display = 'block';
         }
-    
+
         function confirmEdit(idCalendar) {
+            dialog.close();
             const port = '<%= process.env.PORT %>';
             const host = '<%= process.env.DB_HOST %>';
             
@@ -93,6 +114,7 @@
                 console.log("Error al confirmar cambios:", error);
             });
         }
+
     </script>
     
 

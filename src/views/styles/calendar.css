@@ -11,14 +11,21 @@ body {
 
 .divClassesDB {
     display: flex;
-    flex: 1;
-    align-content: stretch;
-    width: 90%;
-    height: 200px;
+    justify-content: space-around;
 }
 
 .classesDB {
     width: 200px;
     height: 100px;
     border: 1px solid #f5f5fa;
+}
+
+.dialogContainer{
+    display: flex;
+    justify-content: center;
+    height: 50vh;
+}
+
+.dialogContent label, input{
+    display: block;
 }
