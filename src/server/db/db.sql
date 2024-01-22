@@ -51,6 +51,7 @@ INSERT INTO `calendar_class` (`title`, `day`, `time_start`, `time_finish`) VALUE
 ('AcosTango Milonga', 'Saturday', '19:00:00', '22:00:00');
 
 INSERT INTO calendar_class(title, day, time_start, time_finish) VALUES ('Beginners', 'Sunday', '20:00:00', '22:00:00');
+INSERT INTO calendar_class(title, day, time_start, time_finish) VALUES ('truers', 'Wednesday', '18:00:00', '19:00:00');
 -- --------------------------------------------------------
 
 --
