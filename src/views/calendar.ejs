@@ -96,13 +96,12 @@
     <form id="form" style="display: none;">
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" min="3" max="40" value="">
-        <br>
         <select name="day" id="day">
             <option disabled selected value="">Week day</option>
             <% for(let i = 0; i < weekDay.length; i++) {%>
                 <option value="<%- weekDay[i] %>"> <%- weekDay[i] %> </option>
             <% } %>
-        </select>
+        </select> <br>
             <label for="time_start">Time start:</label>
             <input type="time" id="time_start" name="time_start">
             <label for="time_finish">Time finish:</label>
@@ -111,7 +110,6 @@
         <button type="button" onclick="hideForm()">Cancel</button>
     </form>
 </div>
-
 
 <script>
     const form =  document.getElementById("form");
