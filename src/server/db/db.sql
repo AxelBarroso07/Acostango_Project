@@ -32,11 +32,15 @@ CREATE DATABASE acostango;
 USE acostango;
 
 CREATE TABLE `calendar_class` (
-  `id_calendar` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `title` varchar(100) NOT NULL,
-  `day` varchar(20) NOT NULL,
-  `time_start` time NOT NULL,
-  `time_finish` time NOT NULL
+  `id_calendar` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `title` VARCHAR(100) NOT NULL,
+  `description` VARCHAR(255) null,
+  `image` BLOB null,
+  `day` VARCHAR(20) NOT NULL,
+  `time_start` TIME NOT NULL,
+  `time_finish` TIME NOT NULL,
+  `category` VARCHAR(15) NOT NULL,
+  `workshop` BOOLEAN NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- classes rows
@@ -53,7 +57,6 @@ INSERT INTO `calendar_class` (`title`, `day`, `time_start`, `time_finish`) VALUE
 INSERT INTO calendar_class(title, day, time_start, time_finish) VALUES ('Beginners', 'Sunday', '20:00:00', '22:00:00');
 INSERT INTO calendar_class(title, day, time_start, time_finish) VALUES ('truers', 'Wednesday', '18:00:00', '19:00:00');
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `gallery`
 --

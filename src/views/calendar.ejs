@@ -10,7 +10,7 @@
 <table border="1">
     <thead>
         <tr>
-            <!-- Hour column -->
+            <!-- WEEKDAY ROW -->
             <th>Hour</th>
             <% for(let i = 0; i < weekDay.length; i++) {%>
                 <th> <%- weekDay[i] %> </th>
@@ -91,9 +91,10 @@
     </div>
 <% } %>
 
-<button onclick="showForm()">Create new class</button>
+<!-- class and workshop form -->
+<button onclick="showHide('formClass', 'show')">Create new class/workshop</button>
 <div>
-    <form id="form" style="display: none;">
+    <form id="formClass" style="display: none;">
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" min="3" max="40" value="">
         <select name="day" id="day">
@@ -106,26 +107,111 @@
             <input type="time" id="time_start" name="time_start">
             <label for="time_finish">Time finish:</label>
             <input type="time" id="time_finish" name="time_finish">
+            <label>Es un workshop?</label><br>
+            <label>
+                <input type="radio" id="workshopOptionFalse" value="false" name="workshop" checked>NO
+            </label>
+            <label>
+                <input type="radio" id="workshopOptionTrue" value="true" name="workshop">SI
+            </label>
+            
             <button type="submit" name="submitButton" value="submitValue">Save class</button>
-        <button type="button" onclick="hideForm()">Cancel</button>
+        <button type="button" onclick="showHide('formClass', 'hide')">Cancel</button>
+    </form>
+</div>
+
+<!-- event form -->
+<button onclick="showHide('formEvent', 'show')">Create new event</button>
+<div>
+    <form id="formEvent" style="display: none;">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" min="3" max="40" value="">
+        <label for="description">Description:</label>
+        <input type="textarea" cols="30" rows="10" id="description" name="description" max="255" value="">
+        <label for="image">Image</label>
+        <input type="file" id="image" name="image" accept="image/*">
+        <select name="day" id="day">
+            <option disabled selected value="">Week day</option>
+            <% for(let i = 0; i < weekDay.length; i++) {%>
+                <option value="<%- weekDay[i] %>"> <%- weekDay[i] %> </option>
+            <% } %>
+        </select> <br>
+            <label for="time_start">Time start:</label>
+            <input type="time" id="time_start" name="time_start">
+            <label for="time_finish">Time finish:</label>
+            <input type="time" id="time_finish" name="time_finish">
+            <button type="submit" name="submitButton" value="submitValue">Save event</button>
+        <button type="button" onclick="showHide('formEvent', 'hide')">Cancel</button>
     </form>
 </div>
 
 <script>
-    const form =  document.getElementById("form");
 
-    function showForm() {
-        form.style.display = "block";
+    function showHide(nameForm, action) {
+        if (action === 'show') {
+            document.getElementById(nameForm).style.display = 'block';
+
+            if (!document.getElementById(nameForm).hasSubmitEvent) {
+                if(nameForm === 'formClass') {
+                    document.getElementById(nameForm).addEventListener("submit", ev => {
+                        ev.preventDefault();
+                        const title = document.getElementById("title").value;
+                        const day = document.getElementById("day").value;
+                        const time_start = document.getElementById("time_start").value;
+                        const time_finish = document.getElementById("time_finish").value;
+                        // const workshop = document.querySelector(".workshopOption").value;
+                        const workshop = document.querySelector('input[name=workshop]:checked').value
+                        // createClass(title, day, time_start, time_finish);
+
+                        console.log("title", title);
+                        console.log("day", day);
+                        console.log("time_start", time_start);
+                        console.log("time_finish", time_finish);
+                        console.log("workshop:", workshop);
+                    });
+                } else if(nameForm === 'formEvent') {
+                    document.getElementById(nameForm).addEventListener("submit", ev => {
+                        ev.preventDefault();
+                        const title = document.getElementById("title").value;
+                        const description = document.getElementById("description").value;
+                        const image = document.getElementById("image").value;
+                        const day = document.getElementById("day").value;
+                        const time_start = document.getElementById("time_start").value;
+                        const time_finish = document.getElementById("time_finish").value;
+                        
+                        const workshop = null
+                        // createClass(title, day, time_start, time_finish);
+                        // createClass(title, day, time_start, time_finish);
+                        console.log("title", title);
+                        console.log("description", description);
+                        console.log("image", image);
+                        console.log("day", day);
+                        console.log("time_start", time_start);
+                        console.log("time_finish", time_finish);
+                        console.log("time_finish", time_finish);
+                        console.log("workshop:", workshop);
+                    });
+                }
+                // Marcamos el evento como true para que no se repita el envío varias veces
+                document.getElementById(nameForm).hasSubmitEvent = true;
+            }
+
+            
+        } else if (action === 'hide') {
+            document.getElementById(nameForm).style.display = 'none';
+        }
     }
 
-    function hideForm() {
-        form.style.display = "none";
-    }
+    // document.getElementById("form").addEventListener("submit", ev=> {
+    //     ev.preventDefault()
+    //     const title = document.getElementById("title").value
+    //     const day = document.getElementById("day").value
+    //     const time_start = document.getElementById("time_start").value
+    //     const time_finish = document.getElementById("time_finish").value
+    //     createClass(title, day, time_start, time_finish);
+    // });
 
     function hideModal(modalId, idCalendar, originalTitle) {
-        // console.log(modalId)
-        // console.log(idCalendar)
-        // console.log(originalTitle)
         const dialog = document.getElementById(modalId)
         if (dialog) {
             const titleInput = document.getElementById('editTitle_' + idCalendar)
@@ -203,17 +289,6 @@
         }
     }
 
-    function showHide(option, idCalendar) {
-        const confirmationDeleteDiv = document.getElementById("confirmationDeleteDiv_" + idCalendar)
-        if (option) {
-            confirmationDeleteDiv.style.display = 'block';
-            confirmationDeleteDiv.dataset.idCalendar = idCalendar;
-        } else {
-            confirmationDeleteDiv.style.display = 'none';
-            confirmationDeleteDiv.dataset.idCalendar = '';
-        }
-    }
-
     function deleteClass(idCalendar) {
         const port = '<%= process.env.PORT %>';
         const host = '<%= process.env.DB_HOST %>';
@@ -234,16 +309,6 @@
             console.log("Error al eliminar el registro:", error)
         })
     }
-
-    document.getElementById("form").addEventListener("submit", ev=> {
-        ev.preventDefault();
-        console.log("llega al eventListener")
-        const title = document.getElementById("title").value
-        const day = document.getElementById("day").value
-        const time_start = document.getElementById("time_start").value
-        const time_finish = document.getElementById("time_finish").value
-        createClass(title, day, time_start, time_finish);
-    });
 
     function createClass(title, day, time_start, time_finish) {
 
