@@ -4,6 +4,7 @@ import { fileURLToPath } from "url";
 import bcrypt from "bcrypt";
 import moment from 'moment'
 import { time } from "console";
+import { PORT, DB_HOST } from '../../../config.js';
 
 export const getIndex = async (req, res) => {
     try {
@@ -51,8 +52,24 @@ export const delIndex = async (req, res) => {
     }
 };
 
+export const getConfig = async (req, res) => {
+    try {
+        const config = {
+            PORT,
+            DB_HOST
+        }
+        res.json(config)
+    } catch(error) {
+        console.log(error)
+        return res.status(500).json({
+            message: "Internal server error"
+        })
+    }
+}
+
 export const getCalendar = async (req, res) => {
     try {
+        // console.log(PORT, DB_HOST)
         const date = new Date();
 
         const year = date.getFullYear();
@@ -173,7 +190,9 @@ export const getCalendar = async (req, res) => {
             hourClassesArray,
             rowsParse,
             hourClassesArrayFormat,
-            uniqueSortedArray
+            uniqueSortedArray,
+            PORT,
+            DB_HOST
         });
     } catch (error) {
         console.log(error);
@@ -248,16 +267,29 @@ export const deleteClass = async (req, res) => {
 
 export const postNewClass = async (req, res) => {
     try {
-        const newClass = req.body.newClass;
+        // const data = req.body.data;
 
-        console.log(newClass)
+        // req.file ? console.log(req.file) : console.log("No existe req.file")
 
-        const title = newClass.title
-        const day = newClass.day
-        const time_start = newClass.time_start
-        const time_finish = newClass.time_finish
+        // const orderData = {
+        //     title : data.title,
+        //     description : data.description,
+        //     image : data.image,
+        //     day : data.time_start,
+        //     time_start : data.time_start,
+        //     time_finish : data.time_finish,
+        //     category : data.category,
+        //     workshop : data.workshop
+        // }
 
-        const [ rows ] = await pool.query("INSERT INTO calendar_class SET title = ?, day = ?, time_start = ?, time_finish = ?", [title, day, time_start, time_finish]);
+        // console.log(orderData)
+        console.log(req.body)
+        
+        // const { buffer } = req.file
+
+        // console.log("buffer", buffer)
+
+        // const [ rows ] = await pool.query("INSERT INTO calendar_class SET title = ?, description = ?, image = ?, day = ?, time_start = ?, time_finish = ?, category = ?, workshop = ?", [orderData.title, orderData.description, orderData.image, orderData.day, orderData.time_start, orderData.time_finish, orderData.category, orderData.workshop]);
         // console.log("rows", rows)
         
         return res.status(200).json({

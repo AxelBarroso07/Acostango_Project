@@ -75,10 +75,13 @@
                                 <!-- Campos de edición -->
                                 <label for="<%- 'editTitle_' + rowParse.idCalendar %>">Title:</label>
                                 <input type="text" id="<%- 'editTitle_' + rowParse.idCalendar %>" name="<%- 'editTitle_' + rowParse.idCalendar %>" value="<%- rowParse.title %>">
+                                
                                 <label for="<%- 'editTimeStart_' + rowParse.idCalendar %>">Time start:</label>
                                 <input type="time" id="<%- 'editTimeStart_' + rowParse.idCalendar %>" name="<%- 'editTimeStart_' + rowParse.idCalendar %>" value="<%- rowParse.timeStartParse %>">
+                                
                                 <label for="<%- 'editTimeFinish_' + rowParse.idCalendar %>">Time finish:</label>
                                 <input type="time" id="<%- 'editTimeFinish_' + rowParse.idCalendar %>" name="<%- 'editTimeFinish_' + rowParse.idCalendar %>" value="<%- rowParse.timeFinishParse %>">
+
                                 <!-- Otros campos de edición... -->
                                 <button type="submit">Save Changes</button>
                                 <button type="button" class="closeModal" onclick="hideModal('editFields_<%- rowParse.idCalendar %>', '<%- rowParse.idCalendar %>','<%- rowParse.title %>')">Close</button>
@@ -97,25 +100,30 @@
     <form id="formClass" style="display: none;">
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" min="3" max="40" value="">
+        
         <select name="day" id="day">
             <option disabled selected value="">Week day</option>
             <% for(let i = 0; i < weekDay.length; i++) {%>
-                <option value="<%- weekDay[i] %>"> <%- weekDay[i] %> </option>
+                <option value="<%- weekDay[i] %>">
+                    <%- weekDay[i] %>
+                </option>
             <% } %>
         </select> <br>
-            <label for="time_start">Time start:</label>
-            <input type="time" id="time_start" name="time_start">
-            <label for="time_finish">Time finish:</label>
-            <input type="time" id="time_finish" name="time_finish">
-            <label>Es un workshop?</label><br>
-            <label>
-                <input type="radio" id="workshopOptionFalse" value="false" name="workshop" checked>NO
-            </label>
-            <label>
-                <input type="radio" id="workshopOptionTrue" value="true" name="workshop">SI
-            </label>
-            
-            <button type="submit" name="submitButton" value="submitValue">Save class</button>
+        <label for="time_start">Time start:</label>
+        <input type="time" id="time_start" name="time_start">
+        
+        <label for="time_finish">Time finish:</label>
+        <input type="time" id="time_finish" name="time_finish">
+        
+        <label>Es un workshop?</label>
+        <br>
+        <label for="workshopOptionFalse">No</label>
+        <input type="radio" id="workshopOptionFalse" value="false" name="workshop" checked>
+        
+        <label for="workshopOptionTrue">Si</label>
+        <input type="radio" id="workshopOptionTrue" value="true" name="workshop">
+        
+        <button type="submit" name="submitButton" value="submitValue">Save class</button>
         <button type="button" onclick="showHide('formClass', 'hide')">Cancel</button>
     </form>
 </div>
@@ -123,229 +131,39 @@
 <!-- event form -->
 <button onclick="showHide('formEvent', 'show')">Create new event</button>
 <div>
-    <form id="formEvent" style="display: none;">
+    <form id="formEvent" style="display: none;" enctype="multipart/form-data">
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" min="3" max="40" value="">
+        
         <label for="description">Description:</label>
-        <input type="textarea" cols="30" rows="10" id="description" name="description" max="255" value="">
+        <br>
+        <textarea id="description" name="description" cols="50" rows="4" maxlength="255" style="resize: none;" value=""></textarea>
+        
+        <br>
+
         <label for="image">Image</label>
         <input type="file" id="image" name="image" accept="image/*">
+        
         <select name="day" id="day">
-            <option disabled selected value="">Week day</option>
+            <option disabled selected hidden value="">Week day</option>
             <% for(let i = 0; i < weekDay.length; i++) {%>
-                <option value="<%- weekDay[i] %>"> <%- weekDay[i] %> </option>
+                <option value="<%- weekDay[i] %>">
+                    <%- weekDay[i] %>
+                </option>
             <% } %>
-        </select> <br>
-            <label for="time_start">Time start:</label>
-            <input type="time" id="time_start" name="time_start">
-            <label for="time_finish">Time finish:</label>
-            <input type="time" id="time_finish" name="time_finish">
-            <button type="submit" name="submitButton" value="submitValue">Save event</button>
+        </select>
+        <br>
+        <label for="time_start">Time start:</label>
+        <input type="time" id="time_start" name="time_start">
+        
+        <label for="time_finish">Time finish:</label>
+        <input type="time" id="time_finish" name="time_finish">
+
+        <button type="submit" name="submitButton" value="submitValue">Save event</button>
         <button type="button" onclick="showHide('formEvent', 'hide')">Cancel</button>
     </form>
 </div>
 
-<script>
+<script src="./scripts/calendar.js"></script>
 
-    function showHide(nameForm, action) {
-        if (action === 'show') {
-            document.getElementById(nameForm).style.display = 'block';
-
-            if (!document.getElementById(nameForm).hasSubmitEvent) {
-                if(nameForm === 'formClass') {
-                    document.getElementById(nameForm).addEventListener("submit", ev => {
-                        ev.preventDefault();
-                        const title = document.getElementById("title").value;
-                        const day = document.getElementById("day").value;
-                        const time_start = document.getElementById("time_start").value;
-                        const time_finish = document.getElementById("time_finish").value;
-                        // const workshop = document.querySelector(".workshopOption").value;
-                        const workshop = document.querySelector('input[name=workshop]:checked').value
-                        // createClass(title, day, time_start, time_finish);
-
-                        console.log("title", title);
-                        console.log("day", day);
-                        console.log("time_start", time_start);
-                        console.log("time_finish", time_finish);
-                        console.log("workshop:", workshop);
-                    });
-                } else if(nameForm === 'formEvent') {
-                    document.getElementById(nameForm).addEventListener("submit", ev => {
-                        ev.preventDefault();
-                        const title = document.getElementById("title").value;
-                        const description = document.getElementById("description").value;
-                        const image = document.getElementById("image").value;
-                        const day = document.getElementById("day").value;
-                        const time_start = document.getElementById("time_start").value;
-                        const time_finish = document.getElementById("time_finish").value;
-                        
-                        const workshop = null
-                        // createClass(title, day, time_start, time_finish);
-                        // createClass(title, day, time_start, time_finish);
-                        console.log("title", title);
-                        console.log("description", description);
-                        console.log("image", image);
-                        console.log("day", day);
-                        console.log("time_start", time_start);
-                        console.log("time_finish", time_finish);
-                        console.log("time_finish", time_finish);
-                        console.log("workshop:", workshop);
-                    });
-                }
-                // Marcamos el evento como true para que no se repita el envío varias veces
-                document.getElementById(nameForm).hasSubmitEvent = true;
-            }
-
-            
-        } else if (action === 'hide') {
-            document.getElementById(nameForm).style.display = 'none';
-        }
-    }
-
-    // document.getElementById("form").addEventListener("submit", ev=> {
-    //     ev.preventDefault()
-    //     const title = document.getElementById("title").value
-    //     const day = document.getElementById("day").value
-    //     const time_start = document.getElementById("time_start").value
-    //     const time_finish = document.getElementById("time_finish").value
-    //     createClass(title, day, time_start, time_finish);
-    // });
-
-    function hideModal(modalId, idCalendar, originalTitle) {
-        const dialog = document.getElementById(modalId)
-        if (dialog) {
-            const titleInput = document.getElementById('editTitle_' + idCalendar)
-            if (titleInput) {
-                titleInput.value = originalTitle
-            }
-
-            dialog.style.display = 'none'
-            dialog.close()
-        }
-    }
-
-    function editClass(idCalendarDB) {
-        // console.log("idCalendar:", idCalendarDB)
-
-        const dialog = document.getElementById('editFields_' + idCalendarDB)
-        if (dialog) {
-            dialog.style.display = 'block'
-        }
-    }
-
-    function confirmEdit(idCalendarDB, titleDB, timeStartDB, timeFinishDB) {
-        const dialog = document.getElementById('editFields_' + idCalendarDB)
-
-        const newTitle = document.getElementById('editTitle_' + idCalendarDB).value
-        const newTimeStart = document.getElementById('editTimeStart_' + idCalendarDB).value
-        const newTimeFinish = document.getElementById('editTimeFinish_' + idCalendarDB).value
-
-        console.log(newTimeStart)
-        console.log(newTimeFinish)
-
-        const port = '<%= process.env.PORT %>'
-        const host = '<%= process.env.DB_HOST %>'
-
-        const newData = {}
-
-        if (dialog) {
-            dialog.close()
-        }
-
-        if (newTitle !== titleDB) {
-            newData.newTitle = newTitle
-        }
-        if (newTimeStart !== timeStartDB) {
-            newData.newTimeStart = newTimeStart
-        }
-        if (newTimeFinish !== timeFinishDB) {
-            newData.newTimeFinish = newTimeFinish
-        }
-        
-        if(Object.keys(newData).length > 0) {
-            // Realizar la solicitud de fetch con los datos del formulario
-            fetch(`http://${host}:${port}/editClass/${idCalendarDB}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    newData
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log("Cambios confirmados:", data)
-                dialog.style.display = 'none'
-                dialog.close()
-                // console.log(window.location.href)
-                location.reload();
-            })
-            .catch(error => {
-                console.log("Error al confirmar cambios:", error)
-            })
-        } else {
-            console.log("Cambia algún dato")
-        }
-    }
-
-    function deleteClass(idCalendar) {
-        const port = '<%= process.env.PORT %>';
-        const host = '<%= process.env.DB_HOST %>';
-
-        console.log("idCalendar from deleteClass()", idCalendar);
-        
-        fetch(`http://${host}:${port}/deleteClass/${idCalendar}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(data => {
-            console.log("Registro eliminado:", data)
-            location.reload();
-        })
-        .catch(error => {
-            console.log("Error al eliminar el registro:", error)
-        })
-    }
-
-    function createClass(title, day, time_start, time_finish) {
-
-        const port = '<%= process.env.PORT %>'
-        const host = '<%= process.env.DB_HOST %>'
-
-        console.log("title", title)
-        console.log("day", day)
-        console.log("time_start", time_start)
-        console.log("time_start", time_finish)
-
-        const newClass = {
-            title,
-            day,
-            time_start,
-            time_finish
-        };
-
-        fetch(`http://${host}:${port}/newClass`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                newClass
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log("New class:", data);
-            location.reload();
-        })
-        .catch(error => {
-            console.error('Error to insert new class:', error);
-        })
-    }
-
-</script>
-    
 <%- include('./partials/footer.ejs') %>

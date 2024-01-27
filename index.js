@@ -1,10 +1,14 @@
 import express from 'express';
-import { PORT } from './config.js';
 import path from 'path';
+import bodyParser from 'body-parser';
 import { fileURLToPath } from 'url';
+
+import { PORT, storage, upload } from './config.js';
+
 import indexRoutes from './src/server/routes/index.routes.js';
 
 const app = express();
+
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
@@ -15,6 +19,10 @@ app.set('views', path.join(__dirname, '/src/views'))
 //Middlewares
 app.use(express.static('./src/public'))
 app.use(express.static('./src/views'))
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 //Routes
 app.use(indexRoutes);

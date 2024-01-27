@@ -1,9 +1,10 @@
 import { Router, json } from 'express';
-import { getIndex, postIndex, updIndex, delIndex, getCalendar, postEditClass, deleteClass, postNewClass } from '../controllers/index.controller.js';
+import { upload } from '../../../config.js';
+import { getIndex, postIndex, updIndex, delIndex, getConfig, getCalendar, postEditClass, deleteClass, postNewClass } from '../controllers/index.controller.js';
 
 const router = Router();
 
-router.use(json());
+router.use(upload.single('image'), json());
 
 router.get('/get', getIndex);
 
@@ -13,12 +14,14 @@ router.put('/put', updIndex);
 
 router.delete('/delete', delIndex);
 
+router.get('/config', getConfig);
+
 router.get('/calendar', getCalendar);
 
 router.post('/editClass/:idCalendar', postEditClass);
 
 router.delete('/deleteClass/:idCalendar', deleteClass);
 
-router.post('/newClass',  postNewClass);
+router.post('/newClass', upload.single('image'), postNewClass);
 
 export default router;

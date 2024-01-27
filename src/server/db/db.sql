@@ -34,8 +34,8 @@ USE acostango;
 CREATE TABLE `calendar_class` (
   `id_calendar` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `title` VARCHAR(100) NOT NULL,
-  `description` VARCHAR(255) null,
-  `image` BLOB null,
+  `description` VARCHAR(255) NULL,
+  `image` BLOB NULL,
   `day` VARCHAR(20) NOT NULL,
   `time_start` TIME NOT NULL,
   `time_finish` TIME NOT NULL,
