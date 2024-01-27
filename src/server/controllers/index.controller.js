@@ -176,6 +176,7 @@ export const getCalendar = async (req, res) => {
                     timeFinishParse: row.time_finish.slice(0, 5),
                     time12hrsStartFormat: moment(row.time_start, 'hh:mm A').format('hh:mm A'),
                     time12hrsFinishFormat: moment(row.time_finish, 'hh:mm:ss A').format('hh:mm A'),
+                    workshop: row.workshop,
                     uniqueSortedArray
                 };
             });
@@ -267,6 +268,10 @@ export const deleteClass = async (req, res) => {
 
 export const postNewClass = async (req, res) => {
     try {
+        // const img = req.file.filename;
+
+        // const [ rows ] = await pool.query("INSERT INTO gallery SET photo = ?", [img]);
+        // console.log(rows)
         // const data = req.body.data;
 
         // req.file ? console.log(req.file) : console.log("No existe req.file")

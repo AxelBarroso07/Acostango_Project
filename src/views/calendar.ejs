@@ -28,10 +28,16 @@
                     <% if(classesForCell.length > 0) { %>
                         <td>
                             <% for(let k = 0; k < classesForCell.length; k++) { %>
+                                <% if (classesForCell[k].workshop == 1) { %>
+                                    <div style="background-color: red;">
+                                <% } %>
                                 <%- classesForCell[k].title %> <%- classesForCell[k].time12hrsStartFormat %>-<%- classesForCell[k].time12hrsFinishFormat %>
                                 <% if (k < classesForCell.length - 1) { %>
                                     <br>
                                 <% } %>
+                                <% if (classesForCell[k].workshop) { %>
+                                </div>
+                            <% } %>
                             <% } %>
                         </td>
                     <% } else { %>
@@ -44,10 +50,12 @@
     </tbody>
 </table>
 
+<p>Classes / <span style="background-color: red;">workshops</span></p>
+
 <% if(rowsParse && rowsParse.length > 0){ %>
     <div class="divClassesDB">
         <% rowsParse.map(rowParse => { %>
-            <div class="classesDB">
+            <div class="classesDB <% if (rowParse.workshop) { %> workshop-class <% } %>">
                 <span><%- rowParse.idCalendar %></span>
                 <span><%- rowParse.title %></span>
                 <span><%- rowParse.day %></span>
@@ -81,7 +89,7 @@
                                 
                                 <label for="<%- 'editTimeFinish_' + rowParse.idCalendar %>">Time finish:</label>
                                 <input type="time" id="<%- 'editTimeFinish_' + rowParse.idCalendar %>" name="<%- 'editTimeFinish_' + rowParse.idCalendar %>" value="<%- rowParse.timeFinishParse %>">
-
+                                
                                 <!-- Otros campos de edición... -->
                                 <button type="submit">Save Changes</button>
                                 <button type="button" class="closeModal" onclick="hideModal('editFields_<%- rowParse.idCalendar %>', '<%- rowParse.idCalendar %>','<%- rowParse.title %>')">Close</button>
@@ -109,12 +117,13 @@
                 </option>
             <% } %>
         </select> <br>
+
         <label for="time_start">Time start:</label>
         <input type="time" id="time_start" name="time_start">
         
         <label for="time_finish">Time finish:</label>
         <input type="time" id="time_finish" name="time_finish">
-        
+
         <label>Es un workshop?</label>
         <br>
         <label for="workshopOptionFalse">No</label>
@@ -123,6 +132,8 @@
         <label for="workshopOptionTrue">Si</label>
         <input type="radio" id="workshopOptionTrue" value="true" name="workshop">
         
+        <input type="hidden" name="category" value="class">
+
         <button type="submit" name="submitButton" value="submitValue">Save class</button>
         <button type="button" onclick="showHide('formClass', 'hide')">Cancel</button>
     </form>
@@ -159,11 +170,18 @@
         <label for="time_finish">Time finish:</label>
         <input type="time" id="time_finish" name="time_finish">
 
+        <input type="hidden" name="category" value="event">
+
         <button type="submit" name="submitButton" value="submitValue">Save event</button>
         <button type="button" onclick="showHide('formEvent', 'hide')">Cancel</button>
     </form>
 </div>
 
+<!-- Input photo example -->
+<!-- <form enctype="multipart/form-data" method="post">
+<input type="file" name="image" accept="image/*">
+<input type="submit" value="send">
+</form> -->
 <script src="./scripts/calendar.js"></script>
 
 <%- include('./partials/footer.ejs') %>

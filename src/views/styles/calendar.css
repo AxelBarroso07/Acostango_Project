@@ -29,3 +29,7 @@ body {
 .dialogContent label, input{
     display: block;
 }
+
+.workshop-class{
+    background-color: red;
+}
