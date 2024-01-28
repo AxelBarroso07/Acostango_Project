@@ -5,53 +5,23 @@ function showHide(nameForm, action) {
         document.getElementById(nameForm).style.display = 'block';
 
         if (!document.getElementById(nameForm).hasSubmitEvent) {
-            if(nameForm === 'formClass') {
-                document.getElementById(nameForm).addEventListener("submit", ev => {
-                    ev.preventDefault();
-                    data = {
-                        title : document.getElementById("title").value,
-                        description : null,
-                        image : null,
-                        day : document.getElementById("day").value,
-                        time_start : document.getElementById("time_start").value,
-                        time_finish : document.getElementById("time_finish").value,
-                        category : 'class',
-                        workshop : booleanParse(document.querySelector('input[name=workshop]:checked').value)
+                document.getElementById(nameForm).addEventListener("submit", async e => {
+                    e.preventDefault()
+
+                    const formData = new FormData(document.getElementById(nameForm));
+                    console.log('Form Data Entries:', [...formData.entries()]);  // Log entries of formData
+
+                    try {
+                        const createdClass = await createClass(formData);
+                        console.log('Class created:', createdClass);
+                    } catch (error) {
+                        console.error('Error creating class:', error);
                     }
-                    // console.log("data", data)
-                    createClass(data)
                 })
-            } else if(nameForm === 'formEvent') {
-                document.getElementById(nameForm).addEventListener("submit", ev => {
-                    ev.preventDefault();
-                    console.log("image", document.getElementById("image").files[0])
-
-                    fileImage = document.getElementById("image").files[0]
-
-                    imageData = {
-                        name : fileImage.name,
-                        size : fileImage.size,
-                        type : fileImage.type
-                    }
-
-                    data = {
-                        title : document.getElementById("title").value,
-                        description : document.getElementById("description").value,
-                        image : imageData,
-                        day : document.getElementById("day").value,
-                        time_start : document.getElementById("time_start").value,
-                        time_finish : document.getElementById("time_finish").value,
-                        category : 'event',
-                        workshop : null
-                    }
-                    // console.log("data", data)
-                    createClass(data)
-                });
             }
 
             // Marcamos el evento como true para que no se repita el envío varias veces
             document.getElementById(nameForm).hasSubmitEvent = true;
-        }
     } else if (action === 'hide') {
         document.getElementById(nameForm).style.display = 'none';
     }
@@ -160,10 +130,7 @@ function deleteClass(idCalendar) {
     })
 }
 
-async function createClass(data) {
-    // const port = process.env.PORT;
-    // const host = process.env.DB_HOST;
-
+async function createClass(formData) {
     let port = 0
     let host = ''
 
@@ -188,23 +155,22 @@ async function createClass(data) {
         console.log('Error en try fetch /config. error:', error)
     }
 
-    console.log("data from createClass():", data)
+    console.log("data from createClass():", formData)
 
-    fetch(`http://${host}:${port}/newClass`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            data
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log("New class:", data);
-        // location.reload();
-    })
-    .catch(error => {
+    try {
+        const response = await fetch(`http://${host}:${port}/newClass`, {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error('Error creating class');
+        }
+
+        const result = await response.json();
+        return result;
+    } catch (error) {
         console.error('Error to insert new class:', error);
-    })
+        throw error;
+    }   
 }

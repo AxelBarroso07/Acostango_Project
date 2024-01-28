@@ -274,7 +274,7 @@ export const postNewClass = async (req, res) => {
         // console.log(rows)
         // const data = req.body.data;
 
-        // req.file ? console.log(req.file) : console.log("No existe req.file")
+        req.file ? console.log(req.file) : console.log("No existe req.file")
 
         // const orderData = {
         //     title : data.title,
@@ -288,6 +288,9 @@ export const postNewClass = async (req, res) => {
         // }
 
         // console.log(orderData)
+        if (!req.file) {
+            return res.status(400).send('No se proporcionó ningún archivo.');
+        }
         console.log(req.body)
         
         // const { buffer } = req.file

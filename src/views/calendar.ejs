@@ -50,7 +50,7 @@
     </tbody>
 </table>
 
-<p>Classes / <span style="background-color: red;">workshops</span></p>
+<p>Classes / <span style="background-color: #f00;">workshops</span></p>
 
 <% if(rowsParse && rowsParse.length > 0){ %>
     <div class="divClassesDB">
@@ -105,7 +105,7 @@
 <!-- class and workshop form -->
 <button onclick="showHide('formClass', 'show')">Create new class/workshop</button>
 <div>
-    <form id="formClass" style="display: none;">
+    <form id="formClass" style="display: none;" action="post">
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" min="3" max="40" value="">
         
@@ -142,7 +142,7 @@
 <!-- event form -->
 <button onclick="showHide('formEvent', 'show')">Create new event</button>
 <div>
-    <form id="formEvent" style="display: none;" enctype="multipart/form-data">
+    <form id="formEvent" style="display: none;" enctype="multipart/form-data" action="post">
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" min="3" max="40" value="">
         
@@ -177,11 +177,6 @@
     </form>
 </div>
 
-<!-- Input photo example -->
-<!-- <form enctype="multipart/form-data" method="post">
-<input type="file" name="image" accept="image/*">
-<input type="submit" value="send">
-</form> -->
 <script src="./scripts/calendar.js"></script>
 
 <%- include('./partials/footer.ejs') %>
