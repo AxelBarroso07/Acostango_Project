@@ -273,7 +273,7 @@ export const postNewClass = async (req, res) => {
         // const [ rows ] = await pool.query("INSERT INTO gallery SET photo = ?", [img]);
         // console.log(rows)
         // const data = req.body.data;
-
+        console.log("llega")
         req.file ? console.log(req.file) : console.log("No existe req.file")
 
         // const orderData = {

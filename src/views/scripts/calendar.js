@@ -2,28 +2,28 @@ function showHide(nameForm, action) {
     let data = {}
 
     if (action === 'show') {
-        document.getElementById(nameForm).style.display = 'block';
+        document.getElementById(nameForm).style.display = 'block'
 
         if (!document.getElementById(nameForm).hasSubmitEvent) {
                 document.getElementById(nameForm).addEventListener("submit", async e => {
                     e.preventDefault()
 
-                    const formData = new FormData(document.getElementById(nameForm));
-                    console.log('Form Data Entries:', [...formData.entries()]);  // Log entries of formData
+                    const formData = new FormData(document.getElementById(nameForm))
+                    console.log('Form Data Entries:', [...formData.entries()])
 
                     try {
-                        const createdClass = await createClass(formData);
-                        console.log('Class created:', createdClass);
+                        const createdClass = await createClass(formData)
+                        console.log('Class created:', createdClass)
                     } catch (error) {
-                        console.error('Error creating class:', error);
+                        console.error('Error creating class:', error)
                     }
                 })
             }
 
             // Marcamos el evento como true para que no se repita el envío varias veces
-            document.getElementById(nameForm).hasSubmitEvent = true;
+            document.getElementById(nameForm).hasSubmitEvent = true
     } else if (action === 'hide') {
-        document.getElementById(nameForm).style.display = 'none';
+        document.getElementById(nameForm).style.display = 'none'
     }
 }
 
@@ -161,16 +161,16 @@ async function createClass(formData) {
         const response = await fetch(`http://${host}:${port}/newClass`, {
             method: 'POST',
             body: formData
-        });
+        })
 
         if (!response.ok) {
-            throw new Error('Error creating class');
+            console.log("error in response.ok /newClass")
         }
 
-        const result = await response.json();
+        const result = await response.json()
+        console.log('Class created:', result)
         return result;
     } catch (error) {
-        console.error('Error to insert new class:', error);
-        throw error;
-    }   
+        console.error('Error to insert new class:', error)
+    }
 }

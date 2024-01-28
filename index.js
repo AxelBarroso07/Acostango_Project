@@ -13,7 +13,8 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 // Configuración de multer
-const upload = multer({ dest: './uploads/' });
+const storage = multer.memoryStorage()
+const upload = multer({ storage: storage });
 //Settings
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, '/src/views'))
@@ -21,7 +22,7 @@ app.set('views', path.join(__dirname, '/src/views'))
 //Middlewares
 app.use(express.static('./src/public'))
 app.use(express.static('./src/views'))
-app.use(upload.single('image'));
+// app.use(upload.single('image'));
 
 process.setMaxListeners(15);
 
@@ -41,3 +42,5 @@ app.use((req, res, next) => {
 app.listen(PORT, () => {
     console.log(`Server listen on port ${PORT}`);
 });
+
+export { upload }
