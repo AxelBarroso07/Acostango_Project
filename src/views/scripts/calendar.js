@@ -168,7 +168,7 @@ async function createClass(formData) {
         }
 
         const result = await response.json()
-        console.log('Class created:', result)
+        console.log('Class created before return:', result)
         return result;
     } catch (error) {
         console.error('Error to insert new class:', error)

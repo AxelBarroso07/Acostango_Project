@@ -269,30 +269,34 @@ export const deleteClass = async (req, res) => {
 
 export const postNewClass = async (req, res) => {
     try {
-        // const img = req.file.filename;
+        const data = req.body
+        const imgData = req.file
 
-        // const [ rows ] = await pool.query("INSERT INTO gallery SET photo = ?", [img]);
-        // console.log(rows)
-        // const data = req.body.data;
-        console.log("llega")
-        req.file ? console.log(req.file) : console.log("No existe req.file")
+        console.log("data:", data)
+        console.log("imgData:", imgData)
 
-        // const orderData = {
-        //     title : data.title,
-        //     description : data.description,
-        //     image : data.image,
-        //     day : data.time_start,
-        //     time_start : data.time_start,
-        //     time_finish : data.time_finish,
-        //     category : data.category,
-        //     workshop : data.workshop
-        // }
+        const orderData = {
+            title : data.title,
+            description : data.description,
+            image : imgData,
+            day : data.day,
+            time_start : data.time_start,
+            time_finish : data.time_finish,
+            category : data.category,
+            workshop : data.workshop
+        }
+
+        console.log("orderData:", orderData)
+        // req.file ? console.log("req.file:", req.file) : console.log("No existe req.file")
+
+        
 
         // console.log(orderData)
         if (!req.file) {
             return res.status(400).send('No se proporcionó ningún archivo.');
         }
-        console.log(req.body)
+        // console.log("req.file.buffer.toString('base64')", req.file.buffer.toString('base64'))
+        // console.log("req.body", req.body)
         
         // const { buffer } = req.file
 
@@ -312,32 +316,32 @@ export const postNewClass = async (req, res) => {
     }
 }
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, '../../../uploads/');
-    },
-    filename: function (req, file, cb) {
-    //   const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-      cb(null,Date.now() + "-" + file.originalname);
-    }
-});
+// const storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//       cb(null, '../../../uploads/');
+//     },
+//     filename: function (req, file, cb) {
+//     //   const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+//       cb(null,Date.now() + "-" + file.originalname);
+//     }
+// });
 
-const upload = multer({ storage: storage})
+// const upload = multer({ storage: storage})
 
-const uploadHandler = upload.single("img")
+// const uploadHandler = upload.single("img")
 
-export {uploadHandler};
+// export {uploadHandler};
 
-export const uploadImage = async (req, res) => {
-    try {
-        return res.status(200).json({
-            'message': 'image sent'
-        })
-    } catch (error) {
-        console.log(error)
-        return res.status(500).json({
-            'message': 'Internal server error'
-        })
-    }
+// export const uploadImage = async (req, res) => {
+//     try {
+//         return res.status(200).json({
+//             'message': 'image sent'
+//         })
+//     } catch (error) {
+//         console.log(error)
+//         return res.status(500).json({
+//             'message': 'Internal server error'
+//         })
+//     }
     
-}
+// }

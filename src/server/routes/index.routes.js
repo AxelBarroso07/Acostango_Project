@@ -1,12 +1,12 @@
 // index.routes.js
 import { Router, json } from 'express';
 import multer from 'multer';
-import { getIndex, postIndex, updIndex, delIndex, getConfig, getCalendar, postEditClass, deleteClass, postNewClass, uploadImage, uploadHandler } from '../controllers/index.controller.js';
-
+import { getIndex, postIndex, updIndex, delIndex, getConfig, getCalendar, postEditClass, deleteClass, postNewClass } from '../controllers/index.controller.js';
+// uploadImage, uploadHandler
 console.log('Importando upload en index.routes.js');
 
-// const storage = multer.memoryStorage();
-// const upload = multer({ storage: storage });
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 console.log('Importación exitosa');
 
@@ -30,8 +30,8 @@ router.post('/editClass/:idCalendar', postEditClass);
 
 router.delete('/deleteClass/:idCalendar', deleteClass);
 
-// router.post('/newClass', upload.single('image'), postNewClass);
+router.post('/newClass', upload.single('image'), postNewClass);
 
-router.post('/uploadImage', uploadHandler, uploadImage);
+// router.post('/uploadImage', uploadHandler, uploadImage);
 
 export default router;
