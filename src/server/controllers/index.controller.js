@@ -3,49 +3,14 @@ import path from "path";
 import { fileURLToPath } from "url";
 import bcrypt from "bcrypt";
 import moment from 'moment'
-import multer from 'multer';
-import { time } from "console";
 import { PORT, DB_HOST } from '../../../config.js';
+import { upload } from "../routes/index.routes.js";
+import multer from "multer";
+import sharp from "sharp";
 
 export const getIndex = async (req, res) => {
     try {
         return res.status(200).render("example");
-    } catch (error) {
-        return res.status(500).json({
-            message: "Internal server error",
-        });
-    }
-};
-
-export const postIndex = async (req, res) => {
-    try {
-        return res.status(200).json({
-            message: "postIndex",
-        });
-    } catch (error) {
-        return res.status(500).json({
-            message: "Internal server error",
-        });
-    }
-};
-
-export const updIndex = async (req, res) => {
-    try {
-        return res.status(200).json({
-            message: "updIndex",
-        });
-    } catch (error) {
-        return res.status(500).json({
-            message: "Internal server error",
-        });
-    }
-};
-
-export const delIndex = async (req, res) => {
-    try {
-        return res.status(200).json({
-            message: "delIndex",
-        });
     } catch (error) {
         return res.status(500).json({
             message: "Internal server error",
@@ -192,9 +157,7 @@ export const getCalendar = async (req, res) => {
             hourClassesArray,
             rowsParse,
             hourClassesArrayFormat,
-            uniqueSortedArray,
-            PORT,
-            DB_HOST
+            uniqueSortedArray
         });
     } catch (error) {
         console.log(error);
@@ -269,45 +232,61 @@ export const deleteClass = async (req, res) => {
 
 export const postNewClass = async (req, res) => {
     try {
-        const data = req.body
-        const imgData = req.file
 
-        console.log("data:", data)
-        console.log("imgData:", imgData)
+        upload(req, res, (error) => {
+            if(error instanceof multer.MulterError) {
+                console.log("Error from Multer:", error.message)
+                return res.status(400).json({
+                    message: 'An unexpected error has occurred, we will resolve it as soon as possible.'
+                })
+            } else if(error) {
+                console.log("Unknown error:", error.message)
+                return res.status(400).json({
+                    message: 'An unexpected error has occurred, we will resolve it as soon as possible.'
+                })
+            }
 
-        const orderData = {
-            title : data.title,
-            description : data.description,
-            image : imgData,
-            day : data.day,
-            time_start : data.time_start,
-            time_finish : data.time_finish,
-            category : data.category,
-            workshop : data.workshop
-        }
+            const data = req.body
+            const imgData = req.file
 
-        console.log("orderData:", orderData)
-        // req.file ? console.log("req.file:", req.file) : console.log("No existe req.file")
+            // console.log("data:", data)
+            // console.log("imgData:", imgData)
 
-        
+            const orderData = {
+                title : data.title,
+                description : data.description,
+                image : imgData,
+                day : data.day,
+                time_start : data.time_start,
+                time_finish : data.time_finish,
+                category : data.category,
+                workshop : data.workshop
+            }
 
-        // console.log(orderData)
-        if (!req.file) {
-            return res.status(400).send('No se proporcionó ningún archivo.');
-        }
-        // console.log("req.file.buffer.toString('base64')", req.file.buffer.toString('base64'))
-        // console.log("req.body", req.body)
-        
-        // const { buffer } = req.file
+            console.log("orderData:", orderData)
+            // req.file ? console.log("req.file:", req.file) : console.log("No existe req.file")
 
-        // console.log("buffer", buffer)
+            
 
-        // const [ rows ] = await pool.query("INSERT INTO calendar_class SET title = ?, description = ?, image = ?, day = ?, time_start = ?, time_finish = ?, category = ?, workshop = ?", [orderData.title, orderData.description, orderData.image, orderData.day, orderData.time_start, orderData.time_finish, orderData.category, orderData.workshop]);
-        // console.log("rows", rows)
-        
-        return res.status(200).json({
-            'message': 'postNewClass'
+            // console.log(orderData)
+            if (!req.file) {
+                return res.status(400).send('No hay ningún archivo.');
+            }
+            // console.log("req.file.buffer.toString('base64')", req.file.buffer.toString('base64'))
+            // console.log("req.body", req.body)
+            
+            // const { buffer } = req.file
+
+            // console.log("buffer", buffer)
+
+            // const [ rows ] = await pool.query("INSERT INTO calendar_class SET title = ?, description = ?, image = ?, day = ?, time_start = ?, time_finish = ?, category = ?, workshop = ?", [orderData.title, orderData.description, orderData.image, orderData.day, orderData.time_start, orderData.time_finish, orderData.category, orderData.workshop]);
+            // console.log("rows", rows)
+            
+            return res.status(200).json({
+                'message': 'postNewClass'
+            })
         })
+
     } catch(error) {
         console.log(error)
         return res.status(500).json({
