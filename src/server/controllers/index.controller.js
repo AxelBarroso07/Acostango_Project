@@ -3,6 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import bcrypt from "bcrypt";
 import moment from 'moment'
+import multer from 'multer';
 import { time } from "console";
 import { PORT, DB_HOST } from '../../../config.js';
 
@@ -309,4 +310,34 @@ export const postNewClass = async (req, res) => {
             'message': 'Internal server error'
         })
     }
+}
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, '../../../uploads/');
+    },
+    filename: function (req, file, cb) {
+    //   const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+      cb(null,Date.now() + "-" + file.originalname);
+    }
+});
+
+const upload = multer({ storage: storage})
+
+const uploadHandler = upload.single("img")
+
+export {uploadHandler};
+
+export const uploadImage = async (req, res) => {
+    try {
+        return res.status(200).json({
+            'message': 'image sent'
+        })
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            'message': 'Internal server error'
+        })
+    }
+    
 }
