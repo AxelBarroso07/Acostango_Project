@@ -52,7 +52,7 @@ export const compressImage = async (req, res) => {
             const fileExtension = path.extname(fileUpload).toLowerCase();
 
             try {
-                let fileImage = sharp(fileUpload);
+                const fileImage = sharp(fileUpload);
                 if (fileExtension === '.jpg' || fileExtension === '.jpeg') {
                     fileImage = fileImage.jpeg({ quality: 20 });
                 } else if (fileExtension === '.png') {
