@@ -105,7 +105,7 @@
 <!-- class and workshop form -->
 <button onclick="showHide('formClass', 'show')">Create new class/workshop</button>
 <div>
-    <form id="formClass" style="display: none;" action="post">
+    <form id="formClass" style="display: none;" method="post">
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" min="3" max="40" value="">
         
@@ -134,28 +134,27 @@
         
         <input type="hidden" name="category" value="class">
 
-        <button type="submit" name="submitButton" value="submitValue">Save class</button>
-        <button type="button" onclick="showHide('formClass', 'hide')">Cancel</button>
+        <button type="submit" name="submitButton" value="submitValue">Save class / workshop</button>
+        <button type="button" onclick="showHide('formClass', 'hide')">Close</button>
     </form>
 </div>
 
 <!-- event form -->
 <button onclick="showHide('formEvent', 'show')">Create new event</button>
 <div>
-    <form id="formEvent" style="display: none;" enctype="multipart/form-data" action="post">
-        <label for="title">Title:</label>
+    <form id="formEvent" style="display: none;" enctype="multipart/form-data" method="post">
+        <!-- <label for="title">Title:</label>
         <input type="text" id="title" name="title" min="3" max="40" value="">
         
         <label for="description">Description:</label>
         <br>
         <textarea id="description" name="description" cols="50" rows="4" maxlength="255" style="resize: none;" value=""></textarea>
-        
-        <br>
+        <br> -->
 
         <label for="image">Image</label>
         <input type="file" id="image" name="image" accept="image/*">
         
-        <select name="day" id="day">
+        <!-- <select name="day" id="day">
             <option disabled selected hidden value="">Week day</option>
             <% for(let i = 0; i < weekDay.length; i++) {%>
                 <option value="<%- weekDay[i] %>">
@@ -170,10 +169,10 @@
         <label for="time_finish">Time finish:</label>
         <input type="time" id="time_finish" name="time_finish">
 
-        <input type="hidden" name="category" value="event">
+        <input type="hidden" name="category" value="event" id="category"> -->
 
         <button type="submit" name="submitButton" value="submitValue">Save event</button>
-        <button type="button" onclick="showHide('formEvent', 'hide')">Cancel</button>
+        <button type="button" onclick="showHide('formEvent', 'hide')">Close</button>
     </form>
 </div>
 

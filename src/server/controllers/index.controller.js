@@ -4,7 +4,7 @@ import { fileURLToPath } from "url";
 import bcrypt from "bcrypt";
 import moment from 'moment'
 import { PORT, DB_HOST } from '../../../config.js';
-import { upload } from "../routes/index.routes.js";
+import { upload, compressImage } from "../routes/index.routes.js";
 import multer from "multer";
 import sharp from "sharp";
 
@@ -230,97 +230,133 @@ export const deleteClass = async (req, res) => {
     }
 }
 
+// export const postNewClass = async (req, res) => {
+// // req.file ? console.log("req.file:", req.file) : console.log("No existe req.file")
+// // console.log("req.file.buffer.toString('base64')", req.file.buffer.toString('base64'))
+// // console.log("req.body", req.body)
+// // const { buffer } = req.file
+// // console.log("buffer", buffer)
+// // const [ rows ] = await pool.query("INSERT INTO calendar_class SET title = ?, description = ?, image = ?, day = ?, time_start = ?, time_finish = ?, category = ?, workshop = ?", [orderData.title, orderData.description, orderData.image, orderData.day, orderData.time_start, orderData.time_finish, orderData.category, orderData.workshop]);
+// // console.log("rows", rows)
+//         try {
+
+//             upload(req, res, (error) => {
+//                 if (error instanceof multer.MulterError) {
+//                     console.log("Error from Multer:", error.message)
+//                     return res.status(400).json({
+//                         message: 'An unexpected error has occurred during file upload. We will resolve it as soon as possible.'
+//                     })
+//                 } else if (error) {
+//                     console.log("Unknown error from Multer:", error.message)
+//                     return res.status(400).json({
+//                         message: 'An unexpected error has occurred during file upload. We will resolve it as soon as possible.'
+//                     })
+//                 }
+    
+//                 if (!req.file) {
+//                     return res.status(400).send('There is no file.');
+//                 }
+
+//             compressImage(req, res, async (err) => {
+//                 if (err) {
+//                     console.log("Error from compressImage:", err.message)
+//                     return res.status(500).json({
+//                         error: 'Internal server error'
+//                     });
+//                 }
+
+//                     const data = req.body;
+//                     const imgData = req.file;
+//                     const imagePath = imgData ? imgData.path : null;
+
+//                     const orderData = {
+//                         title: data.title,
+//                         description: data.description,
+//                         image: imagePath,
+//                         day: data.day,
+//                         time_start: data.time_start,
+//                         time_finish: data.time_finish,
+//                         category: data.category,
+//                         workshop: data.workshop
+//                     };
+//                     console.log("orderData:", orderData);
+    
+//                     // const insert = "INSERT INTO calendar_class SET image = ?";
+//                     // const [rows] = await pool.query(insert, [orderData.image]);
+//                     // console.log(rows)
+
+
+//                     return res.status(200).json({
+//                         'message': 'postNewClass'
+//                     });
+//                 });
+//             });
+
+//     } catch(error) {
+//         console.log(error)
+//         return res.status(500).json({
+//             'message': 'Internal server error'
+//         })
+//     }
+// }
+
 export const postNewClass = async (req, res) => {
     try {
-
-        upload(req, res, (error) => {
-            if(error instanceof multer.MulterError) {
-                console.log("Error from Multer:", error.message)
+        upload(req, res, (uploadError) => {
+            if (uploadError instanceof multer.MulterError) {
+                console.log("Error from Multer:", uploadError.message)
                 return res.status(400).json({
-                    message: 'An unexpected error has occurred, we will resolve it as soon as possible.'
+                    message: 'An unexpected error has occurred during file upload. We will resolve it as soon as possible.'
                 })
-            } else if(error) {
-                console.log("Unknown error:", error.message)
+            } else if (uploadError) {
+                console.log("Unknown error from Multer:", uploadError.message)
                 return res.status(400).json({
-                    message: 'An unexpected error has occurred, we will resolve it as soon as possible.'
+                    message: 'An unexpected error has occurred during file upload. We will resolve it as soon as possible.'
                 })
             }
+        });
 
-            const data = req.body
-            const imgData = req.file
+            compressImage(req, res, (err) => {
+                if (err) {
+                    console.log("Error from compressImage:", err.message)
+                    return res.status(500).json({
+                        error: 'Internal server error'
+                    });
+                }
 
-            // console.log("data:", data)
-            // console.log("imgData:", imgData)
+                const data = req.body;
+                const imgData = req.file;
 
-            const orderData = {
-                title : data.title,
-                description : data.description,
-                image : imgData,
-                day : data.day,
-                time_start : data.time_start,
-                time_finish : data.time_finish,
-                category : data.category,
-                workshop : data.workshop
-            }
+                const orderData = {
+                    title: data.title,
+                    description: data.description,
+                    image: imgData,
+                    day: data.day,
+                    time_start: data.time_start,
+                    time_finish: data.time_finish,
+                    category: data.category,
+                    workshop: data.workshop
+                };
 
-            console.log("orderData:", orderData)
-            // req.file ? console.log("req.file:", req.file) : console.log("No existe req.file")
+                console.log("orderData:", orderData);
 
-            
+                // const insert = "INSERT INTO calendar_class SET image = ?";
+                // const [rows] = await pool.query(insert, [orderData.image]);
+                // console.log(rows)
 
-            // console.log(orderData)
-            if (!req.file) {
-                return res.status(400).send('No hay ningún archivo.');
-            }
-            // console.log("req.file.buffer.toString('base64')", req.file.buffer.toString('base64'))
-            // console.log("req.body", req.body)
-            
-            // const { buffer } = req.file
+                if (!req.file) {
+                    return res.status(400).send('There is no file.');
+                }
 
-            // console.log("buffer", buffer)
-
-            // const [ rows ] = await pool.query("INSERT INTO calendar_class SET title = ?, description = ?, image = ?, day = ?, time_start = ?, time_finish = ?, category = ?, workshop = ?", [orderData.title, orderData.description, orderData.image, orderData.day, orderData.time_start, orderData.time_finish, orderData.category, orderData.workshop]);
-            // console.log("rows", rows)
-            
-            return res.status(200).json({
-                'message': 'postNewClass'
-            })
-        })
-
-    } catch(error) {
+                return res.status(200).json({
+                    'message': 'postNewClass'
+                });
+            });
+        
+    } catch (error) {
         console.log(error)
         return res.status(500).json({
             'message': 'Internal server error'
         })
     }
 }
-
-// const storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//       cb(null, '../../../uploads/');
-//     },
-//     filename: function (req, file, cb) {
-//     //   const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-//       cb(null,Date.now() + "-" + file.originalname);
-//     }
-// });
-
-// const upload = multer({ storage: storage})
-
-// const uploadHandler = upload.single("img")
-
-// export {uploadHandler};
-
-// export const uploadImage = async (req, res) => {
-//     try {
-//         return res.status(200).json({
-//             'message': 'image sent'
-//         })
-//     } catch (error) {
-//         console.log(error)
-//         return res.status(500).json({
-//             'message': 'Internal server error'
-//         })
-//     }
-    
-// }

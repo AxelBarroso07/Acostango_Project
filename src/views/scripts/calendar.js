@@ -130,16 +130,50 @@ function deleteClass(idCalendar) {
     })
 }
 
-async function createClass(formData) {
-    let port = 0
-    let host = ''
+    // // Event data
+    // document.getElementById("formEvent").addEventListener("submit", ev=>{
+    //     ev.preventDefault()
+    //     // const title = document.getElementById("title").value
+    //     // const description = document.getElementById("description").value
+    //     const image = document.getElementById("image").value
+    //     // const day = document.getElementById("day").value
+    //     // const time_start = document.getElementById("time_start").value
+    //     // const time_finish = document.getElementById("time_finish").value
+    //     // const category = document.getElementById("category").value
+    // })
 
+    // function createClass(formData) {
+
+    //     const port = 3000
+    //     const host = "localhost"
+
+    //     console.log("image: ", formData)
+
+
+    //     fetch(`http://${host}:${port}/newClass`, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({
+    //             formData
+    //         })
+    //     })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         console.log("New class:", data);
+    //         location.reload();
+    //     })
+    //     .catch(error => {
+    //         console.error('Error to insert new class:', error);
+    //     })
+    // }
+
+async function createClass(formData) {
     try {
-        const response = await fetch(`/config`, {
-            'method': 'GET',
-            'headers' : {
-                'Content-Type': 'application/json'
-            }
+        const response = await fetch(`/newClass`, {
+            'method': 'POST',
+            body: formData
         })
         
         if(response.ok) {
@@ -154,23 +188,6 @@ async function createClass(formData) {
     } catch(error) {
         console.log('Error en try fetch /config. error:', error)
     }
-
     console.log("data from createClass():", formData)
-
-    try {
-        const response = await fetch(`http://${host}:${port}/newClass`, {
-            method: 'POST',
-            body: formData
-        })
-
-        if (!response.ok) {
-            console.log("error in response.ok /newClass")
-        }
-
-        const result = await response.json()
-        console.log('Class created before return:', result)
-        return result;
-    } catch (error) {
-        console.error('Error to insert new class:', error)
-    }
 }
+    
