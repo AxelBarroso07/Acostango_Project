@@ -1,5 +1,6 @@
 import React from 'react'
 import '../MenuClases/MenuClases.css';
+import { Link } from 'react-router-dom';
 
 function MenuClases() {
   return (

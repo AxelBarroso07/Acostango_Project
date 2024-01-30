@@ -115,27 +115,3 @@ input[type="button"]:hover{
     font-family: 'Roboto', sans-serif;
     gap: 10px;
 }
-
-.icon-map:hover{
-    color: #EA4335;
-    transition: .5s;
-    transform: scale(1.5,1.5);
-}
-
-.icon-whatsapp:hover{
-    color: #25D366;
-    transition: .5s;
-    transform: scale(1.5,1.5);
-}
-
-.icon-phone:hover{
-    color: #4285F4;
-    transition: .5s;
-    transform: scale(1.5,1.5);
-}
-
-.icon-mail:hover{
-    color: #EA4335;
-    transition: .5s ;
-    transform: scale(1.5,1.5);
-}
