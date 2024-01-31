@@ -137,6 +137,7 @@ export const getCalendar = async (req, res) => {
                     idCalendar: row.id_calendar,
                     title: row.title,
                     day: row.day,
+                    image: row.image,
                     hourCalendarClass: moment(startTime, 'hh:mm A').format('hh:mm A'),
                     timeStartParse: row.time_start.slice(0, 5),
                     timeFinishParse: row.time_finish.slice(0, 5),
@@ -233,7 +234,7 @@ export const deleteClass = async (req, res) => {
 export const postNewClass = async (req, res) => {
     try {
 
-        upload(req, res, (error) => {
+        upload(req, res, async(error) => {
             if(error instanceof multer.MulterError) {
                 console.log("Error from Multer:", error.message)
                 return res.status(400).json({
@@ -244,26 +245,34 @@ export const postNewClass = async (req, res) => {
                 return res.status(400).json({
                     message: 'An unexpected error has occurred, we will resolve it as soon as possible.'
                 })
-            }})
+            }
 
-            compressImage(req, res, (err) => {
-                if (err) {
-                    console.log("Error from compressImage:", err.message)
-                    return res.status(500).json({
-                        error: 'Internal server error'
-                    });
-                }
+            //Compress image
+            const imagePath = req.file.path; //Image original name
 
+            const compressedPath = 'src/public/images/'//Directory Path for compressed images
+
+            const compressedImagePath = compressedPath + req.file.filename;//Path for compressed images
+
+            const fileExtension = req.file.filename.split('.').pop().toLowerCase();//File extension
+
+            let fileCompress = sharp(imagePath);//Image to compress
+
+            if (fileExtension === 'jpg' || fileExtension === 'jpeg') {
+                fileCompress = fileCompress.jpeg({ quality: 20 })
+            } else if (fileExtension === 'png') {
+                fileCompress = fileCompress.png({ quality: 20 })
+            } 
+            await fileCompress.toFile(compressedImagePath);
             const data = req.body
-            const imgData = req.file
 
-            // console.log("data:", data)
-            // console.log("imgData:", imgData)
+            //Save image path in DB
+            const [rows] = await pool.query("INSERT INTO gallery SET ? ", { photo: compressedImagePath});
 
             const orderData = {
                 title : data.title,
                 description : data.description,
-                image : imgData,
+                image : imagePath,
                 day : data.day,
                 time_start : data.time_start,
                 time_finish : data.time_finish,
@@ -294,7 +303,7 @@ export const postNewClass = async (req, res) => {
                 'message': 'postNewClass'
             })
         })
-    
+
     } catch(error) {
         console.log(error)
         return res.status(500).json({

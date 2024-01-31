@@ -35,7 +35,7 @@ CREATE TABLE `calendar_class` (
   `id_calendar` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `title` VARCHAR(100) NOT NULL,
   `description` VARCHAR(255) NULL,
-  `image` BLOB NULL,
+  `image` VARCHAR(255) NULL,
   `day` VARCHAR(20) NOT NULL,
   `time_start` TIME NOT NULL,
   `time_finish` TIME NOT NULL,
@@ -65,7 +65,7 @@ INSERT INTO calendar_class(title, day, time_start, time_finish, category, worksh
 
 CREATE TABLE `gallery` (
   `id_image` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `photo` blob DEFAULT NULL
+  `photo` VARCHAR(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
