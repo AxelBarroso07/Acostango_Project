@@ -34,11 +34,14 @@ USE acostango;
 CREATE TABLE `calendar_class` (
   `id_calendar` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `title` VARCHAR(100) NOT NULL,
-  `description` VARCHAR(140) NULL,
+  `description` VARCHAR(255) NOT NULL,
   `image` VARCHAR(255) NULL,
   `day` VARCHAR(20) NOT NULL,
+  `date` DATE NULL,
+  `location` VARCHAR(50) NULL,
+  `price` DECIMAL(7,2) NULL,
   `time_start` TIME NOT NULL,
-  `time_finish` TIME NOT NULL,
+  `time_finish` TIME NULL,
   `category` VARCHAR(15) NOT NULL,
   `workshop` BOOLEAN NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

@@ -4,7 +4,7 @@ import multer from 'multer';
 import path, { join } from 'path';
 import sharp from 'sharp';
 import { fileURLToPath } from 'url';
-import { getIndex, getConfig, getCalendar, postEditClass, deleteClass, postNewClass } from '../controllers/index.controller.js';
+import { getIndex, getConfig, getCalendar, postEditClass, deleteClass, postNewClass, getCreateClass, postConfirmCreateClass } from '../controllers/index.controller.js';
 // uploadImage, uploadHandler
 
 const storage = multer.diskStorage({
@@ -42,43 +42,43 @@ export const upload = multer({
 }).single('image')
 
 //Compress image
-export const compressImage = async (req, res) => {
-    try {
-        upload(req, res, async (err) => {
-            if (err) {
-                return res.status(400).json({ error: err.message });
-            }
+// export const compressImage = async (req, res) => {
+//     try {
+//         upload(req, res, async (err) => {
+//             if (err) {
+//                 return res.status(400).json({ error: err.message });
+//             }
 
-            const fileUpload = req.file.path;
-            const fileExtension = path.extname(fileUpload).toLowerCase();
+//             const fileUpload = req.file.path;
+//             const fileExtension = path.extname(fileUpload).toLowerCase();
             
 
-            try {
-                let fileImage = sharp(fileUpload);
-                if (fileExtension === '.jpg' || fileExtension === '.jpeg') {
-                    fileImage = fileImage.jpeg({ quality: 20 });
-                } else if (fileExtension === '.png') {
-                    fileImage = fileImage.png({ quality: 20 });
-                }
+//             try {
+//                 let fileImage = sharp(fileUpload);
+//                 if (fileExtension === '.jpg' || fileExtension === '.jpeg') {
+//                     fileImage = fileImage.jpeg({ quality: 20 });
+//                 } else if (fileExtension === '.png') {
+//                     fileImage = fileImage.png({ quality: 20 });
+//                 }
 
-                await fileImage.toFile(fileUpload + "_compressed" + fileExtension);
-                res.json({ message: 'Image compressed successfully' });
-            } catch (err) {
-                console.error("Error compressing image", err);
-                return res.status(500).json({ error: 'Internal server error' });
-            }
-        });
-    } catch (error) {
-        console.error("Error in compressImage:", error);
-        return res.status(500).json({ error: 'Internal server error' });
-    }
-};
+//                 await fileImage.toFile(fileUpload + "_compressed" + fileExtension);
+//                 res.json({ message: 'Image compressed successfully' });
+//             } catch (err) {
+//                 console.error("Error compressing image", err);
+//                 return res.status(500).json({ error: 'Internal server error' });
+//             }
+//         });
+//     } catch (error) {
+//         console.error("Error in compressImage:", error);
+//         return res.status(500).json({ error: 'Internal server error' });
+//     }
+// };
 
 const router = Router();
 
 // router.use(upload.single('image'), json());
 
-router.get('/get', getIndex);
+router.get('/', getIndex);
 
 router.get('/config', getConfig);
 
@@ -89,6 +89,10 @@ router.post('/editClass/:idCalendar', postEditClass);
 router.delete('/deleteClass/:idCalendar', deleteClass);
 
 router.post('/newClass', postNewClass);
+
+router.get('/createClass', getCreateClass);
+
+router.post('/confirmCreateClass', postConfirmCreateClass)
 
 // router.post('/uploadImage', uploadHandler, uploadImage);
 

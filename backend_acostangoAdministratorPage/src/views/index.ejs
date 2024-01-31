@@ -1,40 +1,38 @@
-<%- include('./partials/headerStart.ejs', { titlePage: 'Calendar' }) %>
+<%- include('./partials/headerStart.ejs', { titlePage: 'Home' }) %>
 
 <p>Schedule</p>
-
-<p><%- positonMonth %></p>
 
 <table border="1">
     <thead>
         <tr>
             <!-- WEEKDAY ROW -->
-            <th>Hour</th>
-            <% for(let i = 0; i < weekDay.length; i++) {%>
+            <% for(let i = 0; i < weekDay.length; i++) { %>
                 <th> <%- weekDay[i] %> </th>
             <% } %>
         </tr>
     </thead>
     <tbody>
-        <!-- Days and classes colummns -->
-        <% for(let i = 0; i < uniqueSortedArray.length; i++) { %>
-            <tr>
-                <td><%- uniqueSortedArray[i] %></td>
-                <% for(let j = 0; j < weekDay.length; j++) { %>
-                    <% const classesForCell = rowsParse.filter(rowParse => rowParse.day === weekDay[j] && rowParse.hourCalendarClass === uniqueSortedArray[i]) %>
+        <% const maxClassesPerRow = 3 %>
 
-                    <% if(classesForCell.length > 0) { %>
+        <% for (let row = 0; row < maxClassesPerRow; row++) { %>
+            <tr>
+                <% for (let j = 0; j < weekDay.length; j++) { %>
+                    <% const classesForCell = rowsParse.filter(rowParse => rowParse.day === weekDay[j]) %>
+                    <% console.log("console.log():", rowsParse) %>
+                    <% if (classesForCell.length > 0) { %>
+                        <% const currentClassIndex = row + (maxClassesPerRow * j) % classesForCell.length %>
+                        <% const currentClass = classesForCell[currentClassIndex] %>
+                        
+
                         <td>
-                            <% for(let k = 0; k < classesForCell.length; k++) { %>
-                                <% if (classesForCell[k].workshop == 1) { %>
-                                    <div style="background-color: red;">
+                            <% if (currentClass) { %>
+                                <% if (currentClass.workshop === 1) { %>
+                                    <div style="background-color: #f00;">
                                 <% } %>
-                                <%- classesForCell[k].title %> <%- classesForCell[k].time12hrsStartFormat %>-<%- classesForCell[k].time12hrsFinishFormat %>
-                                <% if (k < classesForCell.length - 1) { %>
-                                    <br>
+                                <%- currentClass.title %> <%- currentClass.time12hrsStartFormat %>-<%- currentClass.time12hrsFinishFormat %>
+                                <% if (currentClass.workshop === 1) { %>
+                                    </div>
                                 <% } %>
-                                <% if (classesForCell[k].workshop) { %>
-                                </div>
-                            <% } %>
                             <% } %>
                         </td>
                     <% } else { %>
@@ -43,11 +41,8 @@
                 <% } %>
             </tr>
         <% } %>
-        
     </tbody>
 </table>
-
-<p>Classes / <span style="background-color: #f00;">workshops</span></p>
 
 <% if(rowsParse && rowsParse.length > 0){ %>
     <div class="divClassesDB">
@@ -107,95 +102,8 @@
     </div>
 <% } %>
 
-<!-- class and workshop form -->
-<button onclick="showHide('formClass', 'show')">Create new class/workshop</button>
-<div>
-    <form id="formClass" class="forms" style="display: none;" >
-        <label>Title:</label>
-        <input type="text" id="title" name="title" min="3" max="100" value="">
-
-        <label for="description">Description:</label>
-        <br>
-        <textarea id="description" name="description" cols="50" rows="4" maxlength="255" style="resize: none;" value=""></textarea>
-        <br>
-        
-        <select name="day" id="day">
-            <option disabled selected value="">Week day</option>
-            <% for(let i = 0; i < weekDay.length; i++) {%>
-                <option value="<%- weekDay[i] %>">
-                    <%- weekDay[i] %>
-                </option>
-            <% } %>
-        </select>
-        <br>
-
-        <label for="time_start">Time start:</label>
-        <input type="time" id="time_start" name="time_start">
-        
-        <label for="time_finish">Time finish:</label>
-        <input type="time" id="time_finish" name="time_finish">
-
-        <label>Workshop</label>
-        <br>
-        
-        <label for="workshopOptionTrue">Yes</label>
-        <input type="radio" id="workshopOptionTrue" value="true" name="workshop">
-
-        <label for="workshopOptionFalse">No</label>
-        <input type="radio" id="workshopOptionFalse" value="false" name="workshop" checked>
-        
-        <input type="hidden" name="category" value="class">
-
-        <button type="submit" name="submitButton" value="submitValue">Save class</button>
-        <button type="button" onclick="showHide('formClass', 'hide')">Cancel</button>
-    </form>
-</div>
-
-<!-- event form -->
-<button onclick="showHide('formEvent', 'show')">Create new event</button>
-<div>
-    <form id="formEvent" class="forms" style="display: none;" enctype="multipart/form-data">
-        <label>Title:</label>
-        <input type="text" id="title" name="title" min="3" max="100" value="">
-        
-        <label for="description">Description:</label>
-        <br>
-        <textarea id="description" name="description" cols="50" rows="4" maxlength="140" style="resize: none;" value=""></textarea>
-        <br>
-
-        <label for="image">Image</label>
-        <input type="file" id="image" class="image" name="image" accept="image/*">
-        
-        <select name="day" id="day">
-            <option disabled selected hidden value="">Week day</option>
-            <% for(let i = 0; i < weekDay.length; i++) {%>
-                <option value="<%- weekDay[i] %>">
-                    <%- weekDay[i] %>
-                </option>
-            <% } %>
-        </select>
-        <br>
-        <label for="time_start">Time start:</label>
-        <input type="time" id="time_start" name="time_start">
-
-        <label for="date">Date:</label>
-        <input type="date" id="date" name="date">
-
-        <label for="location">Location</label>
-        <input type="text" id="location" max="50" name="location">
-
-        <label for="price">Price</label>
-        <input type="number" id="price" name="price">
-
-        <input type="hidden" name="category" value="event">
-
-        <button type="submit" name="submitButton" value="submitValue">Save event</button>
-        <button type="button" onclick="showHide('formEvent', 'hide')">Cancel</button>
-    </form>
-</div>
-
 <a href="/createClass">New Class</a>
 
-<script src="./scripts/calendar.js"></script>
+<script src="./scripts/index.js"></script>
 
 <%- include('./partials/footer.ejs') %>

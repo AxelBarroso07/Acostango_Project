@@ -1,34 +1,45 @@
-function showHide(nameForm, action) {
-    let data = {}
+function showHide(action, modalId) {
 
-    if (action === 'show') {
-        document.getElementById(nameForm).style.display = 'block'
+    const dialog = document.getElementById(`confirmationDeleteDiv_${modalId}`)
 
-        if (!document.getElementById(nameForm).hasSubmitEvent) {
-                document.getElementById(nameForm).addEventListener("submit", async e => {
-                    e.preventDefault()
-
-                    const formData = new FormData(document.getElementById(nameForm))
-                    console.log('Form Data Entries:', [...formData.entries()])
-
-                    try {
-                        const createdClass = await createClass(formData)
-                        console.log('Class created:', createdClass)
-                    } catch (error) {
-                        console.error('Error creating class:', error)
-                    }
-                })
-            }
-
-            // Marcamos el evento como true para que no se repita el envío varias veces
-            document.getElementById(nameForm).hasSubmitEvent = true
-    } else if (action === 'hide') {
-        document.getElementById(nameForm).style.display = 'none'
+    if (action === true) {
+        dialog.style.display = 'block'
+    } else if(action === false) {
+        dialog.style.display = 'none'
+        dialog.close()
     }
 }
 
+
 function booleanParse(boolean) {
     return boolean === true || boolean === "true"
+}
+
+async function config() {
+    let port = 0
+    let host = ''
+
+    try {
+        const response = await fetch(`/config`, {
+            'method': 'GET',
+            'headers' : {
+                'Content-Type': 'application/json'
+            }
+        })
+        
+        if(response.ok) {
+            const config = await response.json()
+            // console.log("config", config)
+
+            port = parseInt(config.PORT)
+            host = config.DB_HOST.toString()
+        } else {
+            console.log('Error en config.ok de fetch /config')
+        }
+    } catch(error) {
+        console.log('Error en try fetch /config. error:', error)
+    }
+    return port, host
 }
 
 function hideModal(modalId, idCalendar, originalTitle) {
@@ -113,9 +124,8 @@ function confirmEdit(idCalendarDB, titleDB, descriptionDB, timeStartDB, timeFini
     }
 }
 
-function deleteClass(idCalendar) {
-    const port = process.env.PORT;
-    const host = process.env.DB_HOST;
+async function deleteClass(idCalendar) {
+    await config()
 
     console.log("idCalendar from deleteClass()", idCalendar);
     
