@@ -1,0 +1,24 @@
+.container_clases{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    width: 500px;
+}
+
+.clases{
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    width: 200px;
+    height: 200px;
+    padding: 10px;
+    background-color: #000;
+}
+
+.clases__title{
+    text-align: center;
+    color: #FFF;
+    font-size: 1.2em;
+    font-family: 'Nunito', sans-serif;
+}

@@ -1,0 +1,28 @@
+.menu__faq{
+    background-color: #FFFF;
+}
+
+.faq__title{
+    text-align: center;
+    padding-bottom: 10px;
+    font-family: "Roboto", sans-serif;
+    font-size: 2.5em;
+    font-weight: 400;
+}
+
+.details__answer{
+    font-family: "Nunito", sans-serif;
+    font-weight: 600;
+}
+
+.details__question{
+    width: 420px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+    list-style: none;
+    font-size: .9em;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+}
