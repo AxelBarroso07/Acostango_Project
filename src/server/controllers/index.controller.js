@@ -4,7 +4,7 @@ import { fileURLToPath } from "url";
 import bcrypt from "bcrypt";
 import moment from 'moment'
 import { PORT, DB_HOST } from '../../../config.js';
-import { upload, compressImage } from "../routes/index.routes.js";
+import { uploadNormalImage, uploadCompressedImage } from "../routes/index.routes.js";
 import multer from "multer";
 import sharp from "sharp";
 
@@ -233,7 +233,7 @@ export const deleteClass = async (req, res) => {
 export const postNewClass = async (req, res) => {
     try {
 
-        upload(req, res, (error) => {
+        uploadNormalImage(req, res, (error) => {
             if(error instanceof multer.MulterError) {
                 console.log("Error from Multer:", error.message)
                 return res.status(400).json({
@@ -246,7 +246,7 @@ export const postNewClass = async (req, res) => {
                 })
             }})
 
-            compressImage(req, res, (err) => {
+            uploadCompressedImage(req, res, (err) => {
                 if (err) {
                     console.log("Error from compressImage:", err.message)
                     return res.status(500).json({
