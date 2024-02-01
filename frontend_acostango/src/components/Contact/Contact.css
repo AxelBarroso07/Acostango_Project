@@ -9,7 +9,7 @@ section{
     align-items: center;
     margin: auto;
     width: 70%;
-    gap: 200px;
+    gap: 100px;
     padding: 200px 0px 20px;
 }
 
@@ -17,6 +17,7 @@ section{
     color: #000;
     font-size: 3.5em;
     font-family: 'Roboto', sans-serif;
+    font-weight: 500;
 }
 
 .container__contact{
@@ -28,13 +29,29 @@ section{
     width: 100%;
 }
 
+.contact__map{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.a__mapview{
+    color: #000;
+    font-size: 1.2em;
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    text-decoration: none;
+}
+
 form{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     gap: 20px;
-    width: 300px;
+    width: 400px;
 }
 
 input[type="text"]{
@@ -114,4 +131,19 @@ input[type="button"]:hover{
     font-size: 1em;
     font-family: 'Roboto', sans-serif;
     gap: 10px;
+}
+
+@media (max-width:1000px) {
+    .container__contact{
+        flex-direction: column;
+    }
+
+    form{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+        width: 300px;
+    }
 }
