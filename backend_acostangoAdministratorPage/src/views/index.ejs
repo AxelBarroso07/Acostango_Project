@@ -25,9 +25,9 @@
                     <% if (currentClass) { %>
                         <td>
                             <% if (currentClass.time12hrsFinishFormat !== null) { %>
-                                <%- currentClass.workshop === 0 ? `<span>Class: ${currentClass.title}${currentClass.time12hrsStartFormat}-${currentClass.time12hrsFinishFormat}</span>` : `<span>Workshop: ${currentClass.title}${currentClass.time12hrsStartFormat}-${currentClass.time12hrsFinishFormat}</span>` %>
+                                <%- currentClass.workshop === 0 ? `<span>Class: ${currentClass.title} ${currentClass.time12hrsStartFormat}-${currentClass.time12hrsFinishFormat}</span>` : `<span>Workshop: ${currentClass.title} ${currentClass.time12hrsStartFormat}-${currentClass.time12hrsFinishFormat}</span>` %>
                             <% } else { %>
-                                <%- `<span>Event: ${currentClass.title}${currentClass.time12hrsStartFormat}</span>` %>
+                                <%- `<span>Event: ${currentClass.title} ${currentClass.time12hrsStartFormat}</span>` %>
                             <% } %>
                         </td>
                     <% } else { %>
@@ -38,7 +38,6 @@
         <% } %>
     </tbody>
 </table>
-
 
 <% if(rowsParse && rowsParse.length > 0){ %>
     <div class="divClassesDB">
@@ -85,10 +84,14 @@
                                 
                                 <label for="<%- 'editTimeStart_' + rowParse.idCalendar %>">Time start:</label>
                                 <input type="time" id="<%- 'editTimeStart_' + rowParse.idCalendar %>" name="<%- 'editTimeStart_' + rowParse.idCalendar %>" value="<%- rowParse.timeStartParse %>">
-                                
-                                <label for="<%- 'editTimeFinish_' + rowParse.idCalendar %>">Time finish:</label>
+                                <%- rowParse.category === 'class' %>
+                                    ?
+                                <!-- <label for="<%- 'editTimeFinish_' + rowParse.idCalendar %>">Time finish:</label>
                                 <input type="time" id="<%- 'editTimeFinish_' + rowParse.idCalendar %>" name="<%- 'editTimeFinish_' + rowParse.idCalendar %>" value="<%- rowParse.timeFinishParse %>">
-                                
+                                    :
+                                <label for="<%- 'editDate_' + rowParse.idCalendar %>">Date:</label>
+                                <input type="date" id="<%- 'editDate_' + rowParse.idCalendar %>" name="<%- 'editDate_' + rowParse.idCalendar %>" value="<%- rowParse.date %>"> -->
+
                                 <!-- Otros campos de edición... -->
                                 <button type="submit">Save Changes</button>
                                 <button type="button" class="closeModal" onclick="showHide(false, 'editFields_<%- rowParse.idCalendar %>')">Close</button>
