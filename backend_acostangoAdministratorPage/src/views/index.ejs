@@ -1,0 +1,112 @@
+<%- include('./partials/header.ejs', { titlePage: 'Home' }) %>
+
+<p>Schedule</p>
+
+<table border="1">
+    <thead>
+        <tr>
+            <!-- WEEKDAY ROW -->
+            <% for(let i = 0; i < weekDay.length; i++) { %>
+                <th> <%- weekDay[i] %> </th>
+            <% } %>
+        </tr>
+    </thead>
+    <tbody>
+        <% const maxClassesPerRow = 3 %>
+        <% const maxClassesPerDay = Math.max(...weekDay.map(day => rowsParse.filter(rowParse => rowParse.day === day).length)) %>
+
+        <% for (let row = 0; row < maxClassesPerDay; row++) { %>
+            <tr>
+                <% for (let j = 0; j < weekDay.length; j++) { %>
+                    <% const classesForCell = rowsParse.filter(rowParse => rowParse.day === weekDay[j]) %>
+                    
+                    <% const currentClass = classesForCell[row] %>
+
+                    <% if (currentClass) { %>
+                        <td>
+                            <% if (currentClass.time12hrsFinishFormat !== null) { %>
+                                <%- currentClass.workshop === 0 ? `<span>Class: ${currentClass.title} ${currentClass.time12hrsStartFormat}-${currentClass.time12hrsFinishFormat}</span>` : `<span>Workshop: ${currentClass.title} ${currentClass.time12hrsStartFormat}-${currentClass.time12hrsFinishFormat}</span>` %>
+                            <% } else { %>
+                                <%- `<span>Event: ${currentClass.title} ${currentClass.time12hrsStartFormat}</span>` %>
+                            <% } %>
+                        </td>
+                    <% } else { %>
+                        <td></td>
+                    <% } %>
+                <% } %>
+            </tr>
+        <% } %>
+    </tbody>
+</table>
+
+<% if(rowsParse && rowsParse.length > 0){ %>
+    <div class="divClassesDB">
+        <% rowsParse.map(rowParse => { %>
+            <div class="classesDB <% if (rowParse.workshop) { %> workshop-class <% } %>">
+                <%- rowParse.workshop === 0 ? `<span>Class: ${rowParse.title}</span>` : rowParse.workshop === 1 ? `<span>Workshop: ${rowParse.title}</span>` : `<span>Event: ${rowParse.title}</span>` %>
+                <span><%- rowParse.description %></span>
+                <span><%- rowParse.day %></span>
+                <%- rowParse.date !== null ? `<span>${rowParse.date}</span>` : '' %>
+                <%- rowParse.price !== null ? `<span>${rowParse.price}</span>` : '' %>
+                <%- rowParse.location !== null ? `<span>${rowParse.location}</span>` : '' %>
+                <%- rowParse.time12hrsFinishFormat !== null
+                ?
+                    `<span>${rowParse.time12hrsStartFormat} - ${rowParse.time12hrsFinishFormat}</span>`
+                :
+                    `<span>${rowParse.time12hrsStartFormat}</span>`
+                %>
+                <%- rowParse.image !== null ? `<img src="${rowParse.image}" alt="${rowParse.title}" height="200" width="200" />` : '' %>
+                <button onclick="editClass('<%- rowParse.idCalendar %>')" class="modal">Edit</button>
+                <button onclick="showHide(true, 'confirmationDeleteDiv_<%- rowParse.idCalendar %>')" class="deleteButton">Delete</button>
+
+                <div class="dialogContainer">
+                    <!-- Delete class dialog -->
+                    <dialog id="confirmationDeleteDiv_<%- rowParse.idCalendar %>" class="dialog" style="display: none;">
+                        <p>Delete this class?</p>
+                        <div>
+                            <button id="deleteConfirmYes" onclick="deleteClass('<%- rowParse.idCalendar %>'), showHide(false, '<%- rowParse.idCalendar %>')">Yes</button>
+                        </div>
+                        <div>
+                            <button id="deleteConfirmNo" onclick="showHide(false, 'confirmationDeleteDiv_<%- rowParse.idCalendar %>')">No</button>
+                        </div>
+                    </dialog>
+
+                    <!-- Delete class dialog -->
+                    <dialog class="dialog" style="display: none;" id="editFields_<%- rowParse.idCalendar %>" >
+                        <form id="editForm_<%- rowParse.idCalendar %>" onsubmit="confirmEdit('<%- rowParse.idCalendar %>', '<%- rowParse.title %>', '<%- rowParse.description %>' ,'<%- rowParse.timeStartParse %>', '<%- rowParse.timeFinishParse %>')">
+                            <div class="dialogContent">
+                                <!-- Campos de edición -->
+                                <label for="<%- 'editTitle_' + rowParse.idCalendar %>">Title:</label>
+                                <input type="text" id="<%- 'editTitle_' + rowParse.idCalendar %>" name="<%- 'editTitle_' + rowParse.idCalendar %>" value="<%- rowParse.title %>">
+                                
+                                <label for="<%- 'editDescription_' + rowParse.idCalendar %>">Description:</label>
+                                <textarea cols="50" rows="4" style="resize: none;" id="<%- 'editDescription_' + rowParse.idCalendar %>" name="<%- 'editDescription_' + rowParse.idCalendar %>" value="<%- rowParse.description %>"><%- rowParse.description %></textarea>
+                                
+                                <label for="<%- 'editTimeStart_' + rowParse.idCalendar %>">Time start:</label>
+                                <input type="time" id="<%- 'editTimeStart_' + rowParse.idCalendar %>" name="<%- 'editTimeStart_' + rowParse.idCalendar %>" value="<%- rowParse.timeStartParse %>">
+                                <%- rowParse.category === 'class' %>
+                                    ?
+                                <!-- <label for="<%- 'editTimeFinish_' + rowParse.idCalendar %>">Time finish:</label>
+                                <input type="time" id="<%- 'editTimeFinish_' + rowParse.idCalendar %>" name="<%- 'editTimeFinish_' + rowParse.idCalendar %>" value="<%- rowParse.timeFinishParse %>">
+                                    :
+                                <label for="<%- 'editDate_' + rowParse.idCalendar %>">Date:</label>
+                                <input type="date" id="<%- 'editDate_' + rowParse.idCalendar %>" name="<%- 'editDate_' + rowParse.idCalendar %>" value="<%- rowParse.date %>"> -->
+
+                                <!-- Otros campos de edición... -->
+                                <button type="submit">Save Changes</button>
+                                <button type="button" class="closeModal" onclick="showHide(false, 'editFields_<%- rowParse.idCalendar %>')">Close</button>
+                            </div>
+                        </form>
+                    </dialog>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+<% } %>
+
+<a href="/createClass">New Class</a>
+<a href="/createEvent">New Event</a>
+
+<script src="./scripts/index.js"></script>
+
+<%- include('./partials/footer.ejs') %>

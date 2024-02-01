@@ -1,0 +1,58 @@
+<%- include('./partials/header.ejs', { titlePage: 'Create Class' }) %>
+
+<h1>New Class</h1>
+
+<div>
+    <a href="/">
+        <i class="fa-solid fa-arrow-left" style="color: #f5f5fa;"></i>
+    </a>
+</div>
+
+<div>
+    <form action="/confirmCreateClass" id="formClass" method="POST">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" min="3" max="40" value="" required>
+
+        <label for="description">Description:</label>
+        <br>
+        <textarea id="description" name="description" cols="50" rows="4" maxlength="140" style="resize: none;" value="" required></textarea>
+        <br>
+        
+        <label for="day">Select day of the week:</label>
+        <select name="day" id="day" required>
+            <option disabled selected hidden value="">Week day</option>
+            <% for(let i = 0; i < weekDay.length; i++) { %>
+                <% const day = weekDay[i]; %>
+                <% console.log("'day' in createClass:", day) %>
+        
+                <% const isDayFull = fullDays && fullDays[day.toLowerCase()] && fullDays[day.toLowerCase()].classes.length >= 3; %>
+                <% console.log("'isDayFull' in createClass:", isDayFull) %>
+                
+                <option value="<%- day %>" <%= isDayFull === false ? 'disabled' : '' %>>
+                    <%- day %><%- isDayFull === false ? ' (Full)' : '' %>
+                </option>
+            <% } %>
+        </select>
+        
+        <br>
+
+        <label for="time_start">Time start:</label>
+        <input type="time" id="time_start" name="time_start" required>
+        
+        <label for="time_finish">Time finish:</label>
+        <input type="time" id="time_finish" name="time_finish" required>
+
+        <label>Workshop</label>
+        <br>
+        
+        <label for="workshopOptionTrue">Yes</label>
+        <input type="radio" id="workshopOptionTrue" value="true" name="workshop" required>
+
+        <label for="workshopOptionFalse">No</label>
+        <input type="radio" id="workshopOptionFalse" value="false" name="workshop" checked required>
+
+        <button type="submit">Create</button>
+    </form>
+</div>
+
+<%- include('./partials/footer.ejs') %>

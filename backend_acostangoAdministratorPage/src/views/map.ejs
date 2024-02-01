@@ -1,0 +1,25 @@
+<%- include('./partials/header.ejs') %>
+<!-- Leaflet library -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+  crossorigin=""
+/>
+<!-- Map style -->
+<link rel="stylesheet" href="./styles/map.css" />
+<title>Acostango</title>
+<%- include('./partials/headerEnd.ejs') %>
+
+<footer>
+  <div id="map"></div>
+</footer>
+
+<!-- Leaflet script -->
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+  crossorigin=""
+></script>
+<script src="../../map.js"></script>
+<%- include('./partials/footer.ejs') %>

@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0f0c0c;
+    color: #f5f5fa;
+}
+
+.divClassesDB {
+    display: flex;
+    justify-content: space-around;
+}
+
+.classesDB {
+    width: 250px;
+    height: 150px;
+    border: 1px solid #f5f5fa;
+}
+
+.dialogContainer{
+    display: flex;
+    justify-content: center;
+    height: 50vh;
+}
+
+.dialogContent label, input{
+    display: block;
+}
+
+.workshop-class{
+    background-color: red;
+}
