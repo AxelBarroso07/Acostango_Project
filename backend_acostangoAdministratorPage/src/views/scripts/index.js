@@ -69,6 +69,7 @@ function confirmEdit(idCalendarDB, titleDB, descriptionDB, timeStartDB, timeFini
     const newTimeFinish = document.getElementById('editTimeFinish_' + idCalendarDB).value
 
     console.log(newTimeStart)
+    console.log(newDescription)
     console.log(newTimeFinish)
 
     const port = process.env.PORT

@@ -50,10 +50,6 @@ const router = Router();
 
 // router.use(upload.single('image'), json());
 
-router.get('/', getIndex);
-
-router.get('/config', getConfig);
-
 router.get('/calendar', getCalendar);
 
 router.post('/editClass/:idCalendar', postEditClass);
@@ -61,6 +57,11 @@ router.post('/editClass/:idCalendar', postEditClass);
 router.delete('/deleteClass/:idCalendar', deleteClass);
 
 router.post('/newClass', postNewClass);
+
+//new endpoints
+router.get('/', getIndex);
+
+router.get('/config', getConfig);
 
 router.get('/createClass', getCreateClass);
 

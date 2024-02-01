@@ -26,7 +26,6 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `calendar_class`
 --
-
 CREATE DATABASE acostango;
 
 USE acostango;
@@ -47,15 +46,16 @@ CREATE TABLE `calendar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- classes rows
-INSERT INTO `calendar_class` (`title`, `day`, `time_start`, `time_finish`) VALUES
-('AcosTango Afterwork Milonga', 'Monday', '19:00:00', '22:00:00'),
-('Beginners', 'Tuesday', '18:00:00', '19:00:00'),
-('Intermediate', 'Tuesday', '19:10:00', '20:30:00'),
-('Tango Strong', 'Tuesday', '19:30:00', '20:45:00'),
-('Practice', 'Wednesday', '20:30:00', '22:00:00'),
-('Newcomers Course', 'Thursday', '19:00:00', '22:00:00'),
-('Special Workshop', 'Saturday', '18:00:00', '19:00:00'),
-('AcosTango Milonga', 'Saturday', '19:00:00', '22:00:00');
+INSERT INTO `calendar` (`title`, `description`, `day`, `time_start`, `time_finish`, `category`, `workshop`) VALUES
+                             ('AcosTango Afterwork Milonga', 'Join us and bring your friends! We look forward to dancing with you!', 'Monday', '19:00:00', '22:00:00', 'class', false),
+                             ('Beginners', 'This is where you start your journey into Tango! We look forward to meeting you!', 'Tuesday', '18:00:00', '19:00:00', 'class', false),
+                             ('Intermediate', 'This is where you start your journey into Tango!', 'Tuesday', '19:10:00', '20:30:00', 'class', false),
+                             ('Tango Strong', 'Join us and bring your friends! We look forward to dancing with you! We look forward to dancing with you!', 'Tuesday', '19:30:00', '20:45:00', 'class', false),
+                             ('Practice', 'Join us and bring your friends! and bring your friends! We look forward to dancing with you!', 'Wednesday', '20:30:00', '22:00:00', 'class', false),
+                             ('Newcomers Course', 'Join us and bring your friends! and bring your friends! We look forward to dancing with you!', 'Thursday', '19:00:00', '22:00:00', 'class', false),
+                             ('Special Workshop', 'This is where you start your journey into Tango°', 'Saturday', '18:00:00', '19:00:00', 'class', true),
+                             ('AcosTango Milonga', 'Join us and bring your friends! We look forward to dancing with you!', 'Saturday', '19:00:00', '22:00:00', 'class', false)
+;
 
 INSERT INTO calendar_class(title, day, time_start, time_finish) VALUES ('Beginners', 'Sunday', '20:00:00', '22:00:00');
 INSERT INTO calendar_class(title, day, time_start, time_finish) VALUES ('truers', 'Wednesday', '18:00:00', '19:00:00');

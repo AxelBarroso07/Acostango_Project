@@ -275,6 +275,11 @@ export const postEditClass = async (req, res) => {
             values.push(newData.newTitle);
         }
 
+        if (newData.newDescription) {
+            params.push('description = ?');
+            values.push(newData.newDescription);
+        }
+
         if (newData.newTimeStart) {
             params.push('time_start = ?');
             values.push(newData.newTimeStart);
