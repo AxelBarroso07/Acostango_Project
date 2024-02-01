@@ -57,7 +57,7 @@ export const getIndex = async (req, res) => {
             })
         }
 
-        console.log("rowsParse:", rowsParse)
+        // console.log("rowsParse:", rowsParse)
 
         return res.render("index", {
             weekDay,
@@ -297,7 +297,7 @@ export const postNewClass = async (req, res) => {
     try {
         const data = req.body
         let dirPhotoCompressed = null
-        
+
         if(req.file !== undefined) {
             upload(req, res, async(error) => {
                 if(error instanceof multer.MulterError) {
@@ -311,8 +311,9 @@ export const postNewClass = async (req, res) => {
                         message: 'An unexpected error has occurred, we will resolve it as soon as possible.'
                     })
                 }
-                    })
-    
+            })
+        }
+                    console.log("DAta:", data)
             //Compress image
             // console.log("req.file:", req.file)
             const imagePath = req.file.path; //Image original name
@@ -339,7 +340,7 @@ export const postNewClass = async (req, res) => {
             const fileCompressedImage = req.file.filename
             dirPhotoCompressed = `${dirFolder}${fileCompressedImage}`
             // console.log("dirPhotoCompressed:", dirPhotoCompressed)
-        }
+        
         
 
         // //Save image path in DB
@@ -360,8 +361,8 @@ export const postNewClass = async (req, res) => {
             workshop : data.workshop
         }
 
-        console.log("orderData:", orderData)
-        console.log("orderPrice:", orderData.date)
+        // console.log("orderData:", orderData)
+        // console.log("orderPrice:", orderData.date)
         // req.file ? console.log("req.file:", req.file) : console.log("No existe req.file")
 
         
@@ -383,15 +384,14 @@ export const postNewClass = async (req, res) => {
         return res.status(200).json({
             'message': 'postNewClass'
         })
-        
-
+    
     } catch(error) {
         console.log(error)
         return res.status(500).json({
             'message': 'Internal server error'
         })
     }
-}
+    }
 
 export const getCreateClass = async (req, res) => {
     try {
@@ -415,12 +415,40 @@ export const getCreateClass = async (req, res) => {
         })
     }
 }
-
+// const data = {
+//     title: reqBody.title,
+//     description: reqBody.description,
+//     day: reqBody.day,
+//     date: null,
+//     image: null,
+//     location: null,
+//     price: null,
+//     time_start: reqBody.time_start ?? null,
+//     time_finish: reqBody.time_finish ?? null,
+//     category: reqBody.category ?? null,
+//     workshop: reqBody.workshop ?? null,
+// };
 export const postConfirmCreateClass = async (req, res) => {
     try {
-        const data = req.body
-        console.log("postConfirmCreateClass data:", data)
         
+        const reqBody = req.body
+
+        console.log(reqBody.workshop === 'true' ? true : false)
+
+        const data = {
+            title: reqBody.title,
+            description: reqBody.description,
+            day: reqBody.day,
+            time_start: reqBody.time_start,
+            time_finish: reqBody.time_finish,
+            category: 'class',
+            workshop: reqBody.workshop === 'true' ? true : false
+        };
+        console.log("postConfirmCreateClass data:", data)
+
+        const [ rows ] = await pool.query("INSERT INTO calendar_class SET title = ?, description = ?, image = null, day = ?, date = ?, location = null, price = null, time_start =?, time_finish = ?, category = ?, workshop = ?", [data.title, data.description, data.day, data.date, data.time_start, data.time_finish, data.category, data.workshop])
+
+        return res.redirect("/")
     } catch(error) {
         console.log(error)
         return res.status(500).json({

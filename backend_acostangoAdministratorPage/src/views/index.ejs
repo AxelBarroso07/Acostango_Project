@@ -18,18 +18,17 @@
             <tr>
                 <% for (let j = 0; j < weekDay.length; j++) { %>
                     <% const classesForCell = rowsParse.filter(rowParse => rowParse.day === weekDay[j]) %>
-                    <% console.log("console.log():", rowsParse) %>
+
                     <% if (classesForCell.length > 0) { %>
                         <% const currentClassIndex = row + (maxClassesPerRow * j) % classesForCell.length %>
                         <% const currentClass = classesForCell[currentClassIndex] %>
                         
-
                         <td>
                             <% if (currentClass) { %>
                                 <% if (currentClass.workshop === 1) { %>
                                     <div style="background-color: #f00;">
                                 <% } %>
-                                <%- currentClass.title %> <%- currentClass.time12hrsStartFormat %>-<%- currentClass.time12hrsFinishFormat %>
+                                    <%- currentClass.title %> <%- currentClass.time12hrsStartFormat %>-<%- currentClass.time12hrsFinishFormat %>
                                 <% if (currentClass.workshop === 1) { %>
                                     </div>
                                 <% } %>
@@ -54,12 +53,11 @@
                 <span><%- rowParse.description %></span>
                 <span><%- rowParse.date %></span>
                 <span><%- rowParse.price %></span>
-                <img src="<%- rowParse.image %>" alt="imagenCar" height="200" width="200" />
-                <span><% rowParse.image %></span>
+                <img src="<%- rowParse.image %>" alt="<%- rowParse.title %>" height="200" width="200" />
                 <span><%- rowParse.time12hrsStartFormat %> - </span>
                 <span><%- rowParse.time12hrsFinishFormat %></span>
                 <button onclick="editClass('<%- rowParse.idCalendar %>')" class="modal">Edit</button>
-                <button onclick="showHide(true, '<%- rowParse.idCalendar %>')" class="deleteButton">Delete</button>
+                <button onclick="showHide(true, 'confirmationDeleteDiv_<%- rowParse.idCalendar %>')" class="deleteButton">Delete</button>
 
                 <div class="dialogContainer">
                     <!-- Delete class dialog -->
@@ -69,12 +67,12 @@
                             <button id="deleteConfirmYes" onclick="deleteClass('<%- rowParse.idCalendar %>'), showHide(false, '<%- rowParse.idCalendar %>')">Yes</button>
                         </div>
                         <div>
-                            <button id="deleteConfirmNo" onclick="showHide(false, '<%- rowParse.idCalendar %>')">No</button>
+                            <button id="deleteConfirmNo" onclick="showHide(false, 'confirmationDeleteDiv_<%- rowParse.idCalendar %>')">No</button>
                         </div>
                     </dialog>
 
                     <!-- Delete class dialog -->
-                    <dialog class="dialog" style="display: none;" id="<%- 'editFields_' + rowParse.idCalendar %>" >
+                    <dialog class="dialog" style="display: none;" id="editFields_<%- rowParse.idCalendar %>" >
                         <form id="editForm_<%- rowParse.idCalendar %>" onsubmit="confirmEdit('<%- rowParse.idCalendar %>', '<%- rowParse.title %>', '<%- rowParse.description %>' ,'<%- rowParse.timeStartParse %>', '<%- rowParse.timeFinishParse %>')">
                             <div class="dialogContent">
                                 <!-- Campos de edición -->
@@ -92,7 +90,7 @@
                                 
                                 <!-- Otros campos de edición... -->
                                 <button type="submit">Save Changes</button>
-                                <button type="button" class="closeModal" onclick="hideModal('editFields_<%- rowParse.idCalendar %>', '<%- rowParse.idCalendar %>','<%- rowParse.title %>')">Close</button>
+                                <button type="button" class="closeModal" onclick="showHide(false, 'editFields_<%- rowParse.idCalendar %>')">Close</button>
                             </div>
                         </form>
                     </dialog>

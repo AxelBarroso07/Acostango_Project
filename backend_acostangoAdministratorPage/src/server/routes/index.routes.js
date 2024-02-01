@@ -9,7 +9,7 @@ import { getIndex, getConfig, getCalendar, postEditClass, deleteClass, postNewCl
 
 const storage = multer.diskStorage({
     destination: (req, file, callback) => {
-        callback(null, 'src/public/uploads')
+        callback(null, 'backend_acostangoAdministratorPage/src/public/uploads')
         
     },
     filename: (req, file, callback) => {

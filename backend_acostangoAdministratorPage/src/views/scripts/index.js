@@ -1,6 +1,7 @@
 function showHide(action, modalId) {
 
-    const dialog = document.getElementById(`confirmationDeleteDiv_${modalId}`)
+    const dialog = document.getElementById(modalId)
+    // console.log(modalId)
 
     if (action === true) {
         dialog.style.display = 'block'
@@ -8,11 +9,6 @@ function showHide(action, modalId) {
         dialog.style.display = 'none'
         dialog.close()
     }
-}
-
-
-function booleanParse(boolean) {
-    return boolean === true || boolean === "true"
 }
 
 async function config() {
