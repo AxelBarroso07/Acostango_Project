@@ -18,6 +18,7 @@ const LeftMenu = styled.menu`
   left:-1000px;
 
   transform: ${({open}) => open ? 'translateX(160%)' : 'translateX(0)'};
+  transition:1s;
 
   .menu__social-media{
     display: flex;
@@ -115,6 +116,7 @@ const LeftMenu = styled.menu`
     position:absolute;
     top: 0;
     left:-982px;
+    transition:0.3s;
 
     .menu__social-media{
       display: flex;
