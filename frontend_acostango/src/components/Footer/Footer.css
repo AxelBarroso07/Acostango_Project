@@ -2,9 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    background-color: #fff; 
-    width: 100%;
+    background-color: var(#fff);
 }
 
 .footer__description{
