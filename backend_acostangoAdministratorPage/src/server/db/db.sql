@@ -47,7 +47,7 @@ CREATE TABLE `calendar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- classes rows
-INSERT INTO `calendar_class` (`title`, `day`, `time_start`, `time_finish`) VALUES
+INSERT INTO `calendar` (`title`, `day`, `time_start`, `time_finish`) VALUES
 ('AcosTango Afterwork Milonga', 'Monday', '19:00:00', '22:00:00'),
 ('Beginners', 'Tuesday', '18:00:00', '19:00:00'),
 ('Intermediate', 'Tuesday', '19:10:00', '20:30:00'),
@@ -56,21 +56,3 @@ INSERT INTO `calendar_class` (`title`, `day`, `time_start`, `time_finish`) VALUE
 ('Newcomers Course', 'Thursday', '19:00:00', '22:00:00'),
 ('Special Workshop', 'Saturday', '18:00:00', '19:00:00'),
 ('AcosTango Milonga', 'Saturday', '19:00:00', '22:00:00');
-
-INSERT INTO calendar_class(title, day, time_start, time_finish) VALUES ('Beginners', 'Sunday', '20:00:00', '22:00:00');
-INSERT INTO calendar_class(title, day, time_start, time_finish) VALUES ('truers', 'Wednesday', '18:00:00', '19:00:00');
--- Workshop row
-INSERT INTO calendar_class(title, day, time_start, time_finish, category, workshop) VALUES ('Workshop 1', 'Wednesday', '19:00:00', '20:00:00', 'class', 1);
--- --------------------------------------------------------
---
--- Table structure for table `gallery`
---
-
-CREATE TABLE `gallery` (
-  `id_image` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `photo` VARCHAR(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;--

@@ -63,6 +63,7 @@ const LeftMenu = styled.menu`
     width: 45ch;
     overflow-y: scroll;
     overflow-x: hidden;
+    padding-bottom:2px;
   }
 
   .details__answer::-webkit-scrollbar{
