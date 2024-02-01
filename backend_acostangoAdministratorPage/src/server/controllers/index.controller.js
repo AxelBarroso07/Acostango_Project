@@ -13,6 +13,7 @@ export const getIndex = async (req, res) => {
         let rowsParse = []
         const dayFreeCheck = ''
         const dayFreeIs = true
+        const classesPerDay = {};
         
         const weekDay = [
             "Sunday",
@@ -24,8 +25,11 @@ export const getIndex = async (req, res) => {
             "Saturday",
         ];
 
+        const currentDate = new Date();
+        const currentDay = weekDay[currentDate.getDay()];
+
         const [ rows ] = await pool.query(`SELECT *, DATE_FORMAT(date, '%d/%m/%Y') AS date_formatted,
-        FORMAT(price, 2) AS price_formatted FROM calendar_class ORDER BY CASE
+        FORMAT(price, 2) AS price_formatted FROM calendar ORDER BY CASE
             WHEN day = 'Sunday' THEN 1
             WHEN day = 'Monday' THEN 2
             WHEN day = 'Tuesday' THEN 3
@@ -35,12 +39,31 @@ export const getIndex = async (req, res) => {
             WHEN day = 'Saturday' THEN 7
             END`
         );
-        // console.log("rows from /:", rows)
+        console.log("rows from /:", rows)
 
         // const priceFormat = rows.price_formatted.toString()
+        const fullDays = {};
 
-        if(rows && rows.length > 0) {
+        if (rows && rows.length > 0) {
             rowsParse = rows.map(row => {
+                const dayKey = row.day.toLowerCase();
+        
+                if (!classesPerDay[dayKey]) {
+                    classesPerDay[dayKey] = 1;
+                } else if (classesPerDay[dayKey] < 3) {
+                    classesPerDay[dayKey] += 1;
+                } else {
+                    // Almacena información adicional para días llenos
+                    if (!fullDays[dayKey]) {
+                        fullDays[dayKey] = {
+                            day: row.day,
+                            classes: [row],
+                        };
+                    } else {
+                        fullDays[dayKey].classes.push(row);
+                    }
+                }
+
                 return {
                     idCalendar: row.id_calendar,
                     title: row.title,
@@ -50,16 +73,18 @@ export const getIndex = async (req, res) => {
                     date: row.date_formatted,
                     location: row.location,
                     price: row.price_formatted,
-                    timeStartParse: row.time_start.slice(0, 5),
-                    timeFinishParse: row.time_finish.slice(0, 5),
+                    timeStartParse: row.time_start,
+                    timeFinishParse: row.time_finish,
                     time12hrsStartFormat: moment(row.time_start, 'hh:mm A').format('hh:mm A'),
-                    time12hrsFinishFormat: moment(row.time_finish, 'hh:mm:ss A').format('hh:mm A'),
-                    workshop: row.workshop,
+                    time12hrsFinishFormat: row.time_finish !== null ? moment(row.time_finish, 'hh:mm:ss A').format('hh:mm A') : null,
+                    workshop: row.workshop
                 };
             })
         }
 
-        // console.log("rowsParse:", rowsParse)
+        console.log("rowsParse to index:", rowsParse)
+        console.log("fullDays to index:", fullDays)
+        // console.log("fullDays to index:", JSON.stringify(fullDays, null, 2))
 
         return res.render("index", {
             weekDay,
@@ -68,6 +93,7 @@ export const getIndex = async (req, res) => {
             dayFreeIs
         });
     } catch (error) {
+        console.log(error)
         return res.status(500).json({
             message: "Internal server error",
         });
@@ -125,7 +151,7 @@ export const getCalendar = async (req, res) => {
         const positonMonth = nameMonth[date.getMonth()];
 
         const [ rows ] = await pool.query(`SELECT *, DATE_FORMAT(date, '%d/%m/%Y') AS date_formatted,
-        FORMAT(price, 2) AS price_formatted FROM calendar_class ORDER BY CASE
+        FORMAT(price, 2) AS price_formatted FROM calendar ORDER BY CASE
             WHEN day = 'Sunday' THEN 1
             WHEN day = 'Monday' THEN 2
             WHEN day = 'Tuesday' THEN 3
@@ -259,7 +285,7 @@ export const postEditClass = async (req, res) => {
             values.push(newData.newTimeFinish);
         }
 
-        const [ result ] = await pool.query(`UPDATE calendar_class SET ${params.join(', ')} WHERE id_calendar = ?`, [...values, id])
+        const [ result ] = await pool.query(`UPDATE calendar SET ${params.join(', ')} WHERE id_calendar = ?`, [...values, id])
         console.log(result)
 
         if(result) {
@@ -280,7 +306,7 @@ export const deleteClass = async (req, res) => {
         const id = parseInt(req.params.idCalendar)
         // console.log(id)
 
-        const [ rows ] = await pool.query("DELETE FROM calendar_class WHERE id_calendar = ?", [id])
+        const [ rows ] = await pool.query("DELETE FROM calendar WHERE id_calendar = ?", [id])
 
         // console.log("rows", rows)
 
@@ -375,7 +401,7 @@ export const postNewClass = async (req, res) => {
 
         // console.log("buffer", buffer)
 
-        const [ rows ] = await pool.query("INSERT INTO calendar_class SET title = ?, description = ?, image = ?, day = ?, date = ?, location = ?, price = ?, time_start = ?, time_finish = ?, category = ?, workshop = ?", [orderData.title, orderData.description, orderData.image, orderData.day, orderData.date, orderData.location, orderData.price, orderData.time_start, orderData.time_finish, orderData.category, orderData.workshop]);
+        const [ rows ] = await pool.query("INSERT INTO calendar SET title = ?, description = ?, image = ?, day = ?, date = ?, location = ?, price = ?, time_start = ?, time_finish = ?, category = ?, workshop = ?", [orderData.title, orderData.description, orderData.image, orderData.day, orderData.date, orderData.location, orderData.price, orderData.time_start, orderData.time_finish, orderData.category, orderData.workshop]);
         console.log("rows:", rows)
         
         return res.status(200).json({
@@ -401,9 +427,37 @@ export const getCreateClass = async (req, res) => {
             "Friday",
             "Saturday",
         ];
+
+        const [rows] = await pool.query(`SELECT * FROM calendar`);
+        const classesPerDay = {};
+        const fullDays = {};
+
+        if (rows && rows.length > 0) {
+            rows.forEach(row => {
+                const dayKey = row.day.toLowerCase();
+
+                if (!classesPerDay[dayKey]) {
+                    classesPerDay[dayKey] = 1;
+                } else if (classesPerDay[dayKey] < 3) {
+                    classesPerDay[dayKey] += 1;
+                } else {
+                    if (!fullDays[dayKey]) {
+                        fullDays[dayKey] = {
+                            day: row.day,
+                            classes: [row],
+                        };
+                    } else {
+                        fullDays[dayKey].classes.push(row);
+                    }
+                }
+            });
+        }
+
+        console.log("fullDays to createClass:", fullDays);
         
         res.render("createClass", {
-            weekDay
+            weekDay,
+            fullDays
         })
     } catch(error) {
         console.log(error)
@@ -412,19 +466,7 @@ export const getCreateClass = async (req, res) => {
         })
     }
 }
-// const data = {
-//     title: reqBody.title,
-//     description: reqBody.description,
-//     day: reqBody.day,
-//     date: null,
-//     image: null,
-//     location: null,
-//     price: null,
-//     time_start: reqBody.time_start ?? null,
-//     time_finish: reqBody.time_finish ?? null,
-//     category: reqBody.category ?? null,
-//     workshop: reqBody.workshop ?? null,
-// };
+
 export const postConfirmCreateClass = async (req, res) => {
     try {
         // let dayFreeIs = true
@@ -442,18 +484,7 @@ export const postConfirmCreateClass = async (req, res) => {
 
         console.log("postConfirmCreateClass data:", data)
 
-        // const dayFreeCheck = data.day;
-
-        // const [result] = await pool.query('SELECT COUNT(*) as classCount FROM calendar_class WHERE day = ? GROUP BY day', [dayFreeCheck]);
-        // console.log(result)
-        
-        // const classesCountForDay = result.length > 0 ? result[0].classCount : 0;
-        
-        // if (classesCountForDay >= 3) {
-        //     dayFreeIs = false
-        // }
-
-        const [ rows ] = await pool.query("INSERT INTO calendar_class SET title = ?, description = ?, image = null, day = ?, date = ?, location = null, price = null, time_start =?, time_finish = ?, category = ?, workshop = ?", [data.title, data.description, data.day, data.date, data.time_start, data.time_finish, data.category, data.workshop])
+        const [ rows ] = await pool.query("INSERT INTO calendar SET title = ?, description = ?, image = null, day = ?, date = ?, location = null, price = null, time_start =?, time_finish = ?, category = ?, workshop = ?", [data.title, data.description, data.day, data.date, data.time_start, data.time_finish, data.category, data.workshop])
 
         return res.redirect("/")
     } catch(error) {
@@ -476,7 +507,7 @@ export const getCreateEvent = async(req, res) => {
             "Saturday",
         ];
         
-        res.render("createEvent", {
+        return res.render("createEvent", {
             weekDay
         })
     } catch(error) {
@@ -489,72 +520,65 @@ export const getCreateEvent = async(req, res) => {
 
 export const postConfirmCreateEvent = async(req, res) => {
     try {
-        upload(req, res, async (error) => {
-            // console.log(req)
-            if (error instanceof multer.MulterError) {
-                console.log("Error from Multer:", error.message);
-                return res.status(400).json({
-                    message: 'Error al procesar la imagen from Multer'
-                });
-            } else if (error) {
-                console.log("Error desconocido:", error.message);
-                return res.status(400).json({
-                    message: 'Error al procesar la imagen from Unknown'
-                });
-            }
-            console.log("llega")
+        
+        const reqBody = req.body
+        const category = 'event'
 
-            // Ahora puedes acceder a la información del archivo subido
-            console.log(req.body);
-            console.log(req.file);
-
-
-            // if(req.file !== undefined) {
-            //     upload(req, res, async(error) => {
-            //         if(error instanceof multer.MulterError) {
-            //             console.log("Error from Multer:", error.message)
-            //     return res.status(400).json({
-            //                 message: 'An unexpected error has occurred, we will resolve it as soon as possible.'
-            //             })
-            //         } else if(error) {
-            //             console.log("Unknown error:", error.message)
-            //             return res.status(400).json({
-            //                 message: 'An unexpected error has occurred, we will resolve it as soon as possible.'
-            //             })
-            //         }
-            //     })
-            // }
-            
-            // //Compress image
-            // // console.log("req.file:", req.file)
-            // const imagePath = req.file.path; //Image original name
-
-            // const compressedPath = 'src/public/images/'//Directory Path for compressed images
-
-            // const compressedImagePath = compressedPath + req.file.filename;//Path for compressed images
-
-            // const fileExtension = req.file.filename.split('.').pop().toLowerCase();//File extension
-
-            // let fileCompress = sharp(imagePath);//Image to compress
-
-            // if (fileExtension === 'jpg' || fileExtension === 'jpeg') {
-            //     fileCompress = fileCompress.jpeg({ quality: 20 })
-            // } else if (fileExtension === 'png') {
-            //     fileCompress = fileCompress.png({ quality: 20 })
-
-            // } 
-            // await fileCompress.toFile(compressedImagePath);
-            // // console.log("fileCompress:", fileCompress)
-            // // console.log("fileUpload:", fileCompress.options.fileOut)
-            
-            // const dirFolder = '../public/images/'
-            // const fileCompressedImage = req.file.filename
-            // dirPhotoCompressed = `${dirFolder}${fileCompressedImage}`
-            // // console.log("dirPhotoCompressed:", dirPhotoCompressed)
-            return res.status(200).json({
-                message: 'Evento creado exitosamente'
+        if (!req.file) {
+            return res.status(400).json({
+                message: 'No se proporcionó ningún archivo.'
             });
-        });
+        }
+
+        // console.log(req.body);
+        // console.log(req.file);
+
+        // Compress image
+        const imagePath = req.file.path; //Image original name
+
+        const compressedPath = 'src/public/images/'//Directory Path for compressed images
+
+        const compressedImagePath = compressedPath + req.file.filename;//Path for compressed images
+
+        const fileExtension = req.file.filename.split('.').pop().toLowerCase();//File extension
+
+        let fileCompress = sharp(imagePath);//Image to compress
+
+        if (fileExtension === 'jpg' || fileExtension === 'jpeg') {
+            fileCompress = fileCompress.jpeg({ quality: 20 })
+        } else if (fileExtension === 'png') {
+            fileCompress = fileCompress.png({ quality: 20 })
+
+        } 
+        await fileCompress.toFile(compressedImagePath);
+        // console.log("fileCompress:", fileCompress)
+        // console.log("fileUpload:", fileCompress.options.fileOut)
+        
+        const dirFolder = '../public/images/'
+        const fileCompressedImage = req.file.filename
+        const dirPhotoCompressed = `${dirFolder}${fileCompressedImage}`
+        console.log("dirPhotoCompressed:", dirPhotoCompressed)
+
+        const data = {
+            title: reqBody.title,
+            description: reqBody.description,
+            image: dirPhotoCompressed,
+            day: reqBody.day,
+            date: new Date(reqBody.date),
+            location: reqBody.location,
+            price: reqBody.price,
+            time_start: reqBody.time_start,
+            time_finish: null,
+            category: category,
+            workshop: null
+        }
+
+        console.log("data:", data)
+
+        const [ rows ] = await pool.query("INSERT INTO calendar(title, description, image, day, date, location, price, time_start, time_finish, category, workshop) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [data.title, data.description, data.image, data.day, data.date, data.location, data.price, data.time_start, data.time_finish, data.category, data.workshop])
+
+        return res.redirect('/')
+        
     } catch(error) {
         console.log(error)
         return res.status(500).json({

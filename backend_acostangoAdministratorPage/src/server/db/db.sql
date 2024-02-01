@@ -31,7 +31,7 @@ CREATE DATABASE acostango;
 
 USE acostango;
 
-CREATE TABLE `calendar_class` (
+CREATE TABLE `calendar` (
   `id_calendar` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `title` VARCHAR(100) NOT NULL,
   `description` VARCHAR(255) NOT NULL,

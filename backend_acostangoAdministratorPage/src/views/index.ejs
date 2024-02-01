@@ -13,22 +13,23 @@
     </thead>
     <tbody>
         <% const maxClassesPerRow = 3 %>
+        <% const maxClassesPerDay = Math.max(...weekDay.map(day => rowsParse.filter(rowParse => rowParse.day === day).length)) %>
 
-        <% for (let row = 0; row < maxClassesPerRow; row++) { %>
+        <% for (let row = 0; row < maxClassesPerDay; row++) { %>
             <tr>
                 <% for (let j = 0; j < weekDay.length; j++) { %>
                     <% const classesForCell = rowsParse.filter(rowParse => rowParse.day === weekDay[j]) %>
+                    
+                    <% const currentClass = classesForCell[row] %>
 
-                    <% if (classesForCell.length > 0) { %>
-                        <% const currentClassIndex = row + (maxClassesPerRow * j) % classesForCell.length %>
-                        <% const currentClass = classesForCell[currentClassIndex] %>
-                        
+                    <% if (currentClass) { %>
                         <td>
-                            <% if (currentClass) { %>
-                                    <%- currentClass.title %> <%- currentClass.time12hrsStartFormat %>-<%- currentClass.time12hrsFinishFormat %>
+                            <% if (currentClass.time12hrsFinishFormat !== null) { %>
+                                <%- currentClass.workshop === 0 ? `<span>Class: ${currentClass.title}${currentClass.time12hrsStartFormat}-${currentClass.time12hrsFinishFormat}</span>` : `<span>Workshop: ${currentClass.title}${currentClass.time12hrsStartFormat}-${currentClass.time12hrsFinishFormat}</span>` %>
+                            <% } else { %>
+                                <%- `<span>Event: ${currentClass.title}${currentClass.time12hrsStartFormat}</span>` %>
                             <% } %>
                         </td>
-                        
                     <% } else { %>
                         <td></td>
                     <% } %>
@@ -43,14 +44,18 @@
     <div class="divClassesDB">
         <% rowsParse.map(rowParse => { %>
             <div class="classesDB <% if (rowParse.workshop) { %> workshop-class <% } %>">
-                <%- rowParse.workshop === 0 ? `<span>Class: ${rowParse.title}</span>` : `<span>Workshop: ${rowParse.title}</span>` %>
+                <%- rowParse.workshop === 0 ? `<span>Class: ${rowParse.title}</span>` : rowParse.workshop === 1 ? `<span>Workshop: ${rowParse.title}</span>` : `<span>Event: ${rowParse.title}</span>` %>
                 <span><%- rowParse.description %></span>
                 <span><%- rowParse.day %></span>
                 <%- rowParse.date !== null ? `<span>${rowParse.date}</span>` : '' %>
                 <%- rowParse.price !== null ? `<span>${rowParse.price}</span>` : '' %>
                 <%- rowParse.location !== null ? `<span>${rowParse.location}</span>` : '' %>
-                <span><%- rowParse.time12hrsStartFormat %> - </span>
-                <span><%- rowParse.time12hrsFinishFormat %></span>
+                <%- rowParse.time12hrsFinishFormat !== null
+                ?
+                    `<span>${rowParse.time12hrsStartFormat} - ${rowParse.time12hrsFinishFormat}</span>`
+                :
+                    `<span>${rowParse.time12hrsStartFormat}</span>`
+                %>
                 <%- rowParse.image !== null ? `<img src="${rowParse.image}" alt="${rowParse.title}" height="200" width="200" />` : '' %>
                 <button onclick="editClass('<%- rowParse.idCalendar %>')" class="modal">Edit</button>
                 <button onclick="showHide(true, 'confirmationDeleteDiv_<%- rowParse.idCalendar %>')" class="deleteButton">Delete</button>
