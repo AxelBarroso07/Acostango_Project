@@ -7,11 +7,12 @@ import Footer from './components/Footer/Footer.jsx'
 import Calendar from './components/Calendar/Calendar.jsx'
 import Contact from './components/Contact/Contact.jsx'
 import Index from './components/Index/Index.jsx'
+import PageClases from './components/PageClases/PageClases.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Header />
-    {/* <Menu /> */}
+    <Menu />
     <Index />
     <Calendar />
     <Contact />

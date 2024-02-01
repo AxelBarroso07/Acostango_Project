@@ -22,7 +22,7 @@ function MenuClases() {
             </div>     
         </a>
 
-        <a href="#">
+        <a href="PageClases/PageClases.jsx">
             <div className="clases">
                 <h1 className="clases__title">Clases</h1>
             </div>
