@@ -24,11 +24,8 @@ app.use('/public', express.static(path.join(__dirname, 'src/public')))
 app.use(express.static('./src/views'))
 // app.use(upload.single('image'));
 
-process.setMaxListeners(15);
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
 
 //Routes
 app.use(indexRoutes);

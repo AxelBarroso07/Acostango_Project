@@ -1,5 +1,49 @@
-<%- include('./partials/headerStart.ejs', { titlePage: 'Create Event' }) %>
+<%- include('./partials/header.ejs', { titlePage: 'Create Event' }) %>
 
-<h1>new event</h1>
+<h1>New Event</h1>
+
+<div>
+    <a href="/">
+        <i class="fa-solid fa-arrow-left" style="color: #f5f5fa;"></i>
+    </a>
+</div>
+
+<div>
+    <form action="/confirmCreateEvent" id="formEvent" enctype="multipart/form-data" method="POST">
+        <label>Title:</label>
+        <input type="text" id="title" name="title" min="3" max="100" value="">
+        
+        <label for="description">Description:</label>
+        <br>
+        <textarea id="description" name="description" cols="50" rows="4" maxlength="140" style="resize: none;" value=""></textarea>
+        <br>
+
+        <label for="image">Image</label>
+        <input type="file" id="image" class="image" name="image" accept="image/*">
+        
+        <select name="day" id="day">
+            <option disabled selected hidden value="">Week day</option>
+            <% for(let i = 0; i < weekDay.length; i++) {%>
+                <option value="<%- weekDay[i] %>">
+                    <%- weekDay[i] %>
+                </option>
+            <% } %>
+        </select>
+        <br>
+        <label for="time_start">Time start:</label>
+        <input type="time" id="time_start" name="time_start">
+
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date">
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" max="50" name="location">
+
+        <label for="price">Price</label>
+        <input type="number" id="price" name="price">
+
+        <button type="submit">Create</button>
+    </form>
+</div>
 
 <%- include('./partials/footer.ejs') %>

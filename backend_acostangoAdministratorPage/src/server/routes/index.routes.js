@@ -1,16 +1,19 @@
 // index.routes.js
 import { Router, json } from 'express';
 import multer from 'multer';
-import path, { join } from 'path';
 import sharp from 'sharp';
+import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { getIndex, getConfig, getCalendar, postEditClass, deleteClass, postNewClass, getCreateClass, postConfirmCreateClass } from '../controllers/index.controller.js';
-// uploadImage, uploadHandler
+import { getIndex, getConfig, getCalendar, postEditClass, deleteClass, postNewClass, getCreateClass, postConfirmCreateClass, getCreateEvent, postConfirmCreateEvent } from '../controllers/index.controller.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const storage = multer.diskStorage({
     destination: (req, file, callback) => {
-        callback(null, 'backend_acostangoAdministratorPage/src/public/uploads')
-        
+        const uploadDir = path.resolve(__dirname, '..', '..', 'public', 'uploads');
+        // console.log("uploadDir:", uploadDir)
+        callback(null, uploadDir);
     },
     filename: (req, file, callback) => {
         const fileName = path.parse(file.originalname).name
@@ -21,6 +24,7 @@ const storage = multer.diskStorage({
 
         const finalNameFile = `${fileName}_${formattedDate}_${formattedTime}${fileExtension}`
         callback(null, finalNameFile)
+        // console.log("finalNameFile:", finalNameFile)
     }
 });
 
@@ -38,41 +42,9 @@ export const upload = multer({
             return cb(null, true);
         }
         cb("Error: invalid image type")
-    }
+    },
+    debug: true
 }).single('image')
-
-//Compress image
-// export const compressImage = async (req, res) => {
-//     try {
-//         upload(req, res, async (err) => {
-//             if (err) {
-//                 return res.status(400).json({ error: err.message });
-//             }
-
-//             const fileUpload = req.file.path;
-//             const fileExtension = path.extname(fileUpload).toLowerCase();
-            
-
-//             try {
-//                 let fileImage = sharp(fileUpload);
-//                 if (fileExtension === '.jpg' || fileExtension === '.jpeg') {
-//                     fileImage = fileImage.jpeg({ quality: 20 });
-//                 } else if (fileExtension === '.png') {
-//                     fileImage = fileImage.png({ quality: 20 });
-//                 }
-
-//                 await fileImage.toFile(fileUpload + "_compressed" + fileExtension);
-//                 res.json({ message: 'Image compressed successfully' });
-//             } catch (err) {
-//                 console.error("Error compressing image", err);
-//                 return res.status(500).json({ error: 'Internal server error' });
-//             }
-//         });
-//     } catch (error) {
-//         console.error("Error in compressImage:", error);
-//         return res.status(500).json({ error: 'Internal server error' });
-//     }
-// };
 
 const router = Router();
 
@@ -92,7 +64,11 @@ router.post('/newClass', postNewClass);
 
 router.get('/createClass', getCreateClass);
 
-router.post('/confirmCreateClass', postConfirmCreateClass)
+router.post('/confirmCreateClass', postConfirmCreateClass);
+
+router.get('/createEvent', getCreateEvent);
+
+router.post('/confirmCreateEvent', upload, postConfirmCreateEvent);
 
 // router.post('/uploadImage', uploadHandler, uploadImage);
 

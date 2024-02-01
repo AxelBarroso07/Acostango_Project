@@ -11,6 +11,8 @@ import sharp from "sharp";
 export const getIndex = async (req, res) => {
     try {
         let rowsParse = []
+        const dayFreeCheck = ''
+        const dayFreeIs = true
         
         const weekDay = [
             "Sunday",
@@ -61,7 +63,9 @@ export const getIndex = async (req, res) => {
 
         return res.render("index", {
             weekDay,
-            rowsParse
+            rowsParse,
+            dayFreeCheck,
+            dayFreeIs
         });
     } catch (error) {
         return res.status(500).json({
@@ -313,40 +317,33 @@ export const postNewClass = async (req, res) => {
                 }
             })
         }
-                    console.log("DAta:", data)
-            //Compress image
-            // console.log("req.file:", req.file)
-            const imagePath = req.file.path; //Image original name
-    
-            const compressedPath = 'src/public/images/'//Directory Path for compressed images
-    
-            const compressedImagePath = compressedPath + req.file.filename;//Path for compressed images
-    
-            const fileExtension = req.file.filename.split('.').pop().toLowerCase();//File extension
-    
-            let fileCompress = sharp(imagePath);//Image to compress
-    
-            if (fileExtension === 'jpg' || fileExtension === 'jpeg') {
-                fileCompress = fileCompress.jpeg({ quality: 20 })
-            } else if (fileExtension === 'png') {
-                fileCompress = fileCompress.png({ quality: 20 })
+        console.log("DAta:", data)
+        //Compress image
+        // console.log("req.file:", req.file)
+        const imagePath = req.file.path; //Image original name
 
-            } 
-            await fileCompress.toFile(compressedImagePath);
-            // console.log("fileCompress:", fileCompress)
-            // console.log("fileUpload:", fileCompress.options.fileOut)
-            
-            const dirFolder = '../public/images/'
-            const fileCompressedImage = req.file.filename
-            dirPhotoCompressed = `${dirFolder}${fileCompressedImage}`
-            // console.log("dirPhotoCompressed:", dirPhotoCompressed)
-        
-        
+        const compressedPath = 'src/public/images/'//Directory Path for compressed images
 
-        // //Save image path in DB
-        // const [ rowsImage ] = await pool.query("INSERT INTO gallery SET ? ", { photo: compressedImagePath});
-        // console.log("rowsImage:", rowsImage)
+        const compressedImagePath = compressedPath + req.file.filename;//Path for compressed images
+
+        const fileExtension = req.file.filename.split('.').pop().toLowerCase();//File extension
+
+        let fileCompress = sharp(imagePath);//Image to compress
+
+        if (fileExtension === 'jpg' || fileExtension === 'jpeg') {
+            fileCompress = fileCompress.jpeg({ quality: 20 })
+        } else if (fileExtension === 'png') {
+            fileCompress = fileCompress.png({ quality: 20 })
+        }
         
+        await fileCompress.toFile(compressedImagePath);
+        // console.log("fileCompress:", fileCompress)
+        // console.log("fileUpload:", fileCompress.options.fileOut)
+        
+        const dirFolder = '../public/images/'
+        const fileCompressedImage = req.file.filename
+        dirPhotoCompressed = `${dirFolder}${fileCompressedImage}`
+        // console.log("dirPhotoCompressed:", dirPhotoCompressed)
         
         const orderData = {
             title : data.title,
@@ -391,7 +388,7 @@ export const postNewClass = async (req, res) => {
             'message': 'Internal server error'
         })
     }
-    }
+}
 
 export const getCreateClass = async (req, res) => {
     try {
@@ -430,10 +427,8 @@ export const getCreateClass = async (req, res) => {
 // };
 export const postConfirmCreateClass = async (req, res) => {
     try {
-        
+        // let dayFreeIs = true
         const reqBody = req.body
-
-        console.log(reqBody.workshop === 'true' ? true : false)
 
         const data = {
             title: reqBody.title,
@@ -444,11 +439,122 @@ export const postConfirmCreateClass = async (req, res) => {
             category: 'class',
             workshop: reqBody.workshop === 'true' ? true : false
         };
+
         console.log("postConfirmCreateClass data:", data)
+
+        // const dayFreeCheck = data.day;
+
+        // const [result] = await pool.query('SELECT COUNT(*) as classCount FROM calendar_class WHERE day = ? GROUP BY day', [dayFreeCheck]);
+        // console.log(result)
+        
+        // const classesCountForDay = result.length > 0 ? result[0].classCount : 0;
+        
+        // if (classesCountForDay >= 3) {
+        //     dayFreeIs = false
+        // }
 
         const [ rows ] = await pool.query("INSERT INTO calendar_class SET title = ?, description = ?, image = null, day = ?, date = ?, location = null, price = null, time_start =?, time_finish = ?, category = ?, workshop = ?", [data.title, data.description, data.day, data.date, data.time_start, data.time_finish, data.category, data.workshop])
 
         return res.redirect("/")
+    } catch(error) {
+        console.log(error)
+        return res.status(500).json({
+            'message': 'Internal server error'
+        })
+    }
+}
+
+export const getCreateEvent = async(req, res) => {
+    try {
+        const weekDay = [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+        ];
+        
+        res.render("createEvent", {
+            weekDay
+        })
+    } catch(error) {
+        console.log(error)
+        return res.status(500).json({
+            'message': 'Internal server error'
+        })
+    }
+}
+
+export const postConfirmCreateEvent = async(req, res) => {
+    try {
+        upload(req, res, async (error) => {
+            // console.log(req)
+            if (error instanceof multer.MulterError) {
+                console.log("Error from Multer:", error.message);
+                return res.status(400).json({
+                    message: 'Error al procesar la imagen from Multer'
+                });
+            } else if (error) {
+                console.log("Error desconocido:", error.message);
+                return res.status(400).json({
+                    message: 'Error al procesar la imagen from Unknown'
+                });
+            }
+            console.log("llega")
+
+            // Ahora puedes acceder a la información del archivo subido
+            console.log(req.body);
+            console.log(req.file);
+
+
+            // if(req.file !== undefined) {
+            //     upload(req, res, async(error) => {
+            //         if(error instanceof multer.MulterError) {
+            //             console.log("Error from Multer:", error.message)
+            //     return res.status(400).json({
+            //                 message: 'An unexpected error has occurred, we will resolve it as soon as possible.'
+            //             })
+            //         } else if(error) {
+            //             console.log("Unknown error:", error.message)
+            //             return res.status(400).json({
+            //                 message: 'An unexpected error has occurred, we will resolve it as soon as possible.'
+            //             })
+            //         }
+            //     })
+            // }
+            
+            // //Compress image
+            // // console.log("req.file:", req.file)
+            // const imagePath = req.file.path; //Image original name
+
+            // const compressedPath = 'src/public/images/'//Directory Path for compressed images
+
+            // const compressedImagePath = compressedPath + req.file.filename;//Path for compressed images
+
+            // const fileExtension = req.file.filename.split('.').pop().toLowerCase();//File extension
+
+            // let fileCompress = sharp(imagePath);//Image to compress
+
+            // if (fileExtension === 'jpg' || fileExtension === 'jpeg') {
+            //     fileCompress = fileCompress.jpeg({ quality: 20 })
+            // } else if (fileExtension === 'png') {
+            //     fileCompress = fileCompress.png({ quality: 20 })
+
+            // } 
+            // await fileCompress.toFile(compressedImagePath);
+            // // console.log("fileCompress:", fileCompress)
+            // // console.log("fileUpload:", fileCompress.options.fileOut)
+            
+            // const dirFolder = '../public/images/'
+            // const fileCompressedImage = req.file.filename
+            // dirPhotoCompressed = `${dirFolder}${fileCompressedImage}`
+            // // console.log("dirPhotoCompressed:", dirPhotoCompressed)
+            return res.status(200).json({
+                message: 'Evento creado exitosamente'
+            });
+        });
     } catch(error) {
         console.log(error)
         return res.status(500).json({
