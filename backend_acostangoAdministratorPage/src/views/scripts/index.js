@@ -72,8 +72,8 @@ function confirmEdit(idCalendarDB, titleDB, descriptionDB, timeStartDB, timeFini
     console.log(newDescription)
     console.log(newTimeFinish)
 
-    const port = process.env.PORT
-    const host = process.env.DB_HOST
+    const port = '<%= process.env.PORT %>'
+    const host = '<%= process.env.DB_HOST %>'
 
     const newData = {}
 
@@ -84,11 +84,11 @@ function confirmEdit(idCalendarDB, titleDB, descriptionDB, timeStartDB, timeFini
     if (newTitle !== titleDB) {
         newData.newTitle = newTitle
     }
-    if (newDescription !== descriptionDB) {
-        newData.newDescription = newDescription
-    }
     if (newTimeStart !== timeStartDB) {
         newData.newTimeStart = newTimeStart
+    }
+    if (newDescription !== descriptionDB) {
+        newData.newDescription = newDescription
     }
     if (newTimeFinish !== timeFinishDB) {
         newData.newTimeFinish = newTimeFinish
@@ -111,10 +111,10 @@ function confirmEdit(idCalendarDB, titleDB, descriptionDB, timeStartDB, timeFini
             dialog.style.display = 'none'
             dialog.close()
             // console.log(window.location.href)
-            location.reload();
+            // location.reload();
         })
         .catch(error => {
-            console.log("Error al confirmar cambios:", error)
+            console.log("Error al confirmar cambios:", error.message)
         })
     } else {
         console.log("Cambia algún dato")
@@ -123,7 +123,7 @@ function confirmEdit(idCalendarDB, titleDB, descriptionDB, timeStartDB, timeFini
 
 async function deleteClass(idCalendar) {
     await config()
-
+    
     console.log("idCalendar from deleteClass()", idCalendar);
     
     fetch(`http://${host}:${port}/deleteClass/${idCalendar}`, {

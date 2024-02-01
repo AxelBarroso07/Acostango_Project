@@ -77,7 +77,8 @@ export const getIndex = async (req, res) => {
                     timeFinishParse: row.time_finish,
                     time12hrsStartFormat: moment(row.time_start, 'hh:mm A').format('hh:mm A'),
                     time12hrsFinishFormat: row.time_finish !== null ? moment(row.time_finish, 'hh:mm:ss A').format('hh:mm A') : null,
-                    workshop: row.workshop
+                    workshop: row.workshop,
+                    category: row.category
                 };
             })
         }
@@ -236,11 +237,12 @@ export const getCalendar = async (req, res) => {
                     time12hrsStartFormat: moment(row.time_start, 'hh:mm A').format('hh:mm A'),
                     time12hrsFinishFormat: moment(row.time_finish, 'hh:mm:ss A').format('hh:mm A'),
                     workshop: row.workshop,
+                    category: row.category,
                     uniqueSortedArray
                 };
             });
         }
-
+        
         // console.log("uniqueSortedArray", uniqueSortedArray)
         // console.log("rowsParse", rowsParse)
 
@@ -260,10 +262,158 @@ export const getCalendar = async (req, res) => {
     }
 };
 
+export const getEditClass = async (req,res) =>{
+    try {
+        const id = parseInt(req.params.idCalendar);
+        const [ rows ] = await pool.query("SELECT * FROM calendar WHERE id_calendar = ?", [id])
+        const weekDay = [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+        ];
+        const classesPerDay = {};
+        const fullDays = {};
+
+        if (rows && rows.length > 0) {
+            rows.forEach(row => {
+                const dayKey = row.day.toLowerCase();
+
+                if (!classesPerDay[dayKey]) {
+                    classesPerDay[dayKey] = 1;
+                } else if (classesPerDay[dayKey] < 3) {
+                    classesPerDay[dayKey] += 1;
+                } else {
+                    if (!fullDays[dayKey]) {
+                        fullDays[dayKey] = {
+                            day: row.day,
+                            classes: [row],
+                        };
+                    } else {
+                        fullDays[dayKey].classes.push(row);
+                    }
+                }
+            });
+        }
+
+        // console.log("fullDays to createClass:", fullDays);
+
+        return res.status(200).render("editClass", {
+            data: rows[0],
+            weekDay,
+            fullDays
+        });
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            'message': 'Internal server error'
+        })
+    }
+}
+
+export const confirmEditClass = async (req, res) =>{
+    try {
+        const { idCalendar } = req.params;
+        const newClass = req.body;
+
+        const [ update ] = await pool.query("UPDATE calendar set ? WHERE id_calendar = ?", [newClass, idCalendar]);
+
+        console.log("update: ", update)
+
+        return res.redirect('/');
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            'message': 'Internal server error'
+        })
+    }
+}
+
+export const getEditEvent = async (req,res) =>{
+    try {
+        const id = parseInt(req.params.idCalendar);
+        const [ rows ] = await pool.query("SELECT *, DATE_FORMAT(date, '%d/%m/%Y') AS date_formatted FROM calendar  WHERE id_calendar = ?", [id])
+
+        const weekDay = [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+        ];
+
+        return res.status(200).render("editEvent", {
+            data:{
+                ...rows[0],
+            date_formatted: rows[0].date_formatted
+            },
+            weekDay
+        });
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            'message': 'Internal server error'
+        })
+    }
+}
+
+export const confirmEditEvent = async (req,res) =>{
+    try {
+        const { idCalendar } = req.params;
+        const newClass = req.body;
+
+        if (!req.file) {
+            return res.status(400).json({
+                message: 'No se proporcionó ningún archivo.'
+            });
+        }
+
+        // Compress image
+        const imagePath = req.file.path; //Image original name
+
+        const compressedPath = 'src/public/images/'//Directory Path for compressed images
+
+        const compressedImagePath = compressedPath + req.file.filename;//Path for compressed images
+
+        const fileExtension = req.file.filename.split('.').pop().toLowerCase();//File extension
+
+        let fileCompress = sharp(imagePath);//Image to compress
+
+        if (fileExtension === 'jpg' || fileExtension === 'jpeg') {
+            fileCompress = fileCompress.jpeg({ quality: 20 })
+        } else if (fileExtension === 'png') {
+            fileCompress = fileCompress.png({ quality: 20 })
+
+        } 
+        await fileCompress.toFile(compressedImagePath);
+        // console.log("fileCompress:", fileCompress)
+        // console.log("fileUpload:", fileCompress.options.fileOut)
+        
+        const dirFolder = '../public/images/'
+        const fileCompressedImage = req.file.filename
+        const dirPhotoCompressed = `${dirFolder}${fileCompressedImage}`
+        console.log("dirPhotoCompressed:", dirPhotoCompressed)
+
+        const [ update ] = await pool.query("UPDATE calendar set ? WHERE id_calendar = ?", [newClass, idCalendar]);
+
+        console.log("update: ", update)
+
+        return res.redirect("/");
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            'message': 'Internal server error'
+        })
+    }
+}
+
 export const postEditClass = async (req, res) => {
     try {
-        // console.log("req.params", req.params)
-        // console.log("req.body", req.body)
         const id = parseInt(req.params.idCalendar)
         const newData = req.body.newData
 
@@ -290,7 +440,9 @@ export const postEditClass = async (req, res) => {
             values.push(newData.newTimeFinish);
         }
 
-        const [ result ] = await pool.query(`UPDATE calendar SET ${params.join(', ')} WHERE id_calendar = ?`, [...values, id])
+        const query = `UPDATE calendar SET ${params.join(', ')} WHERE id_calendar = ?`;
+
+        const [result] = await pool.query(query, [...values, id]);
         console.log(result)
 
         if(result) {
@@ -308,12 +460,12 @@ export const postEditClass = async (req, res) => {
 
 export const deleteClass = async (req, res) => {
     try {
-        const id = parseInt(req.params.idCalendar)
+        const { idCalendar } = req.params;
         // console.log(id)
 
-        const [ rows ] = await pool.query("DELETE FROM calendar WHERE id_calendar = ?", [id])
+        const [ rows ] = await pool.query("DELETE FROM calendar WHERE id_calendar = ?", [idCalendar])
 
-        // console.log("rows", rows)
+        console.log("rows", rows)
 
         if(rows.affectedRows > 0) {
             return res.status(204).json({

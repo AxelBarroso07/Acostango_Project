@@ -56,47 +56,27 @@
                     `<span>${rowParse.time12hrsStartFormat}</span>`
                 %>
                 <%- rowParse.image !== null ? `<img src="${rowParse.image}" alt="${rowParse.title}" height="200" width="200" />` : '' %>
-                <button onclick="editClass('<%- rowParse.idCalendar %>')" class="modal">Edit</button>
+                <% if (rowParse.category === 'class') { %>
+                    <a href="/editClass/<%= rowParse.idCalendar %>">Edit</a>
+                <% } else if (rowParse.category === 'event') { %>
+                    <a href="/editEvent/<%= rowParse.idCalendar %>">Edit</a>
+                <% } %>
                 <button onclick="showHide(true, 'confirmationDeleteDiv_<%- rowParse.idCalendar %>')" class="deleteButton">Delete</button>
 
                 <div class="dialogContainer">
                     <!-- Delete class dialog -->
                     <dialog id="confirmationDeleteDiv_<%- rowParse.idCalendar %>" class="dialog" style="display: none;">
-                        <p>Delete this class?</p>
+                        <% if (rowParse.category === 'class') { %>
+                            <p>Delete this class?</p>
+                        <% } else if (rowParse.category === 'event') { %>
+                            <p>Delete this event?</p>
+                        <% } %>
                         <div>
                             <button id="deleteConfirmYes" onclick="deleteClass('<%- rowParse.idCalendar %>'), showHide(false, '<%- rowParse.idCalendar %>')">Yes</button>
                         </div>
                         <div>
                             <button id="deleteConfirmNo" onclick="showHide(false, 'confirmationDeleteDiv_<%- rowParse.idCalendar %>')">No</button>
                         </div>
-                    </dialog>
-
-                    <!-- Delete class dialog -->
-                    <dialog class="dialog" style="display: none;" id="editFields_<%- rowParse.idCalendar %>" >
-                        <form id="editForm_<%- rowParse.idCalendar %>" onsubmit="confirmEdit('<%- rowParse.idCalendar %>', '<%- rowParse.title %>', '<%- rowParse.description %>' ,'<%- rowParse.timeStartParse %>', '<%- rowParse.timeFinishParse %>')">
-                            <div class="dialogContent">
-                                <!-- Campos de edición -->
-                                <label for="<%- 'editTitle_' + rowParse.idCalendar %>">Title:</label>
-                                <input type="text" id="<%- 'editTitle_' + rowParse.idCalendar %>" name="<%- 'editTitle_' + rowParse.idCalendar %>" value="<%- rowParse.title %>">
-                                
-                                <label for="<%- 'editDescription_' + rowParse.idCalendar %>">Description:</label>
-                                <textarea cols="50" rows="4" style="resize: none;" id="<%- 'editDescription_' + rowParse.idCalendar %>" name="<%- 'editDescription_' + rowParse.idCalendar %>" value="<%- rowParse.description %>"><%- rowParse.description %></textarea>
-                                
-                                <label for="<%- 'editTimeStart_' + rowParse.idCalendar %>">Time start:</label>
-                                <input type="time" id="<%- 'editTimeStart_' + rowParse.idCalendar %>" name="<%- 'editTimeStart_' + rowParse.idCalendar %>" value="<%- rowParse.timeStartParse %>">
-                                <%- rowParse.category === 'class' %>
-                                    ?
-                                <!-- <label for="<%- 'editTimeFinish_' + rowParse.idCalendar %>">Time finish:</label>
-                                <input type="time" id="<%- 'editTimeFinish_' + rowParse.idCalendar %>" name="<%- 'editTimeFinish_' + rowParse.idCalendar %>" value="<%- rowParse.timeFinishParse %>">
-                                    :
-                                <label for="<%- 'editDate_' + rowParse.idCalendar %>">Date:</label>
-                                <input type="date" id="<%- 'editDate_' + rowParse.idCalendar %>" name="<%- 'editDate_' + rowParse.idCalendar %>" value="<%- rowParse.date %>"> -->
-
-                                <!-- Otros campos de edición... -->
-                                <button type="submit">Save Changes</button>
-                                <button type="button" class="closeModal" onclick="showHide(false, 'editFields_<%- rowParse.idCalendar %>')">Close</button>
-                            </div>
-                        </form>
                     </dialog>
                 </div>
             </div>
