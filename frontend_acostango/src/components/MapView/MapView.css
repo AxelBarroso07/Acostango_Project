@@ -1,6 +1,7 @@
 .mapa{
     width: 500px;
     height: 500px;
+    
 }   
 
 @media (max-width:1000px) {
@@ -9,3 +10,4 @@
         height: 350px;
     }
 }
+

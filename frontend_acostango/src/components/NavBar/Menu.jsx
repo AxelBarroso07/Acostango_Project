@@ -58,7 +58,15 @@ const LeftMenu = styled.menu`
   
   .details__answer{
     font-family: "Nunito", sans-serif;
-    font-weight: 600;
+    font-weight: 600; 
+    max-height: 100px;
+    width: 45ch;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  .details__answer::-webkit-scrollbar{
+    width:10px;
   }
   
   .details__question{
@@ -232,32 +240,33 @@ const Menu = ({open}) => {
         <h1 className='faq__title'>FAQ</h1>
         <details name="cookies" className='details__answer'>
           <summary className='details__question'>¿QUÉ ES EL TANGO?<svg xmlns="http://www.w3.org/2000/svg" className="arrow_dropdown" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 9l6 6l6 -6" /></svg></summary>
-          el tango esasdasd
+          El tango es una danza de pareja enlazada estrechamente surgida a partir de la fusión de danzas y ritmos afro-rioplatenses,gauchos, latinoamericanos y europeos. Es un baile característico de la región del Río de la Plata y su zona de influencia , principalmente en la ciudad de Buenos Aires, que se extendió por todo el mundo. Se caracteriza por el abrazo estrecho de la pareja, la caminata tanguera, el corte y la quebrada, y la improvisación.
+
         </details>
         
         <details name="cookies" className='details__answer'>
           <summary className='details__question'>¿COMÓ SON LAS CLASES?<svg xmlns="http://www.w3.org/2000/svg" className="arrow_dropdown" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 9l6 6l6 -6" /></svg></summary>
-          el tango esasdasd
+          Las clases de Tango consta de diferentes partes: para los principiantes comenzamos con caminata para adquirir la "actitud" propia del este estilo y ritmo. Seguimos con ejercicios de técnica y luego trabajamos con movimientos, de manera de practicarlo con sus características propias. Estas clases van variando segun los distintos estilos pero siempre maneniendo la misma técnica. Conoce este maravilloso mundo del Tango!. Te esperamos!!
         </details>
 
         <details name="cookies" className='details__answer'>
           <summary className='details__question'>¿COMÓ EMPEZAR Y EN QUÉ MOMENTO DEL AÑO?<svg xmlns="http://www.w3.org/2000/svg" className="arrow_dropdown" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 9l6 6l6 -6" /></svg></summary>
-          el tango esasdasd
+          Comienza con las clases de principiantes, no es necesario tener ningún conocimiento previo. Podes empezar en cualquier época del año.
         </details>
         
         <details name="cookies" className='details__answer'>
           <summary className='details__question'>¿CON QUE ROPA Y CALZADO HAY QUE ASISTIR?<svg xmlns="http://www.w3.org/2000/svg" className="arrow_dropdown" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 9l6 6l6 -6" /></svg></summary>
-          el tango esasdasd
+          Siempre es mejor bailar cómodo, así que la ropa es la que prefieras. En cuanto al calzado, si no tenés zapatos de baile podés traer algo que no se adherente mucho al piso, para no lastimar tus rodillas. Para empezar, algo con suela o goma dura (no adherente) en la base es lo mejor
         </details>
         
         <details name="cookies" className='details__answer'>
           <summary className='details__question'>¿HACE FALTA IR EN PAREJA?<svg xmlns="http://www.w3.org/2000/svg" className="arrow_dropdown" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 9l6 6l6 -6" /></svg></summary>
-          el tango esasdasd
+          No, no hace falta venir en pareja. La mayoría de la gente viene sola, pero también podes venir en pareja. En estas clase generalmente hacemos siempre un cambio de pareja para que todos puedan bailar, pero también puedes bailar solo con tu pareja. Si son clases de avanzados o seminarios te sugerimos que vengas en pareja.
         </details>
         
         <details name="cookies" className='details__answer'>
           <summary className='details__question'>¿HAY QUE INSCRIBIRSE ANTES?<svg xmlns="http://www.w3.org/2000/svg" className="arrow_dropdown" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 9l6 6l6 -6" /></svg></summary>
-          el tango esasdasd
+          No hace falta inscribirse, pero te recomendamos hacerlo, te presentas al horario que figura en la clase a la que quieres asistir. Se abona al final de la clase, podes elegir abonar una clase o tomar el bloque de 10 clases.
         </details>
       </div>
 
