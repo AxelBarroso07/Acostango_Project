@@ -3,12 +3,12 @@
 <h1>Edit event</h1>
 <div>
     <a href="/">
-        <i class="fa-solid fa-arrow-left" style="color: #f5f5fa;"></i>
+        <i class="fa-solid fa-arrow-left" style="color: #0c0c0f;"></i>
     </a>
 </div>
 
 <div>
-    <form action="/editEvent/<%= data.idCalendar %>" id="formEvent" enctype="multipart/form-data" method="post">
+    <form id="formEventEdit" data-id="<%= data.id_calendar %>" enctype="multipart/form-data">
         <label>Title:</label>
         <input type="text" id="title" name="title" min="3" max="100" value="<%= data.title %>">
         
@@ -20,6 +20,7 @@
         <label for="image">Image</label>
         <input type="file" id="image" class="image" name="image" accept="image/*">
         
+        <label for="day">Select day of the week:</label>
         <select name="day" id="day">
             <option disabled selected hidden value="">Week day</option>
             <% for(let i = 0; i < weekDay.length; i++) { %>
@@ -32,9 +33,9 @@
         <br>
         <label for="time_start">Time start:</label>
         <input type="time" id="time_start" name="time_start" value="<%= data.time_start %>">
-<!-- 
+
         <label for="date">Date:</label>
-        <input type="date" id="date" name="date" value="<%= data.date_formatted %>">  -->
+        <input type="date" id="date" name="date" value="<%= date_formatted %>"> 
 
         <label for="location">Location:</label>
         <input type="text" id="location" max="50" name="location" value="<%= data.location %>">
@@ -45,5 +46,50 @@
         <button type="submit">Edit event</button>
     </form>
 </div>
+<script>
+    const formEventEdit = document.querySelector("#formEventEdit")
 
+    formEventEdit.addEventListener('submit', async (e) => {
+    e.preventDefault()
+
+    const id = formEventEdit.dataset.id
+    const title = formEventEdit.querySelector("#title").value
+    const description = formEventEdit.querySelector("#description").value
+    const image = formEventEdit.querySelector("#image").files[0]
+    const day = formEventEdit.querySelector("#day").value
+    const date = formEventEdit.querySelector("#date").value
+    const location = formEventEdit.querySelector("#location").value
+    const price = formEventEdit.querySelector("#price").value
+    const timeStart = formEventEdit.querySelector("#time_start").value
+
+    console.log("info from formClassEdit:", id, title, description, day, timeStart, day, image, date, location, price)
+    const formData = new FormData();
+    formData.append('id', id);
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('image', image);
+    formData.append('day', day);
+    formData.append('date', date);
+    formData.append('location', location);
+    formData.append('price', price);
+    formData.append('timeStart', timeStart);
+    
+    const response = await fetch(`/confirmEditEvent/${id}`, {
+        'method': 'PUT',
+        body: formData
+    })
+
+    const result = await response.json()
+
+    if(result.isUpdateRegister) {
+        console.log("result.isUpdateRegister is true")
+        window.location.href = '/'
+    } else {
+        console.log("result.isUpdateRegister is false")
+        console.log(result)
+        window.location.href = '/error'
+    }
+
+})
+</script>
 <%- include('./partials/footer.ejs') %>

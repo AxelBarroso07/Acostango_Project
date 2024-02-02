@@ -2,13 +2,13 @@ import { Router, json } from 'express';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
-import { getCalendar } from '../controller/calendar.controller.js';
+import { getEvents } from '../controller/events.controller.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const router = Router();
 
-router.get('/calendar', getCalendar);
+router.get('/events', getEvents);
 
 export default router

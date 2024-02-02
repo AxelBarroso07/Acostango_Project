@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import '../Calendar/Calendar.css';
+import React from 'react'
 
-function Calendar() {
+function PageClases() {
   const [ data, setData ] = useState(null)
   const [ loading, setLoading ] = useState(null)
   const [ error, setError ] = useState(null)
@@ -21,7 +20,7 @@ function Calendar() {
         })
 
         const data = await response.json()
-        console.log("Data calendar:", data)
+        console.log("Data calendar class:", data)
       } catch(error) {
         setError(error.message)
       } finally {
@@ -41,10 +40,8 @@ function Calendar() {
   }
 
   return (
-    <section className='calendar'>
-      <h1 className='calendar__title'>CALENDAR</h1>
-    </section>
+    <div>waza</div>
   )
 }
 
-export default Calendar
+export default PageClases

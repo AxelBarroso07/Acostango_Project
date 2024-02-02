@@ -1,20 +1,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
-import Menu from './components/Menu/Menu.jsx'
-import Header from './components/Header/Header.jsx'
-import Footer from './components/Footer/Footer.jsx'
-import Calendar from './components/Calendar/Calendar.jsx'
-import Contact from './components/Contact/Contact.jsx'
-import Index from './components/Index/Index.jsx'
+import App from './App'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App/>
+  }
+])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Header />
-    {/* <Menu /> */}
-    <Index />
-    <Calendar />
-    <Contact />
-    <Footer />
+    <RouterProvider router={router}/>
   </React.StrictMode>,
 )

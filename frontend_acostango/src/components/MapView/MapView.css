@@ -1,7 +1,7 @@
 .mapa{
     width: 500px;
     height: 500px;
-    
+    position: sticky;
 }   
 
 @media (max-width:1000px) {

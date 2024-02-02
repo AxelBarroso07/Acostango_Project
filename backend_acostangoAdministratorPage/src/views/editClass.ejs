@@ -1,14 +1,15 @@
-<%- include('./partials/header.ejs', { titlePage: 'Edit class' }) %>
+<%- include('./partials/header.ejs', { titlePage: 'Edit Class' }) %>
 
 <h1>Edit class</h1>
+
 <div>
     <a href="/">
-        <i class="fa-solid fa-arrow-left" style="color: #f5f5fa;"></i>
+        <i class="fa-solid fa-arrow-left" style="color: #0c0c0f;"></i>
     </a>
 </div>
 
 <div>
-    <form action="/editClass/<%= data.idCalendar %>" id="formClass" method="post">
+    <form id="formClassEdit" data-id="<%= data.id_calendar %>">
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" min="3" max="40" value="<%= data.title %>" required>
 
@@ -19,13 +20,11 @@
         
         <label for="day">Select day of the week:</label>
         <select name="day" id="day" required>
-            <option disabled selected hidden>Week day</option>
+            <option disabled selected hidden value="">Week day</option>
             <% for(let i = 0; i < weekDay.length; i++) { %>
                 <% const day = weekDay[i]; %>
-                <% console.log("'day' in createClass:", day) %>
         
                 <% const isDayFull = fullDays && fullDays[day.toLowerCase()] && fullDays[day.toLowerCase()].classes.length >= 3; %>
-                <% console.log("'isDayFull' in createClass:", isDayFull) %>
                 
                 <option value="<%- day %>" <%= data.day === day ? 'selected' : '' %> <%= isDayFull === false ? 'disabled' : '' %>>
                     <%- day %><%- isDayFull === false ? ' (Full)' : '' %>
@@ -50,8 +49,56 @@
         <label for="workshopOptionFalse">No</label>
         <input type="radio" id="workshopOptionFalse" value="false" name="workshop" checked required>
 
-        <button type="submit">Edit class</button>
+        <button type="submit" class="btn-Edit">Edit class</button>
     </form>
 </div>
+
+<script>
+    const formClassEdit = document.querySelector("#formClassEdit")
+
+    formClassEdit.addEventListener('submit', async (e) => {
+        e.preventDefault()
+
+        const id = formClassEdit.dataset.id
+        const title = formClassEdit.querySelector("#title").value
+        const description = formClassEdit.querySelector("#description").value
+        const day = formClassEdit.querySelector("#day").value
+        const timeStart = formClassEdit.querySelector("#time_start").value
+        const timeFinish = formClassEdit.querySelector("#time_finish").value
+        const workshop = formClassEdit.querySelector('input[name="workshop"]:checked').value;
+
+        const data = {
+            id,
+            title,
+            description,
+            day,
+            timeStart,
+            timeFinish,
+            workshop
+        }
+        
+        const response = await fetch(`/confirmEditClass/${data.id}`, {
+            'method': 'PUT',
+            'headers': {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                data
+            })
+        })
+
+        const result = await response.json()
+
+        if(result.isUpdateRegister) {
+            console.log("result.isUpdateRegister is true")
+            window.location.href = '/'
+        } else {
+            console.log("result.isUpdateRegister is false")
+            console.log(result)
+            window.location.href = '/error'
+        }
+
+    })
+</script>
 
 <%- include('./partials/footer.ejs') %>

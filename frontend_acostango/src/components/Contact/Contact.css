@@ -10,7 +10,8 @@ section{
     margin: auto;
     width: 70%;
     gap: 100px;
-    padding-bottom:50px ;
+    padding: 200px 0px 100px;
+    border-bottom: 1px #000 solid;
 }
 
 .contact__title{
@@ -112,17 +113,6 @@ input[type="button"]:hover{
     transition: .5s;
 }
 
-.a__link{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column-reverse;
-    color: #000;
-    text-decoration: none;
-    font-size: 1em;
-    font-family: 'Roboto', sans-serif;
-    gap: 10px;
-}
 
 @media (max-width:1000px) {
     .container__contact{
@@ -137,13 +127,4 @@ input[type="button"]:hover{
         gap: 20px;
         width: 300px;
     }
-}
-
-.contact__social-media{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 80%;
-    border-bottom: 1px solid #000;
-    padding: 20px 0px 20px;
 }
