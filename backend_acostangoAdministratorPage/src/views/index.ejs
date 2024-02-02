@@ -40,7 +40,7 @@
 </table>
 
 <% if(rowsParse && rowsParse.length > 0){ %>
-    <div class="divClassesDB" >
+    <div class="divClassesDB">
         <% rowsParse.map(rowParse => { %>
             <div class="classesDB <% if (rowParse.workshop) { %> workshop-class <% } %>" id="classCard">
                 <%- rowParse.workshop === 0 ? `<span id="classtype">Class: ${rowParse.title}</span>` : rowParse.workshop === 1 ? `<span id="workshoptype">Workshop: ${rowParse.title}</span>` : `<span id="eventType">Event: ${rowParse.title}</span>` %>

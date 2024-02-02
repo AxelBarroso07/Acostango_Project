@@ -117,7 +117,11 @@ export const getConfig = async (req, res) => {
 
 export const getCalendar = async (req, res) => {
     try {
+        // console.log(PORT, DB_HOST)
         const date = new Date();
+
+        const year = date.getFullYear();
+        const month = date.getMonth();
 
         const nameMonth = [
             "January",
