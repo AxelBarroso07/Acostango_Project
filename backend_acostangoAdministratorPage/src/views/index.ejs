@@ -40,11 +40,12 @@
 </table>
 
 <% if(rowsParse && rowsParse.length > 0){ %>
-    <div class="divClassesDB">
+    <div class="divClassesDB" >
         <% rowsParse.map(rowParse => { %>
-            <div class="classesDB <% if (rowParse.workshop) { %> workshop-class <% } %>">
-                <%- rowParse.workshop === 0 ? `<span id="classtype">Class: ${rowParse.title}</span>` : rowParse.workshop === 1 ? `<span id="workshoptype">Workshop: ${rowParse.title}</span>` : `<span>Event: ${rowParse.title}</span>` %>
+            <div class="classesDB <% if (rowParse.workshop) { %> workshop-class <% } %>" id="classCard">
+                <%- rowParse.workshop === 0 ? `<span id="classtype">Class: ${rowParse.title}</span>` : rowParse.workshop === 1 ? `<span id="workshoptype">Workshop: ${rowParse.title}</span>` : `<span id="eventType">Event: ${rowParse.title}</span>` %>
                 <span><%- rowParse.description %></span>
+                <%- rowParse.image !== null ? `<img src="${rowParse.image}" id="eventImage" alt="${rowParse.title}"  />` : '' %>
                 <span><%- rowParse.day %></span>
                 <%- rowParse.date !== null ? `<span>${rowParse.date}</span>` : '' %>
                 <%- rowParse.price !== null ? `<span>${rowParse.price}</span>` : '' %>
@@ -55,11 +56,11 @@
                 :
                     `<span>${rowParse.time12hrsStartFormat}</span>`
                 %>
-                <%- rowParse.image !== null ? `<img src="${rowParse.image}" alt="${rowParse.title}" height="200" width="200" />` : '' %>
+                
                 <% if (rowParse.category === 'class') { %>
                     <a href="/editClass/<%= rowParse.idCalendar %>" id="classedit">Edit</a>
                 <% } else if (rowParse.category === 'event') { %>
-                    <a href="/editEvent/<%= rowParse.idCalendar %>">Edit</a>
+                    <a href="/editEvent/<%= rowParse.idCalendar %>" id="classedit">Edit</a>
                 <% } %>
                 <button onclick="showHide(true, 'confirmationDeleteDiv_<%- rowParse.idCalendar %>')" class="deleteButton">Delete</button>
 
@@ -83,9 +84,10 @@
         <% }) %>
     </div>
 <% } %>
-
+<div class="createButtons">
 <a href="/createClass" id="newClass">New Class</a>
 <a href="/createEvent" id="newEvent">New Event</a>
+</div>
 
 <script src="./scripts/index.js"></script>
 
