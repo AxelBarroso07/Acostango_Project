@@ -1,6 +1,6 @@
 <%- include('./partials/header.ejs', { titlePage: 'Home' }) %>
 
-<p>Schedule</p>
+<h1>Acostango schedule</h1>
 
 <table border="1">
     <thead>
@@ -43,7 +43,7 @@
     <div class="divClassesDB">
         <% rowsParse.map(rowParse => { %>
             <div class="classesDB <% if (rowParse.workshop) { %> workshop-class <% } %>">
-                <%- rowParse.workshop === 0 ? `<span>Class: ${rowParse.title}</span>` : rowParse.workshop === 1 ? `<span>Workshop: ${rowParse.title}</span>` : `<span>Event: ${rowParse.title}</span>` %>
+                <%- rowParse.workshop === 0 ? `<span id="classtype">Class: ${rowParse.title}</span>` : rowParse.workshop === 1 ? `<span id="workshoptype">Workshop: ${rowParse.title}</span>` : `<span>Event: ${rowParse.title}</span>` %>
                 <span><%- rowParse.description %></span>
                 <span><%- rowParse.day %></span>
                 <%- rowParse.date !== null ? `<span>${rowParse.date}</span>` : '' %>
@@ -57,7 +57,7 @@
                 %>
                 <%- rowParse.image !== null ? `<img src="${rowParse.image}" alt="${rowParse.title}" height="200" width="200" />` : '' %>
                 <% if (rowParse.category === 'class') { %>
-                    <a href="/editClass/<%= rowParse.idCalendar %>">Edit</a>
+                    <a href="/editClass/<%= rowParse.idCalendar %>" id="classedit">Edit</a>
                 <% } else if (rowParse.category === 'event') { %>
                     <a href="/editEvent/<%= rowParse.idCalendar %>">Edit</a>
                 <% } %>
@@ -84,8 +84,8 @@
     </div>
 <% } %>
 
-<a href="/createClass">New Class</a>
-<a href="/createEvent">New Event</a>
+<a href="/createClass" id="newClass">New Class</a>
+<a href="/createEvent" id="newEvent">New Event</a>
 
 <script src="./scripts/index.js"></script>
 
