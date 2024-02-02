@@ -13,7 +13,7 @@ function Calendar() {
         const HOST = import.meta.env.VITE_DB_HOST;
         const PORT = import.meta.env.VITE_PORT_SERVER;
 
-        const response = await fetch(`http://${HOST}:${PORT}/calendar`, {
+        const response = await fetch(`http://${HOST}:${PORT}/events`, {
           'method': 'GET',
           'headers': {
             'Content-Type': 'application/json'
