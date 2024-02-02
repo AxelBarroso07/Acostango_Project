@@ -1,3 +1,7 @@
+html{
+    scroll-behavior: smooth;
+}
+
 section{
     padding-block:100px ;
 }
@@ -10,7 +14,8 @@ section{
     margin: auto;
     width: 70%;
     gap: 100px;
-    padding: 200px 0px 20px;
+    padding: 200px 0px 100px;
+    border-bottom: 1px #000 solid;
 }
 
 .contact__title{
@@ -112,26 +117,6 @@ input[type="button"]:hover{
     transition: .5s;
 }
 
-.contact__social-media{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    border-bottom: 1px solid #000;
-    padding-bottom: 50px;
-}
-
-.a__link{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column-reverse;
-    color: #000;
-    text-decoration: none;
-    font-size: 1em;
-    font-family: 'Roboto', sans-serif;
-    gap: 10px;
-}
 
 @media (max-width:1000px) {
     .container__contact{
