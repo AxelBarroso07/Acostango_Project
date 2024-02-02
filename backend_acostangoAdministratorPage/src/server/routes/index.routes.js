@@ -4,7 +4,7 @@ import multer from 'multer';
 import sharp from 'sharp';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { getIndex, getConfig, getCalendar, postEditClass, deleteClass, postNewClass, getCreateClass, postConfirmCreateClass, getCreateEvent, postConfirmCreateEvent, getEditClass, confirmEditClass, getEditEvent, confirmEditEvent } from '../controllers/index.controller.js';
+import { getIndex, getConfig, getCalendar, postEditClass, deleteClass, postNewClass, getCreateClass, postConfirmCreateClass, getCreateEvent, postConfirmCreateEvent, getEditClass, putConfirmEditClass, getEditEvent, confirmEditEvent } from '../controllers/index.controller.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -58,28 +58,31 @@ router.delete('/deleteClass/:idCalendar', deleteClass);
 
 router.post('/newClass', postNewClass);
 
-//Get edit class
-router.get('/editClass/:idCalendar', getEditClass);
-//Confirm edit class
-router.put('/editClass/:idCalendar', confirmEditClass);
 
-//Get edit event
-router.get('/editEvent/:idCalendar', getEditEvent);
-//Confirm edit event
-router.put('/editEvent/:idCalendar', confirmEditEvent);
 
 //new endpoints
+
+//Home
 router.get('/', getIndex);
 
+//Get ENV variables
 router.get('/config', getConfig);
 
+//Create Class
 router.get('/createClass', getCreateClass);
-
 router.post('/confirmCreateClass', postConfirmCreateClass);
 
+//Create Event
 router.get('/createEvent', getCreateEvent);
-
 router.post('/confirmCreateEvent', upload, postConfirmCreateEvent);
+
+//Edit class
+router.get('/editClass/:idCalendar', getEditClass);
+router.put('/confirmEditClass/:idCalendar', putConfirmEditClass);
+
+//Edit event
+router.get('/editEvent/:idCalendar', getEditEvent);
+router.put('/confirmEditEvent/:idCalendar', confirmEditEvent);
 
 // router.post('/uploadImage', uploadHandler, uploadImage);
 
