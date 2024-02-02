@@ -1,5 +1,6 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const LeftMenu = styled.menu`
   display: flex;
@@ -212,11 +213,11 @@ const Menu = ({open}) => {
     <LeftMenu open={open}>
       <div className="menu">
         <div className='container_clases'>
-          <a href="#">
-            <div className="clases">
-                <h1 className="clases__title">Clases</h1>
-            </div>
-          </a>
+        <Link to='./Pages/PagesClases/PagesClases.jsx'>
+          <div className="clases">
+              <h1 className="clases__title">Clases</h1>
+          </div>
+        </Link>
 
           <a href="#">
             <div className="clases">
