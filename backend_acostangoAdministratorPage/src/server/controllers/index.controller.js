@@ -290,7 +290,6 @@ export const getEditClass = async (req,res) =>{
             WHEN day = 'Saturday' THEN 7
             END`
         );
-        // console.log("rows from /editClass/:id:", rowsFullDay)
 
         if (rows && rows.length > 0) {
             rowsFullDay.map(row => {
@@ -354,13 +353,12 @@ export const putConfirmEditClass = async (req, res) =>{
                 isUpdateRegister: false
             })
         } else {
-            console.log("se actualizó")
+            console.log("Row updated")
             return res.status(200).json({
                 isUpdateRegister: true
             })
         }
 
-        // return res.redirect('/');
     } catch (error) {
         console.log(error)
         return res.status(500).json({
@@ -372,7 +370,7 @@ export const putConfirmEditClass = async (req, res) =>{
 export const getEditEvent = async (req,res) =>{
     try {
         const id = parseInt(req.params.idCalendar);
-        const [ rows ] = await pool.query("SELECT *, DATE_FORMAT(date, '%d/%m/%Y') AS date_formatted FROM calendar  WHERE id_calendar = ?", [id])
+        const [ rows ] = await pool.query("SELECT * FROM calendar  WHERE id_calendar = ?", [id])
 
         const weekDay = [
             "Sunday",
@@ -383,12 +381,13 @@ export const getEditEvent = async (req,res) =>{
             "Friday",
             "Saturday",
         ];
+    
+        // Format date to YYYY-MM-DD
+        const formatDate = new Date(rows[0].date).toISOString().split('T')[0];
 
         return res.status(200).render("editEvent", {
-            data:{
-                ...rows[0],
-            date_formatted: rows[0].date_formatted
-            },
+            data: rows[0],
+            date_formatted: formatDate,
             weekDay
         });
     } catch (error) {
@@ -399,10 +398,10 @@ export const getEditEvent = async (req,res) =>{
     }
 }
 
-export const confirmEditEvent = async (req,res) =>{
+export const putConfirmEditEvent = async (req,res) =>{
     try {
-        const { idCalendar } = req.params;
-        const newClass = req.body;
+        const idCalendar = parseInt(req.params.idCalendar);
+        const reqBody = req.body;
 
         if (!req.file) {
             return res.status(400).json({
@@ -436,11 +435,39 @@ export const confirmEditEvent = async (req,res) =>{
         const dirPhotoCompressed = `${dirFolder}${fileCompressedImage}`
         console.log("dirPhotoCompressed:", dirPhotoCompressed)
 
-        const [ update ] = await pool.query("UPDATE calendar set ? WHERE id_calendar = ?", [newClass, idCalendar]);
+        const data = {
+            title: reqBody.title,
+            description: reqBody.description,
+            image: dirPhotoCompressed,
+            day: reqBody.day,
+            date: new Date(reqBody.date),
+            location: reqBody.location,
+            price: reqBody.price,
+            timeStart: reqBody.timeStart,
+            timeFinish: null,
+            workshop: null
+        }
 
-        console.log("update: ", update)
+        console.log(reqBody)
+        console.log(data)
 
-        return res.redirect("/");
+        const [ result ] = await pool.query("UPDATE calendar SET title = ?, description = ?, image = ?, day = ?, date = ?, location = ?, price = ?, time_start = ?, time_finish = ?, workshop = ? WHERE id_calendar = ?", [data.title, data.description, data.image, data.day, data.date, data.location, data.price, data.timeStart, data.timeFinish, data.workshop, idCalendar]);
+
+        console.log("update: ", result)
+
+        
+
+        if(result.affectedRows === 0) {
+            return res.status(404).json({
+                isUpdateRegister: false
+            })
+        } else {
+            console.log("Row updated")
+            return res.status(200).json({
+                isUpdateRegister: true
+            })
+        }
+
     } catch (error) {
         console.log(error)
         return res.status(500).json({

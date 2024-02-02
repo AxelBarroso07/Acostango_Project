@@ -4,7 +4,7 @@ import multer from 'multer';
 import sharp from 'sharp';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { getIndex, getConfig, getCalendar, postEditClass, deleteClass, postNewClass, getCreateClass, postConfirmCreateClass, getCreateEvent, postConfirmCreateEvent, getEditClass, putConfirmEditClass, getEditEvent, confirmEditEvent } from '../controllers/index.controller.js';
+import { getIndex, getConfig, getCalendar, postEditClass, deleteClass, postNewClass, getCreateClass, postConfirmCreateClass, getCreateEvent, postConfirmCreateEvent, getEditClass, putConfirmEditClass, getEditEvent, putConfirmEditEvent } from '../controllers/index.controller.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -82,7 +82,7 @@ router.put('/confirmEditClass/:idCalendar', putConfirmEditClass);
 
 //Edit event
 router.get('/editEvent/:idCalendar', getEditEvent);
-router.put('/confirmEditEvent/:idCalendar', confirmEditEvent);
+router.put('/confirmEditEvent/:idCalendar', upload, putConfirmEditEvent);
 
 // router.post('/uploadImage', uploadHandler, uploadImage);
 
