@@ -4,7 +4,7 @@
 
 <div>
     <a href="/">
-        <i class="fa-solid fa-arrow-left" style="color: #f5f5fa;"></i>
+        <i class="fa-solid fa-arrow-left" style="color: #0c0c0f"> Back</i>
     </a>
 </div>
 
@@ -18,10 +18,10 @@
         <textarea id="description" name="description" cols="50" rows="4" maxlength="140" style="resize: none;" value=""></textarea>
         <br>
 
-        <label for="image">Image</label>
+        <label for="image">Select Image:</label>
         <input type="file" id="image" class="image" name="image" accept="image/*">
         
-        <label for="day">Select day of the week:</label>
+        <label for="day">Select day of the week:</label><br>
         <select name="day" id="day">
             <option disabled selected hidden value="">Week day</option>
             <% for(let i = 0; i < weekDay.length; i++) {%>

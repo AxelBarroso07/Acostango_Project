@@ -70,7 +70,9 @@ export const getIndex = async (req, res) => {
                     day: row.day,
                     date: row.date_formatted,
                     location: row.location,
-                    price: row.price_formatted,
+                    price: row.price_formatted 
+                    ? '€' + ' ' + row.price_formatted.slice(0, -3).replace('.',',') + row.price_formatted.slice(-3)
+                    : null,
                     timeStartParse: row.time_start,
                     timeFinishParse: row.time_finish,
                     time12hrsStartFormat: moment(row.time_start, 'hh:mm A').format('hh:mm A'),
@@ -83,7 +85,6 @@ export const getIndex = async (req, res) => {
 
         console.log("rowsParse to index:", rowsParse)
         console.log("fullDays to index:", fullDays)
-        // console.log("fullDays to index:", JSON.stringify(fullDays, null, 2))
 
         return res.render("index", {
             weekDay,
@@ -524,8 +525,7 @@ export const postEditClass = async (req, res) => {
 
 export const deleteClass = async (req, res) => {
     try {
-        const { idCalendar } = req.params;
-        // console.log(id)
+        const idCalendar = parseInt(req.params.idCalendar);
 
         const [ rows ] = await pool.query("DELETE FROM calendar WHERE id_calendar = ?", [idCalendar])
 
@@ -542,7 +542,7 @@ export const deleteClass = async (req, res) => {
             'message': 'Internal server error'
         })
     }
-asyncasync}
+}
 
 export const postNewClass = async (req, res) => {
     try {
@@ -805,5 +805,15 @@ export const postConfirmCreateEvent = async(req, res) => {
         return res.status(500).json({
             'message': 'Internal server error'
         })
+    }
+}
+
+export const getHandleError = async (req,res) =>{
+    try {
+        throw new Error('Simulated error');
+
+    } catch (error) {
+        console.error(error);
+        res.render('error', { titlePage: 'An error has occurred' });
     }
 }

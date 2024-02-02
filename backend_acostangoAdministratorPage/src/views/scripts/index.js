@@ -35,7 +35,7 @@ async function config() {
     } catch(error) {
         console.log('Error en try fetch /config. error:', error)
     }
-    return port, host
+    return { port, host }
 }
 
 function hideModal(modalId, idCalendar, originalTitle) {
@@ -122,7 +122,7 @@ function confirmEdit(idCalendarDB, titleDB, descriptionDB, timeStartDB, timeFini
 }
 
 async function deleteClass(idCalendar) {
-    await config()
+    const { host, port } = await config()
     
     console.log("idCalendar from deleteClass()", idCalendar);
     
@@ -133,11 +133,11 @@ async function deleteClass(idCalendar) {
         }
     })
     .then(data => {
-        console.log("Registro eliminado:", data)
+        console.log("Row deleted:", data)
         location.reload();
     })
     .catch(error => {
-        console.log("Error al eliminar el registro:", error)
+        console.log("Error to delete row:", error)
     })
 }
 
