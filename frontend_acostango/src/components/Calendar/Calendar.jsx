@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import '../Calendar/Calendar.css';
 
 function Calendar() {
@@ -6,31 +6,34 @@ function Calendar() {
   const [ loading, setLoading ] = useState(null)
   const [ error, setError ] = useState(null)
 
-  useEffect(() => {
-    const fetchDataCalendar = async () => {
-      try {
+  const fetchDataCalendar = useCallback(async () => {
+    try {
+      const HOST = import.meta.env.VITE_DB_HOST;
+      const PORT = import.meta.env.VITE_PORT_SERVER;
 
-        const HOST = import.meta.env.VITE_DB_HOST;
-        const PORT = import.meta.env.VITE_PORT_SERVER;
+      const response = await fetch(`http://${HOST}:${PORT}/calendar`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
 
-        const response = await fetch(`http://${HOST}:${PORT}/calendar`, {
-          'method': 'GET',
-          'headers': {
-            'Content-Type': 'application/json'
-          }
-        })
+      const result = await response.json();
+      console.log("Data calendar:", result);
 
-        const data = await response.json()
-        console.log("Data calendar:", data)
-      } catch(error) {
-        setError(error.message)
-      } finally {
-        setLoading(false)
-      }
+      const fetchedData = result.data
+
+      setData(fetchedData);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
     }
+  }, []);
 
-    fetchDataCalendar()
-  }, [])
+  useEffect(() => {
+    fetchDataCalendar();
+  }, [fetchDataCalendar]);
 
   if(loading) {
     return <p>Cargando</p>;
@@ -43,6 +46,23 @@ function Calendar() {
   return (
     <section className='calendar'>
       <h1 className='calendar__title'>CALENDAR</h1>
+      {data && data.length > 0 ? (
+        <ul>
+          {data.map(item => (
+            <li key={item.idCalendar}>
+              <p>{item.idCalendar}</p>
+              <p>{item.title}</p>
+              <p>{item.description}</p>
+              <p>{item.day}</p>
+              <p>{item.time12hrsStartFormat}</p>
+              <p>{item.time12hrsStartFormat}</p>
+              <p>{item.workshop}</p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No hay datos disponibles</p>
+      )}
     </section>
   )
 }
