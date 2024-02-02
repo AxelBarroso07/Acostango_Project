@@ -4,12 +4,12 @@ import { MapView } from '../MapView/MapView'
 
 function Contact() {    
   return (
-    <section className='contact'>
+    <section className='contact' id='contact'>
       <h1 className='contact__title'>CONTACT</h1>
       <div className="container__contact">
         <div className="contact__map">
           <MapView />
-          <a className='a__mapview' href="https://maps.app.goo.gl/3WCRktNn9kqWEV5U7">Schönbrunner Str. 58, Vienna</a>
+          <a className='a__mapview' href="https://maps.app.goo.gl/3WCRktNn9kqWEV5U7" target='_blank'>Schönbrunner Str. 58, Vienna</a>
         </div>
         <div className="form">
           <form action="">
