@@ -1,5 +1,21 @@
 <%- include('./partials/header.ejs', { titlePage: 'An error has occurred' }) %>
 
-<h1>An error has occurred</h1>
+<style>
+    body{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        flex-direction: column;
+    }
+</style>
+
+<div>
+    <a href="/">
+        <i class="fa-solid fa-arrow-left" style="color: #0c0c0f; font-size: 1.2em;"> Back</i>
+    </a>
+</div>
+
+<h1 style="font-size: 2em;">¡An error has occurred!</h1>
 
 <%- include('./partials/footer.ejs') %>

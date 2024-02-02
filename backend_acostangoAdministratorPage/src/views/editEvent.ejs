@@ -3,7 +3,7 @@
 <h1>Edit event</h1>
 <div>
     <a href="/">
-        <i class="fa-solid fa-arrow-left" style="color: #0c0c0f;"></i>
+        <i class="fa-solid fa-arrow-left" style="color: #0c0c0f;"> Back</i>
     </a>
 </div>
 
@@ -17,10 +17,11 @@
         <textarea id="description" name="description" cols="50" rows="4" maxlength="140" style="resize: none;" value=""><%= data.description %></textarea>
         <br>
 
-        <label for="image">Image</label>
-        <input type="file" id="image" class="image" name="image" accept="image/*">
-        
-        <label for="day">Select day of the week:</label>
+        <label >Select new image:</label><br>
+        <label for="image"><img src="<%= data.image %>" width="200" height="100" style="cursor: pointer;"></label>
+        <input type="file" id="image" class="image" name="image" accept="image/*" style="visibility: hidden;">
+
+        <label for="day">Select day of the week:</label><br>
         <select name="day" id="day">
             <option disabled selected hidden value="">Week day</option>
             <% for(let i = 0; i < weekDay.length; i++) { %>
