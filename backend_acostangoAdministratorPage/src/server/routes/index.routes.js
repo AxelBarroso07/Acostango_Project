@@ -3,7 +3,7 @@ import { Router, json } from 'express';
 import multer from 'multer';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { getIndex, getConfig, getCalendar, postEditClass, deleteClass, postNewClass, getCreateClass, postConfirmCreateClass, getCreateEvent, postConfirmCreateEvent, getEditClass, putConfirmEditClass, getEditEvent, putConfirmEditEvent, getHandleError } from '../controllers/index.controller.js';
+import { getIndex, getConfig, deleteClass, getCreateClass, postConfirmCreateClass, getCreateEvent, postConfirmCreateEvent, getEditClass, putConfirmEditClass, getEditEvent, putConfirmEditEvent, getHandleError } from '../controllers/index.controller.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -49,15 +49,7 @@ const router = Router();
 
 // router.use(upload.single('image'), json());
 
-router.get('/calendar', getCalendar);
-
-router.post('/editClass/:idCalendar', postEditClass);
-
 router.delete('/deleteClass/:idCalendar', deleteClass);
-
-router.post('/newClass', postNewClass);
-
-
 
 //new endpoints
 
