@@ -11,20 +11,15 @@ function Footer() {
     const handleScroll = () => {
       const currentScrollPosition = window.scrollY;
 
-      // Verificar si se está scrollando hacia arriba o abajo
       const scrollingUp = currentScrollPosition < lastScrollPosition;
 
-      // Actualizar el estado de isHidden
       setIsHidden(scrollingUp);
 
-      // Actualizar la última posición de desplazamiento
       lastScrollPosition = currentScrollPosition;
     };
 
-    // Agregar un event listener para el evento de desplazamiento
     window.addEventListener('scroll', handleScroll);
 
-    // Limpiar el event listener cuando el componente se desmonta
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
