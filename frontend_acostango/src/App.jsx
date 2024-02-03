@@ -1,21 +1,23 @@
-import React from 'react'
-import '../src/App.css'
-import NavBar from './components/NavBar/NavBar.jsx'
-import Footer from './components/Footer/Footer.jsx'
-import Calendar from './components/Calendar/Calendar.jsx'
-import Contact from './components/Contact/Contact.jsx'
-import Index from './components/Index/Index.jsx'
+import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import PageIndex from "./Pages/PageIndex";
+import PageClases from "./Pages/PageClases";
+import PageMilonga from "./Pages/PageMilonga";
+import PageEvents from "./Pages/PageEvents";
+import PageRent from "./Pages/PageRent";
 
 function App() {
   return (
-    <div className='App__container'>
-        <NavBar />
-        <Index />
-        <Calendar />
-        <Contact />
-        <Footer />
-    </div>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<PageIndex />} />
+        <Route path="/clases" element={<PageClases />} />
+        <Route path="/milonga" element={<PageMilonga />} />
+        <Route path="/events" element={<PageEvents />} />
+        <Route path="/rent" element={<PageRent />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

@@ -1,5 +1,4 @@
-import React from 'react'
-import '../Index/Index.css'
+import './Index.css'
 
 function Index() {
   return (

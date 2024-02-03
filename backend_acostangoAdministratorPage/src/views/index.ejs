@@ -48,7 +48,8 @@
                 <%- rowParse.image !== null ? `<img src="${rowParse.image}" id="eventImage" alt="${rowParse.title}"  />` : '' %>
                 <span><%- rowParse.day %></span>
                 <%- rowParse.date !== null ? `<span>${rowParse.date}</span>` : '' %>
-                <%- rowParse.price !== null ? `<span>${rowParse.price}</span>` : '' %>
+                <span><%- rowParse.price %> €</span>
+                <%- rowParse.block !== null ? `<span>Block of 10 classes: ${rowParse.block} €</span>` : '' %>
                 <%- rowParse.location !== null ? `<span>${rowParse.location}</span>` : '' %>
                 <%- rowParse.time12hrsFinishFormat !== null
                 ?

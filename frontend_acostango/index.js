@@ -8,6 +8,7 @@ import { PORT, corsOptions } from './config.js';
 
 import calendarRoutes from './src/server/routes/calendar.routes.js';
 import eventsRoutes from './src/server/routes/events.routes.js';
+import sendMail from './src/server/routes/sendMail.routes.js';
 
 const app = express()
 
@@ -23,6 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(calendarRoutes);
 app.use(eventsRoutes);
+app.use(sendMail);
 
 app.use((req, res, next) => {
     res.status(404).json({

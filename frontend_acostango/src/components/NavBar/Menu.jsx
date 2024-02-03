@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -119,7 +118,6 @@ const LeftMenu = styled.menu`
   @media (max-width:560px){
     display: flex;
     transform: ${({open}) => open ? 'translateX(175%)' : 'translateX(0)'};
-    transition: transform 0,3s ease-in-out;
     justify-content: center;
     gap:20px;
     align-items: center;
@@ -214,30 +212,31 @@ const LeftMenu = styled.menu`
 }
 `
 
+// eslint-disable-next-line react/prop-types
 const Menu = ({open}) => {
   return (
     <LeftMenu open={open}>
       <div className="menu">
         <div className='container_clases'>
-          <Link to='/PageClases/PageClases.jsx' className='a__links-clases'>
+          <Link to='/clases' className='a__links-clases'>
             <div className="clases">
                 <h1 className="clases__title">Classes</h1>
             </div>
           </Link>
 
-          <Link to='/PageClases/PageMilonga.jsx' className='a__links-clases'>
+          <Link to='/milonga' className='a__links-clases'>
             <div className="clases">
                 <h1 className="clases__title">Milonga</h1>
             </div>
           </Link>
 
-          <Link to='/PageClases/PageEvents.jsx' className='a__links-clases'>
+          <Link to='/events' className='a__links-clases'>
             <div className="clases">
                 <h1 className="clases__title">Events</h1>
             </div>
           </Link>
 
-          <Link to='/PageClases/PageRent.jsx' className='a__links-clases'>
+          <Link to='/rent' className='a__links-clases'>
             <div className="clases">
                 <h1 className="clases__title">Rent Studio</h1>
             </div>

@@ -14,7 +14,7 @@ section{
     margin: auto;
     width: 70%;
     gap: 100px;
-    padding: 200px 0px 100px;
+    padding: 100px 0px 100px;
     border-bottom: 1px #000 solid;
 }
 
@@ -117,10 +117,16 @@ input[type="button"]:hover{
     transition: .5s;
 }
 
+.mail__send__message {
+    color: #07ca28;
+    font-size: 1.2em;
+    font-family: 'Roboto', sans-serif;
+}
 
 @media (max-width:1000px) {
     .container__contact{
         flex-direction: column;
+        gap: 40px;
     }
 
     form{
