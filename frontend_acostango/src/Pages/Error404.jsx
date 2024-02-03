@@ -1,5 +1,7 @@
 export default function Error404() {
   return (
-    <div>Error404</div>
+    <div className="container__error">
+      Error 404 Page not found
+    </div>
   )
 }

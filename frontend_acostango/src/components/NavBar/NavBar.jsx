@@ -10,14 +10,24 @@ const Nav = styled.nav`
   align-items: center;
   padding: 20px 50px;
   background-color: #FFFFFF;
+
+  .logo{
+    width:50%;
+    height:100%;
+  }
+
+  .header__logo{
+    width:100%;
+    height:100%;
+  }
 `
 
 const NavBar = () => {
   return (
     <Nav>
       <MenuButton />
-      <div className="logo"><a href="/"><img src="#" alt="acostango_logo" /></a></div>
-      <button className="button"><svg xmlns="http://www.w3.org/2000/svg" className="header__icon" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M3.6 9h16.8" /><path d="M3.6 15h16.8" /><path d="M11.5 3a17 17 0 0 0 0 18" /><path d="M12.5 3a17 17 0 0 1 0 18" /></svg></button>
+      <div className="logo"><a href="/"><img src="../src/assets/icons/ACOSTANGO.svg" alt="acostango_logo" className='header__logo'/></a></div>
+      <ButtonLanguage />
     </Nav>
   )
 }

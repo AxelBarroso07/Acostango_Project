@@ -11,7 +11,7 @@ const LeftMenu = styled.menu`
   gap:60px;
   padding: 20px;
   background-color: #FFFF;
-  box-shadow: rgba(0, 0, 0, 0.20) 50px 10px 40px 10px;
+  box-shadow: rgba(0, 0, 0, 0.10) 50px 10px 200px 10px;
 
   position:absolute;
   top: 0;
@@ -126,7 +126,7 @@ const LeftMenu = styled.menu`
     height: 100%;
     width: auto;
     background-color: #FFFF;
-    box-shadow: rgba(0, 0, 0, 0.20) 50px 10px 40px 10px;
+    box-shadow: rgba(0, 0, 0, 0.10) 50px 10px 200px 10px;
     position:absolute;
     top: 0;
     left:-982px;
