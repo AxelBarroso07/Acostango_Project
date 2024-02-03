@@ -15,7 +15,7 @@
 
         <label for="description">Description:</label>
         <br>
-        <textarea id="description" name="description" cols="50" rows="4" maxlength="140" style="resize: none;" required><%= data.description %></textarea>
+        <textarea id="description" name="description" cols="50" rows="4" style="resize: none;" required><%= data.description %></textarea>
         <br>
         
         <label for="day">Select day of the week:</label>
@@ -33,6 +33,12 @@
         </select>
         
         <br>
+
+        <label for="price">Price</label>
+        <input type="number" id="price" name="price" value="<%= data.price %>">
+
+        <label for="block">block of 10 classes:</label>
+        <input type="number" id="block" name="block" value="<%= data.block %>">
 
         <label for="time_start">Time start:</label>
         <input type="time" id="time_start" name="time_start" value="<%= data.time_start %>" required>
@@ -63,6 +69,8 @@
         const title = formClassEdit.querySelector("#title").value
         const description = formClassEdit.querySelector("#description").value
         const day = formClassEdit.querySelector("#day").value
+        const price = formClassEdit.querySelector("#price").value
+        const block = formClassEdit.querySelector("#block").value
         const timeStart = formClassEdit.querySelector("#time_start").value
         const timeFinish = formClassEdit.querySelector("#time_finish").value
         const workshop = formClassEdit.querySelector('input[name="workshop"]:checked').value;
@@ -72,6 +80,8 @@
             title,
             description,
             day,
+            price,
+            block,
             timeStart,
             timeFinish,
             workshop

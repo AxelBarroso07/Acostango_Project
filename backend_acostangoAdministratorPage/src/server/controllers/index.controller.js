@@ -28,8 +28,7 @@ export const getIndex = async (req, res) => {
         const currentDate = new Date();
         const currentDay = weekDay[currentDate.getDay()];
 
-        const [ rows ] = await pool.query(`SELECT *, DATE_FORMAT(date, '%d/%m/%Y') AS date_formatted,
-        FORMAT(price, 2) AS price_formatted FROM calendar ORDER BY CASE
+        const [ rows ] = await pool.query(`SELECT *, DATE_FORMAT(date, '%d/%m/%Y') AS date_formatted FROM calendar ORDER BY CASE
             WHEN day = 'Sunday' THEN 1
             WHEN day = 'Monday' THEN 2
             WHEN day = 'Tuesday' THEN 3
@@ -69,9 +68,8 @@ export const getIndex = async (req, res) => {
                     day: row.day,
                     date: row.date_formatted,
                     location: row.location,
-                    price: row.price_formatted 
-                    ? '€' + ' ' + row.price_formatted.slice(0, -3).replace('.',',') + row.price_formatted.slice(-3)
-                    : null,
+                    price: row.price,
+                    block: row.block,
                     timeStartParse: row.time_start,
                     timeFinishParse: row.time_finish,
                     time12hrsStartFormat: moment(row.time_start, 'hh:mm A').format('hh:mm A'),
@@ -126,8 +124,7 @@ export const getEditClass = async (req,res) =>{
 
         const [ rows ] = await pool.query("SELECT * FROM calendar WHERE id_calendar = ?", [id])
 
-        const [ rowsFullDay ] = await pool.query(`SELECT *, DATE_FORMAT(date, '%d/%m/%Y') AS date_formatted,
-        FORMAT(price, 2) AS price_formatted FROM calendar ORDER BY CASE
+        const [ rowsFullDay ] = await pool.query(`SELECT *, DATE_FORMAT(date, '%d/%m/%Y') AS date_formatted FROM calendar ORDER BY CASE
             WHEN day = 'Sunday' THEN 1
             WHEN day = 'Monday' THEN 2
             WHEN day = 'Tuesday' THEN 3
@@ -179,12 +176,14 @@ export const putConfirmEditClass = async (req, res) =>{
             title: reqBody.title,
             description: reqBody.description,
             day: reqBody.day,
+            price: reqBody.price,
+            block: reqBody.block,
             timeStart: reqBody.timeStart,
             timeFinish: reqBody.timeFinish,
             workshop: reqBody.workshop === 'true' ? true : false
         }
 
-        const [ result ] = await pool.query("UPDATE calendar SET title = ?, description = ?, day = ?, time_start = ?, time_finish = ?, workshop = ? WHERE id_calendar = ?", [data.title, data.description, data.day, data.timeStart, data.timeFinish, data.workshop, idCalendar]);
+        const [ result ] = await pool.query("UPDATE calendar SET title = ?, description = ?, day = ?, price = ?, block = ?, time_start = ?, time_finish = ?, workshop = ? WHERE id_calendar = ?", [data.title, data.description, data.day, data.price, data.block, data.timeStart, data.timeFinish, data.workshop, idCalendar]);
 
         if(result.affectedRows === 0) {
             return res.status(404).json({
@@ -367,13 +366,15 @@ export const postConfirmCreateClass = async (req, res) => {
             title: reqBody.title,
             description: reqBody.description,
             day: reqBody.day,
+            price: reqBody.price,
+            block: reqBody.block,
             time_start: reqBody.time_start,
             time_finish: reqBody.time_finish,
             category: 'class',
             workshop: reqBody.workshop === 'true' ? true : false
         };
 
-        const [ rows ] = await pool.query("INSERT INTO calendar SET title = ?, description = ?, image = null, day = ?, date = ?, location = null, price = null, time_start =?, time_finish = ?, category = ?, workshop = ?", [data.title, data.description, data.day, data.date, data.time_start, data.time_finish, data.category, data.workshop])
+        const [ rows ] = await pool.query("INSERT INTO calendar SET title = ?, description = ?, image = null, day = ?, price = ?, block = ?,  date = ?, location = null,  time_start = ?, time_finish = ?, category = ?, workshop = ?", [data.title, data.description, data.day, data.price, data.block, data.date, data.time_start, data.time_finish, data.category, data.workshop])
 
         return res.redirect("/")
     } catch(error) {

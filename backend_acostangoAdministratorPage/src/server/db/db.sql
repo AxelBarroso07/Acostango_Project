@@ -33,29 +33,32 @@ USE acostango;
 CREATE TABLE `calendar` (
   `id_calendar` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `title` VARCHAR(100) NOT NULL,
-  `description` VARCHAR(255) NOT NULL,
+  `description` TEXT NOT NULL,
   `image` VARCHAR(255) NULL,
   `day` VARCHAR(20) NOT NULL,
   `date` DATE NULL,
   `location` VARCHAR(50) NULL,
-  `price` DECIMAL(7,2) NULL,
+  `price` INT NOT NULL,
+  `block` INT NULL,
   `time_start` TIME NOT NULL,
   `time_finish` TIME NULL,
   `category` VARCHAR(15) NOT NULL,
   `workshop` BOOLEAN NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- classes rows
-INSERT INTO `calendar` (`title`, `description`, `day`, `time_start`, `time_finish`, `category`, `workshop`) VALUES
-                      ('AcosTango Afterwork Milonga', 'Join us and bring your friends! We look forward to dancing with you!', 'Monday', '19:00:00', '22:00:00', 'class', false),
-                      ('Beginners', 'This is where you start your journey into Tango! We look forward to meeting you!', 'Tuesday', '18:00:00', '19:00:00', 'class', false),
-                      ('Intermediate', 'This is where you start your journey into Tango!', 'Tuesday', '19:10:00', '20:30:00', 'class', false),
-                      ('Tango Strong', 'Join us and bring your friends! We look forward to dancing with you! We look forward to dancing with you!', 'Tuesday', '19:30:00', '20:45:00', 'class', false),
-                      ('Practice', 'Join us and bring your friends! and bring your friends! We look forward to dancing with you!', 'Wednesday', '20:30:00', '22:00:00', 'class', false),
-                      ('Newcomers Course', 'Join us and bring your friends! and bring your friends! We look forward to dancing with you!', 'Thursday', '19:00:00', '22:00:00', 'class', false),
-                      ('Special Workshop', 'This is where you start your journey into Tango°', 'Saturday', '18:00:00', '19:00:00', 'class', true),
-                      ('AcosTango Milonga', 'Join us and bring your friends! We look forward to dancing with you!', 'Saturday', '19:00:00', '22:00:00', 'class', false)
-;
+-- classes and workshops rows
+INSERT INTO `calendar` (`title`, `description`, `day`, `price`, `block`, `time_start`, `time_finish`, `category`, `workshop`) VALUES
+                      ('Intermediate & Advance', 'These classes are aimed at people who already have experience in dancing tango. It is necessary to come as a couple to take the advanced classes. In this class technical concepts and complex movements of Tango are handled. We will wait for you!!!', 'Monday', 15, 180, '18:00:00', '19:00:00', 'class', false),
+                      ('AcosTango Afterwork Milonga', 'Come dance right after work, switch off dancing after a day of work and go to bed early.
+                      For all those who get up early to be able to go to work the next day. Our milonga is a great solution', 'Monday', 10, null, '19:00:00', '22:00:00', 'class', false),
+                      ('Tango Technique', 'This class is intended for learning and perfecting the technique of both men and women in tango. We will work on axis, weight shifts, pivots, walking, turns, stumbles and embellishments. A class intended for those who already dance but also for those who want to get in touch with tango for the first time', 'Tuesday', 20, 140, '18:00:00', '19:15:00', 'class', false),
+                      ('Tango Strong', 'Tango Strong is a movement discipline, focused on the one hand to maintain a healthy body and on the other to develop, strengthen and give flexibility to the body through typical movements of tango dance.
+                      It is an individual job for all types of people, especially Tango dancers who want to improve their physical condition', 'Tuesday', 20, 140, '19:30:00', '20:45:00', 'class', false),
+                      ('Beginners', 'These are classes for beginners, people who are starting out for the first time or who have a very little knowledge of tango dancing.', 'Wednesday', 15, 180, '18:00:00', '19:00:00', 'class', false),
+                      ('Intermediate & Advance', 'These classes are aimed at people who already have experience in dancing tango. It is necessary to come as a couple to take the advanced classes. In this class technical concepts and complex movements of Tango are handled. We will wait for you!!!', 'Wednesday', 25, 180, '19:00:00', '20:30:00', 'class', false),
+                      ('Beginners', 'These are classes for beginners, people who are starting out for the first time or who have a very little knowledge of tango dancing.', 'Friday', 25, 180, '19:00:00', '21:00:00', 'class', false),
+                      ('Special Workshop', 'These workshops are thematic, they work on a specific tango theme or movement, for example sacda, volleys, hooks or sweeps or a musical rhythm such as milonga, waltz or musicality with different tango composers and every three weeks we change the theme', 'Saturday', 25, null, '19:00:00', '20:30:00', 'class', true),
+                      ('Acostango Milonga', 'Every Saturday night we organize our milonga, a special night, with very good music and a splendid floor. Very close to the center which makes it very accessible', 'Saturday', 10, null, '20:30:00', '22:00:00', 'class', false)
 
 -- INSERT INTO calendar_class(title, day, time_start, time_finish) VALUES ('Beginners', 'Sunday', '20:00:00', '22:00:00');
 -- INSERT INTO calendar_class(title, day, time_start, time_finish) VALUES ('truers', 'Wednesday', '18:00:00', '19:00:00');
