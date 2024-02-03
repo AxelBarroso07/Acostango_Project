@@ -10,12 +10,12 @@ export const getCalendar = async (req, res) => {
         const [ rows ] = await pool.query(`SELECT id_calendar, title, description, day, time_start, time_finish, category, workshop FROM calendar 
         WHERE category = 'class'
         ORDER BY CASE
-            WHEN day = 'Sunday' THEN 1
-            WHEN day = 'Monday' THEN 2
-            WHEN day = 'Tuesday' THEN 3
-            WHEN day = 'Wednesday' THEN 4
-            WHEN day = 'Thursday' THEN 5
-            WHEN day = 'Friday' THEN 6
+            WHEN day = 'Monday' THEN 1
+            WHEN day = 'Tuesday' THEN 2
+            WHEN day = 'Wednesday' THEN 3
+            WHEN day = 'Thursday' THEN 4
+            WHEN day = 'Friday' THEN 5
+            WHEN day = 'Sunday' THEN 6
             WHEN day = 'Saturday' THEN 7
             END`
         );

@@ -117,6 +117,11 @@ input[type="button"]:hover{
     transition: .5s;
 }
 
+.mail__send__message {
+    color: #07ca28;
+    font-size: 1.2em;
+    font-family: 'Roboto', sans-serif;
+}
 
 @media (max-width:1000px) {
     .container__contact{
