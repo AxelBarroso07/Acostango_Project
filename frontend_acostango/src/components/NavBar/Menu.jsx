@@ -119,7 +119,6 @@ const LeftMenu = styled.menu`
   @media (max-width:560px){
     display: flex;
     transform: ${({open}) => open ? 'translateX(175%)' : 'translateX(0)'};
-    transition: transform 0,3s ease-in-out;
     justify-content: center;
     gap:20px;
     align-items: center;

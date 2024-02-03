@@ -14,7 +14,7 @@ section{
     margin: auto;
     width: 70%;
     gap: 100px;
-    padding: 0px 0px 200px;
+    padding: 0px 0px 100px;
 }
 
 .calendar__title{
@@ -22,4 +22,21 @@ section{
     font-size: 3.5em;
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
+}
+
+table{
+    border: 2px red solid;
+    width: 100%;
+}
+
+caption{
+    width: 100%;
+    margin: 0 auto;
+}
+
+.rows{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }

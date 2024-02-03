@@ -14,7 +14,7 @@ section{
     margin: auto;
     width: 70%;
     gap: 100px;
-    padding: 200px 0px 100px;
+    padding: 100px 0px 100px;
     border-bottom: 1px #000 solid;
 }
 
@@ -121,6 +121,7 @@ input[type="button"]:hover{
 @media (max-width:1000px) {
     .container__contact{
         flex-direction: column;
+        gap: 40px;
     }
 
     form{

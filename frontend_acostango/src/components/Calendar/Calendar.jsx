@@ -47,19 +47,22 @@ function Calendar() {
     <section className='calendar'>
       <h1 className='calendar__title'>CALENDAR</h1>
       {data && data.length > 0 ? (
-        <ul>
+        <div className='container__table'>
           {data.map(item => (
-            <li key={item.idCalendar}>
-              <p>{item.idCalendar}</p>
-              <p>{item.title}</p>
-              <p>{item.description}</p>
-              <p>{item.day}</p>
-              <p>{item.time12hrsStartFormat}</p>
-              <p>{item.time12hrsStartFormat}</p>
-              <p>{item.workshop}</p>
-            </li>
+            <table key={item.idCalendar}>
+              <tr className='rows'>
+                <th className='table__day'>{item.day}</th>
+                <th className='table__title'>{item.title}</th>
+                <p className='table__description'>{item.description}</p>
+                <td className='table__horario'>
+                  <td>{item.time12hrsStartFormat}</td>
+                  <td>{item.time12hrsStartFormat}</td>
+                </td>
+                <p className='table__workshop'>{item.workshop}</p>
+              </tr>
+            </table>
           ))}
-        </ul>
+        </div>
       ) : (
         <p>No hay datos disponibles</p>
       )}
