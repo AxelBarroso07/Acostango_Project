@@ -1,5 +1,15 @@
 <%- include('./partials/header.ejs', { titlePage: 'Home' }) %>
-
+<p style="color: black;">Calendar:</p>
+<% for(let i = 0; i < weekDay.length; i++) { %>
+    <p style="color: black;"> <%- weekDay[i] %> </p>
+    <% for (let y = 0; y < rowsParse.length; y++) { %>
+        <% if(rowsParse[y].day === weekDay[i]){ %>
+            <p style="color: black;"><%- rowsParse[y].title %></p>
+            <p style="color: black;"><%- rowsParse[y].timeStartParse %></p>
+            <p style="color: black;"><%- rowsParse[y].timeFinishParse %></p>
+        <% } %>
+    <% } %>
+<% } %>
 <h1>Acostango schedule</h1>
 
 <table border="1">
