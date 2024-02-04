@@ -13,13 +13,13 @@ const LeftMenu = styled.menu`
   padding: 20px;
   background-color: #FFFF;
   box-shadow: rgba(0, 0, 0, 0.20) 50px 10px 40px 10px;
-
-  position:absolute;
+  position:fixed;
   top: 0;
   left:-1000px;
 
   transform: ${({open}) => open ? 'translateX(160%)' : 'translateX(0)'};
   transition:1s;
+
 
   .menu__social-media{
     display: flex;
@@ -59,13 +59,13 @@ const LeftMenu = styled.menu`
   
   .details__answer{
     font-family: "Nunito", sans-serif;
-    font-weight: 600; 
+    font-weight: 600;
     max-height: 100px;
-    width: 45ch;
     overflow-y: scroll;
     overflow-x: hidden;
     padding-bottom:2px;
     cursor:pointer;
+    width: 400px;
   }
 
   .details__answer::-webkit-scrollbar{
@@ -73,7 +73,8 @@ const LeftMenu = styled.menu`
   }
   
   .details__question{
-    width: 420px;
+    width: 95%;
+    max-width: 420px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -82,6 +83,7 @@ const LeftMenu = styled.menu`
     font-size: .9em;
     font-weight: bold;
     font-family: 'Roboto', sans-serif;
+    margin: auto;
   }
 
   .container_clases{
@@ -116,21 +118,21 @@ const LeftMenu = styled.menu`
     text-decoration:none;
   }
    
-  @media (max-width:560px){
+  @media (max-width:800px){
     display: flex;
-    transform: ${({open}) => open ? 'translateX(175%)' : 'translateX(0)'};
     justify-content: center;
     gap:20px;
     align-items: center;
     flex-direction: column;
     padding: 30px;
-    height: 100%;
-    width: auto;
+    height: 100vh;
+    width: 100%;
     background-color: #FFFF;
     box-shadow: rgba(0, 0, 0, 0.20) 50px 10px 40px 10px;
     position:absolute;
     top: 0;
-    left:-982px;
+    left:-100%;
+    left: ${({open}) => open ? '0' : '-100%'};
     transition:0.3s;
 
     .menu__social-media{
@@ -171,10 +173,11 @@ const LeftMenu = styled.menu`
     .details__answer{
       font-family: "Nunito", sans-serif;
       font-weight: 600;
+      width: 300px;
     }
     
     .details__question{
-      width: 380px;
+      max-width: 300px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -183,6 +186,7 @@ const LeftMenu = styled.menu`
       font-size: .9em;
       font-weight: bold;
       font-family: 'Roboto', sans-serif;
+      margin-bottom: 5px;
     }
 
     .container_clases{
@@ -190,15 +194,15 @@ const LeftMenu = styled.menu`
       justify-content: center;
       gap: 20px;
       flex-wrap: wrap;
-      width: 500px;
+      width: 300px;
     }
 
     .clases{
       display: flex;
       flex-direction: column;
       justify-content: end;
-      width: 180px;
-      height: 180px;
+      width: 140px;
+      height: 140px;
       padding: 10px;
       background-color: #000;
     }
@@ -210,8 +214,31 @@ const LeftMenu = styled.menu`
       font-family: 'Nunito', sans-serif;
     }
   }
+
+  @media (max-height:800px){
+    .container_clases{
+      width: 400px;
+    }
+
+    .clases{
+      width: 150px;
+      height: 150px;
+    }
+  }
+
+  @media (max-height:700px){
+    .container_clases{
+      width: 400px;
+    }
+
+    .clases{
+      width: 150px;
+      height: 150px;
+    }
+  }
 }
 `
+
 
 const Menu = ({open}) => {
   return (

@@ -4,7 +4,7 @@ import MenuButton from './MenuButton'
 import ButtonLanguage from '../ButtonLanguage/ButtonLanguage'
 
 const Nav = styled.nav`
-  height: 150px;
+  height: 100px;
   display: flex;
   justify-content: space-between;
   align-items: center;
