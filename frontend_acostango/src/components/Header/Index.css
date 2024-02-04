@@ -5,13 +5,14 @@
     align-items: center;
     margin: auto;
     width: 70%;
-    padding: 100px 0px 200px;
+    padding: 200px 0px 200px;
 }
 
 .container__image{
-    width: 80%;
-    height: 80%;
-    border: 3px #000 solid;
+    width: 70%;
+    height: 600px;
+    border: 2px #000 solid;
+    margin-top: 50px;
 }
 
 .index__image{

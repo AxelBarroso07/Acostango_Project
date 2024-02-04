@@ -9,7 +9,10 @@ const Nav = styled.nav`
   justify-content: space-between;
   align-items: center;
   padding: 20px 50px;
+  width: 100%;
   background-color: #FFFFFF;
+  position:fixed;
+  z-index: 999;
 
   .logo{
     width:50%;
