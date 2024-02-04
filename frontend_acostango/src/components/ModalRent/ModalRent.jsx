@@ -40,11 +40,12 @@ const ContenedorModal = styled.div`
     border-radius: 5px;
     box-shadow:rgba(100,100,111,0.2) 0px 7px 29px 0px;
     padding:20px;
-    margin-top:150px;
+    margin-top:80px;
 `;
 
 const BotonCerrar = styled.button`
     position:absolute;
+    z-index:999;
     top:20px;
     left:20px;
     color:#000;
