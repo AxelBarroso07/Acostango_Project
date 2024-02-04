@@ -12,7 +12,10 @@ function PageRent() {
           <div className='container__image-1'><img src="../src/assets/image/image-rent.png" alt="img__studio-1" className='img__studio-1'/></div>
           <div className='container__column'>
             <div className='container__image-2'><img src="../src/assets/image/image-rent.png" alt="img__studio-2" className='img__studio-2'/></div>
-            <div className='container__image-3'><img src="../src/assets/image/image-rent.png" alt="img__studio-3" className='img__studio-3'/></div>
+            <button className='container__image-3'><div className='container__vermas'>
+              <svg xmlns="http://www.w3.org/2000/svg" className="icon-plus" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+              <span>Ver Mas</span>
+            </div></button>
           </div>
         </div>
         
