@@ -5,8 +5,8 @@
     align-items: center;
     margin: auto;
     width: 100%;
-    height: 100vh;
-    padding: 200px 0px 200px;
+    height: 100%;
+    padding: 100px 0px 200px;
 }
 
 .container__image{
