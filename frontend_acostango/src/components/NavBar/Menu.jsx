@@ -15,9 +15,8 @@ const LeftMenu = styled.menu`
   box-shadow: rgba(0, 0, 0, 0.20) 50px 10px 40px 10px;
   position:fixed;
   top: 0;
-  left:-1000px;
-
-  transform: ${({open}) => open ? 'translateX(160%)' : 'translateX(0)'};
+  left:-650px;
+  transform: ${({open}) => open ? 'translateX(102%)' : 'translateX(-100%)'};
   transition:1s;
 
 
@@ -132,7 +131,7 @@ const LeftMenu = styled.menu`
     position:absolute;
     top: 0;
     left:-100%;
-    left: ${({open}) => open ? '0' : '-100%'};
+    transform: ${({open}) => open ? 'translateX(100%)' : 'translateX(-100%)'};
     transition:0.3s;
 
     .menu__social-media{
@@ -166,7 +165,7 @@ const LeftMenu = styled.menu`
       text-align: center;
       padding-bottom: 10px;
       font-family: "Roboto", sans-serif;
-      font-size: 2em;
+      font-size: 1.8em;
       font-weight: 400;
     }
     
@@ -181,12 +180,12 @@ const LeftMenu = styled.menu`
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 30px;
+      height: 25px;
       list-style: none;
-      font-size: .9em;
+      font-size: .8em;
       font-weight: bold;
       font-family: 'Roboto', sans-serif;
-      margin-bottom: 5px;
+      margin-bottom: 2px;
     }
 
     .container_clases{
@@ -201,8 +200,8 @@ const LeftMenu = styled.menu`
       display: flex;
       flex-direction: column;
       justify-content: end;
-      width: 140px;
-      height: 140px;
+      width: 120px;
+      height: 120px;
       padding: 10px;
       background-color: #000;
     }
@@ -214,32 +213,8 @@ const LeftMenu = styled.menu`
       font-family: 'Nunito', sans-serif;
     }
   }
-
-  @media (max-height:800px){
-    .container_clases{
-      width: 400px;
-    }
-
-    .clases{
-      width: 150px;
-      height: 150px;
-    }
-  }
-
-  @media (max-height:700px){
-    .container_clases{
-      width: 400px;
-    }
-
-    .clases{
-      width: 150px;
-      height: 150px;
-    }
-  }
 }
 `
-
-
 const Menu = ({open}) => {
   return (
     <LeftMenu open={open}>

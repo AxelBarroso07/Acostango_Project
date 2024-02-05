@@ -18,7 +18,7 @@ function PageRent() {
             <div className='container__image-2'><img src="../src/assets/image/image-rent.png" alt="img__studio-2" className='img__studio-2'/></div>
             <button onClick={() => cambiarEstadoModal1(!estadoModal1)} className='container__image-3'><div className='container__vermas'>
               <svg xmlns="http://www.w3.org/2000/svg" className="icon-plus" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
-              <span>Ver Mas</span>
+              <p className='span'>Ver Mas</p>
             </div></button>
 
             <ModalRent estado={estadoModal1} cambiarEstado={cambiarEstadoModal1}> </ModalRent>
