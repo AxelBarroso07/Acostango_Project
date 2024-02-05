@@ -10,7 +10,7 @@ function PageMilonga() {
         <div className="container__image-milonga">
           <img src="../src/assets/image/image-classes.png" alt="img-classes" className='image__milonga' />
         </div>
-        <h1 className="classes__title">MILONGA</h1>
+        <h1 className="milonga__title">MILONGA</h1>
         <div className="container__info">
           <div className="container__block">
               <h2 className="title__block">Begginers</h2>

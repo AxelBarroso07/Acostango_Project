@@ -33,7 +33,7 @@
 .container__column{
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 90%;
 }
 
 .container__image-2{
@@ -70,7 +70,8 @@
     gap: 10px;
     text-decoration: none;
     list-style: none;
-    width: 70%;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .li__item{
@@ -79,7 +80,6 @@
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
 }
-
 
 .rent__precio{
     color: #000;
@@ -103,14 +103,68 @@
 }
 
 .icon-plus{
-    width: 80px;
-    height: 80px;
+    width: 5em;
+    height: 5em;
 }
-
 
 .span{
     color: #000;
     font-size: 1.5em;
     font-family: 'Roboto', sans-serif;
     font-weight: 600;
+}
+
+@media (max-width:700px) {
+
+    .container__rent{
+        width: 80%;
+        margin: 0 auto;
+        padding-top: 50px;
+    }
+
+    .rent__title{
+        color: #000;
+        font-size: 2em;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 500;
+        text-align: center;
+        padding: 40px 0px 20px;
+    }
+    
+    .container__slider-images{
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        width: 100%;
+        padding-bottom: 20px;
+    }
+
+    .container__description-studio{
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+        padding-bottom: 50px;
+        gap: 10px;
+    }
+
+    .icon-plus{
+        width: 2.5em;
+        height: 2.5em;
+    }
+
+    .span{
+        color: #000;
+        font-size: 1em;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 600;
+    }
+
+    .rent__precio{
+        color: #000;
+        font-size: 2.8em;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 500;
+        text-align: center;
+        padding-bottom: 50px;
+    }
 }
