@@ -55,8 +55,8 @@ function Calendar() {
                         <div key={item.idCalendar}>
                           <p className='table__hstitle-class'>{item.title}</p>
                           <div className='container__hora'>
-                            <p className='table__hsstart'>{item.timeStartParse}</p>
-                            <p className='table__hsfinish'>{item.timeFinishParse}</p>
+                            <p className='table__hsstart'>{item.time12hrsStartFormat}</p>
+                            <p className='table__hsfinish'>{item.time12hrsFinishFormat}</p>
                           </div>
                         </div>
                       );
