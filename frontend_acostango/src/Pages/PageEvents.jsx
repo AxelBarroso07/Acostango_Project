@@ -1,8 +1,43 @@
 import React from 'react'
+import NavBar from '../components/NavBar/NavBar'
+import '../Pages/PageEvents.css'
 
 function PageEvents() {
   return (
-    <h1>Eventos</h1>
+    <div>
+      <NavBar />
+      <div className="container__events">
+        <h1 className="events__title">EVENTS</h1>
+        <div className="container__event">
+          <div className="event">
+            <div className='container__img'>
+              <img src="../src/assets/image/image-classes.png" alt="image-event" className="image__event" />
+            </div>
+            <h2 className="title__event">TANGO STRONG</h2>
+            <p className="description__event">SHOW DE TANGO POR MARIANO AGUIAR</p>
+            <div className="dates__event">
+              <p className='dates__event ubi'>Villa Dominico</p>
+                <p className='dates__event date'>12/10/2024</p>
+                <p className='dates__event time'>18HS</p>
+                <p className='dates__event price'>1000 €</p>
+              </div>
+          </div>
+          <div className="event">
+            <div className='container__img'>
+              <img src="../src/assets/image/image-classes.png" alt="image-event" className="image__event" />
+            </div>
+            <h2 className="title__event">TANGO STRONG</h2>
+            <p className="description__event">SHOW DE TANGO POR MARIANO AGUIAR</p>
+            <div className="dates__event">
+              <p className='dates__event ubi'>Villa Dominico</p>
+              <p className='dates__event date'>12/10/2024</p>
+              <p className='dates__event time'>18HS</p>
+              <p className='dates__event price'>1000 €</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
 

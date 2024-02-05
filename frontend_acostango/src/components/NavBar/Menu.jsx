@@ -13,13 +13,12 @@ const LeftMenu = styled.menu`
   padding: 20px;
   background-color: #FFFF;
   box-shadow: rgba(0, 0, 0, 0.20) 50px 10px 40px 10px;
-
-  position:absolute;
+  position:fixed;
   top: 0;
-  left:-1000px;
-
-  transform: ${({open}) => open ? 'translateX(160%)' : 'translateX(0)'};
+  left:-650px;
+  transform: ${({open}) => open ? 'translateX(102%)' : 'translateX(-100%)'};
   transition:1s;
+
 
   .menu__social-media{
     display: flex;
@@ -59,13 +58,13 @@ const LeftMenu = styled.menu`
   
   .details__answer{
     font-family: "Nunito", sans-serif;
-    font-weight: 600; 
+    font-weight: 600;
     max-height: 100px;
-    width: 45ch;
     overflow-y: scroll;
     overflow-x: hidden;
     padding-bottom:2px;
     cursor:pointer;
+    width: 400px;
   }
 
   .details__answer::-webkit-scrollbar{
@@ -73,7 +72,8 @@ const LeftMenu = styled.menu`
   }
   
   .details__question{
-    width: 420px;
+    width: 95%;
+    max-width: 420px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -82,6 +82,7 @@ const LeftMenu = styled.menu`
     font-size: .9em;
     font-weight: bold;
     font-family: 'Roboto', sans-serif;
+    margin: auto;
   }
 
   .container_clases{
@@ -116,21 +117,21 @@ const LeftMenu = styled.menu`
     text-decoration:none;
   }
    
-  @media (max-width:560px){
+  @media (max-width:800px){
     display: flex;
-    transform: ${({open}) => open ? 'translateX(175%)' : 'translateX(0)'};
     justify-content: center;
     gap:20px;
     align-items: center;
     flex-direction: column;
     padding: 30px;
-    height: 100%;
-    width: auto;
+    height: 100vh;
+    width: 100%;
     background-color: #FFFF;
     box-shadow: rgba(0, 0, 0, 0.20) 50px 10px 40px 10px;
     position:absolute;
     top: 0;
-    left:-982px;
+    left:-100%;
+    transform: ${({open}) => open ? 'translateX(100%)' : 'translateX(-100%)'};
     transition:0.3s;
 
     .menu__social-media{
@@ -164,25 +165,27 @@ const LeftMenu = styled.menu`
       text-align: center;
       padding-bottom: 10px;
       font-family: "Roboto", sans-serif;
-      font-size: 2em;
+      font-size: 1.8em;
       font-weight: 400;
     }
     
     .details__answer{
       font-family: "Nunito", sans-serif;
       font-weight: 600;
+      width: 300px;
     }
     
     .details__question{
-      width: 380px;
+      max-width: 300px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 30px;
+      height: 25px;
       list-style: none;
-      font-size: .9em;
+      font-size: .8em;
       font-weight: bold;
       font-family: 'Roboto', sans-serif;
+      margin-bottom: 2px;
     }
 
     .container_clases{
@@ -190,15 +193,15 @@ const LeftMenu = styled.menu`
       justify-content: center;
       gap: 20px;
       flex-wrap: wrap;
-      width: 500px;
+      width: 300px;
     }
 
     .clases{
       display: flex;
       flex-direction: column;
       justify-content: end;
-      width: 180px;
-      height: 180px;
+      width: 120px;
+      height: 120px;
       padding: 10px;
       background-color: #000;
     }
@@ -212,31 +215,30 @@ const LeftMenu = styled.menu`
   }
 }
 `
-
 const Menu = ({open}) => {
   return (
     <LeftMenu open={open}>
       <div className="menu">
         <div className='container_clases'>
-          <Link to='/PageClases/PageClases.jsx' className='a__links-clases'>
+          <Link to='/clases' className='a__links-clases'>
             <div className="clases">
                 <h1 className="clases__title">Classes</h1>
             </div>
           </Link>
 
-          <Link to='/PageClases/PageMilonga.jsx' className='a__links-clases'>
+          <Link to='/milonga' className='a__links-clases'>
             <div className="clases">
                 <h1 className="clases__title">Milonga</h1>
             </div>
           </Link>
 
-          <Link to='/PageClases/PageEvents.jsx' className='a__links-clases'>
+          <Link to='/events' className='a__links-clases'>
             <div className="clases">
                 <h1 className="clases__title">Events</h1>
             </div>
           </Link>
 
-          <Link to='/PageClases/PageRent.jsx' className='a__links-clases'>
+          <Link to='/rent' className='a__links-clases'>
             <div className="clases">
                 <h1 className="clases__title">Rent Studio</h1>
             </div>
