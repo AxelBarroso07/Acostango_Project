@@ -24,9 +24,7 @@ const Nav = styled.nav`
     height:100%;
   }
 
-  @media (max-width:800px){
-    height: 80px;
-  }
+
 `
 
 const NavBar = () => {
