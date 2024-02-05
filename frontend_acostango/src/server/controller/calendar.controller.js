@@ -5,6 +5,16 @@ import moment from 'moment';
 
 export const getCalendar = async (req, res) => {
     try {
+        const weekDay = [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+        ];
+
         let data = []
 
         const [ rows ] = await pool.query(`SELECT id_calendar, title, description, day, time_start, time_finish, category, workshop FROM calendar 
@@ -15,9 +25,10 @@ export const getCalendar = async (req, res) => {
             WHEN day = 'Wednesday' THEN 3
             WHEN day = 'Thursday' THEN 4
             WHEN day = 'Friday' THEN 5
-            WHEN day = 'Sunday' THEN 6
-            WHEN day = 'Saturday' THEN 7
+            WHEN day = 'Saturday' THEN 6
+            WHEN day = 'Sunday' THEN 7
             END`
+            
         );
         // console.log("rows from /calendar:", rows)
 
@@ -41,7 +52,8 @@ export const getCalendar = async (req, res) => {
         console.log("data from /calendar:", data)
 
         return res.status(200).json({
-            data
+            data,
+            weekDay,
         })
 
     } catch(error) {

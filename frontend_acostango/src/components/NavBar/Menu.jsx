@@ -220,7 +220,7 @@ const Menu = ({open}) => {
     <LeftMenu open={open}>
       <div className="menu">
         <div className='container_clases'>
-          <Link to='/clases' className='a__links-clases'>
+          <Link to='/classes' className='a__links-clases'>
             <div className="clases">
                 <h1 className="clases__title">Classes</h1>
             </div>

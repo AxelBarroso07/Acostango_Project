@@ -1,8 +1,8 @@
 import React from 'react'
-import '../Pages/PageClases.css'
+import '../Pages/PageClasses.css'
 import NavBar from '../components/NavBar/NavBar'
 
-function PageClases() {
+function PageClasses() {
   return (  
     <div>
       <NavBar/>
@@ -46,4 +46,4 @@ function PageClases() {
   )
 }
 
-export default PageClases
+export default PageClasses
