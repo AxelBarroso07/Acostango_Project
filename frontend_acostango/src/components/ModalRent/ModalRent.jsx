@@ -1,5 +1,5 @@
 import React from 'react'
-import Slider from '../Slider/Slider'
+// import Slider from '../Slider/Slider'
 import styled from 'styled-components'
 
 const ModalRent = ({estado, cambiarEstado}) => {
@@ -9,7 +9,7 @@ const ModalRent = ({estado, cambiarEstado}) => {
             <Overlay>
                 <ContenedorModal onClick={() => cambiarEstado(false)}>
                     <BotonCerrar><svg xmlns="http://www.w3.org/2000/svg" className="icon-x" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></BotonCerrar>
-                    <Slider />
+                    {/* <Slider /> */}
                 </ContenedorModal>
             </Overlay>
         }
@@ -33,8 +33,8 @@ const Overlay = styled.div`
 `;
 
 const ContenedorModal = styled.div`
-    width:70%;
-    min-height:70%;
+    width:80%;
+    height:80%;
     background-color:#FFF;
     position:relative;
     border-radius: 5px;
