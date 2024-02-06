@@ -27,12 +27,10 @@
 .container__info{
     display: flex;
     justify-content: space-between;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     padding: 50px 0px 100px;
     gap: 20px;
-    width: 100%;
-    margin: 0 auto;
 }
 
 .container__block{
@@ -79,49 +77,34 @@ tr{
     font-family: 'Nunito', sans-serif;
     font-weight: 600;
 }
-  
 
-@media (max-width:700px) {
-
-    .container__clases{
-        width: 80%;
-        margin: 0 auto;
-        padding-top: 50px;
-    }
-
-    .classes__title{
-        color: #000;
-        font-size: 2.8em;
-        font-family: 'Roboto', sans-serif;
-        font-weight: 500;
-        text-align: center;
-        padding: 10px 0px 10px;
-    }
-
-    .container__info{
-        flex-direction: column;
-        gap: 50px;
-        width: 100%;
-        margin: 0 auto;
-    }
-
-    .container__block{
-        width: 100%;
-    }
-    
+td{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #000;
+    font-size: 1.1em;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    width: 100%;
 }
 
-@media (max-width: 600px) {
+@media (max-width:900px){
     .container__info{
+        display: flex;
+        justify-content: space-between;
         flex-direction: column;
-        gap: 50px;
-        width: 100%;
-        margin: 0 auto;
-    }
-
-    .container__block{
-        width: 100%;
-        margin: 0 auto;
+        align-items: center;
+        padding: 50px 0px 100px;
+        gap: 20px;
     }
     
+    .container__block{
+        display: flex;
+        justify-content: start;
+        align-items: start;
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+    }
 }

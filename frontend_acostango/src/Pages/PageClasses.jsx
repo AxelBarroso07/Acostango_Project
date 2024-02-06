@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import '../Pages/PageClasses.css'
+import '../Pages/PageClasses2.css'
 import NavBar from '../components/NavBar/NavBar'
 
 function PageClasses() {
@@ -46,7 +46,7 @@ function PageClasses() {
 
   return (
     <div>
-      <NavBar/>
+      <NavBar />
       <div className='container__clases'>
         <div className="container__image-clases">
           <img src="../src/assets/image/image-classes.png" alt="img-classes" className='image__classes' />
@@ -55,67 +55,71 @@ function PageClasses() {
         <div className="container__info">
           {
             data && Object.keys(data).length > 0
-            && (
-              Object.keys(data).map(title => {
-                const uniqueDescriptions = [...new Set(data[title].map(item => item.description))];
+            &&
+              (
+                Object.keys(data).map(title => {
+                  const uniqueDescriptions = [...new Set(data[title].map(item => item.description))];
 
-                return (
-                  <div key={title} className="container__block">
-                    <h2 className="title__block">{title}</h2>
-                    {
-                      uniqueDescriptions.map((description, index) => {
-                        const classesWithSameDescription = data[title].filter(item => item.description === description);
+                  return (
+                    <div key={title} className="container__block">
+                      <h2 className="title__block">{title}</h2>
+                      {
+                        uniqueDescriptions.map((description, index) => {
+                          const classesWithSameDescription = data[title].filter(item => item.description === description);
 
-                        return (
-                          <>
-                            <p className="description__block">
-                              {description}
-                            </p>
-                            <div className="horario__block">
-                              <table className="table__block">
-                                {
-                                  classesWithSameDescription.map((classItem, idx) => (
-                                    <tr key={idx}>
-                                      {classItem.day}: {classItem.time12hrsStartFormat} to {classItem.time12hrsFinishFormat} {classItem.price && <span className="precio">{classItem.price}</span>}
-                                    </tr>
-                                  ))
-                                }
-                                {
-                                  classesWithSameDescription.length > 0 && (
-                                    <>
-                                      {
-                                        classesWithSameDescription[classesWithSameDescription.length - 1].block && classesWithSameDescription[classesWithSameDescription.length - 1].block !== null
-                                        &&
-                                          (
-                                            <tr>
-                                              Block of 10 classes 
-                                              {
-                                                classesWithSameDescription[classesWithSameDescription.length - 1].block
-                                                &&
-                                                  (
-                                                    <span className='precio'>
+                          return (
+                            <React.Fragment key={description}>
+                              <p className="description__block">
+                                {description}
+                              </p>
+                              <div className="horario__block">
+                                <table className="table__block">
+                                  {
+                                    classesWithSameDescription.map((classItem, idx) => (
+                                      <tr key={idx}>
+                                        <td>{classItem.day}:</td>
+                                        <td>{classItem.time12hrsStartFormat} to {classItem.time12hrsFinishFormat} {classItem.price && <span className="precio">{classItem.price}</span>}</td>
+                                      </tr>
+                                    ))
+                                  }
+                                  {
+                                    classesWithSameDescription.length > 0
+                                    &&
+                                      (
+                                        <React.Fragment key={'block'}>
+                                          {
+                                            classesWithSameDescription[classesWithSameDescription.length - 1].block && classesWithSameDescription[classesWithSameDescription.length - 1].block !== null
+                                            &&
+                                              (
+                                                <tr>
+                                                  <td colSpan="2">
+                                                    Block of 10 classes
                                                       {
-                                                        classesWithSameDescription[classesWithSameDescription.length - 1].block
-                                                      }
-                                                    </span>
-                                                  )
-                                              }
-                                            </tr>
-                                          )
-                                      }
-                                    </>
-                                  )
-                                }
-                              </table>
-                            </div>
-                          </>
-                        );
-                      })
-                    }
-                  </div>
-                );
-              })
-            )
+                                                      classesWithSameDescription[classesWithSameDescription.length - 1].block
+                                                      &&
+                                                        (
+                                                          <span className='precio'>
+                                                            {classesWithSameDescription[classesWithSameDescription.length - 1].block}
+                                                          </span>
+                                                        )
+                                                    }
+                                                  </td>
+                                                </tr>
+                                              )
+                                          }
+                                        </React.Fragment>
+                                      )
+                                  }
+                                </table>
+                              </div>
+                            </React.Fragment>
+                          );
+                        })
+                      }
+                    </div>
+                  );
+                })
+              )
           }
         </div>
       </div>

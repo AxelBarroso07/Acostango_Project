@@ -30,7 +30,6 @@ export const getCalendar = async (req, res) => {
             END`
             
         );
-        // console.log("rows from /calendar:", rows)
 
         if(rows && rows.length > 0) {
             data = rows.map(row => {
@@ -48,8 +47,6 @@ export const getCalendar = async (req, res) => {
                 };
             })
         }
-
-        // console.log("data from /calendar:", data)
 
         return res.status(200).json({
             data,
