@@ -12,11 +12,11 @@ const __dirname = dirname(__filename);
 const storage = multer.diskStorage({
     destination: (req, file, callback) => {
         const uploadDir = path.resolve(__dirname, '..', '..', 'public', 'uploads');
-        // console.log("uploadDir:", uploadDir)
+        console.log("uploadDir:", uploadDir)
         callback(null, uploadDir);
     },
     filename: (req, file, callback) => {
-        const fileName = path.parse(file.originalname).name
+        const fileName = path.parse(file.originalname).name.replace(/\s/g, '_')
         const currentDate = new Date()
         const formattedDate = currentDate.toISOString().slice(0, 10)
         const formattedTime = currentDate.toTimeString().slice(0, 8).replace(/:/g, '')

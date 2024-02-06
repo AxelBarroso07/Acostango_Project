@@ -1,4 +1,6 @@
 import { pool } from "../../../db.js";
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
 import moment from 'moment';
 
 export const getEvents = async (req, res) => {
@@ -24,7 +26,7 @@ export const getEvents = async (req, res) => {
 
             data = rows.map(row => {
 
-                const image = '../../../../../backend_acostangoAdministratorPage/src/public/' + row.image
+                const image = row.image.split('/').pop()
                 const price = row.price_formatted.replace(/\.00$/, '') + '€'
                 // console.log(image)
                 // console.log("price:", price)
@@ -45,7 +47,11 @@ export const getEvents = async (req, res) => {
             })
         }
 
-        console.log("data to events:", data)
+        // console.log("data to events:", data)
+        // const __filename = fileURLToPath(import.meta.url);
+        // const __dirname = dirname(__filename);
+        // console.log(__filename)
+        // console.log(__dirname)
 
         return res.status(200).json({
             data
