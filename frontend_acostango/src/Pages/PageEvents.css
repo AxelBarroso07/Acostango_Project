@@ -27,16 +27,19 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding: 20px 0px 100px;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 40px;
+    padding-bottom: 100px;
 }
 
 .event{
     display: flex;
     justify-content: space-between;
+    align-items: start;
     flex-direction: column;
-    width: 100%;
-    gap: 5px;
+    gap: 10px;
+    width: 45%;
 }
 
 .title__event{
@@ -67,10 +70,18 @@
     .container__event{
         display: flex;
         justify-content: space-between;
-        flex-direction: column;
         width: 100%;
-        padding: 20px 0px 100px;
+        flex-direction: column;
+        flex-wrap: wrap;
         gap: 40px;
+    }
+    .event {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
     }
 }
 
