@@ -445,7 +445,7 @@ export const postConfirmCreateEvent = async(req, res) => {
         //Compress image 2
         const imagePath2 = req.file.path.replace(/\s/g, '_'); //Image original name
         // console.log("imagePath2:", imagePath2)
-        const compressedPath2 = __dirname + '/../../../../frontend_acostango/src/assets/image/'//Directory Path for compressed images
+        const compressedPath2 = __dirname + '/../../../../frontend_acostango/src/assets/imageEvents/'//Directory Path for compressed images
         const compressedImagePath2 = compressedPath2 + req.file.filename;//Path for compressed images
         const fileExtension2 = req.file.filename.split('.').pop().toLowerCase();//File extension
         let fileCompress2 = sharp(imagePath2);//Image to compress

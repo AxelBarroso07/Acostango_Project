@@ -47,12 +47,6 @@ export const getEvents = async (req, res) => {
             })
         }
 
-        // console.log("data to events:", data)
-        // const __filename = fileURLToPath(import.meta.url);
-        // const __dirname = dirname(__filename);
-        // console.log(__filename)
-        // console.log(__dirname)
-
         return res.status(200).json({
             data
         });
