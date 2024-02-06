@@ -83,6 +83,8 @@ const LeftMenu = styled.menu`
     font-weight: bold;
     font-family: 'Roboto', sans-serif;
     margin: auto;
+    text-transform:uppercase;
+    color:#000;
   }
 
   .container_clases{

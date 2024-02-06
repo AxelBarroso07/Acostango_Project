@@ -5,8 +5,8 @@ const DropDownLanguage = () => {
   return (
     <div className='dropDownLanguage'>
         <ul className=''>
-            <li className='text__language'>EN</li>
-            <li className='text__language'>GER</li>
+            <button className='text__language'>EN</button>
+            <button className='text__language'>GER</button>
         </ul>
     </div>
   )
