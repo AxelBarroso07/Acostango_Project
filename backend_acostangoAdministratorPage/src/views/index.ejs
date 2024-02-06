@@ -45,7 +45,7 @@
             <div class="classesDB <% if (rowParse.workshop) { %> workshop-class <% } %>" id="classCard">
                 <%- rowParse.workshop === 0 ? `<span id="classtype">Class: ${rowParse.title}</span>` : rowParse.workshop === 1 ? `<span id="workshoptype">Workshop: ${rowParse.title}</span>` : `<span id="eventType">Event: ${rowParse.title}</span>` %>
                 <span><%- rowParse.description %></span>
-                <%- rowParse.image !== null ? `<img src="${rowParse.image}" id="eventImage" alt="${rowParse.title}"  />` : '' %>
+                <%- rowParse.category === 'event' && rowParse.image ? `<img src="${rowParse.image}" id="eventImage" alt="${rowParse.title}"  />` : '' %>
                 <span><%- rowParse.day %></span>
                 <%- rowParse.date !== null ? `<span>${rowParse.date}</span>` : '' %>
                 <span><%- rowParse.price %> €</span>
