@@ -203,14 +203,26 @@ export const deleteEvent = async (req, res) => {
 
         const [imageData] = await pool.query("SELECT image FROM calendar WHERE id_calendar = ?", [idCalendar]);
 
-        const imageFileCompressPath = path.join(__dirname, '../../../src/public/images', imageData[0].image)
-        console.log(imageFileCompressPath)
+        const imageFileCompressPathAdminPage = path.join(__dirname, '../../../src/public/images', imageData[0].image)
+        // console.log(imageFileCompressPathAdminPage)
+        //
+        const imageFileCompressPathPrincipalPage = path.join(__dirname, '../../../../frontend_acostango/src/assets/imageEvents', imageData[0].image)
+        // console.log(imageFileCompressPathPrincipalPage)
 
         const [ rows ] = await pool.query("DELETE FROM calendar WHERE id_calendar = ?", [idCalendar])
 
         if(rows.affectedRows > 0) {
-            await fs.promises.access(imageFileCompressPath);
-            await unlinkAsync(imageFileCompressPath);
+            try {
+                await fs.promises.access(imageFileCompressPathAdminPage);
+                await unlinkAsync(imageFileCompressPathAdminPage);
+                //
+                await fs.promises.access(imageFileCompressPathPrincipalPage);
+                await unlinkAsync(imageFileCompressPathPrincipalPage);
+            } catch(error) {
+                console.log("errorrrr")
+                console.error(error)
+            }
+
             return res.status(204).json({
                 'message': 'Event deleted successfuly'
             })
