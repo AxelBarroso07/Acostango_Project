@@ -1,5 +1,5 @@
 import { pool } from "../../../db.js";
-import path from "path";
+import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 import bcrypt from "bcrypt";
 import moment from 'moment'
@@ -60,11 +60,14 @@ export const getIndex = async (req, res) => {
                     }
                 }
 
+                const imageParse = '../public/images/' + row.image
+                // console.log("imageParse:", imageParse)
+
                 return {
                     idCalendar: row.id_calendar,
                     title: row.title,
                     description: row.description,
-                    image: row.image,
+                    image: imageParse,
                     day: row.day,
                     date: row.date_formatted,
                     location: row.location,
@@ -415,28 +418,43 @@ export const postConfirmCreateEvent = async(req, res) => {
             res.render('error', { titlePage: 'An error has occurred' });
         }
 
+        const __filename = fileURLToPath(import.meta.url);
+        const __dirname = dirname(__filename);
+        console.log("__filename:", __filename)
+        console.log()
+        console.log("__dirname:", __dirname)
+        console.log()
+
         // Compress image
         const imagePath = req.file.path; //Image original name
-
         const compressedPath = 'src/public/images/'//Directory Path for compressed images
-
         const compressedImagePath = compressedPath + req.file.filename;//Path for compressed images
-
         const fileExtension = req.file.filename.split('.').pop().toLowerCase();//File extension
-
         let fileCompress = sharp(imagePath);//Image to compress
-
         if (fileExtension === 'jpg' || fileExtension === 'jpeg') {
-            fileCompress = fileCompress.jpeg({ quality: 20 })
+            fileCompress = fileCompress.jpeg({ quality: 50 })
         } else if (fileExtension === 'png') {
-            fileCompress = fileCompress.png({ quality: 20 })
-
+            fileCompress = fileCompress.png({ quality: 50 })
         } 
         await fileCompress.toFile(compressedImagePath);
-        
-        const dirFolder = '../public/images/'
+
         const fileCompressedImage = req.file.filename
-        const dirPhotoCompressed = `${dirFolder}${fileCompressedImage}`
+        const dirPhotoCompressed = `${fileCompressedImage}`
+        // console.log("dirPhotoCompressed:", dirPhotoCompressed)
+        
+        //Compress image 2
+        const imagePath2 = req.file.path.replace(/\s/g, '_'); //Image original name
+        // console.log("imagePath2:", imagePath2)
+        const compressedPath2 = __dirname + '/../../../../frontend_acostango/src/assets/imageEvents/'//Directory Path for compressed images
+        const compressedImagePath2 = compressedPath2 + req.file.filename;//Path for compressed images
+        const fileExtension2 = req.file.filename.split('.').pop().toLowerCase();//File extension
+        let fileCompress2 = sharp(imagePath2);//Image to compress
+        if (fileExtension2 === 'jpg' || fileExtension2 === 'jpeg') {
+            fileCompress2 = fileCompress2.jpeg({ quality: 20 })
+        } else if (fileExtension2 === 'png') {
+            fileCompress2 = fileCompress2.png({ quality: 20 })
+        } 
+        await fileCompress2.toFile(compressedImagePath2);
 
         const data = {
             title: reqBody.title,
