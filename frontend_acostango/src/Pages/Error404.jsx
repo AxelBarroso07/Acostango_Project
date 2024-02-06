@@ -6,7 +6,7 @@ export default function Error404() {
     <div className="container__body-error">
       <div className="container__error">
         <p className="text__error">404.</p>
-        <span>That's an error.</span>
+        <span className="error">That's an error.</span>
         <p className="text__error-2">Page not found. The request URL was not found on this server.</p>
         <p className="text__back"><a href="/">Go Back</a></p>
       </div>
