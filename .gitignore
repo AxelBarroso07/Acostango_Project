@@ -9,7 +9,13 @@ lerna-debug.log*
 
 node_modules/
 images/
+!images/.gitKeep
+
 uploads/
+!uploads/.gitKeep
+
+imageEvents/*
+!imageEvents/.gitKeep
 dist
 dist-ssr
 *.local
