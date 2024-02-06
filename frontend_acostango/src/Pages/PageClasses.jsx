@@ -4,6 +4,7 @@ import NavBar from '../components/NavBar/NavBar'
 
 function PageClasses() {
   const [ data, setData ] = useState(null);
+  const [ allData, setAllData ] = useState(null);
   const [ error, setError ] = useState(null);
   
   const fetchDataClasses = useCallback(async () => {
@@ -23,6 +24,7 @@ function PageClasses() {
 
       const classesData = result.data
       // console.log("classData:", classesData);
+      setAllData(classesData)
 
       const groupedClasses = {};
 
@@ -44,6 +46,32 @@ function PageClasses() {
     fetchDataClasses();
   }, [fetchDataClasses]);
 
+  const separateSections = (allData) => {
+    const classes = {};
+    const workshops = {};
+  
+    // Filtrar las clases y talleres
+    allData.forEach(data => {
+      if (data.workshop) {
+        // Es un taller
+        if (!workshops[data.title]) {
+          workshops[data.title] = [];
+        }
+        workshops[data.title].push(data);
+      } else {
+        // Es una clase
+        if (!classes[data.title]) {
+          classes[data.title] = [];
+        }
+        classes[data.title].push(data);
+      }
+    });
+  
+    // Imprimir el resultado (puedes ajustar esto según tus necesidades)
+    console.log("Classes:", classes);
+    console.log("Workshops:", workshops);
+  };
+
   return (
     <div>
       <NavBar />
@@ -52,7 +80,18 @@ function PageClasses() {
           <img src="../src/assets/image/image-classes.png" alt="img-classes" className='image__classes' />
         </div>
         <h1 className="classes__title">CLASSES</h1>
-        <div className="container__info-2">
+        <div className="container__info">
+          {
+            // data && (
+            //   allData.map(data => {
+            //     console.log(data.idCalendar)
+            //     console.log("data:", data.workshop)
+            //   })
+            // ) && (console.log("allData:", allData))
+            data && (
+              separateSections(allData)
+            )
+          }
           {
             data && Object.keys(data).length > 0
             &&
@@ -61,8 +100,8 @@ function PageClasses() {
                   const uniqueDescriptions = [...new Set(data[title].map(item => item.description))];
 
                   return (
-                    <div key={title} className="container__block-2">
-                      <h2 className="title__block">{title}</h2>
+                    <div key={title} className="container__block">
+                      <h2 className="title_block">{title}</h2>
                       {
                         uniqueDescriptions.map((description, index) => {
                           const classesWithSameDescription = data[title].filter(item => item.description === description);

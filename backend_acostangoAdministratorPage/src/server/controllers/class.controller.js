@@ -14,12 +14,14 @@ export const getCreateClass = async (req, res) => {
             "Saturday",
         ];
 
-        const [rows] = await pool.query(`SELECT * FROM calendar`);
+        const [rows] = await pool.query(`SELECT * FROM calendar WHERE category = 'class'`);
         const fullDays = {};
 
         if (rows && rows.length > 0) {
             rows.forEach(row => {
                 const dayKey = row.day.toLowerCase();
+                let eventFilter = ''
+                row.category.toLowerCase() === 'class' ? eventFilter = row.category : 'a'
 
                 if (!fullDays[dayKey]) {
                     fullDays[dayKey] = {

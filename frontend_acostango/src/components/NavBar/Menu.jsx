@@ -217,7 +217,9 @@ const LeftMenu = styled.menu`
   }
 }
 `
+
 const Menu = ({open}) => {
+
   return (
     <LeftMenu open={open}>
       <div className="menu">
