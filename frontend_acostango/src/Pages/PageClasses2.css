@@ -24,22 +24,23 @@
     padding: 40px 0px 50px;
 }
 
-.container__info{
+.container__info-2{
     display: flex;
     justify-content: space-between;
+    width: 100%;
     flex-direction: row;
-    align-items: center;
-    padding: 50px 0px 100px;
-    gap: 20px;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding-bottom: 100px;
 }
 
-.container__block{
+.container__block-2{
     display: flex;
-    justify-content: start;
+    justify-content: space-between;
     align-items: start;
     flex-direction: column;
-    gap: 20px;
-    width: 100%;
+    gap: 10px;
+    width: 45%;
 }
 
 .title__block{
@@ -57,6 +58,10 @@
 }
 
 .horario__block{
+    color: #000;
+    font-size: 1em;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
     width: 100%;
 }
 
@@ -89,22 +94,56 @@ td{
     width: 100%;
 }
 
-@media (max-width:900px){
-    .container__info{
+@media (max-width:1000px){
+    .container__info-2{
         display: flex;
         justify-content: space-between;
+        width: 100%;
         flex-direction: column;
-        align-items: center;
-        padding: 50px 0px 100px;
-        gap: 20px;
+        flex-wrap: wrap;
+        gap: 40px;
     }
     
-    .container__block{
+    .container__block-2{
         display: flex;
-        justify-content: start;
+        justify-content: space-between;
         align-items: start;
         flex-direction: column;
-        gap: 20px;
+        gap: 10px;
+        width: 100%;
+    }
+    
+}
+
+@media (max-width:500px){
+    .classes__title{
+        color: #000;
+        font-size: 3em;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 500;
+        text-align: center;
+        padding: 20px 0px 30px;
+    }
+
+    .title__block{
+        color: #000;
+        font-size: 1em;
+        font-family: 'Nunito', sans-serif;
+        font-weight: 700;
+    }
+    
+    .description__block{
+        color: #000;
+        font-size: .8em;
+        font-family: 'Nunito', sans-serif;
+        font-weight: 700;
+    }
+    
+    .horario__block{
+        color: #000;
+        font-size: .8em;
+        font-family: 'Nunito', sans-serif;
+        font-weight: 700;
         width: 100%;
     }
 }
