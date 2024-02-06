@@ -21,31 +21,30 @@
         <label for="day">Select day of the week:</label>
         <select name="day" id="day" required>
             <option disabled selected hidden value="">Week day</option>
-            <% for(let i = 0; i < weekDay.length; i++) { %>
+            <% for (let i = 0; i < weekDay.length; i++) { %>
                 <% const day = weekDay[i]; %>
-                <% console.log("'day' in createClass:", day) %>
+                <% const isDayFull = fullDays && fullDays[day.toLowerCase()] && fullDays[day.toLowerCase()].classes >= 3; %>
         
-                <% const isDayFull = fullDays && fullDays[day.toLowerCase()] && fullDays[day.toLowerCase()].classes.length >= 3; %>
-                <% console.log("'isDayFull' in createClass:", isDayFull) %>
-                
-                <option value="<%- day %>" <%= isDayFull === false ? 'disabled' : '' %>>
-                    <%- day %><%- isDayFull === false ? ' (Full)' : '' %>
+                <option value="<%- day %>" <%= isDayFull ? 'disabled' : '' %>>
+                    <%- day %><%- isDayFull ? ' (Full)' : '' %>
                 </option>
             <% } %>
         </select>
         
         <br>
-        <label for="price">Price</label>
-        <input type="number" id="price" name="price">
+        <label for="price">Price: $</label>
+        <input type="number" id="price" name="price" min="0" max="999999" required>
 
-        <label for="block">Block of 10 classes:</label>
-        <input type="number" id="block" name="block">
+        <label for="block">Block of 10 classes: $</label>
+        <input type="number" id="block" name="block" min="0" max="99999" required>
 
         <label for="time_start">Time start:</label>
         <input type="time" id="time_start" name="time_start" required>
+        <label>hs</label>
         
         <label for="time_finish">Time finish:</label>
         <input type="time" id="time_finish" name="time_finish" required>
+        <label>hs</label>
 
         <label>Workshop</label>
         <br>

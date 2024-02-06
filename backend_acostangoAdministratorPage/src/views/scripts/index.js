@@ -141,6 +141,26 @@ async function deleteClass(idCalendar) {
     })
 }
 
+async function deleteEvent(idCalendar) {
+    const { host, port } = await config()
+    
+    console.log("idCalendar from deleteClass()", idCalendar);
+    
+    fetch(`http://${host}:${port}/deleteEvent/${idCalendar}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(data => {
+        console.log("Row deleted:", data)
+        location.reload();
+    })
+    .catch(error => {
+        console.log("Error to delete row:", error)
+    })
+}
+
 async function createClass(formData) {
     let port = 0
     let host = ''
