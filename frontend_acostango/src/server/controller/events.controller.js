@@ -1,27 +1,9 @@
 import { pool } from "../../../db.js";
-import path from "path";
-import { fileURLToPath } from "url";
 import moment from 'moment';
 
 export const getEvents = async (req, res) => {
     try {
-        let rowsParse = []
-        const dayFreeCheck = ''
-        const dayFreeIs = true
-        const classesPerDay = {};
-
-        const weekDay = [
-            "Sunday",
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-        ];
-
-        const currentDate = new Date();
-        const currentDay = weekDay[currentDate.getDay()];
+        let data = []
 
         const [ rows ] = await pool.query(`SELECT *, DATE_FORMAT(date, '%d/%m/%Y') AS date_formatted,
         FORMAT(price, 2) AS price_formatted FROM calendar
@@ -40,12 +22,13 @@ export const getEvents = async (req, res) => {
 
         if (rows && rows.length > 0) {
 
-            const image = '../../../../../backend_acostangoAdministratorPage/src/public/' + rows[0].image
-            const price = rows[0].price_formatted.replace(/\.00$/, '') + '€'
-            // console.log(image)
-            // console.log("price:", price)
+            data = rows.map(row => {
 
-            rowsParse = rows.map(row => {
+                const image = '../../../../../backend_acostangoAdministratorPage/src/public/' + row.image
+                const price = row.price_formatted.replace(/\.00$/, '') + '€'
+                // console.log(image)
+                // console.log("price:", price)
+
                 return {
                     idCalendar: row.id_calendar,
                     title: row.title,
@@ -62,16 +45,11 @@ export const getEvents = async (req, res) => {
             })
         }
 
-        console.log("rowsParse to events:", rowsParse)
+        console.log("data to events:", data)
 
-        // return res.status(200).render("calendar", {
-        //     positonMonth,
-        //     weekDay,
-        //     hourClassesArray,
-        //     rowsParse,
-        //     hourClassesArrayFormat,
-        //     uniqueSortedArray
-        // });
+        return res.status(200).json({
+            data
+        });
     } catch (error) {
         console.log(error);
         return res.status(500).json({

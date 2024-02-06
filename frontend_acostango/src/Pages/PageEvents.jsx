@@ -1,8 +1,41 @@
-import React from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import NavBar from '../components/NavBar/NavBar'
 import '../Pages/PageEvents.css'
 
 function PageEvents() {
+
+  const [ data, setData ] = useState(null);
+  const [ error, setError ] = useState(null);
+  
+  const fetchDataClasses = useCallback(async () => {
+    try {
+      const HOST = import.meta.env.VITE_DB_HOST;
+      const PORT = import.meta.env.VITE_PORT_SERVER;
+
+      const response = await fetch(`http://${HOST}:${PORT}/events`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const result = await response.json();
+      console.log("Data events:", result);
+
+      const eventsData = result.data
+      // console.log("eventsData:", eventsData);
+
+      setData(eventsData);
+    } catch (error) {
+      console.log(error)
+      setError(error.message);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchDataClasses();
+  }, [fetchDataClasses]);
+
   return (
     <div>
       <NavBar />
