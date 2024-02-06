@@ -44,8 +44,9 @@ export const postSendEmail = async (req, res) => {
             }
         });
     } catch(error) {
-        res.status(500).json({
-            "message": "Internal server error: " + error
+        console.log(error)
+        return res.status(500).json({
+            message: "Internal server error. We are working to solve it",
         })
     }
 }

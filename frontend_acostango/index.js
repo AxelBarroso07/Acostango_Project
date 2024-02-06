@@ -7,6 +7,7 @@ import cors from 'cors';
 import { PORT, corsOptions } from './config.js';
 
 import calendarRoutes from './src/server/routes/calendar.routes.js';
+import classesRoutes from './src/server/routes/classes.routes.js';
 import eventsRoutes from './src/server/routes/events.routes.js';
 import sendMail from './src/server/routes/sendMail.routes.js';
 
@@ -23,6 +24,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(calendarRoutes);
+app.use(classesRoutes);
 app.use(eventsRoutes);
 app.use(sendMail);
 

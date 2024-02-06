@@ -1,23 +1,15 @@
 import { pool } from "../../../db.js";
-import path from "path";
-import { fileURLToPath } from "url";
 import moment from 'moment';
 
-export const getCalendar = async (req, res) => {
+export const getClasses = async (req, res) => {
     try {
-        const weekDay = [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Sunday",
-        ];
-
         let data = []
 
-        const [ rows ] = await pool.query(`SELECT id_calendar, title, description, day, time_start, time_finish, category, workshop FROM calendar 
+        const [ rows ] = await pool.query(`SELECT id_calendar, title, description, day, price, block, time_start, time_finish, workshop, category,
+        block,
+        FORMAT(block, 2) AS block_formatted,
+        FORMAT(price, 2) AS price_formatted
+        FROM calendar
         WHERE category = 'class'
         ORDER BY CASE
             WHEN day = 'Monday' THEN 1
@@ -28,38 +20,44 @@ export const getCalendar = async (req, res) => {
             WHEN day = 'Saturday' THEN 6
             WHEN day = 'Sunday' THEN 7
             END`
-            
         );
-        // console.log("rows from /calendar:", rows)
+        // console.log("rows from /:", rows)
 
-        if(rows && rows.length > 0) {
+        if (rows && rows.length > 0) {
+            
+
             data = rows.map(row => {
+                const price = rows[0].price_formatted.replace(/\.00$/, '') + '€'
+                const block = row.block_formatted !== null ? row.block_formatted.replace(/\.00$/, '') + '€' : null
+                // console.log("price:", price)
+                // console.log("block:", block)
+
                 return {
                     idCalendar: row.id_calendar,
                     title: row.title,
                     description: row.description,
                     day: row.day,
+                    price,
+                    block,
                     timeStartParse: row.time_start,
-                    timeFinishParse: row.time_finish,
                     time12hrsStartFormat: moment(row.time_start, 'hh:mm A').format('hh:mm A'),
-                    time12hrsFinishFormat: row.time_finish !== null ? moment(row.time_finish, 'hh:mm:ss A').format('hh:mm A') : null,
+                    timeFinishParse: row.time_finish,
+                    time12hrsFinishFormat: moment(row.time_finish, 'hh:mm A').format('hh:mm A'),
                     workshop: row.workshop,
                     category: row.category
                 };
             })
         }
 
-        // console.log("data from /calendar:", data)
+        // console.log("data to classes:", data)
 
         return res.status(200).json({
-            data,
-            weekDay,
+            data
         })
-
-    } catch(error) {
-        console.log(error)
+    } catch (error) {
+        console.log(error);
         return res.status(500).json({
             message: "Internal server error. We are working to solve it",
-        })
+        });
     }
 }
