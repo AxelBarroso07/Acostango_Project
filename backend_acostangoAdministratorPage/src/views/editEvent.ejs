@@ -1,50 +1,52 @@
-<%- include('./partials/header.ejs', { titlePage: 'Edit event' }) %>
+<%- include('./partials/header.ejs', { titlePage: 'Edit event', pageStyle: 'editEvent.css' }) %>
 
-<h1>Edit event</h1>
 <div>
     <a href="/">
-        <i class="fa-solid fa-arrow-left" style="color: #0c0c0f;"> Back</i>
+        <i class="fa-solid fa-arrow-left" style="color: #0c0c0f;"></i>
     </a>
 </div>
 
 <div>
     <form id="formEventEdit" data-id="<%= data.id_calendar %>" enctype="multipart/form-data">
-        <label>Title:</label>
-        <input type="text" id="title" name="title" min="3" max="100" value="<%= data.title %>">
-        
-        <label for="description">Description:</label>
-        <br>
-        <textarea id="description" name="description" cols="50" rows="4" maxlength="100" style="resize: none;" value=""><%= data.description %></textarea>
-        <br>
-
-        <label >Select new image:</label><br>
-        <label for="image"><img src="<%= data.image %>" width="200" height="100" style="cursor: pointer;"></label>
-        <input type="file" id="image" class="image" name="image" accept="image/*" style="visibility: hidden;">
-
-        <label for="day">Select day of the week:</label><br>
-        <select name="day" id="day">
-            <option disabled selected hidden value="">Week day</option>
-            <% for(let i = 0; i < weekDay.length; i++) { %>
-                <% const day = weekDay[i]; %>
-                <option value="<%- day %>" <%= data.day === day ? 'selected' : '' %>>
-                    <%= day %>
-                </option>
-            <% } %>
-        </select>
-        <br>
-        <label for="time_start">Time start:</label>
-        <input type="time" id="time_start" name="time_start" value="<%= data.time_start %>">
-
-        <label for="date">Date:</label>
-        <input type="date" id="date" name="date" value="<%= date_formatted %>"> 
-
-        <label for="location">Location:</label>
-        <input type="text" id="location" max="50" name="location" value="<%= data.location %>">
-
-        <label for="price">Price</label>
-        <input type="number" id="price" name="price" value="<%= data.price %>">
-
-        <button type="submit">Edit event</button>
+        <h1>Edit event</h1>
+        <div class="form">
+            <label>Title:</label>
+            <input type="text" id="title" name="title" min="3" max="100" value="<%= data.title %>">
+            
+            <label for="description">Description:</label>
+            <br>
+            <textarea id="description" name="description" cols="50" rows="4" maxlength="100" style="resize: none;" value=""><%= data.description %></textarea>
+            <br>
+            
+            <label >Select new image:</label><br>
+            <label for="image"><img src="<%= data.image %>" width="200" height="100" style="cursor: pointer;"></label>
+            <input type="file" id="image" class="image" name="image" accept="image/*" style="visibility: hidden;">
+            
+            <label for="day">Select day of the week:</label><br>
+            <select name="day" id="day">
+                <option disabled selected hidden value="">Week day</option>
+                <% for(let i = 0; i < weekDay.length; i++) { %>
+                    <% const day = weekDay[i]; %>
+                    <option value="<%- day %>" <%= data.day === day ? 'selected' : '' %>>
+                        <%= day %>
+                    </option>
+                <% } %>
+            </select>
+            <br>
+            <label for="time_start">Time start:</label>
+            <input type="time" id="time_start" name="time_start" value="<%= data.time_start %>">
+            
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" value="<%= date_formatted %>"> 
+            
+            <label for="location">Location:</label>
+            <input type="text" id="location" max="50" name="location" value="<%= data.location %>">
+            
+            <label for="price">Price</label>
+            <input type="number" id="price" name="price" value="<%= data.price %>">
+            
+            <button type="submit">Edit event</button>
+        </div>
     </form>
 </div>
 <script>
