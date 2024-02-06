@@ -1,0 +1,48 @@
+.dropDownLanguage{
+    position: absolute;
+    top: 5.5rem;
+    right: 1.9rem;
+    background-color: rgba(233, 233, 233, 0.842);
+    width: 80px;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #808080;
+}
+
+.dropDownLanguage::before{
+    content: '';
+    position: absolute;
+    top: -0.7rem;
+    right: 1.7rem;
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    background-color:  rgba(233, 233, 233, 0.842);
+    border-left: 1px solid #808080;
+    border-top: 1px solid #808080 ;
+}
+
+.text__language{
+    color: #000;
+    font-size: 1.2em;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 500;
+    list-style: none;
+    padding: 2px;
+    border-radius: 4px;
+}
+
+.text__language:hover{
+    background-color:rgba(189, 189, 189, 0.842);
+}
+
+.text__language::after{
+    content: '';
+    background-color: #868686;
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    width: 80%;
+    height: 1px;
+    border-radius: 2px;
+}

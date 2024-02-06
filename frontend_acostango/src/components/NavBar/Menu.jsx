@@ -248,39 +248,38 @@ const Menu = ({open}) => {
       <div className="menu__faq">
         <h1 className='faq__title'>FAQ</h1>
         <details name="cookies" className='details__answer'>
-          <summary className='details__question'>¿QUÉ ES EL TANGO?<svg xmlns="http://www.w3.org/2000/svg" className="arrow_dropdown" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 9l6 6l6 -6" /></svg></summary>
-          El tango es una danza de pareja enlazada estrechamente surgida a partir de la fusión de danzas y ritmos afro-rioplatenses,gauchos, latinoamericanos y europeos. Es un baile característico de la región del Río de la Plata y su zona de influencia , principalmente en la ciudad de Buenos Aires, que se extendió por todo el mundo. Se caracteriza por el abrazo estrecho de la pareja, la caminata tanguera, el corte y la quebrada, y la improvisación.
+          <summary className='details__question'>What is tango?<svg xmlns="http://www.w3.org/2000/svg" className="arrow_dropdown" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 9l6 6l6 -6" /></svg></summary>
+          Tango is a closely linked couples dance that emerged from the fusion of Afro-River Plate, Gaucho, Latin American and European dances and rhythms. It is a characteristic dance of the Río de la Plata region and its area of ​​influence, mainly in the city of Buenos Aires, which spread throughout the world. It is characterized by the close embrace of the couple, the tango walk, the cut and the quebrada, and improvisation.
+        </details>
+        
+        <details name="cookies" className='details__answer'>
+          <summary className='details__question'>What are the classes like?<svg xmlns="http://www.w3.org/2000/svg" className="arrow_dropdown" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 9l6 6l6 -6" /></svg></summary>
+          Tango classes consist of different parts: for beginners we start by walking to acquire the "attitude" of this style and rhythm. We continue with technique exercises and then work with movements, to be able to practice it with its own characteristics. These classes vary according to different styles but always maintaining the same technique. Get to know this wonderful world of Tango! We will wait for you!!
+        </details>
 
+        <details name="cookies" className='details__answer'>
+          <summary className='details__question'>How to start and what time of year?<svg xmlns="http://www.w3.org/2000/svg" className="arrow_dropdown" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 9l6 6l6 -6" /></svg></summary>
+          Start with classes for beginners, no prior knowledge is necessary. You can start at any time of the year.
         </details>
         
         <details name="cookies" className='details__answer'>
-          <summary className='details__question'>¿COMÓ SON LAS CLASES?<svg xmlns="http://www.w3.org/2000/svg" className="arrow_dropdown" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 9l6 6l6 -6" /></svg></summary>
-          Las clases de Tango consta de diferentes partes: para los principiantes comenzamos con caminata para adquirir la "actitud" propia del este estilo y ritmo. Seguimos con ejercicios de técnica y luego trabajamos con movimientos, de manera de practicarlo con sus características propias. Estas clases van variando segun los distintos estilos pero siempre maneniendo la misma técnica. Conoce este maravilloso mundo del Tango!. Te esperamos!!
-        </details>
-
-        <details name="cookies" className='details__answer'>
-          <summary className='details__question'>¿COMÓ EMPEZAR Y EN QUÉ MOMENTO DEL AÑO?<svg xmlns="http://www.w3.org/2000/svg" className="arrow_dropdown" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 9l6 6l6 -6" /></svg></summary>
-          Comienza con las clases de principiantes, no es necesario tener ningún conocimiento previo. Podes empezar en cualquier época del año.
+          <summary className='details__question'>What clothing and footwear should I attend?<svg xmlns="http://www.w3.org/2000/svg" className="arrow_dropdown" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 9l6 6l6 -6" /></svg></summary>
+          It is always better to dance comfortably, so the clothes are whatever you prefer. As for footwear, if you don't have dance shoes you can bring something that doesn't stick to the floor too much, so as not to hurt your knees. To start, something with a hard (non-sticky) sole or rubber on the bottom is best.
         </details>
         
         <details name="cookies" className='details__answer'>
-          <summary className='details__question'>¿CON QUE ROPA Y CALZADO HAY QUE ASISTIR?<svg xmlns="http://www.w3.org/2000/svg" className="arrow_dropdown" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 9l6 6l6 -6" /></svg></summary>
-          Siempre es mejor bailar cómodo, así que la ropa es la que prefieras. En cuanto al calzado, si no tenés zapatos de baile podés traer algo que no se adherente mucho al piso, para no lastimar tus rodillas. Para empezar, algo con suela o goma dura (no adherente) en la base es lo mejor
+          <summary className='details__question'>Is it necessary to go as a couple?<svg xmlns="http://www.w3.org/2000/svg" className="arrow_dropdown" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 9l6 6l6 -6" /></svg></summary>
+          No, you do not need to come as a couple. Most people come alone, but you can also come as a couple. In these classes we generally always change partners so that everyone can dance, but you can also dance alone with your partner. If they are advanced classes or seminars, we suggest that you come as a couple.
         </details>
         
         <details name="cookies" className='details__answer'>
-          <summary className='details__question'>¿HACE FALTA IR EN PAREJA?<svg xmlns="http://www.w3.org/2000/svg" className="arrow_dropdown" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 9l6 6l6 -6" /></svg></summary>
-          No, no hace falta venir en pareja. La mayoría de la gente viene sola, pero también podes venir en pareja. En estas clase generalmente hacemos siempre un cambio de pareja para que todos puedan bailar, pero también puedes bailar solo con tu pareja. Si son clases de avanzados o seminarios te sugerimos que vengas en pareja.
-        </details>
-        
-        <details name="cookies" className='details__answer'>
-          <summary className='details__question'>¿HAY QUE INSCRIBIRSE ANTES?<svg xmlns="http://www.w3.org/2000/svg" className="arrow_dropdown" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 9l6 6l6 -6" /></svg></summary>
-          No hace falta inscribirse, pero te recomendamos hacerlo, te presentas al horario que figura en la clase a la que quieres asistir. Se abona al final de la clase, podes elegir abonar una clase o tomar el bloque de 10 clases.
+          <summary className='details__question'>Do i need to register before?<svg xmlns="http://www.w3.org/2000/svg" className="arrow_dropdown" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 9l6 6l6 -6" /></svg></summary>
+          It is not necessary to register, but we recommend that you do so by showing up at the time indicated in the class you wish to attend. It is paid at the end of the class, you can choose to pay for one class or take the block of 10 classes.
         </details>
       </div>
 
         <div className="menu__footer">
-          <p className="menu__disclaimer">Siganos en nuestras redes sociales!</p>
+          <p className="menu__disclaimer">Follow us on our social networks!</p>
           <div className="menu__social-media">
             <a className='a__link' href="#" target='_blank'><svg xmlns="http://www.w3.org/2000/svg" className="icon-facebook" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" /></svg></a>
             <a className='a__link' href="#" target='_blank'><svg xmlns="http://www.w3.org/2000/svg" className="icon-instagram" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4m0 4a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4z" /><path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /><path d="M16.5 7.5l0 .01" /></svg></a>
