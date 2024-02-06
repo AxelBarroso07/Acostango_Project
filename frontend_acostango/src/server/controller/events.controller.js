@@ -75,7 +75,7 @@ export const getEvents = async (req, res) => {
     } catch (error) {
         console.log(error);
         return res.status(500).json({
-            message: "Internal server error",
+            message: "Internal server error. We are working to solve it",
         });
     }
 }

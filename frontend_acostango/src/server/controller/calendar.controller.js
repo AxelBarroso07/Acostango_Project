@@ -38,7 +38,7 @@ export const getCalendar = async (req, res) => {
             })
         }
 
-        console.log("data from /calendar:", data)
+        // console.log("data from /calendar:", data)
 
         return res.status(200).json({
             data
@@ -47,7 +47,7 @@ export const getCalendar = async (req, res) => {
     } catch(error) {
         console.log(error)
         return res.status(500).json({
-            "message": "Internal server error in calendar/"
+            message: "Internal server error. We are working to solve it",
         })
     }
 }
