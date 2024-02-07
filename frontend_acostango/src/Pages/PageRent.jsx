@@ -1,14 +1,16 @@
 import React from 'react'
 import NavBar from '../components/NavBar/NavBar'
 import '../Pages/PageRent.css'
+import i18n from '../Translation/i18n.js';
+import { useTranslation } from 'react-i18next';
 
 function PageRent() {
-
+  const { t } = useTranslation('translation');
   return (
     <div>
     <NavBar/>
       <div className='container__rent'>
-        <h1 className="rent__title">RENT THE STUDIO</h1>
+        <h1 className="rent__title">{t("studio.title")}</h1>
         <div className="container__slider-images">
           <div className='container__image-1'><img src="../src/assets/image/image-rent.png" alt="img__studio-1" className='img__studio-1'/></div>
           <div className='container__column'>
@@ -21,19 +23,19 @@ function PageRent() {
         
         <div className="container__description-studio">
           <ul className='container__items'>
-            <li className='li__item'>- 30m² (6 meters wide, 5 meters long)</li>
-            <li className='li__item'>- Specialized dance floor</li>
-            <li className='li__item'>- Wall with full length mirror covering one side wide</li>
-            <li className='li__item'>- Efficient ventilation system to keep a fresh environment</li>
-            <li className='li__item'>- Soundproof walls for privacy and reduction of external noise</li>
+            <li className='li__item'>- {t("studio.features.dimensions")}</li>
+            <li className='li__item'>- {t("studio.features.floor")}</li>
+            <li className='li__item'>- {t("studio.features.wall")}</li>
+            <li className='li__item'>- {t("studio.features.ventilation")}</li>
+            <li className='li__item'>- {t("studio.features.privacity")}</li>
           </ul>
         
           <ul className='container__items'>
-            <li className='li__item'>- High quality sound system with Bluetooth connection</li>
-            <li className='li__item'>- Fixed or mobile dance bar according to needs</li>
-            <li className='li__item'>- Non-slip and safe floor for different dance styles</li>
-            <li className='li__item'>- Versatile and easily configurable furniture for different activities</li>
-            <li className='li__item'>- Ambient lighting system to create different atmospheres</li>
+            <li className='li__item'>- {t("studio.features.sound")}</li>
+            <li className='li__item'>- {t("studio.features.dancebar")}</li>
+            <li className='li__item'>- {t("studio.features.non-slip")}</li>
+            <li className='li__item'>- {t("studio.features.furniture")}</li>
+            <li className='li__item'>- {t("studio.features.atmosphere")}</li>
           </ul>
         </div>
 

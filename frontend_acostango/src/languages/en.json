@@ -1,6 +1,6 @@
 {   
     "studio": {
-        "title": "rent the studio",
+        "title": "RENT THE STUDIO",
         "features": {
             "dimensions": "30m² (6 meters wide, 5 meters long)",
             "floor": "Specialized dance floor",
@@ -14,7 +14,7 @@
             "atmosphere": "Ambient lighting system to create different atmospheres"
         }
     },"events":{
-        "title": "events"
+        "title": "EVENTS"
     },
     "milonga": {
         "title": "Afterwork milonga",
@@ -22,11 +22,11 @@
         "day": "monday"
     },
     "classes": {
-        "title": "classes",
-        "subtitle": "workshops"
+        "title": "CLASSES",
+        "subtitle": "WORKSHOPS"
     },
     "calendar": {
-        "title": "calendar",
+        "title": "CALENDAR",
         "days": {
             "monday": "monday",
             "tuesday": "tuesday",
@@ -39,10 +39,10 @@
     },
     "menu": {
         "boxes": {
-            "classes": "classes",
-            "milonga": "milonga",
-            "events": "events",
-            "rent studio": "rent studio"
+            "classes": "CLASSES",
+            "milonga": "MILONGA",
+            "events": "EVENTS",
+            "rent-studio": "RENT STUDIO"
             },
         "questions": {
             "question1": {
@@ -73,15 +73,17 @@
         "subtitle": "Follow us on our social networks!"
     },
     "contact": {
-        "title": "contact",
+        "title": "CONTACT",
         "form": {
-            "name": "name",
-            "email": "email",
-            "subject": "subject",
-            "message": "message",
-            "send": "send"
+            "name": "NAME",
+            "email": "EMAIL",
+            "subject": "SUBJECT",
+            "message": "MESSAGE",
+            "send": "SEND"
         }
     },
+    "emailmessage": "Email sent successfully",
+    "rights": "All rights reserved",
     "footer": {
         "links": {
             "maps": "maps",

@@ -45,7 +45,7 @@ function Calendar() {
 
   return (
     <section className='calendar'>
-      <h1 className='calendar__title'>CALENDAR</h1>
+      <h1 className='calendar__title'>{t("calendar.title")}</h1>
       <div className='container__calendar'>
         {weekDay &&
           weekDay.map((day, index) => (

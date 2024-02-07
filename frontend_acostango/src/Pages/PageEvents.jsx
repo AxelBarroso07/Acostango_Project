@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import NavBar from '../components/NavBar/NavBar'
 import '../Pages/PageEvents.css'
+import i18n from '../Translation/i18n.js';
+import { useTranslation } from 'react-i18next';
 
 function PageEvents() {
-
+  const { t } = useTranslation('translation');
   const [ data, setData ] = useState(null);
   const [ error, setError ] = useState(null);
   
@@ -40,7 +42,7 @@ function PageEvents() {
     <div>
       <NavBar />
       <div className="container__events">
-        <h1 className="events__title">EVENTS</h1>
+        <h1 className="events__title">{t("events.title")}</h1>
         <div className="container__event">
 
           {

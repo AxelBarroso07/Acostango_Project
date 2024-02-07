@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import '../Pages/PageClasses2.css'
 import NavBar from '../components/NavBar/NavBar'
+import i18n from '../Translation/i18n.js';
+import { useTranslation } from 'react-i18next';
 
 function PageClasses() {
+  const { t } = useTranslation('translation');
   const [ data, setData ] = useState(null);
   const [ allData, setAllData ] = useState(null);
 
@@ -77,7 +80,7 @@ function PageClasses() {
         <div className="container__image-clases">
           <img src="../src/assets/image/image-classes.png" alt="img-classes" className="image__classes" />
         </div>
-        <h1 className="classes__title">CLASSES</h1>
+        <h1 className="classes__title">{t("classes.title")}</h1>
         <div className="container__info">
           {groupClassWorkshop.classes &&
             Object.keys(groupClassWorkshop.classes).length > 0 &&
@@ -131,7 +134,7 @@ function PageClasses() {
             })}
           </div>
 
-          <h1 className="classes__title">WORKSHOPS</h1>
+          <h1 className="classes__title">{t("classes.subtitle")}</h1>
           <div className="container__info">
             {groupClassWorkshop.workshops &&
               Object.keys(groupClassWorkshop.workshops).length > 0 &&

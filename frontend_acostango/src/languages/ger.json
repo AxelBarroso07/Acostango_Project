@@ -1,6 +1,6 @@
 {
     "studio": {
-        "title": "Studio mieten",
+        "title": "STUDIO MIETEN",
         "features": {
             "dimensions": "30m² (6 meter breit, 5 meter lang)",
             "floor": "spezialisierte tanzfläche",
@@ -14,18 +14,18 @@
             "atmosphere": "Ambiente-Beleuchtungssystem zur Schaffung unterschiedlicher Atmosphären"
         }
     },"events":{
-        "title": "veranstaltungen"
+        "title": "VERANSTALTUNGEN"
     },"milonga": {
         "title": "Afterwork milonga",
         "decription": "Entspannen Sie sich nach einem anstrengenden Arbeitstag zum Rhythmus der Musik auf unserer Milonga. Tanzen Sie nach der Arbeit und tanken Sie neue Energie für den nächsten Tag. Genießen und entspannen Sie sich, ruhen Sie sich anschließend früh aus und starten Sie mit neuer Vitalität in den nächsten Tag",
         "day": "montag"
     },
     "classes": {
-        "title": "klassen",
-        "subtitle": "werkstätten"
+        "title": "KLASSEN",
+        "subtitle": "WERKSTÄTTEN"
     },
     "calendar": {
-        "title": "kalender",
+        "title": "KALENDER",
         "days": {
             "monday": "montag",
             "tuesday": "dienstag",
@@ -38,10 +38,10 @@
     },
     "menu": {
         "boxes": {
-            "classes": "Klassen",
-            "milonga": "milonga",
-            "events": "veranstaltungen",
-            "rent studio": "Studio mieten"
+            "classes": "KLASSEN",
+            "milonga": "MILONGA",
+            "events": "VERANSTALTUNGEN",
+            "rent-studio": "STUDIO MIETEN"
             },
         "questions": {
             "question1": {
@@ -69,18 +69,20 @@
                 "answer": "Eine Anmeldung ist nicht erforderlich, wir empfehlen Ihnen jedoch, zu der in dem Kurs, an dem Sie teilnehmen möchten, angegebenen Zeit zu erscheinen. Die Bezahlung erfolgt am Ende des Kurses. Sie können wählen, ob Sie einen Kurs bezahlen oder den Block mit 10 Kursen belegen möchten"
             }
         },
-        "subtitle": "Folgen Sie uns auf unseren sozialen Netzwerken!!"
+        "subtitle": "Folgen sie uns auf unseren sozialen netzwerken!!"
     },
     "contact": {
-        "title": "kontakt",
+        "title": "KONTAKT",
         "form": {
-            "name": "name",
-            "email": "email",
-            "subject": "thema",
-            "message": "nachricht",
-            "send": "senden"
+            "name": "NAME",
+            "email": "EMAIL",
+            "subject": "THEMA",
+            "message": "NACHRICHT",
+            "send": "SENDEN"
         }
     },
+    "emailmessage": "Email wurde erfolgreich Versendet",
+    "rights": "Alle Rechte vorbehalten",
     "footer": {
         "links": {
             "maps": "karten",
