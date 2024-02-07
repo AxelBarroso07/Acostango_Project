@@ -19,7 +19,6 @@ const LeftMenu = styled.menu`
   transform: ${({open}) => open ? 'translateX(102%)' : 'translateX(-100%)'};
   transition:1s;
 
-
   .menu__social-media{
     display: flex;
     justify-content: space-around;
@@ -65,6 +64,34 @@ const LeftMenu = styled.menu`
     padding-bottom:2px;
     cursor:pointer;
     width: 400px;
+  }
+
+  .classes{
+    background-image:linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)), url(../src/assets/image/classes.jpg)  ;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .milonga{
+    background-image:linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)), url(../src/assets/image/milonga.jpg)  ;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .events{
+    background-image:linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)), url(../src/assets/image/events.jpg)  ;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .rent{
+    background-image:linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)), url(../src/assets/image/rent.jpg)  ;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
   }
 
   .details__answer::-webkit-scrollbar{
@@ -225,25 +252,25 @@ const Menu = ({open}) => {
       <div className="menu">
         <div className='container_clases'>
           <Link to='/classes' className='a__links-clases'>
-            <div className="clases">
+            <div className="clases classes">
                 <h1 className="clases__title">Classes</h1>
             </div>
           </Link>
 
           <Link to='/milonga' className='a__links-clases'>
-            <div className="clases">
+            <div className="clases milonga">
                 <h1 className="clases__title">Milonga</h1>
             </div>
           </Link>
 
           <Link to='/events' className='a__links-clases'>
-            <div className="clases">
+            <div className="clases events">
                 <h1 className="clases__title">Events</h1>
             </div>
           </Link>
 
           <Link to='/rent' className='a__links-clases'>
-            <div className="clases">
+            <div className="clases rent">
                 <h1 className="clases__title">Rent Studio</h1>
             </div>
           </Link>
