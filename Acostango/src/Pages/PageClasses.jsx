@@ -135,7 +135,7 @@ function PageClasses() {
           </div>
 
           <h1 className="classes__title">{t("classes.subtitle")}</h1>
-          <div className="container__info">
+          <div className="container__info-2">
             {groupClassWorkshop.workshops &&
               Object.keys(groupClassWorkshop.workshops).length > 0 &&
               Object.keys(groupClassWorkshop.workshops).map(title => {
