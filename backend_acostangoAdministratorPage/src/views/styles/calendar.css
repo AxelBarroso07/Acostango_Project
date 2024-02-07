@@ -269,6 +269,11 @@ table td{
     border: 2px solid black;
 }
 
+#eventImage{
+    width: 30%;
+    height: 40%;
+}
+
 
 @media (max-width:1350px) {
     .divClassesDB {

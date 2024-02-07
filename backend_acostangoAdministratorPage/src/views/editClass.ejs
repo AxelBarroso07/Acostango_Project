@@ -11,36 +11,36 @@
         <h1>Edit class</h1>
         <div class="form">
             <div class="primary__rows">
-                <input type="text" id="title" name="title" min="3" max="40" value="<%= data.title %>" required placeholder="TITLE"> 
-                
-                <select name="day" id="day" required placeholder="SELECT DAY">
-                    <option disabled selected hidden value="">Week day</option>
-                    <% for(let i = 0; i < weekDay.length; i++) { %>
-                        <% const day = weekDay[i]; %>
-                
-                        <% const isDayFull = fullDays && fullDays[day.toLowerCase()] && fullDays[day.toLowerCase()].classes.length >= 3; %>
-                        
-                        <option value="<%- day %>" <%= data.day === day ? 'selected' : '' %> <%= isDayFull === false ? 'disabled' : '' %>>
-                            <%- day %><%- isDayFull === false ? ' (Full)' : '' %>
-                        </option>
-                    <% } %>
-                </select>
+                <div class="columns">
+                    <input type="text" id="title" name="title" min="3" max="40" value="<%= data.title %>" required placeholder="TITLE"> 
+                    
+                    <select name="day" id="day" required placeholder="SELECT DAY">
+                        <option disabled selected hidden value="">Week day</option>
+                        <% for(let i = 0; i < weekDay.length; i++) { %>
+                            <% const day = weekDay[i]; %>
+                    
+                            <% const isDayFull = fullDays && fullDays[day.toLowerCase()] && fullDays[day.toLowerCase()].classes.length >= 3; %>
+                            
+                            <option value="<%- day %>" <%= data.day === day ? 'selected' : '' %> <%= isDayFull === false ? 'disabled' : '' %>>
+                                <%- day %><%- isDayFull === false ? ' (Full)' : '' %>
+                            </option>
+                        <% } %>
+                    </select>
+                </div>
+
+                <textarea id="description" name="description" cols="50" rows="4" style="resize: none;" required placeholder="DESCRIPTION"><%= data.description %></textarea>
             </div>
 
             <div class="second__rows-column">
-                <textarea id="description" name="description" cols="50" rows="4" style="resize: none;" required placeholder="DESCRIPTION"><%= data.description %></textarea>
                 
-                <div>
+                <div class="precio__block">
                     <input type="number" id="price" name="price" value="<%= data.price %>" min="0" max="999999" placeholder="PRICE">
                     
                     <input type="number" id="block" name="block" value="<%= data.block %>" min="0" max="99999" placeholder="BLOCK OF 10 CLASSES">
                 </div>
-            </div>
-
-            <div class="thirty__row-column">
+                
                 <div class="workshop">
                     <label>Workshop</label>
-                
                     <div class="optionYes">
                        <label for="workshopOptionTrue">Yes</label>
                        <input type="radio" id="workshopOptionTrue" value="true" name="workshop" <%= data.workshop === 1 ? 'checked' : '' %> required>
@@ -62,11 +62,9 @@
                         <input type="time" id="time_finish" name="time_finish" value="<%= data.time_finish %>">
                     </div>
                 </div>
+
             </div>
-            
-           
-            
-            
+
             <button type="submit" class="btn-Edit">Edit class</button>
         </div>
     </form>
