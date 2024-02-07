@@ -14,11 +14,69 @@ body {
     align-items: center;
 }
 
-/*all calendar section*/
+/*index*/
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    padding: 20px;
+    gap: 10px;
+    width: 100%;
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+#newClass{
+    color: white;
+    padding: 10px;
+    background-color: #000000;
+    border-radius: 5px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+#newClass:hover{
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    font-weight: 700;
+    text-decoration: none;
+    border: 1px solid #000;
+    transition: .8s;
+}
+
+#newEvent{
+    color: white;
+    padding: 10px;
+    background-color: #000000;
+    border-radius: 5px;
+    font-weight: 700;
+    text-decoration: none;
+    
+}
+
+#newEvent:hover{
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    font-weight: 700;
+    text-decoration: none;
+    border: 1px solid #000;
+    transition: .8s;
+}
 
 h1{
+    font-size: 2em;
     color: #000000;
-    margin-bottom: 30px;
 }
 
 .divClassesDB {
@@ -26,30 +84,132 @@ h1{
     flex-wrap: wrap;
     justify-content: space-around;
     width: 90%;
-    gap: 20px;
+    gap: 10px;
+    padding-bottom: 30px;
 }
 
 .classesDB {
-    width: 300px;
-    height: 500px;
+    width: 30%;
+    height: 400px;
     border-radius: 5px;
     padding: 10px;
-    color: black;
+    color: rgb(255, 255, 255);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
-    background-color: #e4e4e4;
-    text-align: center;
+    background-color: #000000;
+    gap: 10px;
+}
+
+.buttons__bd{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+}
+
+.deleteButton{
+    color: rgb(0, 0, 0);
+    background-color: #ffffff;
+    padding: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
+    cursor: pointer;
+    border: none;
+    width: 50px;
+    height: 50px;
+}
+
+.icon-trash{
+    width: 100%;
+    height: 100%;
+}
+
+.deleteButton:hover{
+    color: rgb(255, 255, 255);
+    background-color: #313131;
+    padding: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
+    cursor: pointer;
+    border: none;
+    transition: .6s;
+}
+
+#classedit{
+    color: rgb(0, 0, 0);
+    background-color: #ffffff;
+    padding: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
+    cursor: pointer;
+    border: none;
+    width: 50px;
+    height: 50px;
+}
+
+.icon-pencil{
+    width: 100%;
+    height: 100%;
+}
+
+#classedit:hover{
+    color: rgb(255, 255, 255);
+    background-color: #313131;
+    padding: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
+    cursor: pointer;
+    border: none;
+    transition: .6s;
+}
+
+.bd__title{
+    width: 100%;
 }
 
 #classtype{
     font-weight: 700;
+    text-transform: uppercase;
+    font-size: 1.2em;
+}
+
+.bd__description span{
+    font-weight: 500;
+    font-size: .9em;
+}
+.bd__dia{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    gap: 10px;
+    width: 100%;
+}
+
+.bd__horario{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 10px;
+    width: 100%;
 }
 
 .dialog{
     position: absolute;
-    top: 50;
+    top: 50%;
     width: max-content;
     margin: auto;
     padding: 30px;
@@ -81,11 +241,19 @@ h1{
 }
 
 .workshop-class{
-    background-color: rgb(160, 160, 160);
+    background-color: rgb(31, 31, 31);
 }
 
 #workshoptype{
     font-weight: 700;
+}
+
+.buttons__delete{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
 }
 
 table{
@@ -101,113 +269,60 @@ table td{
     border: 2px solid black;
 }
 
-#classedit{
-    text-decoration: none;
-    color: black;
-    padding: 5px;
-    border: 1px solid black;
-    border-radius: 5px;
-}
-
-#classedit:hover{
-    color: white;
-    border: 1px solid black;
-    background-color: black;
-}
-
-.deleteButton{
-    color: white;
-    padding: 5px;
-    background-color: #181818;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: 400;
-    font-family: 'Poppins', sans-serif;
-    cursor: pointer;
-    border: none;
-}
-
-#newClass{
-    color: white;
-    padding: 10px;
-    background-color: #181818;
-    border-radius: 5px;
-    font-weight: 700;
-    text-decoration: none;
-    
-}
-
-#newEvent{
-    color: white;
-    padding: 10px;
-    background-color: #494949;
-    border-radius: 5px;
-    font-weight: 700;
-    text-decoration: none;
-    
-}
-
-/*all create class section*/
-
-label{
-    color: #000000;
-    font-size: 1.2em;
-    font-weight: 600;
-}
-
-input{
-    font-size: 1em;
-    font-family: 'Poppins', sans-serif;
-}
-
-select{
-    font-size: 1em;
-    font-family: 'Poppins', sans-serif;
-}
-
-#createClassButton{
-    color: white;
-    padding: 5px;
-    background-color: #181818;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: 400;
-    font-family: 'Poppins', sans-serif;
-    cursor: pointer;
-    border: none;
-    font-size: 1.2em;
-    margin-top: 10px;
-    padding: 5px;
-}
-
-#createEventButton{
-    color: white;
-    background-color: #181818;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: 400;
-    font-family: 'Poppins', sans-serif;
-    cursor: pointer;
-    border: none;
-    font-size: 1.2em;
-    margin-top: 10px;
-    padding: 5px;
-}
-
-#eventType{
-    font-weight: 700;
-}
-
 #eventImage{
-    height: 100px;
-    width: max-content;
+    width: 30%;
+    height: 40%;
 }
 
-.createButtons{
-    width: max-content;
-    display: flex;
-    flex-direction: row;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    gap: 10px;
+
+@media (max-width:1350px) {
+    .divClassesDB {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        width: 90%;
+        gap: 10px;
+        padding-bottom: 30px;
+    }
+    
+    .classesDB {
+        width: 40%;
+        height: 400px;
+        border-radius: 5px;
+        padding: 10px;
+        color: rgb(255, 255, 255);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        background-color: #000000;
+        gap: 10px;
+    }
 }
+
+@media (max-width:1000px) {
+    .divClassesDB {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        width: 90%;
+        gap: 10px;
+        padding-bottom: 30px;
+    }
+    
+    .classesDB {
+        width: 80%;
+        height: 400px;
+        border-radius: 5px;
+        padding: 10px;
+        color: rgb(255, 255, 255);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        background-color: #000000;
+        gap: 10px;
+    }
+}
+
+/*--index--*/

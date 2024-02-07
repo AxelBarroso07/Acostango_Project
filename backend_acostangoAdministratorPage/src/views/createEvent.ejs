@@ -1,49 +1,58 @@
-<%- include('./partials/header.ejs', { titlePage: 'Create Event' }) %>
+<%- include('./partials/header.ejs', { titlePage: 'Create Event', pageStyle: 'createEvents.css' }) %>
 
-<h1>New Event</h1>
 
-<div>
+<div class="header">
     <a href="/">
-        <i class="fa-solid fa-arrow-left" style="color: #0c0c0f"> Back</i>
+        <i class="fa-solid fa-arrow-left" style="color: #0c0c0f"> </i>
     </a>
 </div>
 
 <div>
     <form action="/confirmCreateEvent" id="formEvent" enctype="multipart/form-data" method="POST">
-        <label>Title:</label>
-        <input type="text" id="title" name="title" min="3" max="100" value="" required>
-        
-        <label for="description">Description:</label>
-        <br>
-        <textarea id="description" name="description" cols="50" rows="4" maxlength="100" style="resize: none;" value="" required></textarea>
-        <br>
+        <h1>New Event</h1>
+        <div class="form">
+            <div class="primary__rows">
+                <input type="text" id="title" name="title" min="3" max="100" value="" required placeholder="TITLE">
+                
+                <textarea id="description" name="description" cols="50" rows="4" maxlength="100" style="resize: none;" value="" required placeholder="DESCRIPTION"></textarea>
+                
+                <select name="day" id="day" required placeholder="SELECT DAY">
+                    <option disabled selected hidden value="">Week day</option>
+                    <% for(let i = 0; i < weekDay.length; i++) {%>
+                        <option value="<%- weekDay[i] %>">
+                            <%- weekDay[i] %>
+                        </option>
+                        <% } %>
+                </select>
+            </div>
 
-        <label for="image">Select Image:</label>
-        <input type="file" id="image" class="image" name="image" accept="image/*" required>
-        
-        <label for="day">Select day of the week:</label><br>
-        <select name="day" id="day" required>
-            <option disabled selected hidden value="">Week day</option>
-            <% for(let i = 0; i < weekDay.length; i++) {%>
-                <option value="<%- weekDay[i] %>">
-                    <%- weekDay[i] %>
-                </option>
-            <% } %>
-        </select>
-        <br>
-        <label for="time_start">Time start:</label>
-        <input type="time" id="time_start" name="time_start" required>
+            <div class="second__rows-column">
+                <input type="text" id="location" max="50" name="location" required placeholder="LOCATION">
+                    
+                <input type="number" id="price" name="price" required placeholder="PRICE">
+                    
+                    
+                <div class="select__image">
+                    <label for="image">Select Image:</label>
+                    <input type="file" id="image" class="image" name="image" accept="image/*" >
+                </div>
+            </div>
 
-        <label for="date">Date:</label>
-        <input type="date" id="date" name="date" required>
-
-        <label for="location">Location:</label>
-        <input type="text" id="location" max="50" name="location" required>
-
-        <label for="price">Price</label>
-        <input type="number" id="price" name="price" required>
-
-        <button type="submit" id="createEventButton">Create</button>
+            <div class="hora__date">
+                <div class="horaStart">
+                    <label for="time_start">Time start:</label>
+                    <input type="time" id="time_start" name="time_start" required>
+                </div>
+            
+                <div class="date">
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" name="date" required >
+                </div>
+            </div>
+            
+            
+            <button type="submit" id="createEventButton">Create</button>
+        </div>
     </form>
 </div>
 

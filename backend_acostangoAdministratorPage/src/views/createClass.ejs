@@ -1,61 +1,71 @@
-<%- include('./partials/header.ejs', { titlePage: 'Create Class' }) %>
+<%- include('./partials/header.ejs', { titlePage: 'Create Class', pageStyle: 'createClass.css' }) %>
 
-<h1>New Class</h1>
-
-<div>
+<div class="header">
     <a href="/">
-        <i class="fa-solid fa-arrow-left" style="color: #0c0c0f;"> Back</i>
+        <i class="fa-solid fa-arrow-left" style="color: #0c0c0f;"></i>
     </a>
+    
 </div>
 
 <div>
     <form action="/confirmCreateClass" id="formClass" method="POST">
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" min="3" max="40" value="" required>
+        <h1>New Class</h1>
+        <div class="form">
+            <div class="primary__rows">
+                <input type="text" id="title" name="title" min="3" max="40" value="" required placeholder="TITLE">
+                
+                <div class="description">
+                    <textarea id="description" name="description" cols="50" rows="4" style="resize: none;" value="" required placeholder="DESCRIPTION"></textarea>
+                </div>
+                
+                <select name="day" id="day" required>
+                    <option disabled selected hidden value="">SELECT DAY</option>
+                    <% for (let i = 0; i < weekDay.length; i++) { %>
+                        <% const day = weekDay[i]; %>
+                        <% const isDayFull = fullDays && fullDays[day.toLowerCase()] && fullDays[day.toLowerCase()].classes >= 3; %>
+                
+                        <option value="<%- day %>" <%= isDayFull ? 'disabled' : '' %>>
+                            <%- day %><%- isDayFull ? ' (Full)' : '' %>
+                        </option>
+                    <% } %>
+                </select>
+            </div>
 
-        <label for="description">Description:</label>
-        <br>
-        <textarea id="description" name="description" cols="50" rows="4" style="resize: none;" value="" required></textarea>
-        <br>
-        
-        <label for="day">Select day of the week:</label>
-        <select name="day" id="day" required>
-            <option disabled selected hidden value="">Week day</option>
-            <% for (let i = 0; i < weekDay.length; i++) { %>
-                <% const day = weekDay[i]; %>
-                <% const isDayFull = fullDays && fullDays[day.toLowerCase()] && fullDays[day.toLowerCase()].classes >= 3; %>
-        
-                <option value="<%- day %>" <%= isDayFull ? 'disabled' : '' %>>
-                    <%- day %><%- isDayFull ? ' (Full)' : '' %>
-                </option>
-            <% } %>
-        </select>
-        
-        <br>
-        <label for="price">Price: $</label>
-        <input type="number" id="price" name="price" min="0" max="999999" required>
-
-        <label for="block">Block of 10 classes: $</label>
-        <input type="number" id="block" name="block" min="0" max="99999" required>
-
-        <label for="time_start">Time start:</label>
-        <input type="time" id="time_start" name="time_start" required>
-        <label>hs</label>
-        
-        <label for="time_finish">Time finish:</label>
-        <input type="time" id="time_finish" name="time_finish" required>
-        <label>hs</label>
-
-        <label>Workshop</label>
-        <br>
-        
-        <label for="workshopOptionTrue">Yes</label>
-        <input type="radio" id="workshopOptionTrue" value="true" name="workshop" required>
-
-        <label for="workshopOptionFalse">No</label>
-        <input type="radio" id="workshopOptionFalse" value="false" name="workshop" checked required>
-
-        <button type="submit" id="createClassButton">Create</button>
+            <div class="second__rows-column">
+                <input type="number" id="price" name="price" min="0" max="999999" required placeholder="PRICE">
+                
+                <input type="number" id="block" name="block" min="0" max="99999" required placeholder="BLOCK OF 10 CLASSES">
+                
+                <div class="hora">
+                    <div class="horaStart">
+                        <label for="time_start">Time start:</label>
+                        <input type="time" id="time_start" name="time_start" required>
+                        <label>hs</label>
+                    </div>
+                    
+                    <div class="horaFinish"> 
+                        <label for="time_finish">Time finish:</label>
+                        <input type="time" id="time_finish" name="time_finish" required>
+                        <label>hs</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="workshop">
+                <label>Workshop</label>
+                <div class="optionYes">
+                    <label for="workshopOptionTrue">Yes</label>
+                    <input type="radio" id="workshopOptionTrue" value="true" name="workshop" required>
+                </div>
+                
+               <div class="optionNo">
+                 <label for="workshopOptionFalse">No</label>
+                 <input type="radio" id="workshopOptionFalse" value="false" name="workshop" checked required>
+               </div>
+            </div>
+            
+            <button type="submit" id="createClassButton">Create</button>
+        </div>
     </form>
 </div>
 

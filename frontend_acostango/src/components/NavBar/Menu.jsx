@@ -21,7 +21,6 @@ const LeftMenu = styled.menu`
   transform: ${({open}) => open ? 'translateX(102%)' : 'translateX(-100%)'};
   transition:1s;
 
-
   .menu__social-media{
     display: flex;
     justify-content: space-around;
@@ -67,6 +66,34 @@ const LeftMenu = styled.menu`
     padding-bottom:2px;
     cursor:pointer;
     width: 400px;
+  }
+
+  .classes{
+    background-image:linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)), url(../src/assets/image/classes.jpg)  ;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .milonga{
+    background-image:linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)), url(../src/assets/image/milonga.jpg)  ;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .events{
+    background-image:linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)), url(../src/assets/image/events.jpg)  ;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .rent{
+    background-image:linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)), url(../src/assets/image/rent.jpg)  ;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
   }
 
   .details__answer::-webkit-scrollbar{

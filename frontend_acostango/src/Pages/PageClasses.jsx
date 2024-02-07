@@ -87,8 +87,8 @@ function PageClasses() {
             Object.keys(groupClassWorkshop.classes).map(title => {
               const uniqueDescriptions = [...new Set(groupClassWorkshop.classes[title].map(item => item.description))];
               return (
-                <div key={title} className="container__block">
-                  <h2 className="title_block">{title}</h2>
+                <div key={title} className="container__block-2">
+                  <h2 className="title__block">{title}</h2>
                   {uniqueDescriptions.map((description, index) => {
                     const classesWithSameDescription = groupClassWorkshop.classes[title].filter(
                       item => item.description === description
@@ -141,8 +141,8 @@ function PageClasses() {
               Object.keys(groupClassWorkshop.workshops).map(title => {
                 const uniqueDescriptions = [...new Set(groupClassWorkshop.workshops[title].map(item => item.description))];
                 return (
-                  <div key={title} className="container__block">
-                    <h2 className="title_block">{title}</h2>
+                  <div key={title} className="container__block-2">
+                    <h2 className="title__block">{title}</h2>
                     {uniqueDescriptions.map((description, index) => {
                       const workshopsWithSameDescription = groupClassWorkshop.workshops[title].filter(
                         item => item.description === description
