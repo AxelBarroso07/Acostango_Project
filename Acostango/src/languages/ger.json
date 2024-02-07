@@ -1,0 +1,96 @@
+{
+    "studio": {
+        "title": "STUDIO MIETEN",
+        "features": {
+            "dimensions": "30m² (6 meter breit, 5 meter lang)",
+            "floor": "spezialisierte tanzfläche",
+            "wall": "wand mit ganzkörperspiegel, der eine seite breit abdeckt",
+            "ventilation": "effizientes belüftungssystem für eine frische umgebung",
+            "privacity": "schalldichte wände für privatsphäre und reduzierung von außenlärm",
+            "sound": "hochwertiges soundsystem mit bluetooth-verbindung" ,
+            "dancebar": "feste oder mobile tanzstange je nach bedarf",
+            "non-slip": "rutschfester und sicherer boden für verschiedene tanzstile",
+            "furniture": "vielseitige und leicht konfigurierbare möbel für verschiedene aktivitäten",
+            "atmosphere": "Ambiente-Beleuchtungssystem zur Schaffung unterschiedlicher Atmosphären"
+        }
+    },
+    "events":{
+        "title": "VERANSTALTUNGEN"
+    },
+    "milonga": {
+        "title": "AFTERWORK MILONGA",
+        "description": "Entspannen Sie sich nach einem anstrengenden Arbeitstag zum Rhythmus der Musik auf unserer Milonga. Tanzen Sie nach der Arbeit und tanken Sie neue Energie für den nächsten Tag. Genießen und entspannen Sie sich, ruhen Sie sich anschließend früh aus und starten Sie mit neuer Vitalität in den nächsten Tag",
+        "day": "Montag"
+    },
+    "classes": {
+        "title": "KLASSEN",
+        "subtitle": "WERKSTÄTTEN"
+    },
+    "calendar": {
+        "title": "KALENDER",
+        "days": {
+            "monday": "montag",
+            "tuesday": "dienstag",
+            "wednesday": "mittwoch",
+            "thursday": "donnerstag",
+            "friday": "freitag",
+            "saturday": "samstag",
+            "sunday": "sonntag"
+        }
+    },
+    "menu": {
+        "boxes": {
+            "classes": "KLASSEN",
+            "milonga": "MILONGA",
+            "events": "VERANSTALTUNGEN",
+            "rent-studio": "STUDIO MIETEN"
+        },
+        "questions": {
+            "question1": {
+                "question": "Was ist Tango?",
+                "answer": "Tango ist ein eng miteinander verbundener Paartanz, der aus der Fusion von Afro-River-Plate-, Gaucho-, lateinamerikanischen und europäischen Tänzen und Rhythmen entstanden ist. Es handelt sich um einen charakteristischen Tanz der Region Río de la Plata und ihres Einflussgebiets, vor allem in der Stadt Buenos Aires, der sich auf der ganzen Welt verbreitete. Es zeichnet sich durch die enge Umarmung des Paares, den Tango-Gang, den Schnitt und die Quebrada sowie Improvisation aus"
+            },
+            "question2": {
+                "question": "Como sind die Klassen?",
+                "answer": "Der Tangounterricht besteht aus verschiedenen Teilen: Für Anfänger beginnen wir mit dem Gehen, um die „Einstellung“ dieses Stils und Rhythmus zu erlernen. Wir machen weiter mit Technikübungen und arbeiten dann mit Bewegungen, um diese mit ihren Eigenheiten üben zu können. Diese Kurse variieren je nach Stil, behalten aber immer die gleiche Technik bei. Lernen Sie die wunderbare Welt des Tangos kennen! Wir werden auf dich warten!!"
+            },
+            "question3": {
+                "question": "Wie fange ich an und zu welcher Jahreszeit?",
+                "answer": "Beginnen Sie mit Kursen für Anfänger, Vorkenntnisse sind nicht erforderlich. Sie können zu jeder Jahreszeit beginnen"
+            },
+            "question4": {
+                "question": "Welche Kleidung und Schuhe sollte ich besuchen?",
+                "answer": "Es ist immer besser, bequem zu tanzen, also wählen Sie die Kleidung, die Sie bevorzugen. Was das Schuhwerk betrifft: Wenn Sie keine Tanzschuhe haben, können Sie etwas mitbringen, das nicht zu sehr am Boden klebt, damit Ihre Knie nicht verletzt werden. Für den Anfang eignet sich am besten etwas mit einer harten (nicht klebrigen) Sohle oder Gummi an der Unterseite"
+            },
+            "question5": {
+                "question": "Ist es notwendig, als Paar zu reisen?",
+                "answer": "Nein, Sie müssen nicht als Paar kommen. Die meisten Leute kommen alleine, aber Sie können auch zu zweit kommen. In diesen Kursen wechseln wir grundsätzlich immer den Partner, sodass jeder tanzen kann, Sie können aber auch alleine mit Ihrem Partner tanzen. Wenn es sich um fortgeschrittene Kurse oder Seminare handelt, empfehlen wir Ihnen, als Paar zu kommen"
+            },
+            "question6": {
+                "question": "Muss ich mich vorher registrieren?",
+                "answer": "Eine Anmeldung ist nicht erforderlich, wir empfehlen Ihnen jedoch, zu der in dem Kurs, an dem Sie teilnehmen möchten, angegebenen Zeit zu erscheinen. Die Bezahlung erfolgt am Ende des Kurses. Sie können wählen, ob Sie einen Kurs bezahlen oder den Block mit 10 Kursen belegen möchten"
+            }
+        },
+        "subtitle": "Folgen sie uns auf unseren sozialen netzwerken!!"
+    },
+    "contact": {
+        "title": "KONTAKT",
+        "form": {
+            "name": "NAME",
+            "email": "EMAIL",
+            "subject": "THEMA",
+            "message": "NACHRICHT",
+            "send": "SENDEN"
+        }
+    },
+    "emailmessage": "Email wurde erfolgreich Versendet",
+    "rights": "Alle Rechte vorbehalten",
+    "footer": {
+        "links": {
+            "maps": "karten",
+            "whatsapp": "whatsapp",
+            "call": "anruf",
+            "email": "email"
+        }
+    }
+}
