@@ -132,14 +132,14 @@ function PageClasses() {
           </div>
 
           <h1 className="classes__title">WORKSHOPS</h1>
-          <div className="container__info">
+          <div className="container__info-2">
             {groupClassWorkshop.workshops &&
               Object.keys(groupClassWorkshop.workshops).length > 0 &&
               Object.keys(groupClassWorkshop.workshops).map(title => {
                 const uniqueDescriptions = [...new Set(groupClassWorkshop.workshops[title].map(item => item.description))];
                 return (
-                  <div key={title} className="container__block">
-                    <h2 className="title_block">{title}</h2>
+                  <div key={title} className="container__block-2">
+                    <h2 className="title__block">{title}</h2>
                     {uniqueDescriptions.map((description, index) => {
                       const workshopsWithSameDescription = groupClassWorkshop.workshops[title].filter(
                         item => item.description === description
