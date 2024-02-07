@@ -15,7 +15,7 @@
     height: 100%;
 }
 
-.milonga__title{
+.milonga__title-3{
     color: #000;
     font-size: 3.5em;
     font-family: 'Roboto', sans-serif;
@@ -24,7 +24,7 @@
     padding: 40px 0px 20px;
 }
 
-.container__info{
+.container__info-3{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -33,7 +33,7 @@
     padding: 20px 0px 100px;
 }
 
-.container__block{
+.container__block-3{
     display: flex;
     justify-content: space-around;
     align-items: start;
@@ -49,25 +49,18 @@
     padding: 40px 0px 50px;
 }
 
-.title__block{
-    color: #000;
-    font-size: 2em;
-    font-family: 'Nunito', sans-serif;
-    font-weight: 700;
-}
-
-.description__block{
+.description__block-3{
     color: #000;
     font-size: 1em;
     font-family: 'Nunito', sans-serif;
     font-weight: 500;
 }
 
-.horario__block{
+.horario__block-3{
     width: 100%;
 }
 
-.table__block{
+.table__block-3{
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -75,7 +68,7 @@
     gap: 5px;
 }
 
-tr{
+.tr-3{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -86,12 +79,12 @@ tr{
 }
 
 @media (max-width: 550px) {
-    .container__info{
+    .container__info-3{
         flex-direction: column;
         gap: 50px;
     }
 
-    .container__block{
+    .container__block-3{
         width: 100%;
 
     }
@@ -106,7 +99,7 @@ tr{
         padding-top: 50px;
     }
 
-    .milonga__title{
+    .milonga__title-3{
         color: #000;
         font-size: 2.8em;
         font-family: 'Roboto', sans-serif;
@@ -115,14 +108,14 @@ tr{
         padding: 10px 0px 10px;
     }
 
-    .description__block{
+    .description__block-3{
         color: #000;
         font-size: .8em;
         font-family: 'Nunito', sans-serif;
         font-weight: 500;
     }
     
-    tr{
+    .tr-3{
         display: flex;
         justify-content: space-between;
         align-items: center;

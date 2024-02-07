@@ -78,14 +78,14 @@ function PageClasses() {
           <img src="../src/assets/image/image-classes.png" alt="img-classes" className="image__classes" />
         </div>
         <h1 className="classes__title">CLASSES</h1>
-        <div className="container__info">
+        <div className="container__info-2">
           {groupClassWorkshop.classes &&
             Object.keys(groupClassWorkshop.classes).length > 0 &&
             Object.keys(groupClassWorkshop.classes).map(title => {
               const uniqueDescriptions = [...new Set(groupClassWorkshop.classes[title].map(item => item.description))];
               return (
-                <div key={title} className="container__block">
-                  <h2 className="title_block">{title}</h2>
+                <div key={title} className="container__block-2">
+                  <h2 className="title__block">{title}</h2>
                   {uniqueDescriptions.map((description, index) => {
                     const classesWithSameDescription = groupClassWorkshop.classes[title].filter(
                       item => item.description === description
