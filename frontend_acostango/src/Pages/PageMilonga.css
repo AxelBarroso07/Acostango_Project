@@ -21,7 +21,7 @@
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     text-align: center;
-    padding: 40px 0px 50px;
+    padding: 40px 0px 20px;
 }
 
 .container__info{
@@ -30,7 +30,7 @@
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
-    padding: 50px 0px 100px;
+    padding: 20px 0px 100px;
 }
 
 .container__block{
@@ -38,8 +38,15 @@
     justify-content: space-around;
     align-items: start;
     flex-direction: column;
-    gap: 20px;
-    width: 45%;
+    gap: 40px;
+    width: 60ch;
+    margin: 0 auto;
+    color: #000;
+    font-size: 2em;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    text-align: center;
+    padding: 40px 0px 50px;
 }
 
 .title__block{
@@ -53,7 +60,7 @@
     color: #000;
     font-size: 1em;
     font-family: 'Nunito', sans-serif;
-    font-weight: 700;
+    font-weight: 500;
 }
 
 .horario__block{
