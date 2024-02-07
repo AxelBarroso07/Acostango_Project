@@ -114,6 +114,23 @@ tr{
         text-align: center;
         padding: 10px 0px 10px;
     }
+
+    .description__block{
+        color: #000;
+        font-size: .8em;
+        font-family: 'Nunito', sans-serif;
+        font-weight: 500;
+    }
+    
+    tr{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #000;
+        font-size: .8em;
+        font-family: 'Nunito', sans-serif;
+        font-weight: 600;
+    }
     
 }
 
