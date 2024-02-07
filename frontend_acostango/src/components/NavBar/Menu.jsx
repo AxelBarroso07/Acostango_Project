@@ -83,6 +83,8 @@ const LeftMenu = styled.menu`
     font-weight: bold;
     font-family: 'Roboto', sans-serif;
     margin: auto;
+    text-transform:uppercase;
+    color:#000;
   }
 
   .container_clases{
@@ -215,7 +217,9 @@ const LeftMenu = styled.menu`
   }
 }
 `
+
 const Menu = ({open}) => {
+
   return (
     <LeftMenu open={open}>
       <div className="menu">

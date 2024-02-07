@@ -24,8 +24,6 @@ export const getClasses = async (req, res) => {
         // console.log("rows from /:", rows)
 
         if (rows && rows.length > 0) {
-            
-
             data = rows.map(row => {
                 const price = rows[0].price_formatted.replace(/\.00$/, '') + '€'
                 const block = row.block_formatted !== null ? row.block_formatted.replace(/\.00$/, '') + '€' : null

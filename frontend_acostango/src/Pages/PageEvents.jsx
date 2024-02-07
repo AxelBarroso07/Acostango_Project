@@ -20,10 +20,10 @@ function PageEvents() {
       });
 
       const result = await response.json();
-      console.log("Data events:", result);
+      // console.log("Data events:", result);
 
       const eventsData = result.data
-      // console.log("eventsData:", eventsData);
+      console.log("eventsData:", eventsData);
 
       setData(eventsData);
     } catch (error) {
@@ -42,32 +42,40 @@ function PageEvents() {
       <div className="container__events">
         <h1 className="events__title">EVENTS</h1>
         <div className="container__event">
-          <div className="event">
-            <div className='container__img'>
-              <img src="../src/assets/image/image-classes.png" alt="image-event" className="image__event" />
-            </div>
-            <h2 className="title__event">TANGO STRONG</h2>
-            <p className="description__event">SHOW DE TANGO POR MARIANO AGUIAR</p>
-            <div className="dates__event">
-              <p className='dates__event ubi'>Villa Dominico</p>
-                <p className='dates__event date'>12/10/2024</p>
-                <p className='dates__event time'>18HS</p>
-                <p className='dates__event price'>1000 €</p>
-              </div>
-          </div>
-          <div className="event">
-            <div className='container__img'>
-              <img src="../src/assets/image/image-classes.png" alt="image-event" className="image__event" />
-            </div>
-            <h2 className="title__event">TANGO STRONG</h2>
-            <p className="description__event">SHOW DE TANGO POR MARIANO AGUIAR</p>
-            <div className="dates__event">
-              <p className='dates__event ubi'>Villa Dominico</p>
-              <p className='dates__event date'>12/10/2024</p>
-              <p className='dates__event time'>18HS</p>
-              <p className='dates__event price'>1000 €</p>
-            </div>
-          </div>
+
+          {
+            data && data.length > 0
+            &&
+              (
+                data.map(itemEvent => (
+                    <div key={itemEvent.idCalendar} className="event">
+                      <div className="container__img">
+                        <img src={`src/assets/imageEvents/${itemEvent.image}`} alt={itemEvent.title} className="image__event" />
+                      </div>
+                      <h2 className="title__event">
+                        {itemEvent.title}
+                      </h2>
+                      <p className="description__event">
+                        {itemEvent.description}
+                      </p>
+                      <div className="dates__event">
+                        <p className="dates_event">
+                          {itemEvent.location}
+                        </p>
+                        <p className="dates_event">
+                          {itemEvent.date}
+                        </p>
+                        <p className="dates_event">
+                          {itemEvent.time12hrsStartFormat}
+                        </p>
+                        <p className="dates_event">
+                          {itemEvent.price}
+                        </p>
+                      </div>
+                    </div>
+                ))
+              )
+          }
         </div>
       </div>
     </div>
@@ -75,3 +83,32 @@ function PageEvents() {
 }
 
 export default PageEvents
+
+// <div className="event">
+//   <div className='container__img'>
+//     <img src="../src/assets/image/image-classes.png" alt="image-event" className="image__event" />
+//   </div>
+//   <h2 className="title__event">TANGO STRONG</h2>
+//   <p className="description__event">SHOW DE TANGO POR MARIANO AGUIAR</p>
+//   <div className="dates__event">
+//     <p className='dates__event ubi'>Villa Dominico</p>
+//       <p className='dates__event date'>12/10/2024</p>
+//       <p className='dates__event time'>18HS</p>
+//       <p className='dates__event price'>1000 €</p>
+//     </div>
+// </div>
+
+
+// <div className="event">
+//   <div className='container__img'>
+//     <img src="../src/assets/image/image-classes.png" alt="image-event" className="image__event" />
+//   </div>
+//   <h2 className="title__event">TANGO STRONG</h2>
+//   <p className="description__event">SHOW DE TANGO POR MARIANO AGUIAR</p>
+//   <div className="dates__event">
+//     <p className='dates__event ubi'>Villa Dominico</p>
+//     <p className='dates__event date'>12/10/2024</p>
+//     <p className='dates__event time'>18HS</p>
+//     <p className='dates__event price'>1000 €</p>
+//   </div>
+// </div>

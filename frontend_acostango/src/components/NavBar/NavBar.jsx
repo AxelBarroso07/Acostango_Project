@@ -31,7 +31,7 @@ const NavBar = () => {
   return (
     <Nav>
       <MenuButton />
-      <div className="logo"><a href="/"><img src="../src/assets/icons/ACOSTANGO.svg" alt="acostango_logo" className='header__logo'/></a></div>
+        <div className="logo"><a href="/"><img src="../src/assets/icons/ACOSTANGO.svg" alt="acostango_logo" className='header__logo'/></a></div>
       <ButtonLanguage />
     </Nav>
   )

@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import '../Calendar/Calendar.css';
+import i18n from '../../Translation/i18n.js';
+import { useTranslation } from 'react-i18next';
 
 function Calendar() {
+  const { t } = useTranslation('translation');
+  
   const [ data, setData ] = useState(null)
   const [ loading, setLoading ] = useState(null)
   const [ error, setError ] = useState(null)
@@ -46,7 +50,7 @@ function Calendar() {
         {weekDay &&
           weekDay.map((day, index) => (
             <div className='container__table' key={index}>
-              <th className='title__day'>{day}</th>
+              <th className='title__day'>{t(`calendar.days.${day.toLowerCase()}`)}</th>
               <div className='container__day'>
                 {data &&
                   data.map((item) => {
