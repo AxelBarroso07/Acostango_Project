@@ -85,9 +85,9 @@
                 <div class="dialogContainer">
                     <!-- Delete class dialog -->
                     <dialog id="confirmationDeleteDiv_<%- rowParse.idCalendar %>" class="dialog" style="display: none;">
-                        <p>Delete this class?</p>
                         <div class="buttons__delete">
                             <% if(rowParse.category === 'class') { %>
+                                <p>Delete this class?</p>
                                 <div>
                                     <button id="deleteConfirmYes" onclick="deleteClass('<%- rowParse.idCalendar %>'), showHide(false, '<%- rowParse.idCalendar %>')">Yes</button>
                                 </div>
