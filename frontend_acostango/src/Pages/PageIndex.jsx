@@ -6,13 +6,13 @@ import Footer from '../components/Footer/Footer'
 
 
 export default function PageIndex() {
-    return (
-        <div className='App__container'>
-        <NavBar />
-        <Header />
-        <Calendar />
-        <Contact />
-        <Footer />
+  return (
+    <div className='App__container'>
+      <NavBar />
+      <Header />
+      <Calendar />
+      <Contact />
+      <Footer />
     </div>
-    )
+  )
 }
