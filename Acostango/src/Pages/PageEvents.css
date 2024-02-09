@@ -96,11 +96,11 @@
 
     .events__title{
         color: #000;
-        font-size: 2.8em;
+        font-size: 2em;
         font-family: 'Roboto', sans-serif;
         font-weight: 500;
         text-align: center;
-        padding: 10px 0px 10px;
+        padding: 20px 0px 20px;
     }
     
 }

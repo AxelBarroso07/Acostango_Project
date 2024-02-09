@@ -176,12 +176,14 @@ const LeftMenu = styled.menu`
       justify-content:center;
       align-items:center;
       flex-direction:column;
+      padding-top: 20px;
+      width: 100%;
     }
 
     .menu__disclaimer{
       font-family: 'Nunito',sans-serif;
       font-weight: 700;
-      font-size: 1em;
+      font-size: .8em;
       padding-bottom: 10px;
     }
 
@@ -224,7 +226,7 @@ const LeftMenu = styled.menu`
       justify-content: center;
       gap: 20px;
       flex-wrap: wrap;
-      width: 300px;
+      width: 100%;
     }
 
     .clases{
@@ -240,7 +242,8 @@ const LeftMenu = styled.menu`
     .clases__title{
       text-align: center;
       color: #FFF;
-      font-size: 1.2em;
+      font-size: .65em;
+      font-weigth: 700;
       font-family: 'Nunito', sans-serif;
       text-transform: uppercase;   
     }
