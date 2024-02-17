@@ -8,9 +8,17 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules/
+
+!images/.gitKeep
+
+!uploads/.gitKeep
+
+!imageEvents/.gitKeep
 dist
 dist-ssr
 *.local
+
+
 
 # Editor directories and files
 .vscode/*

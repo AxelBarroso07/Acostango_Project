@@ -1,0 +1,114 @@
+<%- include('./partials/header.ejs', { titlePage: 'Edit event', pageStyle: 'editEvent.css' }) %>
+
+<div class="header">
+    <a href="/">
+        <i class="fa-solid fa-arrow-left" style="color: #0c0c0f;"></i>
+    </a>
+</div>
+
+<div>
+    <form id="formEventEdit" data-id="<%= data.id_calendar %>" enctype="multipart/form-data">
+        <h1>Edit event</h1>
+        <div class="form">
+            <div class="primary__rows">
+                <input type="text" id="title" name="title" min="3" max="100" value="<%= data.title %>" placeholder="TITLE">
+                
+                <textarea id="description" name="description" cols="50" rows="4" maxlength="100" style="resize: none;" placeholder="DESCRIPTION" value=""><%= data.description %></textarea>
+                
+                <select name="day" id="day" placeholder="SELECT DAY">
+                    <option disabled selected hidden value="">Week day</option>
+                    <% for(let i = 0; i < weekDay.length; i++) { %>
+                        <% const day = weekDay[i]; %>
+                        <option value="<%- day %>" <%= data.day === day ? 'selected' : '' %>>
+                            <%= day %>
+                        </option>
+                    <% } %>
+                </select>
+            </div>
+
+          
+
+            
+            
+           <div class="second__rows-column">
+                <div class="precio__block">
+                    <input type="text" id="location" max="50" name="location" value="<%= data.location %>" placeholder="LOCATION">
+                    
+                    <input type="number" id="price" name="price" value="<%= data.price %>" placeholder="PRICE">
+                </div>
+
+            <div class="columns">
+                    <div class="hora">
+                        <div class="horaStart">
+                            <label for="time_start">Time start:</label>
+                            <input type="time" id="time_start" name="time_start" value="<%= data.time_start %>">
+                        </div>
+                    </div>
+                
+                <div class="date">
+                     <label for="date">Date:</label>
+                     <input type="date" id="date" name="date" value="<%= date_formatted %>"> 
+                </div>
+            </div>
+             
+             
+
+            <div class="image__container">
+                 <label >Select new image:</label>
+                 <label for="image"><img src="<%= data.image %>" width="200" height="100" style="cursor: pointer;"></label>
+                 <input type="file" id="image" class="image" name="image" accept="image/*" style="visibility: hidden;">
+            </div>
+           </div>
+           
+            
+            <button type="submit">Edit event</button>
+        </div>
+    </form>
+</div>
+<script>
+    const formEventEdit = document.querySelector("#formEventEdit")
+
+    formEventEdit.addEventListener('submit', async (e) => {
+    e.preventDefault()
+
+    const id = formEventEdit.dataset.id
+    const title = formEventEdit.querySelector("#title").value
+    const description = formEventEdit.querySelector("#description").value
+    const image = formEventEdit.querySelector("#image").files[0]
+    const day = formEventEdit.querySelector("#day").value
+    const date = formEventEdit.querySelector("#date").value
+    const location = formEventEdit.querySelector("#location").value
+    const price = formEventEdit.querySelector("#price").value
+    const timeStart = formEventEdit.querySelector("#time_start").value
+
+    console.log("info from formClassEdit:", id, title, description, day, timeStart, day, image, date, location, price)
+    const formData = new FormData();
+    formData.append('id', id);
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('image', image);
+    formData.append('day', day);
+    formData.append('date', date);
+    formData.append('location', location);
+    formData.append('price', price);
+    formData.append('timeStart', timeStart);
+    
+    const response = await fetch(`/confirmEditEvent/${id}`, {
+        'method': 'PUT',
+        body: formData
+    })
+
+    const result = await response.json()
+
+    if(result.isUpdateRegister) {
+        console.log("result.isUpdateRegister is true")
+        window.location.href = '/'
+    } else {
+        console.log("result.isUpdateRegister is false")
+        console.log(result)
+        window.location.href = '/error'
+    }
+
+})
+</script>
+<%- include('./partials/footer.ejs') %>

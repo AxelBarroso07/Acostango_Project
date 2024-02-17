@@ -1,0 +1,125 @@
+<%- include('./partials/header.ejs', { titlePage: 'Edit Class', pageStyle: 'editClass.css' }) %>
+
+<div class="header">
+    <a href="/">
+        <i class="fa-solid fa-arrow-left" style="color: #0c0c0f;"></i>
+    </a>
+</div>
+
+<div>
+    <form id="formClassEdit" data-id="<%= data.id_calendar %>">
+        <h1>Edit class</h1>
+        <div class="form">
+            <div class="primary__rows">
+                <div class="columns">
+                    <input type="text" id="title" name="title" min="3" max="40" value="<%= data.title %>" required placeholder="TITLE"> 
+                    
+                    <select name="day" id="day" required placeholder="SELECT DAY">
+                        <option disabled selected hidden value="">Week day</option>
+                        <% for(let i = 0; i < weekDay.length; i++) { %>
+                            <% const day = weekDay[i]; %>
+                    
+                            <% const isDayFull = fullDays && fullDays[day.toLowerCase()] && fullDays[day.toLowerCase()].classes.length >= 3; %>
+                            
+                            <option value="<%- day %>" <%= data.day === day ? 'selected' : '' %> <%= isDayFull === false ? 'disabled' : '' %>>
+                                <%- day %><%- isDayFull === false ? ' (Full)' : '' %>
+                            </option>
+                        <% } %>
+                    </select>
+                </div>
+
+                <textarea id="description" name="description" cols="50" rows="4" style="resize: none;" required placeholder="DESCRIPTION"><%= data.description %></textarea>
+            </div>
+
+            <div class="second__rows-column">
+                
+                <div class="precio__block">
+                    <input type="number" id="price" name="price" value="<%= data.price %>" min="0" max="999999" placeholder="PRICE">
+                    
+                    <input type="number" id="block" name="block" value="<%= data.block %>" min="0" max="99999" placeholder="BLOCK OF 10 CLASSES">
+                </div>
+                
+                <div class="workshop">
+                    <label>Workshop</label>
+                    <div class="optionYes">
+                       <label for="workshopOptionTrue">Yes</label>
+                       <input type="radio" id="workshopOptionTrue" value="true" name="workshop" <%= data.workshop === 1 ? 'checked' : '' %> required>
+                    </div>
+                    <div class="optionNo">
+                       <label for="workshopOptionFalse">No</label>
+                       <input type="radio" id="workshopOptionFalse" value="false" name="workshop" <%= data.workshop === 0 ? 'checked' : '' %> required>
+                    </div>
+                </div>
+                
+                <div class="hora">
+                    <div class="horaStart">
+                        <label for="time_start">Time start:</label>
+                        <input type="time" id="time_start" name="time_start" value="<%= data.time_start %>">
+                    </div>
+                    
+                    <div class="horaFinish">
+                        <label for="time_finish">Time finish:</label>
+                        <input type="time" id="time_finish" name="time_finish" value="<%= data.time_finish %>">
+                    </div>
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn-Edit">Edit class</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    const formClassEdit = document.querySelector("#formClassEdit")
+
+    formClassEdit.addEventListener('submit', async (e) => {
+        e.preventDefault()
+
+        const id = formClassEdit.dataset.id
+        const title = formClassEdit.querySelector("#title").value
+        const description = formClassEdit.querySelector("#description").value
+        const day = formClassEdit.querySelector("#day").value
+        const price = formClassEdit.querySelector("#price").value
+        const block = formClassEdit.querySelector("#block").value
+        const timeStart = formClassEdit.querySelector("#time_start").value
+        const timeFinish = formClassEdit.querySelector("#time_finish").value
+        const workshop = formClassEdit.querySelector('input[name="workshop"]:checked').value;
+
+        const data = {
+            id,
+            title,
+            description,
+            day,
+            price,
+            block,
+            timeStart,
+            timeFinish,
+            workshop
+        }
+        
+        const response = await fetch(`/confirmEditClass/${data.id}`, {
+            'method': 'PUT',
+            'headers': {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                data
+            })
+        })
+
+        const result = await response.json()
+
+        if(result.isUpdateRegister) {
+            console.log("result.isUpdateRegister is true")
+            window.location.href = '/'
+        } else {
+            console.log("result.isUpdateRegister is false")
+            console.log(result)
+            window.location.href = '/error'
+        }
+
+    })
+</script>
+
+<%- include('./partials/footer.ejs') %>
