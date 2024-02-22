@@ -88,7 +88,7 @@ export const postConfirmCreateEvent = async(req, res) => {
 
         const [ rows ] = await pool.query("INSERT INTO calendar(title, description, image, day, date, location, price, time_start, time_finish, category, workshop) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [data.title, data.description, data.image, data.day, data.date, data.location, data.price, data.time_start, data.time_finish, data.category, data.workshop])
 
-        return res.redirect('/')
+        return res.redirect('home')
         
     } catch(error) {
         console.error(error);

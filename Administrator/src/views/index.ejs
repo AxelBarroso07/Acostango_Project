@@ -1,117 +1,19 @@
-<%- include('./partials/header.ejs', { titlePage: 'Home', pageStyle: 'calendar.css' }) %>
+<%- include('./partials/header.ejs', { titlePage: 'Login', pageStyle: 'login.css' }) %>
 
-<div class="header">
-    <h1>Acostango schedule</h1>
-    <div class="buttons">
-        <a href="/createClass" id="newClass">New Class</a>
-        <a href="/createEvent" id="newEvent">New Event</a>
-    </div>
-</div>
+<h1>Log in</h1>
+<form action="" method="POST" id="form">
+    <label for="username">User:</label>
+    <input type="text" placeholder="User" max="50" id="username" class="user" name="username">
+    <label for="passsword">Password:</label>
+    <input type="password" placeholder="Password" max="50" id="password" class="pass" name="password">
+    <button type="submit" class="btn-login">LOG IN</button>
+</form>
+<script>
 
-<table border="1">
-    <thead>
-        <tr>
-            <!-- WEEKDAY ROW -->
-            <% for(let i = 0; i < weekDay.length; i++) { %>
-                <th> <%- weekDay[i] %> </th>
-            <% } %>
-        </tr>
-    </thead>
-    <tbody>
-        <% const maxClassesPerRow = 3 %>
-        <% const maxClassesPerDay = Math.max(...weekDay.map(day => rowsParse.filter(rowParse => rowParse.day === day).length)) %>
+    // const form = document.getElementById("form").addEventListener('submit', ev =>{
+    //     ev.preventDefault();
+    //     window.location.href = '/home';
+    // })
 
-        <% for (let row = 0; row < maxClassesPerDay; row++) { %>
-            <tr>
-                <% for (let j = 0; j < weekDay.length; j++) { %>
-                    <% const classesForCell = rowsParse.filter(rowParse => rowParse.day === weekDay[j]) %>
-                    
-                    <% const currentClass = classesForCell[row] %>
-
-                    <% if (currentClass) { %>
-                        <td>
-                            <% if (currentClass.time12hrsFinishFormat !== null) { %>
-                                <%- currentClass.workshop === 0 ? `<span>Class: ${currentClass.title} ${currentClass.time12hrsStartFormat}-${currentClass.time12hrsFinishFormat}</span>` : `<span>Workshop: ${currentClass.title} ${currentClass.time12hrsStartFormat}-${currentClass.time12hrsFinishFormat}</span>` %>
-                            <% } else { %>
-                                <%- `<span>Event: ${currentClass.title} ${currentClass.time12hrsStartFormat}</span>` %>
-                            <% } %>
-                        </td>
-                    <% } else { %>
-                        <td></td>
-                    <% } %>
-                <% } %>
-            </tr>
-        <% } %>
-    </tbody>
-</table>
-
-<% if(rowsParse && rowsParse.length > 0){ %>
-    <div class="divClassesDB">
-        <% rowsParse.map(rowParse => { %>
-            <div class="classesDB <% if (rowParse.workshop) { %> workshop-class <% } %>" id="classCard">
-                <div class="bd__title">
-                    <%- rowParse.workshop === 0 ? `<span id="classtype">Class: ${rowParse.title}</span>` : rowParse.workshop === 1 ? `<span id="workshoptype">Workshop: ${rowParse.title}</span>` : `<span id="eventType">Event: ${rowParse.title}</span>` %>
-                </div>
-                <div class="bd__description">
-                    <span><%- rowParse.description %></span>
-                </div>
-                <%- rowParse.category === 'event' && rowParse.image ? `<img src="${rowParse.image}" id="eventImage" alt="${rowParse.title}"  />` : '' %>
-                <div class="bd__dia">
-                    
-                        <span><%- rowParse.day %></span>
-                        <%- rowParse.date !== null ? `<span>${rowParse.date}</span>` : '' %>
-                        <span><%- rowParse.price %> €</span>
-                </div>
-
-                <div class="bd__horario">
-                    <%- rowParse.block !== null ? `<span>Block of 10 classes: ${rowParse.block} €</span>` : '' %>
-                    <%- rowParse.location !== null ? `<span>${rowParse.location}</span>` : '' %>
-                    <%- rowParse.time12hrsFinishFormat !== null
-                    ?
-                        `<span>${rowParse.time12hrsStartFormat} - ${rowParse.time12hrsFinishFormat}</span>`
-                    :
-                        `<span>${rowParse.time12hrsStartFormat}</span>`
-                    %>
-                </div>
-                <div class="buttons__bd">
-                    <% if (rowParse.category === 'class') { %>
-                        <a href="/editClass/<%= rowParse.idCalendar %>" id="classedit"><svg xmlns="http://www.w3.org/2000/svg" class="icon-pencil" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" /><path d="M13.5 6.5l4 4" /></svg></a>
-                    <% } else if (rowParse.category === 'event') { %>
-                        <a href="/editEvent/<%= rowParse.idCalendar %>" id="classedit"><svg xmlns="http://www.w3.org/2000/svg" class="icon-pencil" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" /><path d="M13.5 6.5l4 4" /></svg></a>
-                    <% } %>
-                    <button onclick="showHide(true, 'confirmationDeleteDiv_<%- rowParse.idCalendar %>')" class="deleteButton"><svg xmlns="http://www.w3.org/2000/svg" class="icon-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg></button>
-                </div>
-
-                <div class="dialogContainer">
-                    <!-- Delete class dialog -->
-                    <dialog id="confirmationDeleteDiv_<%- rowParse.idCalendar %>" class="dialog" style="display: none;">
-                        <div class="buttons__delete">
-                            <% if(rowParse.category === 'class') { %>
-                                <p>Delete this class?</p>
-                                <div>
-                                    <button id="deleteConfirmYes" onclick="deleteClass('<%- rowParse.idCalendar %>'), showHide(false, '<%- rowParse.idCalendar %>')">Yes</button>
-                                </div>
-                                <div>
-                                    <button id="deleteConfirmNo" onclick="showHide(false, 'confirmationDeleteDiv_<%- rowParse.idCalendar %>')">No</button>
-                                </div>
-                            <% } else if(rowParse.category === 'event') { %>
-                                <p>Delete this event?</p>
-                                <div>
-                                    <button id="deleteConfirmYes" onclick="deleteEvent('<%- rowParse.idCalendar %>'), showHide(false, '<%- rowParse.idCalendar %>')">Yes</button>
-                                </div>
-                                <div>
-                                    <button id="deleteConfirmNo" onclick="showHide(false, 'confirmationDeleteDiv_<%- rowParse.idCalendar %>')">No</button>
-                                </div>
-                            <% } %>
-                        </div>
-                    </dialog>
-                </div>
-            </div>
-        <% }) %>
-    </div>
-<% } %>
-
-
-<script src="./scripts/index.js"></script>
-
+</script>
 <%- include('./partials/footer.ejs') %>

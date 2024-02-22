@@ -1,4 +1,4 @@
-<%- include('./partials/header.ejs', { titlePage: 'An error has occurred', pageStyle: 'error.css' }) %>
+<%- include('./partials/header.ejs', { titlePage: 'ERROR', pageStyle: 'error.css' }) %>
 
 <style>
     body{
@@ -11,11 +11,11 @@
 </style>
 
 <div>
-    <a href="/">
+    <a href="/home">
         <i class="fa-solid fa-arrow-left" style="color: #0c0c0f; font-size: 1.2em;"> Back</i>
     </a>
 </div>
 
-<h1 style="font-size: 2em;">¡An error has occurred!</h1>
+<h1 style="font-size: 2em; color: #0c0c0f;">¡An error has occurred!</h1>
 
 <%- include('./partials/footer.ejs') %>

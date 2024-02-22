@@ -3,7 +3,7 @@ import { getIndex } from '../controllers/index.controller.js';
 
 const router = Router();
 
-//Home
+//Index / Login
 router.get('/', getIndex);
 
 export default router;

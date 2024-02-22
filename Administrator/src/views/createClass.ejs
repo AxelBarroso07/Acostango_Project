@@ -1,7 +1,7 @@
 <%- include('./partials/header.ejs', { titlePage: 'Create Class', pageStyle: 'createClass.css' }) %>
 
 <div class="header">
-    <a href="/">
+    <a href="/home">
         <i class="fa-solid fa-arrow-left" style="color: #0c0c0f;"></i>
     </a>
     
@@ -58,10 +58,10 @@
                     <input type="radio" id="workshopOptionTrue" value="true" name="workshop" required>
                 </div>
                 
-               <div class="optionNo">
-                 <label for="workshopOptionFalse">No</label>
-                 <input type="radio" id="workshopOptionFalse" value="false" name="workshop" checked required>
-               </div>
+            <div class="optionNo">
+                <label for="workshopOptionFalse">No</label>
+                <input type="radio" id="workshopOptionFalse" value="false" name="workshop" checked required>
+            </div>
             </div>
             
             <button type="submit" id="createClassButton">Create</button>

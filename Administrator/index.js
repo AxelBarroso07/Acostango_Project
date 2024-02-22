@@ -9,6 +9,8 @@ import indexRoutes from './src/server/routes/index.routes.js';
 import configRoutes from './src/server/routes/config.routes.js';
 import classRoutes from './src/server/routes/class.routes.js';
 import eventRoutes from './src/server/routes/event.routes.js';
+import homeRoutes from './src/server/routes/home.routes.js';
+import errorRoutes from './src/server/routes/error.routes.js';
 
 const app = express();
 
@@ -28,9 +30,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //Routes
 app.use(indexRoutes);
+app.use(homeRoutes);
 app.use(configRoutes);
 app.use(classRoutes);
 app.use(eventRoutes);
+app.use(errorRoutes);
 
 app.use((req, res, next) => {
     res.redirect('/');

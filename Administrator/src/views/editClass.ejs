@@ -1,7 +1,7 @@
 <%- include('./partials/header.ejs', { titlePage: 'Edit Class', pageStyle: 'editClass.css' }) %>
 
 <div class="header">
-    <a href="/">
+    <a href="/home">
         <i class="fa-solid fa-arrow-left" style="color: #0c0c0f;"></i>
     </a>
 </div>
@@ -112,7 +112,7 @@
 
         if(result.isUpdateRegister) {
             console.log("result.isUpdateRegister is true")
-            window.location.href = '/'
+            window.location.href = '/home'
         } else {
             console.log("result.isUpdateRegister is false")
             console.log(result)

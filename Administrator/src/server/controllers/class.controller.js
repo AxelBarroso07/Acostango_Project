@@ -68,7 +68,7 @@ export const postConfirmCreateClass = async (req, res) => {
 
         console.log(rows)
 
-        return res.redirect("/")
+        return res.redirect("home")
     } catch(error) {
         console.error(error);
         res.render('error', { titlePage: 'An error has occurred' });

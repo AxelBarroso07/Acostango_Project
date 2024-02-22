@@ -60,19 +60,12 @@ INSERT INTO `calendar` (`title`, `description`, `day`, `price`, `block`, `time_s
                       ('Special Workshop', 'These workshops are thematic, they work on a specific tango theme or movement, for example sacda, volleys, hooks or sweeps or a musical rhythm such as milonga, waltz or musicality with different tango composers and every three weeks we change the theme', 'Saturday', 25, null, '19:00:00', '20:30:00', 'class', true),
                       ('Acostango Milonga', 'Every Saturday night we organize our milonga, a special night, with very good music and a splendid floor. Very close to the center which makes it very accessible', 'Saturday', 10, null, '20:30:00', '22:00:00', 'class', false);
 
--- INSERT INTO calendar_class(title, day, time_start, time_finish) VALUES ('Beginners', 'Sunday', '20:00:00', '22:00:00');
--- INSERT INTO calendar_class(title, day, time_start, time_finish) VALUES ('truers', 'Wednesday', '18:00:00', '19:00:00');
--- -- Workshop row
--- INSERT INTO calendar_class(title, day, time_start, time_finish, category, workshop) VALUES ('Workshop 1', 'Wednesday', '19:00:00', '20:00:00', 'class', 1);
--- -- --------------------------------------------------------
--- --
--- -- Table structure for table `gallery`
--- --
-
--- CREATE TABLE `gallery` (
---   `id_image` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
---   `photo` VARCHAR(255) DEFAULT NULL
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- Uers table
+CREATE TABLE `users` (
+  `id_user` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(50) NOT NULL,
+  `pass_u` VARCHAR(50) NOT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 -- /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
