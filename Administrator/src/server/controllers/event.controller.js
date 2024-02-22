@@ -99,16 +99,11 @@ export const postConfirmCreateEvent = async(req, res) => {
 // edit event
 export const getEditEvent = async (req,res) =>{
     try {
-        const __filename = fileURLToPath(import.meta.url);
-        const __dirname = dirname(__filename);
-        console.log(__dirname)
-        console.log('/editEvent/:idCalendar', parseInt(req.params.idCalendar))
-        const id = parseInt(req.params.idCalendar); // Get the id from the url param
-        console.log("id:", id)
-        const [ rows ] = await pool.query("SELECT * FROM calendar WHERE id_calendar = ?", [id]) // Get the event data from the database
-        // console.log(rows)
-
-        // Array with the days of the week
+        console.log("req.params.idCalendar:", req.params.idCalendar)
+        console.log("req.params:", req.params)
+        const id = parseInt(req.params.idCalendar);
+        const [ rows ] = await pool.query("SELECT * FROM calendar  WHERE id_calendar = ?", [id])
+        console.log("rows:", rows)
         const weekDay = [
             "Sunday",
             "Monday",
@@ -120,11 +115,11 @@ export const getEditEvent = async (req,res) =>{
         ];
     
         // Format date to YYYY-MM-DD
-        const formatDate = new Date(rows[0].date).toISOString().split('T')[0]; // Format date to YYYY-MM-DD
+        const formatDate = new Date(rows[0].date).toISOString().split('T')[0];
 
-        return res.status(200).render("editEvent", { // Render the editEvent page with the event data
+        return res.status(200).render("editEvent", {
             data: rows[0],
-            date_formatted: formatDate, // Send the formatted date
+            date_formatted: formatDate,
             weekDay
         });
     } catch (error) {
@@ -135,60 +130,56 @@ export const getEditEvent = async (req,res) =>{
 
 export const putConfirmEditEvent = async (req,res) =>{
     try {
-        const idCalendar = parseInt(req.params.idCalendar); // get the id from the url param
-        const reqBody = req.body; // get the form data
-
-        if (!req.file) { // if there is no file uploaded, return error and redirect to error page
-            res.render('error', { titlePage: 'An error has occurred' });
-        }
+        const idCalendar = parseInt(req.params.idCalendar);
+        const reqBody = req.body;
+        console.log("reqBody:", reqBody)
         console.log("req.file:", req.file)
+
         // Compress image
-        const imagePath = req.file.path; // image original name
+        const imagePath = req.file && req.file.path !== undefined ? req.file.path : reqBody.image.replaceAll('../public/images/', ''); //Image original name
+        let dirPhotoCompressed = ''
 
-        const compressedPath = 'src/public/images/' // directory Path for compressed images
+        const compressedPath = 'src/public/images/'//Directory Path for compressed images
+        if(req.file && req.file.path && req.file !== undefined) {
+            const compressedImagePath = compressedPath + req.file.filename;//Path for compressed images
 
-        const compressedImagePath = compressedPath + req.file.filename; // path for compressed images
-
-        const fileExtension = req.file.filename.split('.').pop().toLowerCase(); // file extension
-
-        let fileCompress = sharp(imagePath); // image to compress
-
-        if (fileExtension === 'jpg' || fileExtension === 'jpeg') { // if the file extension is jpg or jpeg, compress the image to 20% quality
-            fileCompress = fileCompress.jpeg({ quality: 20 })
-        } else if (fileExtension === 'png') {
-            fileCompress = fileCompress.png({ quality: 20 })
-
-        } 
-        await fileCompress.toFile(compressedImagePath); // save the compressed image
-        
-        const dirFolder = '../public/images/' // directory Path for compressed images
-        const fileCompressedImage = req.file.filename // compressed image name
-        const dirPhotoCompressed = `${dirFolder}${fileCompressedImage}` // compressed image path
-
-        const data = { // set the data to update in the database
+            const fileExtension = req.file.filename.split('.').pop().toLowerCase();//File extension
+    
+            let fileCompress = sharp(imagePath);//Image to compress
+    
+            if (fileExtension === 'jpg' || fileExtension === 'jpeg') {
+                fileCompress = fileCompress.jpeg({ quality: 20 })
+            } else if (fileExtension === 'png') {
+                fileCompress = fileCompress.png({ quality: 20 })
+            } 
+            await fileCompress.toFile(compressedImagePath);
+            
+            const fileCompressedImage = req.file.filename
+            dirPhotoCompressed = `${fileCompressedImage}`
+        } else {
+            const fileCompressedImage = reqBody.image
+            dirPhotoCompressed = `${fileCompressedImage}`
+        }
+        const data = {
             title: reqBody.title,
             description: reqBody.description,
             image: dirPhotoCompressed,
             day: reqBody.day,
-            date: new Date(reqBody.date), // format date to YYYY-MM-DD
+            date: new Date(reqBody.date),
             location: reqBody.location,
             price: reqBody.price,
             timeStart: reqBody.timeStart,
-            timeFinish: null, // event has no time_finish
-            workshop: null // event has no workshop
+            timeFinish: null,
+            workshop: null
         }
+        // console.log("data:", data)
 
-        const [ result ] = await pool.query("UPDATE calendar SET title = ?, description = ?, image = ?, day = ?, date = ?, location = ?, price = ?, time_start = ?, time_finish = ?, workshop = ? WHERE id_calendar = ?", [data.title, data.description, data.image, data.day, data.date, data.location, data.price, data.timeStart, data.timeFinish, data.workshop, idCalendar]); // update the data in the database
-
-        if(result.affectedRows === 0) {
-            return res.status(404).json({
-                isUpdateRegister: false // if the row is not updated, return false, this will be used in the front-end to show a message
-            })
+        const [ result ] = await pool.query("UPDATE calendar SET title = ?, description = ?, image = ?, day = ?, date = ?, location = ?, price = ?, time_start = ?, time_finish = ?, workshop = ? WHERE id_calendar = ?", [data.title, data.description, data.image, data.day, data.date, data.location, data.price, data.timeStart, data.timeFinish, data.workshop, idCalendar]);
+        
+        if (result.affectedRows === 0) {
+            return res.status(404).send({ isUpdateRegister: false, redirectTo: '/error' });
         } else {
-            console.log("Row updated")
-            return res.status(200).json({
-                isUpdateRegister: true // if the row is updated, return true, this will be used in the front-end to show a message
-            })
+            return res.status(200).send({ isUpdateRegister: true, redirectTo: '/home' });
         }
     } catch (error) {
         console.error(error);

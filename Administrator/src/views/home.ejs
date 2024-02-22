@@ -57,7 +57,7 @@
                 </div>
                 <%- rowParse.category === 'event' && rowParse.image ? `<img src="${rowParse.image}" id="eventImage" alt="${rowParse.title}"  />` : '' %>
                 <div class="bd__dia"> <!-- the day, date and price are displayed -->
-                    
+
                         <span><%- rowParse.day %></span> <!-- the day is displayed -->
                         <%- rowParse.date !== null ? `<span>${rowParse.date}</span>` : '' %> <!-- the date is displayed -->
                         <span><%- rowParse.price %> €</span> <!-- the price is displayed -->
