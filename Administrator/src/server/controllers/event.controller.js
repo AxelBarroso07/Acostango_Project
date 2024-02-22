@@ -135,12 +135,17 @@ export const putConfirmEditEvent = async (req,res) =>{
         console.log("reqBody:", reqBody)
         console.log("req.file:", req.file)
 
+        const __filename = fileURLToPath(import.meta.url);
+        const __dirname = dirname(__filename);
+
         // Compress image
         const imagePath = req.file && req.file.path !== undefined ? req.file.path : reqBody.image.replaceAll('../public/images/', ''); //Image original name
+        const imagePath2 = req.file && req.file.path !== undefined ? req.file.path.replace(/\s/g, '_') : reqBody.image.replace(/\s/g, '_'); //Image original name
         let dirPhotoCompressed = ''
 
         const compressedPath = 'src/public/images/'//Directory Path for compressed images
         if(req.file && req.file.path && req.file !== undefined) {
+            // compress image 1
             const compressedImagePath = compressedPath + req.file.filename;//Path for compressed images
 
             const fileExtension = req.file.filename.split('.').pop().toLowerCase();//File extension
@@ -156,6 +161,19 @@ export const putConfirmEditEvent = async (req,res) =>{
             
             const fileCompressedImage = req.file.filename
             dirPhotoCompressed = `${fileCompressedImage}`
+
+            // compress image 2
+            // console.log("imagePath2:", imagePath2)
+            const compressedPath2 = __dirname + '/../../../../Acostango/src/assets/imageEvents/'//Directory Path for compressed images
+            const compressedImagePath2 = compressedPath2 + req.file.filename;//Path for compressed images
+            const fileExtension2 = req.file.filename.split('.').pop().toLowerCase();//File extension
+            let fileCompress2 = sharp(imagePath2);//Image to compress
+            if (fileExtension2 === 'jpg' || fileExtension2 === 'jpeg') {
+                fileCompress2 = fileCompress2.jpeg({ quality: 20 })
+            } else if (fileExtension2 === 'png') {
+                fileCompress2 = fileCompress2.png({ quality: 20 })
+            } 
+            await fileCompress2.toFile(compressedImagePath2);
         } else {
             const fileCompressedImage = reqBody.image
             dirPhotoCompressed = `${fileCompressedImage}`

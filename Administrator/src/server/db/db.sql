@@ -68,9 +68,6 @@ CREATE TABLE `user` (
   `pass_u` VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Martin account
--- INSERT INTO `user` (`username`, `pass_u`) VALUES
--- ('acostamartingo', '');
 
 -- /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 -- /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

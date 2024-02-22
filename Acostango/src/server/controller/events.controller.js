@@ -18,7 +18,7 @@ export const getEvents = async (req, res) => {
             WHEN day = 'Saturday' THEN 7
             END`
         );
-        console.log("rows from /:", rows)
+        console.log("rows from /events:", rows)
 
         if (rows && rows.length > 0) {
 
