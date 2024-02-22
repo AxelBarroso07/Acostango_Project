@@ -32,7 +32,7 @@ app.use(session({
     cookie: {
         secure: false, // true just for HTTPS
         httpOnly: true, // no acces with js in client
-        maxAge: 5000 // 7 * 24 * 60 * 60 * 1000 // cookie expiration time in milliseconds (7 days)
+        maxAge: 60000 // 7 * 24 * 60 * 60 * 1000 // cookie expiration time in milliseconds (7 days)
     }
 }));
 app.use('/public', express.static(path.join(__dirname, 'src/public')))
@@ -42,12 +42,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //Routes
 app.use(logIn);
+app.use(errorRoutes);
 app.use(isAuthenticated);
 app.use(homeRoutes);
 app.use(configRoutes);
 app.use(classRoutes);
 app.use(eventRoutes);
-app.use(errorRoutes);
 
 app.use((req, res, next) => {
     res.redirect('/');

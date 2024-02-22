@@ -1,15 +1,12 @@
 import { pool } from "../../../db.js";
 import bcrypt from 'bcrypt';
-import randomeToken from 'random-token'
-import { SESSION_SECRET } from "../../../config.js";
 
 export const getLogIn = async (req, res) => {
     try {
-        if(req.session.user) {
+        if(req.session.user) { // req.session.user set in 'userValidation' route
             return res.redirect('/home');
         }
-        const error = req.query.error ? req.query.error : null;
-        return res.render('logIn', { error: error });
+        return res.render('logIn');
     } catch (error) {
         console.error(error);
         res.render('error', { titlePage: 'An error has occurred' });
@@ -37,11 +34,11 @@ export const userValidation = async (req, res) => {
                 return res.redirect('/home');
             } else {
                 console.log("Password incorrect")
-                return res.redirect('/login?error=IncorrectPassword');
+                return res.redirect('/login');
             }
         } else {
             console.log("Password incorrect")
-            return res.redirect('/login?error=IncorrectPassword');
+            return res.redirect('/login');
         }
     } catch (error) {
         console.error(error);
