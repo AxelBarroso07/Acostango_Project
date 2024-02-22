@@ -1,0 +1,16 @@
+<%- include('./partials/header.ejs', { titlePage: 'Log In', pageStyle: 'login.css' }) %>
+
+<h1>Log in</h1>
+<form action="/userValidation" id="form" method="POST">
+    <label for="username">User:</label>
+    <input type="text" placeholder="Enter your user" max="50" id="username" class="user" name="username">
+
+    <label for="passsword">Password:</label>
+    <input type="password" placeholder="Enter your password" max="50" id="password" class="pass" name="password">
+    
+    <button type="submit" class="btn-login">LOG IN</button>
+</form>
+<% if (error && error === "IncorrectPassword") { %>
+    <p class="error">Contraseña incorrecta</p>
+<% } %>
+<%- include('./partials/footer.ejs') %>

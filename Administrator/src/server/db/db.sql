@@ -61,11 +61,14 @@ INSERT INTO `calendar` (`title`, `description`, `day`, `price`, `block`, `time_s
                       ('Acostango Milonga', 'Every Saturday night we organize our milonga, a special night, with very good music and a splendid floor. Very close to the center which makes it very accessible', 'Saturday', 10, null, '20:30:00', '22:00:00', 'class', false);
 
 -- Uers table
-CREATE TABLE `users` (
+CREATE TABLE `user` (
   `id_user` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(50) NOT NULL,
-  `pass_u` VARCHAR(50) NOT NULL,
+  `pass_u` VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- INSERT INTO `user` (`username`, `pass_u`) VALUES
+-- ('admin', 'admin');
 
 -- /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 -- /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
