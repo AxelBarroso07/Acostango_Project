@@ -1,7 +1,8 @@
+// package for the env variables
 import dotenv from 'dotenv';
-
+// automatically loads the .env file and configured
 dotenv.config();
-
+// export the env variables
 export const PORT = process.env.PORT;
 export const DB_HOST = process.env.DB_HOST;
 export const DB_PORT = process.env.DB_PORT;

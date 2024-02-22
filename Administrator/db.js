@@ -1,7 +1,8 @@
+// package for connecting to the database
 import { createPool } from 'mysql2/promise';
-
+//ENV variables for the database
 import { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_DATABASE } from './config.js';
-
+// create a pool of connections to the database
 export const pool = createPool({
     host: DB_HOST,
     user: DB_USER,
