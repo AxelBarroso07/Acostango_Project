@@ -1,22 +1,22 @@
-function showHide(action, modalId) {
+function showHide(action, modalId) { // show hide modal considering action and modalId
 
-    const dialog = document.getElementById(modalId)
+    const dialog = document.getElementById(modalId) // get modal by id
     // console.log(modalId)
 
     if (action === true) {
-        dialog.style.display = 'block'
+        dialog.style.display = 'block' // if the action is true, show the modal
     } else if(action === false) {
-        dialog.style.display = 'none'
+        dialog.style.display = 'none' // else hide the modal
         dialog.close()
     }
 }
 
 async function config() {
-    let port = 0
-    let host = ''
+    let port = 0 // default port
+    let host = '' // default host
 
     try {
-        const response = await fetch(`/config`, {
+        const response = await fetch(`/config`, { // fetch the config file
             'method': 'GET',
             'headers' : {
                 'Content-Type': 'application/json'
@@ -33,83 +33,85 @@ async function config() {
             console.log('Error en config.ok de fetch /config')
         }
     } catch(error) {
-        console.log('Error en try fetch /config. error:', error)
+        console.log('Error:', error)
     }
     return { port, host }
 }
 
-function hideModal(modalId, idCalendar, originalTitle) {
-    const dialog = document.getElementById(modalId)
+function hideModal(modalId, idCalendar, originalTitle) { // hide modal and close it
+    const dialog = document.getElementById(modalId) // get modal by id
+
     if (dialog) {
-        const titleInput = document.getElementById('editTitle_' + idCalendar)
+        const titleInput = document.getElementById('editTitle_' + idCalendar) // get input by id of the title
         if (titleInput) {
-            titleInput.value = originalTitle
+            titleInput.value = originalTitle // set the value of the input with the original title
         }
 
-        dialog.style.display = 'none'
-        dialog.close()
+        dialog.style.display = 'none' // hide the modal if it exists
+        dialog.close() // close the modal if it exists
     }
 }
 
-function editClass(idCalendarDB) {
+function editClass(idCalendarDB) { // show the modal to edit the class
     // console.log("idCalendar:", idCalendarDB)
 
-    const dialog = document.getElementById('editFields_' + idCalendarDB)
+    const dialog = document.getElementById('editFields_' + idCalendarDB) // get the modal by id
     if (dialog) {
-        dialog.style.display = 'block'
+        dialog.style.display = 'block' // show the modal if it exists
     }
 }
 
-function confirmEdit(idCalendarDB, titleDB, descriptionDB, timeStartDB, timeFinishDB) {
-    const dialog = document.getElementById('editFields_' + idCalendarDB)
+function confirmEdit(idCalendarDB, titleDB, descriptionDB, timeStartDB, timeFinishDB) { // confirm the changes in the class
+
+    const dialog = document.getElementById('editFields_' + idCalendarDB) // get the modal by id
 
     const newTitle = document.getElementById('editTitle_' + idCalendarDB).value
     const newDescription = document.getElementById('editDescription_' + idCalendarDB).value
     const newTimeStart = document.getElementById('editTimeStart_' + idCalendarDB).value
-    const newTimeFinish = document.getElementById('editTimeFinish_' + idCalendarDB).value
+    const newTimeFinish = document.getElementById('editTimeFinish_' + idCalendarDB).value // get the values of the inputs in the modal
 
-    console.log(newTimeStart)
-    console.log(newDescription)
-    console.log(newTimeFinish)
+    // console.log(newTimeStart)
+    // console.log(newDescription)
+    // console.log(newTimeFinish)
 
-    const port = '<%= process.env.PORT %>'
-    const host = '<%= process.env.DB_HOST %>'
-
+    const port = '<%= process.env.PORT %>' // get the port and host from the environment variables
+    const host = '<%= process.env.DB_HOST %>' // get the port and host from the environment variables
+    
     const newData = {}
 
     if (dialog) {
-        dialog.close()
+        dialog.close() // close the modal if it exists
     }
 
     if (newTitle !== titleDB) {
-        newData.newTitle = newTitle
+        newData.newTitle = newTitle // if the new title is different from the original, set the new title
     }
     if (newTimeStart !== timeStartDB) {
-        newData.newTimeStart = newTimeStart
+        newData.newTimeStart = newTimeStart // if the new time start is different from the original, set the new time start
     }
     if (newDescription !== descriptionDB) {
-        newData.newDescription = newDescription
+        newData.newDescription = newDescription // if the new description is different from the original, set the new description
     }
     if (newTimeFinish !== timeFinishDB) {
-        newData.newTimeFinish = newTimeFinish
+        newData.newTimeFinish = newTimeFinish // if the new time finish is different from the original, set the new time finish
     }
     
     if(Object.keys(newData).length > 0) {
         // Realizar la solicitud de fetch con los datos del formulario
-        fetch(`http://${host}:${port}/editClass/${idCalendarDB}`, {
+        fetch(`http://${host}:${port}/editClass/${idCalendarDB}`, { // fetch the url with the id of the class
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json' // set the headers
             },
             body: JSON.stringify({
-                newData
+                newData // send the new data to the server
             })
         })
         .then(response => response.json())
         .then(data => {
-            console.log("Cambios confirmados:", data)
-            dialog.style.display = 'none'
-            dialog.close()
+            // console.log("Cambios confirmados:", data)
+            dialog.style.display = 'none' // hide the modal if it exists
+            dialog.close() // close the modal if it exists
             // console.log(window.location.href)
             // location.reload();
         })

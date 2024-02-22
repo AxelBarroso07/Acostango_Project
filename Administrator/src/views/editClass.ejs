@@ -7,74 +7,73 @@
 </div>
 
 <div>
-    <form id="formClassEdit" data-id="<%= data.id_calendar %>">
+    <form id="formClassEdit" data-id="<%= data.id_calendar %>"> <!-- the form sends the data with the class to be edited -->
         <h1>Edit class</h1>
         <div class="form">
-            <div class="primary__rows">
+            <div class="primary__rows"> <!-- the user enters the title, description, day, price, block of classes, workshop, time start and time finish of the class -->
                 <div class="columns">
-                    <input type="text" id="title" name="title" min="3" max="40" value="<%= data.title %>" required placeholder="TITLE"> 
+                    <input type="text" id="title" name="title" min="3" max="40" value="<%= data.title %>" required placeholder="TITLE"> <!-- the user enters the title of the class -->
                     
-                    <select name="day" id="day" required placeholder="SELECT DAY">
+                    <select name="day" id="day" required placeholder="SELECT DAY"> <!-- the user selects the day of the week -->
                         <option disabled selected hidden value="">Week day</option>
-                        <% for(let i = 0; i < weekDay.length; i++) { %>
-                            <% const day = weekDay[i]; %>
+                        <% for(let i = 0; i < weekDay.length; i++) { %> <!-- the loop iterates through the days of the week -->
+                            <% const day = weekDay[i]; %> <!-- the day of the week is set to the current day -->
                     
-                            <% const isDayFull = fullDays && fullDays[day.toLowerCase()] && fullDays[day.toLowerCase()].classes.length >= 3; %>
+                            <% const isDayFull = fullDays && fullDays[day.toLowerCase()] && fullDays[day.toLowerCase()].classes.length >= 3; %> <!-- the day is set to full if there are 3 classes -->
                             
-                            <option value="<%- day %>" <%= data.day === day ? 'selected' : '' %> <%= isDayFull === false ? 'disabled' : '' %>>
+                            <option value="<%- day %>" <%= data.day === day ? 'selected' : '' %> <%= isDayFull === false ? 'disabled' : '' %>> <!-- the day of the week is displayed in the select -->
                                 <%- day %><%- isDayFull === false ? ' (Full)' : '' %>
                             </option>
                         <% } %>
                     </select>
                 </div>
 
-                <textarea id="description" name="description" cols="50" rows="4" style="resize: none;" required placeholder="DESCRIPTION"><%= data.description %></textarea>
+                <textarea id="description" name="description" cols="50" rows="4" style="resize: none;" required placeholder="DESCRIPTION"><%= data.description %></textarea> <!-- the user enters the description of the class -->
             </div>
 
-            <div class="second__rows-column">
-                
-                <div class="precio__block">
-                    <input type="number" id="price" name="price" value="<%= data.price %>" min="0" max="999999" placeholder="PRICE">
+            <div class="second__rows-column"> <!-- the user enters the price, block of classes, workshop, time start and time finish of the class -->
+                <div class="precio__block"> <!-- the user enters the price and block of classes of the class -->
+                    <input type="number" id="price" name="price" value="<%= data.price %>" min="0" max="999999" placeholder="PRICE"> <!-- the user enters the price of the class -->
                     
-                    <input type="number" id="block" name="block" value="<%= data.block %>" min="0" max="99999" placeholder="BLOCK OF 10 CLASSES">
+                    <input type="number" id="block" name="block" value="<%= data.block %>" min="0" max="99999" placeholder="BLOCK OF 10 CLASSES"> <!-- the user enters the block of classes of the class -->
                 </div>
                 
                 <div class="workshop">
                     <label>Workshop</label>
-                    <div class="optionYes">
+                    <div class="optionYes"> <!-- the user selects if the class is a workshop -->
                        <label for="workshopOptionTrue">Yes</label>
-                       <input type="radio" id="workshopOptionTrue" value="true" name="workshop" <%= data.workshop === 1 ? 'checked' : '' %> required>
+                       <input type="radio" id="workshopOptionTrue" value="true" name="workshop" <%= data.workshop === 1 ? 'checked' : '' %> required> <!-- the user selects if the class is a workshop -->
                     </div>
                     <div class="optionNo">
                        <label for="workshopOptionFalse">No</label>
-                       <input type="radio" id="workshopOptionFalse" value="false" name="workshop" <%= data.workshop === 0 ? 'checked' : '' %> required>
+                       <input type="radio" id="workshopOptionFalse" value="false" name="workshop" <%= data.workshop === 0 ? 'checked' : '' %> required> <!-- the user selects if the class isn't a workshop -->
                     </div>
                 </div>
                 
                 <div class="hora">
                     <div class="horaStart">
                         <label for="time_start">Time start:</label>
-                        <input type="time" id="time_start" name="time_start" value="<%= data.time_start %>">
+                        <input type="time" id="time_start" name="time_start" value="<%= data.time_start %>"> <!-- the user enters the time start of the class -->
                     </div>
                     
                     <div class="horaFinish">
                         <label for="time_finish">Time finish:</label>
-                        <input type="time" id="time_finish" name="time_finish" value="<%= data.time_finish %>">
+                        <input type="time" id="time_finish" name="time_finish" value="<%= data.time_finish %>"> <!-- the user enters the time finish of the class -->
                     </div>
                 </div>
 
             </div>
 
-            <button type="submit" class="btn-Edit">Edit class</button>
+            <button type="submit" class="btn-Edit">Edit class</button> <!-- if the user clicks the button, the class is edited -->
         </div>
     </form>
 </div>
 
 <script>
-    const formClassEdit = document.querySelector("#formClassEdit")
+    const formClassEdit = document.querySelector("#formClassEdit") // the form is selected
 
-    formClassEdit.addEventListener('submit', async (e) => {
-        e.preventDefault()
+    formClassEdit.addEventListener('submit', async (e) => { // the form sends the data with the class information to the server for his edition
+        e.preventDefault() // the default behavior of the form is prevented
 
         const id = formClassEdit.dataset.id
         const title = formClassEdit.querySelector("#title").value
@@ -84,9 +83,9 @@
         const block = formClassEdit.querySelector("#block").value
         const timeStart = formClassEdit.querySelector("#time_start").value
         const timeFinish = formClassEdit.querySelector("#time_finish").value
-        const workshop = formClassEdit.querySelector('input[name="workshop"]:checked').value;
+        const workshop = formClassEdit.querySelector('input[name="workshop"]:checked').value; // the user selects if the class is a workshop
 
-        const data = {
+        const data = { // data const is set with the class information
             id,
             title,
             description,
@@ -98,28 +97,27 @@
             workshop
         }
         
-        const response = await fetch(`/confirmEditClass/${data.id}`, {
-            'method': 'PUT',
+        const response = await fetch(`/confirmEditClass/${data.id}`, { // the class information is sent to the server for his edition
+            'method': 'PUT', // the method is set to put
             'headers': {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json' // the content type is set to json
             },
             body: JSON.stringify({
-                data
+                data // the class information is sent to the server
             })
         })
 
-        const result = await response.json()
+        const result = await response.json() // the response is set to result
 
         if(result.isUpdateRegister) {
-            console.log("result.isUpdateRegister is true")
-            window.location.href = '/home'
+            // console.log("result.isUpdateRegister is true")
+            window.location.href = '/home' // if the class is edited, the user is redirected to the home page
         } else {
-            console.log("result.isUpdateRegister is false")
-            console.log(result)
-            window.location.href = '/error'
+            // console.log("result.isUpdateRegister is false")
+            // console.log(result)
+            window.location.href = '/error' // else the user is redirected to the error page
         }
 
     })
 </script>
-
 <%- include('./partials/footer.ejs') %>

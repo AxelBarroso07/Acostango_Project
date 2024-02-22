@@ -30,6 +30,7 @@ CREATE DATABASE acostango;
 
 USE acostango;
 
+-- Table for the calendar of classes, workshops and events
 CREATE TABLE `calendar` (
   `id_calendar` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `title` VARCHAR(100) NOT NULL,
@@ -46,7 +47,7 @@ CREATE TABLE `calendar` (
   `workshop` BOOLEAN NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- classes and workshops rows
+-- Inserts classes and workshops into the calendar
 INSERT INTO `calendar` (`title`, `description`, `day`, `price`, `block`, `time_start`, `time_finish`, `category`, `workshop`) VALUES
                       ('Intermediate & Advance', 'These classes are aimed at people who already have experience in dancing tango. It is necessary to come as a couple to take the advanced classes. In this class technical concepts and complex movements of Tango are handled. We will wait for you!!!', 'Monday', 15, 180, '18:00:00', '19:00:00', 'class', false),
                       ('AcosTango Afterwork Milonga', 'Come dance right after work, switch off dancing after a day of work and go to bed early.
@@ -60,7 +61,7 @@ INSERT INTO `calendar` (`title`, `description`, `day`, `price`, `block`, `time_s
                       ('Special Workshop', 'These workshops are thematic, they work on a specific tango theme or movement, for example sacda, volleys, hooks or sweeps or a musical rhythm such as milonga, waltz or musicality with different tango composers and every three weeks we change the theme', 'Saturday', 25, null, '19:00:00', '20:30:00', 'class', true),
                       ('Acostango Milonga', 'Every Saturday night we organize our milonga, a special night, with very good music and a splendid floor. Very close to the center which makes it very accessible', 'Saturday', 10, null, '20:30:00', '22:00:00', 'class', false);
 
--- Uers table
+-- user table
 CREATE TABLE `user` (
   `id_user` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(50) NOT NULL,

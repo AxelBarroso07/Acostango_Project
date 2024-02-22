@@ -8,50 +8,50 @@
 </div>
 
 <div>
-    <form action="/confirmCreateEvent" id="formEvent" enctype="multipart/form-data" method="POST">
+    <form action="/confirmCreateEvent" id="formEvent" enctype="multipart/form-data" method="POST"> <!-- the form sends the data with the event to be created -->
         <h1>New Event</h1>
         <div class="form">
             <div class="primary__rows">
-                <input type="text" id="title" name="title" min="3" max="100" value="" required placeholder="TITLE">
+                <input type="text" id="title" name="title" min="3" max="100" value="" required placeholder="TITLE"> <!-- the user enters the title of the event -->
                 
-                <textarea id="description" name="description" cols="50" rows="4" maxlength="100" style="resize: none;" value="" required placeholder="DESCRIPTION"></textarea>
+                <textarea id="description" name="description" cols="50" rows="4" maxlength="100" style="resize: none;" value="" required placeholder="DESCRIPTION"></textarea> <!-- the user enters the description of the event -->
                 
-                <select name="day" id="day" required placeholder="SELECT DAY">
+                <select name="day" id="day" required placeholder="SELECT DAY"> <!-- the user selects the day of the week -->
                     <option disabled selected hidden value="">Week day</option>
-                    <% for(let i = 0; i < weekDay.length; i++) {%>
+                    <% for(let i = 0; i < weekDay.length; i++) {%> <!-- the loop iterates through the days of the week -->
                         <option value="<%- weekDay[i] %>">
-                            <%- weekDay[i] %>
+                            <%- weekDay[i] %> <!-- the day of the week is displayed in the select -->
                         </option>
                         <% } %>
                 </select>
             </div>
 
-            <div class="second__rows-column">
-                <input type="text" id="location" max="50" name="location" required placeholder="LOCATION">
+            <div class="second__rows-column"> <!-- the user enters the location, price, time start, date and image of the event -->
+                <input type="text" id="location" max="50" name="location" required placeholder="LOCATION"> <!-- the user enters the location of the event -->
                     
-                <input type="number" id="price" name="price" required placeholder="PRICE">
+                <input type="number" id="price" name="price" required placeholder="PRICE"> <!-- the user enters the price of the event -->
                     
                     
                 <div class="select__image">
                     <label for="image">Select Image:</label>
-                    <input type="file" id="image" class="image" name="image" accept="image/*" >
+                    <input type="file" id="image" class="image" name="image" accept="image/*"> <!-- the user selects the image of the event -->
                 </div>
             </div>
 
             <div class="hora__date">
                 <div class="horaStart">
                     <label for="time_start">Time start:</label>
-                    <input type="time" id="time_start" name="time_start" required>
+                    <input type="time" id="time_start" name="time_start" required> <!-- the user enters the time start of the event -->
                 </div>
             
                 <div class="date">
                     <label for="date">Date:</label>
-                    <input type="date" id="date" name="date" required >
+                    <input type="date" id="date" name="date" required> <!-- the user enters the date of the event -->
                 </div>
             </div>
             
             
-            <button type="submit" id="createEventButton">Create</button>
+            <button type="submit" id="createEventButton">Create</button> <!-- the user clicks the button to create the event -->
         </div>
     </form>
 </div>

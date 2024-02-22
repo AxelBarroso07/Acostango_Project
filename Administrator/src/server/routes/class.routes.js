@@ -3,15 +3,15 @@ import { getCreateClass, postConfirmCreateClass, getEditClass, putConfirmEditCla
 
 const router = Router();
 
-//Create Class
+// create class routes
 router.get('/createClass', getCreateClass);
 router.post('/confirmCreateClass', postConfirmCreateClass);
 
-//Edit class
+// edit class routes
 router.get('/editClass/:idCalendar', getEditClass);
 router.put('/confirmEditClass/:idCalendar', putConfirmEditClass);
 
-//Delete class
+// delete class routes
 router.delete('/deleteClass/:idCalendar', deleteClass);
 
 export default router;

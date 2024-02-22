@@ -3,7 +3,7 @@ import { getHandleError } from '../controllers/error.controller.js';
 
 const router = Router();
 
-//Handle errors
+// error route
 router.get('/error', getHandleError);
 
 export default router;

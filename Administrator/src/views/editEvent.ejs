@@ -5,21 +5,21 @@
         <i class="fa-solid fa-arrow-left" style="color: #0c0c0f;"></i>
     </a>
 </div>
-
+<% console.log("desde editEvent.ejs") %>
 <div>
-    <form id="formEventEdit" data-id="<%= data.id_calendar %>" enctype="multipart/form-data">
+    <form id="formEventEdit" data-id="<%= data.id_calendar %>" enctype="multipart/form-data"> <!-- the form sends the data with the event to be edited -->
         <h1>Edit event</h1>
         <div class="form">
-            <div class="primary__rows">
-                <input type="text" id="title" name="title" min="3" max="100" value="<%= data.title %>" placeholder="TITLE">
+            <div class="primary__rows"> <!-- the user enters the title, description and day of the event -->
+                <input type="text" id="title" name="title" min="3" max="100" value="<%= data.title %>" placeholder="TITLE"> <!-- the user enters the title of the event -->
                 
-                <textarea id="description" name="description" cols="50" rows="4" maxlength="100" style="resize: none;" placeholder="DESCRIPTION" value=""><%= data.description %></textarea>
+                <textarea id="description" name="description" cols="50" rows="4" maxlength="100" style="resize: none;" placeholder="DESCRIPTION" value=""><%= data.description %></textarea> <!-- the user enters the description of the event -->
                 
-                <select name="day" id="day" placeholder="SELECT DAY">
+                <select name="day" id="day" placeholder="SELECT DAY"> <!-- the user selects the day of the week -->
                     <option disabled selected hidden value="">Week day</option>
                     <% for(let i = 0; i < weekDay.length; i++) { %>
                         <% const day = weekDay[i]; %>
-                        <option value="<%- day %>" <%= data.day === day ? 'selected' : '' %>>
+                        <option value="<%- day %>" <%= data.day === day ? 'selected' : '' %>> <!-- the day of the week is displayed in the select -->
                             <%= day %>
                         </option>
                     <% } %>
@@ -30,85 +30,86 @@
 
             
             
-           <div class="second__rows-column">
+           <div class="second__rows-column"> <!-- the user enters the location, price, time start, date and image of the event -->
                 <div class="precio__block">
-                    <input type="text" id="location" max="50" name="location" value="<%= data.location %>" placeholder="LOCATION">
+                    <input type="text" id="location" max="50" name="location" value="<%= data.location %>" placeholder="LOCATION"> <!-- the user enters the location of the event -->
                     
-                    <input type="number" id="price" name="price" value="<%= data.price %>" placeholder="PRICE">
+                    <input type="number" id="price" name="price" value="<%= data.price %>" placeholder="PRICE"> <!-- the user enters the price of the event -->
                 </div>
 
-            <div class="columns">
+            <div class="columns"> <!-- the user enters the time start and date of the event -->
                     <div class="hora">
                         <div class="horaStart">
                             <label for="time_start">Time start:</label>
-                            <input type="time" id="time_start" name="time_start" value="<%= data.time_start %>">
+                            <input type="time" id="time_start" name="time_start" value="<%= data.time_start %>"> <!-- the user enters the time start of the event -->
                         </div>
                     </div>
                 
-                <div class="date">
+                <div class="date"> <!-- the user enters the date of the event -->
                      <label for="date">Date:</label>
-                     <input type="date" id="date" name="date" value="<%= date_formatted %>"> 
+                     <input type="date" id="date" name="date" value="<%= date_formatted %>">  <!-- the user enters the date of the event -->
                 </div>
             </div>
              
              
 
-            <div class="image__container">
+            <div class="image__container"> <!-- the user selects the image of the event -->
                  <label >Select new image:</label>
                  <label for="image"><img src="<%= data.image %>" width="200" height="100" style="cursor: pointer;"></label>
-                 <input type="file" id="image" class="image" name="image" accept="image/*" style="visibility: hidden;">
+                 <input type="file" id="image" class="image" name="image" accept="image/*" style="visibility: hidden;"> <!-- the user selects the image of the event -->
             </div>
            </div>
            
             
-            <button type="submit">Edit event</button>
+            <button type="submit">Edit event</button> <!-- if the user clicks the button, the event is edited -->
         </div>
     </form>
 </div>
 <script>
     const formEventEdit = document.querySelector("#formEventEdit")
 
-    formEventEdit.addEventListener('submit', async (e) => {
-    e.preventDefault()
+    formEventEdit.addEventListener('submit', async (e) => { // the form sends the data with the event information to the server for his edition
+        e.preventDefault() // the default behavior of the form is prevented
 
-    const id = formEventEdit.dataset.id
-    const title = formEventEdit.querySelector("#title").value
-    const description = formEventEdit.querySelector("#description").value
-    const image = formEventEdit.querySelector("#image").files[0]
-    const day = formEventEdit.querySelector("#day").value
-    const date = formEventEdit.querySelector("#date").value
-    const location = formEventEdit.querySelector("#location").value
-    const price = formEventEdit.querySelector("#price").value
-    const timeStart = formEventEdit.querySelector("#time_start").value
+        // the event information is obtained from the form
+        const id = formEventEdit.dataset.id
+        const title = formEventEdit.querySelector("#title").value
+        const description = formEventEdit.querySelector("#description").value
+        const image = formEventEdit.querySelector("#image").files[0]
+        const day = formEventEdit.querySelector("#day").value
+        const date = formEventEdit.querySelector("#date").value
+        const location = formEventEdit.querySelector("#location").value
+        const price = formEventEdit.querySelector("#price").value
+        const timeStart = formEventEdit.querySelector("#time_start").value
 
-    console.log("info from formClassEdit:", id, title, description, day, timeStart, day, image, date, location, price)
-    const formData = new FormData();
-    formData.append('id', id);
-    formData.append('title', title);
-    formData.append('description', description);
-    formData.append('image', image);
-    formData.append('day', day);
-    formData.append('date', date);
-    formData.append('location', location);
-    formData.append('price', price);
-    formData.append('timeStart', timeStart);
-    
-    const response = await fetch(`/confirmEditEvent/${id}`, {
-        'method': 'PUT',
-        body: formData
+        // console.log("info from formClassEdit:", id, title, description, day, timeStart, day, image, date, location, price)
+        const formData = new FormData(); // the form data is created
+        formData.append('id', id);
+        console.log(id)
+        formData.append('title', title);
+        formData.append('description', description);
+        formData.append('image', image);
+        formData.append('day', day);
+        formData.append('date', date);
+        formData.append('location', location);
+        formData.append('price', price);
+        formData.append('timeStart', timeStart); // the event information is added to the form data
+        
+        const response = await fetch(`/confirmEditEvent/${id}`, { // the event information is sent to the server for his edition
+            'method': 'PUT', // the method is set to put
+            body: formData // the form data is sent to the server
+        })
+
+        const result = await response.json() // the response is converted to json format
+
+        if(result.isUpdateRegister) {
+            // console.log("result.isUpdateRegister is true")
+            window.location.href = '/home' // if the event is edited, the user is redirected to the home page
+        } else {
+            // console.log("result.isUpdateRegister is false")
+            // console.log(result)
+            window.location.href = '/error' // else the user is redirected to the error page
+        }
     })
-
-    const result = await response.json()
-
-    if(result.isUpdateRegister) {
-        console.log("result.isUpdateRegister is true")
-        window.location.href = '/home'
-    } else {
-        console.log("result.isUpdateRegister is false")
-        console.log(result)
-        window.location.href = '/error'
-    }
-
-})
 </script>
 <%- include('./partials/footer.ejs') %>
