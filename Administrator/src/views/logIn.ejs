@@ -1,12 +1,18 @@
 <%- include('./partials/header.ejs', { titlePage: 'Log In', pageStyle: 'login.css' }) %>
-<h1>Log in</h1>
-<form action="/userValidation" id="form" method="POST"> <!-- the form sends the data with user and password to the server for his validation -->
-    <label for="username">User:</label>
-    <input type="text" placeholder="Enter your user" max="50" id="username" class="user" name="username"> <!-- the user enters his user -->
-
-    <label for="passsword">Password:</label>
-    <input type="password" placeholder="Enter your password" max="50" id="password" class="pass" name="password"> <!-- the user enters his password -->
+<div class="container__form">
+    <h1 class="title__form">Login</h1>
+    <form action="/userValidation" id="form" method="POST"> <!-- the form sends the data with user and password to the server for his validation -->
+        <div class="container__user">
+            <label for="username">User</label>
+            <input type="text" placeholder="Enter your user" max="50" id="username" class="user" name="username"> <!-- the user enters his user -->
+        </div>
     
-    <button type="submit" class="btn-login">LOG IN</button> <!-- the user clicks the button to send the data -->
-</form>
+       <div class="container__password">
+         <label for="passsword">Password</label>
+         <input type="password" placeholder="Enter your password" max="50" id="password" class="pass" name="password"> <!-- the user enters his password -->
+       </div>
+        
+        <button type="submit" class="btn-login">LOGIN</button> <!-- the user clicks the button to send the data -->
+    </form>
+</div>
 <%- include('./partials/footer.ejs') %>

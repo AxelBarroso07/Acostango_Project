@@ -67,7 +67,7 @@ input[type="text"]{
     color: #000000;
     height: 60px;
     width: 100%;
-    text-transform: uppercase;
+    text-transform: lowercase;
     border-bottom: 1px #000 solid;
     font-weight: 700;
     font-size: 1em;
@@ -79,7 +79,7 @@ textarea{
     color: #000000;
     height: 100%;
     width: 80%;
-    text-transform: uppercase;
+    text-transform: lowercase;
     border-bottom: 1px #000 solid;
     font-weight: 700;
     font-size: 1em;
@@ -91,7 +91,7 @@ input[type="number"]{
     color: #000000;
     height: 50px;
     width: 100%;
-    text-transform: uppercase;
+    text-transform: lowercase;
     border-bottom: 1px #000 solid;
     font-weight: 700;
     font-size: 1em;
@@ -103,7 +103,7 @@ input[type="time"]{
     color: #000000;
     height: 40px;
     width: 50%;
-    text-transform: uppercase;
+    text-transform: lowercase;
     font-weight: 700;
     font-size: 1em;
 }
@@ -131,7 +131,7 @@ input[type="time"]{
     color: #000000;
     height: 50px;
     width: 400px;
-    text-transform: uppercase;
+    text-transform: lowercase;
     border-bottom: 1px #000 solid;
 }
 
@@ -214,7 +214,7 @@ input[type="time"]{
         color: #fff;
         height: 50px;
         width: 120px;
-        text-transform: uppercase;
+        text-transform: lowercase;
         font-weight: 700;
         font-size: 1em;
         margin: 0 auto;
@@ -226,7 +226,7 @@ input[type="time"]{
         color: #000000;
         height: 60px;
         width: 100%;
-        text-transform: uppercase;
+        text-transform: lowercase;
         border-bottom: 1px #000 solid;
         font-weight: 700;
         font-size: 1em;
@@ -238,7 +238,7 @@ input[type="time"]{
         color: #000000;
         height: 60px;
         width: 100%;
-        text-transform: uppercase;
+        text-transform: lowercase;
         border-bottom: 1px #000 solid;
         font-weight: 700;
         font-size: 1em;
@@ -250,7 +250,7 @@ input[type="time"]{
         color: #000000;
         height: 100%;
         width: 100%;
-        text-transform: uppercase;
+        text-transform: lowercase;
         border-bottom: 1px #000 solid;
         font-weight: 700;
         font-size: 1em;
@@ -262,7 +262,7 @@ input[type="time"]{
         color: #000000;
         height: 50px;
         width: 100%;
-        text-transform: uppercase;
+        text-transform: lowercase;
         border-bottom: 1px #000 solid;
         font-weight: 700;
         font-size: 1em;
@@ -274,7 +274,7 @@ input[type="time"]{
         color: #000000;
         height: 40px;
         width: 50%;
-        text-transform: uppercase;
+        text-transform: lowercase;
         font-weight: 700;
         font-size: 1em;
     }
@@ -298,7 +298,7 @@ input[type="time"]{
         color: #000000;
         height: 50px;
         width: 100%;
-        text-transform: uppercase;
+        text-transform: lowercase;
         border-bottom: 1px #000 solid;
     }
 }

@@ -23,15 +23,13 @@ const Nav = styled.nav`
     width:100%;
     height:100%;
   }
-
-
 `
 
 const NavBar = () => {
   return (
     <Nav>
       <MenuButton />
-        <div className="logo"><a href="/"><img src="../src/assets/icons/ACOSTANGO.svg" alt="acostango_logo" className='header__logo'/></a></div>
+        <div className="logo"><a href="/"><img src="../src/assets/image/logo-acostango-1.svg" alt="acostango_logo" className='header__logo'/></a></div>
       <ButtonLanguage />
     </Nav>
   )
