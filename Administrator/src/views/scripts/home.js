@@ -1,3 +1,6 @@
+const host = 'back.acostango.at'
+const protocol = 'https'
+
 function showHide(action, modalId) { // show hide modal considering action and modalId
 
     const dialog = document.getElementById(modalId) // get modal by id
@@ -9,33 +12,6 @@ function showHide(action, modalId) { // show hide modal considering action and m
         dialog.style.display = 'none' // else hide the modal
         dialog.close()
     }
-}
-
-async function config() {
-    let port = 0 // default port
-    let host = '' // default host
-
-    try {
-        const response = await fetch(`/config`, { // fetch the config file
-            'method': 'GET',
-            'headers' : {
-                'Content-Type': 'application/json'
-            }
-        })
-        
-        if(response.ok) {
-            const config = await response.json()
-            // console.log("config", config)
-
-            port = parseInt(config.PORT)
-            host = config.DB_HOST.toString()
-        } else {
-            console.log('Error en config.ok de fetch /config')
-        }
-    } catch(error) {
-        console.log('Error:', error)
-    }
-    return { port, host }
 }
 
 function hideModal(modalId, idCalendar, originalTitle) { // hide modal and close it
@@ -74,9 +50,6 @@ function confirmEdit(idCalendarDB, titleDB, descriptionDB, timeStartDB, timeFini
     // console.log(newDescription)
     // console.log(newTimeFinish)
 
-    const port = '<%= process.env.PORT %>' // get the port and host from the environment variables
-    const host = '<%= process.env.DB_HOST %>' // get the port and host from the environment variables
-    
     const newData = {}
 
     if (dialog) {
@@ -98,7 +71,7 @@ function confirmEdit(idCalendarDB, titleDB, descriptionDB, timeStartDB, timeFini
     
     if(Object.keys(newData).length > 0) {
         // Realizar la solicitud de fetch con los datos del formulario
-        fetch(`http://${host}:${port}/editClass/${idCalendarDB}`, { // fetch the url with the id of the class
+        fetch(`${protocol}://${host}/editClass/${idCalendarDB}`, { // fetch the url with the id of the class
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json' // set the headers
@@ -124,11 +97,11 @@ function confirmEdit(idCalendarDB, titleDB, descriptionDB, timeStartDB, timeFini
 }
 
 async function deleteClass(idCalendar) {
-    const { host, port } = await config()
+    
     
     console.log("idCalendar from deleteClass()", idCalendar);
     
-    fetch(`http://${host}:${port}/deleteClass/${idCalendar}`, {
+    fetch(`${protocol}://${host}/deleteClass/${idCalendar}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
@@ -143,12 +116,8 @@ async function deleteClass(idCalendar) {
     })
 }
 
-async function deleteEvent(idCalendar) {
-    const { host, port } = await config()
-    
-    console.log("idCalendar from deleteClass()", idCalendar);
-    
-    fetch(`http://${host}:${port}/deleteEvent/${idCalendar}`, {
+async function deleteEvent(idCalendar) { 
+    fetch(`${protocol}://${host}/deleteEvent/${idCalendar}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
@@ -164,34 +133,8 @@ async function deleteEvent(idCalendar) {
 }
 
 async function createClass(formData) {
-    let port = 0
-    let host = ''
-
     try {
-        const response = await fetch(`/config`, {
-            'method': 'GET',
-            'headers' : {
-                'Content-Type': 'application/json'
-            }
-        })
-        
-        if(response.ok) {
-            const config = await response.json()
-            // console.log("config", config)
-
-            port = parseInt(config.PORT)
-            host = config.DB_HOST.toString()
-        } else {
-            console.log('Error en config.ok de fetch /config')
-        }
-    } catch(error) {
-        console.log('Error en try fetch /config. error:', error)
-    }
-
-    console.log("data from createClass():", formData)
-
-    try {
-        const response = await fetch(`http://${host}:${port}/newClass`, {
+        const response = await fetch(`${protocol}://${host}/newClass`, {
             method: 'POST',
             body: formData
         })
