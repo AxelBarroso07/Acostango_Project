@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && npm run copy-assets",
+    "copy-assets": "xcopy /s /e src\\assets\\imageEvents dist\\assets\\imageEvents",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "nodemon": "nodemon ./index.js"

@@ -67,11 +67,24 @@ export const postConfirmCreateEvent = async(req, res) => {
         const fileExtension2 = req.file.filename.split('.').pop().toLowerCase(); // File extension 
         let fileCompress2 = sharp(imagePath2); // Image to compress
         if (fileExtension2 === 'jpg' || fileExtension2 === 'jpeg') {
-            fileCompress2 = fileCompress2.jpeg({ quality: 20 }) // Compress image to 20% quality
+            fileCompress2 = fileCompress2.jpeg({ quality: 50 }) // Compress image to 50% quality
         } else if (fileExtension2 === 'png') {
-            fileCompress2 = fileCompress2.png({ quality: 20 })
+            fileCompress2 = fileCompress2.png({ quality: 50 })
         } 
         await fileCompress2.toFile(compressedImagePath2); // Save the compressed image
+
+        // Compress image for dist folder
+        const imagePath3 = req.file.path.replace(/\s/g, '_'); // Image original name
+        const compressedPath3 = __dirname + '/../../../../Acostango/dist/assets/imageEvents/' // Directory Path for compressed images
+        const compressedImagePath3 = compressedPath3 + req.file.filename; // Path for compressed images
+        const fileExtension3 = req.file.filename.split('.').pop().toLowerCase(); // File extension 
+        let fileCompress3 = sharp(imagePath3); // Image to compress
+        if (fileExtension3 === 'jpg' || fileExtension3 === 'jpeg') {
+            fileCompress2 = fileCompress3.jpeg({ quality: 50 }) // Compress image to 50% quality
+        } else if (fileExtension3 === 'png') {
+            fileCompress3 = fileCompress3.png({ quality: 50 })
+        } 
+        await fileCompress3.toFile(compressedImagePath3); // Save the compressed image
         
         const data = { // Set the data to insert in the database
             title: reqBody.title,
@@ -141,6 +154,7 @@ export const putConfirmEditEvent = async (req,res) =>{
         // Compress image
         const imagePath = req.file && req.file.path !== undefined ? req.file.path : reqBody.image.replaceAll('../public/images/', ''); //Image original name
         const imagePath2 = req.file && req.file.path !== undefined ? req.file.path.replace(/\s/g, '_') : reqBody.image.replace(/\s/g, '_'); //Image original name
+        const imagePath3 = req.file && req.file.path !== undefined ? req.file.path.replace(/\s/g, '_') : reqBody.image.replace(/\s/g, '_'); //Image original name
         let dirPhotoCompressed = ''
 
         const compressedPath = 'src/public/images/'//Directory Path for compressed images
@@ -153,9 +167,9 @@ export const putConfirmEditEvent = async (req,res) =>{
             let fileCompress = sharp(imagePath);//Image to compress
     
             if (fileExtension === 'jpg' || fileExtension === 'jpeg') {
-                fileCompress = fileCompress.jpeg({ quality: 20 })
+                fileCompress = fileCompress.jpeg({ quality: 50 })
             } else if (fileExtension === 'png') {
-                fileCompress = fileCompress.png({ quality: 20 })
+                fileCompress = fileCompress.png({ quality: 50 })
             } 
             await fileCompress.toFile(compressedImagePath);
             
@@ -169,11 +183,23 @@ export const putConfirmEditEvent = async (req,res) =>{
             const fileExtension2 = req.file.filename.split('.').pop().toLowerCase();//File extension
             let fileCompress2 = sharp(imagePath2);//Image to compress
             if (fileExtension2 === 'jpg' || fileExtension2 === 'jpeg') {
-                fileCompress2 = fileCompress2.jpeg({ quality: 20 })
+                fileCompress2 = fileCompress2.jpeg({ quality: 50 })
             } else if (fileExtension2 === 'png') {
-                fileCompress2 = fileCompress2.png({ quality: 20 })
+                fileCompress2 = fileCompress2.png({ quality: 50 })
             } 
             await fileCompress2.toFile(compressedImagePath2);
+
+            // compress image to dist folder
+            const compressedPath3 = __dirname + '/../../../../Acostango/dist/assets/imageEvents/'//Directory Path for compressed images
+            const compressedImagePath3 = compressedPath3 + req.file.filename;//Path for compressed images
+            const fileExtension3 = req.file.filename.split('.').pop().toLowerCase();//File extension
+            let fileCompress3 = sharp(imagePath3);//Image to compress
+            if (fileExtension3 === 'jpg' || fileExtension3 === 'jpeg') {
+                fileCompress3 = fileCompress3.jpeg({ quality: 50 })
+            } else if (fileExtension3 === 'png') {
+                fileCompress3 = fileCompress3.png({ quality: 50 })
+            } 
+            await fileCompress3.toFile(compressedImagePath3);
         } else {
             const fileCompressedImage = reqBody.image
             dirPhotoCompressed = `${fileCompressedImage}`

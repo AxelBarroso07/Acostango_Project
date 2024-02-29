@@ -7,5 +7,7 @@ export default defineConfig({
   define: {
     'process.env.PORT': JSON.stringify(process.env.PORT),
     'process.env.DB_HOST': JSON.stringify(process.env.DB_HOST)
-  }
+  },
+  assetsInclude: ['src/assets/imageEvents/'],
+  assetsOutputPath: 'assets/imageEvents'
 })
