@@ -52,7 +52,7 @@ function PageEvents() {
                 data.map(itemEvent => (
                     <div key={itemEvent.idCalendar} className="event">
                       <div className="container__img">
-                        <img src={`src/assets/imageEvents/${itemEvent.image}`} alt={itemEvent.title} className="image__event" />
+                        <img src={`assets/imageEvents/${itemEvent.image}`} alt={itemEvent.title} className="image__event" />
                       </div>
                       <h2 className="title__event">
                         {itemEvent.title}
