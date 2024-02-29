@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export const corsOptions = {
-    origin: `http://${process.env.VITE_DB_HOST}:${process.env.VITE_PORT}`,
+    origin: `${process.env.VITE_PROTOCOL}://*.${process.env.VITE_DOMAIN}`,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
     optionsSuccessStatus: 204,

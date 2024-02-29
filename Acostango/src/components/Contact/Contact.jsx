@@ -16,10 +16,12 @@ function Contact() {
 
   const fetchSendMail = async () => {
     try {
-      const HOST = import.meta.env.VITE_DB_HOST;
+      const HOST = import.meta.env.VITE_BACKEND_HOST;
       const PORT = import.meta.env.VITE_PORT_SERVER;
+      const definitivePort = PORT ? `:${PORT}` : ''
+      const VITE_PROTOCOL = import.meta.env.VITE_PROTOCOL;
 
-      const response = await fetch(`http://${HOST}:${PORT}/sendMail`, {
+      const response = await fetch(`${VITE_PROTOCOL}://${HOST}${definitivePort}/sendMail`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

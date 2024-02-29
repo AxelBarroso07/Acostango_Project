@@ -13,10 +13,14 @@ function Calendar() {
 
   const fetchDataCalendar = useCallback(async () => {
     try {
-      const HOST = import.meta.env.VITE_DB_HOST;
+      const HOST = import.meta.env.VITE_BACKEND_HOST;
       const PORT = import.meta.env.VITE_PORT_SERVER;
+      const definitivePort = PORT ? `:${PORT}` : ''
+      const VITE_PROTOCOL = import.meta.env.VITE_PROTOCOL;
 
-      const response = await fetch(`http://${HOST}:${PORT}/calendar`, {
+      console.log(`${VITE_PROTOCOL}://${HOST}${definitivePort}/calendar`)
+
+      const response = await fetch(`${VITE_PROTOCOL}://${HOST}${definitivePort}/calendar`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'

@@ -6,6 +6,8 @@ import cors from 'cors';
 
 import { PORT, corsOptions } from './config.js';
 
+console.log(corsOptions, PORT)
+
 import calendarRoutes from './src/server/routes/calendar.routes.js';
 import classesRoutes from './src/server/routes/classes.routes.js';
 import eventsRoutes from './src/server/routes/events.routes.js';
