@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import MenuButton from './MenuButton'
 import ButtonLanguage from '../ButtonLanguage/ButtonLanguage'
+import LogoAcostango from '../../assets/image/logo-acostango-1.svg'
 
 const Nav = styled.nav`
   height: 100px;
@@ -29,7 +30,7 @@ const NavBar = () => {
   return (
     <Nav>
       <MenuButton />
-        <div className="logo"><a href="/"><img src="../src/assets/image/logo-acostango-1.svg" alt="acostango_logo" className='header__logo'/></a></div>
+        <div className="logo"><a href="/"><img src={LogoAcostango} alt="acostango_logo" className='header__logo'/></a></div>
       <ButtonLanguage />
     </Nav>
   )

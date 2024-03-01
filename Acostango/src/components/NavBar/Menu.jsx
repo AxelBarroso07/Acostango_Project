@@ -4,6 +4,12 @@ import { Link } from 'react-router-dom';
 import i18n from '../../Translation/i18n.js';
 import { useTranslation } from 'react-i18next';
 
+import ImageClasses from '../../assets/image/classes.jpg'
+import ImageMilonga from '../../assets/image/milonga.jpg'
+import ImageEvents from '../../assets/image/events.jpg'
+import ImageRent from '../../assets/image/rent.jpg'
+
+
 const LeftMenu = styled.menu`
   display: flex;
   justify-content: center;
@@ -69,28 +75,28 @@ const LeftMenu = styled.menu`
   }
 
   .classes{
-    background-image:linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)), url(../src/assets/image/classes.jpg);
+    background-image:linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)), url(${ImageClasses});
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
   }
 
   .milonga{
-    background-image:linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)), url(../src/assets/image/milonga.jpg);
+    background-image:linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)), url(${ImageMilonga});
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
   }
 
   .events{
-    background-image:linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)), url(../src/assets/image/events.jpg)  ;
+    background-image:linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)), url(${ImageEvents});
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
   }
 
   .rent{
-    background-image:linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)), url(../src/assets/image/rent.jpg)  ;
+    background-image:linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)), url(${ImageRent});
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;

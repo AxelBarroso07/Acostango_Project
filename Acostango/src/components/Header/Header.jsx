@@ -1,10 +1,12 @@
 import './Index.css'
 import '../Header/Index.css'
 
+import ImageHeader from '../../assets/image/image-index.png'
+
 function Index() {
   return (
     <section className='index'>
-      <div className='container__image'></div>
+        <img className='container__image' src={ImageHeader} />
     </section>
   )
 }
