@@ -18,8 +18,9 @@ function Contact() {
     try {
       const HOST = import.meta.env.VITE_DB_HOST;
       const PORT = import.meta.env.VITE_PORT_SERVER;
+      const PROTOCOL = import.meta.env.VITE_PROTOCOL
 
-      const response = await fetch(`http://${HOST}:${PORT}/sendMail`, {
+      const response = await fetch(`${PROTOCOL}://${HOST}${PORT}/sendMail`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
