@@ -31,7 +31,7 @@ async function config() {
             // console.log("config", config)
 
             port = parseInt(config.PORT)
-            host = config.DB_HOST.toString()
+            host = config.DOMAIN_ADMIN.toString()
             protocol = config.PROTOCOL.toString()
         } else {
             console.log('Error en config.ok de fetch /config')
@@ -186,7 +186,7 @@ async function createClass(formData) {
             // console.log("config", config)
 
             port = parseInt(config.PORT)
-            host = config.DB_HOST.toString()
+            host = config.DOMAIN_ADMIN.toString()
             protocol = config.PROTOCOL.toString()
         } else {
             console.log('Error en config.ok de fetch /config')

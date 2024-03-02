@@ -1,10 +1,10 @@
-import { PORT, DB_HOST, PROTOCOL } from '../../../config.js';
+import { PORT, DOMAIN_ADMIN, PROTOCOL } from '../../../config.js';
 
 export const getConfig = async (req, res) => {
     try {
         const config = { // this will store the configuration of the server
             PORT,
-            DB_HOST,
+            DOMAIN_ADMIN,
             PROTOCOL
         }
         res.json(config) // return the configuration of the server
