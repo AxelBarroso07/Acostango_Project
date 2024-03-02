@@ -4,7 +4,7 @@ dotenv.config();
 
 const port = process.env.VITE_PORT ? `:${process.env.VITE_PORT}` : ''
 
-const origin = `${process.env.VITE_PROTOCOL}://${process.env.VITE_DB_HOST}${port}`
+const origin = `${process.env.VITE_PROTOCOL}://${process.env.DOMAIN}${port}`
 
 export const corsOptions = {
     origin,
