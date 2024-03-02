@@ -4,6 +4,8 @@ import '../Pages/PageMilonga.css'
 import i18n from '../Translation/i18n.js';
 import { useTranslation } from 'react-i18next';
 
+import ImageMilonga from '../assets/image/page-milonga.jpg'
+
 function PageMilonga() {
 
   const { t } = useTranslation('translation');
@@ -13,7 +15,7 @@ function PageMilonga() {
       <NavBar/>
       <div className='container__milonga'>
         <div className="container__image-milonga">
-          <img src="../src/assets/image/page-milonga.jpg" alt="img-classes" className='image__milonga' />
+          <img src={ImageMilonga} alt="img-classes" className='image__milonga' />
         </div>
         <h1 className="milonga__title-3">{t("milonga.title")}</h1>
         <div className="container__info-3">
