@@ -14,7 +14,7 @@ function PageClasses() {
   const fetchDataClasses = useCallback(async () => {
     try {
       const HOST = import.meta.env.VITE_DB_HOST;
-      const PORT = import.meta.env.VITE_PORT_SERVER;
+      const PORT = import.meta.env.VITE_PORT_SERVER ? import.meta.env.VITE_PORT_SERVER : '';
       const PROTOCOL = import.meta.env.VITE_PROTOCOL
 
       const response = await fetch(`${PROTOCOL}://${HOST}${PORT}/classes`, {
