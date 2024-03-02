@@ -1,4 +1,4 @@
-const DOMAIN = 'http://localhost:3001'
+const DOMAIN = 'https://admin.acostango.at'
 
 
 function showHide(action, modalId) { // show hide modal considering action and modalId
