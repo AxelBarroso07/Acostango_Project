@@ -5,7 +5,7 @@ import ImageHeader from '../../assets/image/image-index.png'
 
 function Index() {
   return (
-    <section className='index'>
+    <section className='index' id='index'>
         <img className='container__image' src={ImageHeader} />
     </section>
   )

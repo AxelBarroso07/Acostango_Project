@@ -16,7 +16,7 @@ const Nav = styled.nav`
   z-index: 999;
 
   .logo{
-    width:50%;
+    width:auto;
     height:100%;
   }
 
