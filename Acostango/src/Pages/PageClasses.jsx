@@ -4,6 +4,8 @@ import NavBar from '../components/NavBar/NavBar'
 import i18n from '../Translation/i18n.js';
 import { useTranslation } from 'react-i18next';
 
+import ImageClases from '../assets/image/image-classes.png'
+
 function PageClasses() {
   const { t } = useTranslation('translation');
   const [ data, setData ] = useState(null);
@@ -14,7 +16,7 @@ function PageClasses() {
   const fetchDataClasses = useCallback(async () => {
     try {
       const HOST = import.meta.env.VITE_DB_HOST;
-      const PORT = import.meta.env.VITE_PORT_SERVER;
+      const PORT = import.meta.env.VITE_PORT_SERVER ? import.meta.env.VITE_PORT_SERVER : '';
       const PROTOCOL = import.meta.env.VITE_PROTOCOL
 
       const response = await fetch(`${PROTOCOL}://${HOST}${PORT}/classes`, {
@@ -79,7 +81,7 @@ function PageClasses() {
       <NavBar />
       <div className="container__clases">
         <div className="container__image-clases">
-          <img src="../src/assets/image/image-classes.png" alt="img-classes" className="image__classes" />
+          <img src={ImageClases} alt="img-classes" className="image__classes" />
         </div>
         <h1 className="classes__title">{t("classes.title")}</h1>
         <div className="container__info-2">

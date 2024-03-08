@@ -4,6 +4,8 @@ import '../Pages/PageRent.css'
 import i18n from '../Translation/i18n.js';
 import { useTranslation } from 'react-i18next';
 
+import ImageRent1 from '../assets/image/image-rent.png'
+
 function PageRent() {
   const { t } = useTranslation('translation');
   return (
@@ -12,9 +14,9 @@ function PageRent() {
       <div className='container__rent'>
         <h1 className="rent__title">{t("studio.title")}</h1>
         <div className="container__slider-images">
-          <div className='container__image-1'><img src="../src/assets/image/image-rent.png" alt="img__studio-1" className='img__studio-1'/></div>
+          <div className='container__image-1'><img src={ImageRent1} alt="img__studio-1" className='img__studio-1'/></div>
           <div className='container__column'>
-            <div className='container__image-2'><img src="../src/assets/image/image-rent.png" alt="img__studio-2" className='img__studio-2'/></div>
+            <div className='container__image-2'><img src={ImageRent1} alt="img__studio-2" className='img__studio-2'/></div>
             <div className='container__image-3'>
               <div className='container__vermas'>
             </div></div>

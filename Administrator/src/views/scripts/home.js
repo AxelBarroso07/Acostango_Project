@@ -1,4 +1,4 @@
-const DOMAIN = 'http://localhost:3001'
+const DOMAIN = 'https://admin.acostango.at'
 
 
 function showHide(action, modalId) { // show hide modal considering action and modalId
@@ -31,7 +31,7 @@ async function config() {
             // console.log("config", config)
 
             port = parseInt(config.PORT)
-            host = config.DB_HOST.toString()
+            host = config.DOMAIN_ADMIN.toString()
             protocol = config.PROTOCOL.toString()
         } else {
             console.log('Error en config.ok de fetch /config')
@@ -131,9 +131,8 @@ function confirmEdit(idCalendarDB, titleDB, descriptionDB, timeStartDB, timeFini
 async function deleteClass(idCalendar) {
     const { host, port, protocol } = await config()
     
-    console.log("idCalendar from deleteClass()", idCalendar);
     
-    fetch(`${protocol}://${host}:${port}/deleteClass/${idCalendar}`, {
+    fetch(`${protocol}://${host}/deleteClass/${idCalendar}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
@@ -153,7 +152,7 @@ async function deleteEvent(idCalendar) {
     
     console.log("idCalendar from deleteClass()", idCalendar);
     
-    fetch(`${protocol}://${host}:${port}/deleteEvent/${idCalendar}`, {
+    fetch(`${protocol}://${host}/deleteEvent/${idCalendar}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
@@ -186,7 +185,7 @@ async function createClass(formData) {
             // console.log("config", config)
 
             port = parseInt(config.PORT)
-            host = config.DB_HOST.toString()
+            host = config.DOMAIN_ADMIN.toString()
             protocol = config.PROTOCOL.toString()
         } else {
             console.log('Error en config.ok de fetch /config')
@@ -198,7 +197,7 @@ async function createClass(formData) {
     console.log("data from createClass():", formData)
 
     try {
-        const response = await fetch(`${protocol}://${host}:${port}/newClass`, {
+        const response = await fetch(`${protocol}://${host}/newClass`, {
             method: 'POST',
             body: formData
         })
