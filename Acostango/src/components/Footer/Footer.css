@@ -37,7 +37,6 @@
     font-size: 1em;
     font-family: 'Roboto', sans-serif;
     gap: 10px;
-    text-transform: capitalize;
 }
 
 .footer .contact__social-media {

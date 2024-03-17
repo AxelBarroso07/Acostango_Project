@@ -87,9 +87,9 @@
     "footer": {
         "links": {
             "maps": "maps",
-            "whatsapp": "whatsapp",
+            "whatsapp": "WhatsApp",
             "call": "call",
-            "email": "email"
+            "email": "Email"
         }
     }
 }
