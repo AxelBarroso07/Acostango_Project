@@ -15,14 +15,25 @@ const Nav = styled.nav`
   position:fixed;
   z-index: 999;
 
+  @media (max-width: 960px){
+    padding: 10px 25px;
+  }
+
   .logo{
     width:auto;
-    height:100%;
+    height:auto;
   }
 
   .header__logo{
-    width:100%;
-    height:100%;
+    width: 300px;
+    height:60px;
+  }
+
+  @media (max-width: 500px){
+    .header__logo{
+      width: 200px;
+      height:40px;
+    }
   }
 `
 
@@ -30,7 +41,7 @@ const NavBar = () => {
   return (
     <Nav>
       <MenuButton />
-        <div className="logo"><a href="/"><img src={LogoAcostango} alt="acostango_logo" className='header__logo'/></a></div>
+      <div className="logo"><a href="/"><img src={LogoAcostango} alt="acostango_logo" className='header__logo'/></a></div>
       <ButtonLanguage />
     </Nav>
   )
