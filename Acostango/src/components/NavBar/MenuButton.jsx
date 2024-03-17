@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import Menu from './Menu'
 
 const Burger = styled.div`
-  width:2rem;
-  height:2rem;
+  width:32px;
+  height:32px;
   top:15px;
   left:20px;
   display:flex;
@@ -12,6 +12,11 @@ const Burger = styled.div`
   flex-flow:column nowrap;
   z-index:20;
 
+  @media (max-width: 500px){
+    width:25px;
+    height:25px;
+  }
+  
   div{ 
     width:2rem;
     height:0.25rem;
@@ -33,6 +38,11 @@ const Burger = styled.div`
     &:nth-child(3){
       transform: ${({open}) => open ? 'rotate(-45deg)' : 'rotate(0)'};
     }
+
+    @media (max-width: 500px){
+      width:25px;
+    }
+
   }
 `
 
