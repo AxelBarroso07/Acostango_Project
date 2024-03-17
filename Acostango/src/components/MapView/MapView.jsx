@@ -15,12 +15,12 @@ export const MapView = () => {
     L.Marker.prototype.options.icon = DefaultIcon;    
     return (
         <div>
-            <MapContainer center={[48.190493718277075, 16.353333125430908]} zoom={17} scrollWheelZoom={true} className='mapa'>
+            <MapContainer center={[48.1903842, 16.3535917]} zoom={17} scrollWheelZoom={true} className='mapa'>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright" >OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <Marker position={[48.190493718277075, 16.353333125430908]}>
+                <Marker position={[48.1903842, 16.3535917]}>
                     <Popup>
                         Acostango Studio.
                     </Popup>
