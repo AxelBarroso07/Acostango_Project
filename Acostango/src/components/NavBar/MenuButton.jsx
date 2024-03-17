@@ -13,8 +13,8 @@ const Burger = styled.div`
   z-index:20;
 
   @media (max-width: 500px){
-    width:25px;
-    height:25px;
+    width:42x;
+    height:30px;
   }
   
   div{ 
@@ -39,10 +39,28 @@ const Burger = styled.div`
       transform: ${({open}) => open ? 'rotate(-45deg)' : 'rotate(0)'};
     }
 
-    @media (max-width: 500px){
-      width:25px;
-    }
 
+    @media (max-width: 500px){
+
+      &:nth-child(1){
+        transform: ${({open}) => open ? 'rotate(45deg)' : 'rotate(0)'};
+        width:30px;
+      }
+  
+      &:nth-child(2){
+        transform: ${({open}) => open ? 'translateX(-100%)' : 'translateX(0)'};
+        opacity:${({open}) => open ? 0 : 1};
+        width:30px;
+      }
+  
+      &:nth-child(3){
+        transform: ${({open}) => open ? 'rotate(-45deg)' : 'rotate(0)'};
+        width:30px;
+      }
+
+      width:25px;
+      height:3px;
+    }
   }
 `
 

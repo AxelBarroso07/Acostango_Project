@@ -4,7 +4,6 @@
     flex-direction: column;
     align-items: center;
     background-color:#fff;
-    padding-bottom: 100px;
 }
 
 .footer__description{
@@ -25,6 +24,10 @@
 
 .footer__link{
     text-decoration: none;
+}
+
+.leaflet-control-attribution{
+  display: none;
 }
 
 .a__link{
