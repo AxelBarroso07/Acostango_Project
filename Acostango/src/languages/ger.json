@@ -88,9 +88,9 @@
     "footer": {
         "links": {
             "maps": "karten",
-            "whatsapp": "whatsapp",
+            "whatsapp": "WhatsApp",
             "call": "anruf",
-            "email": "email"
+            "email": "Email"
         }
     }
 }

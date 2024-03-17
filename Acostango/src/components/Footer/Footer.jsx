@@ -10,10 +10,6 @@ function Footer() {
 
   const [isHidden, setIsHidden] = useState(false);
 
-  const test = t("footer.links.maps");
-  console.log(test)
-  console.log(t("footer.links.maps"))
-
   useEffect(() => {
     let lastScrollPosition = window.scrollY;
 
