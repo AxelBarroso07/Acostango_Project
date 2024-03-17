@@ -57,6 +57,7 @@ form{
     flex-direction: column;
     gap: 20px;
     width: 400px;
+    border-radius: 0px;
 }
 
 input[type="text"]{
@@ -73,6 +74,7 @@ input[type="mail"]{
     width: 100%;
     height: 50px;
     font-size: 1.5em ;
+    border-radius: 0px;
 }
 
 textarea{
@@ -82,6 +84,7 @@ textarea{
     height: 100px;
     font-size: 2em;
     resize: none;
+    border-radius: 0px;
 }
 
 textarea::-webkit-scrollbar {

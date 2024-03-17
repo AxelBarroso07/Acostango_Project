@@ -2,6 +2,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    list-style: none;
+    -webkit-list-style:none;
 }
 
 :root{
@@ -11,4 +13,6 @@
 
 body{
     background-color: var(--primary);
+    list-style: none;
+    -webkit-list-style:none;
 }

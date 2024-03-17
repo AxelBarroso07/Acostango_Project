@@ -29,6 +29,7 @@ const LeftMenu = styled.menu`
 
   *{
     list-style:none;
+    -webkit-list-style:none;
   }
 
   .menu__social-media{
@@ -125,6 +126,7 @@ const LeftMenu = styled.menu`
     margin: auto;
     text-transform:uppercase;
     color:#000;
+    -webkit-justify-content:space-between;
   }
 
   .container_clases{
@@ -187,7 +189,7 @@ const LeftMenu = styled.menu`
       justify-content:center;
       align-items:center;
       flex-direction:column;
-      padding-top: 20px;
+      padding-top: 10px;
       width: 100%;
     }
 
@@ -242,9 +244,10 @@ const LeftMenu = styled.menu`
     .container_clases{
       display: flex;
       justify-content: center;
-      gap: 20px;
+      gap: 10px;
       flex-wrap: wrap;
       width: 100%;
+      padding:60px 0px 10px 0px;
     }
 
     .clases{
