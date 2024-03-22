@@ -8,27 +8,30 @@ function Footer() {
 
   const { t } = useTranslation('translation');
 
-  const [isHidden, setIsHidden] = useState(false);
-
+  const [isHidden, setIsHidden] = useState(true); // Cambiado a true inicialmente
+  
   useEffect(() => {
     let lastScrollPosition = window.scrollY;
-
+  
     const handleScroll = () => {
       const currentScrollPosition = window.scrollY;
-
+  
       const scrollingUp = currentScrollPosition < lastScrollPosition;
-
-      setIsHidden(scrollingUp);
-
+  
+      setIsHidden(!scrollingUp); // Cambiado a la negación de scrollingUp
+  
       lastScrollPosition = currentScrollPosition;
     };
-
+  
     window.addEventListener('scroll', handleScroll);
-
+  
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+  
+  // El resto de tu componente...
+  
 
   return (
     <footer className="footer">
