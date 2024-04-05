@@ -51,19 +51,25 @@
                 </div>
             </div>
             
-            <div class="workshop">
+            <select name="type_class" id="day" required> <!-- the user selects the type class -->
+                <option disabled selected hidden value="">SELECT TYPE CLASS</option>
+                    <option value="workshop">Workshop</option>
+                    <option value="milonga">Milonga</option>
+                    <option value="class">-</option>
+            </select>
+
+            <!-- <div class="workshop">
                 <label>Workshop</label>
                 <div class="optionYes">
                     <label for="workshopOptionTrue">Yes</label>
                     <input type="radio" id="workshopOptionTrue" value="true" name="workshop" required> <!-- the user selects if the class is a workshop -->
-                </div>
+                <!-- </div>
                 
             <div class="optionNo">
                 <label for="workshopOptionFalse">No</label>
                 <input type="radio" id="workshopOptionFalse" value="false" name="workshop" checked required> <!-- the user selects if the class isn't a workshop, by default selected as false -->
-            </div>
-            </div>
-            
+            <!-- </div>
+            </div> -->
             <button type="submit" id="createClassButton">Create</button> <!-- the user clicks the button to create the class -->
         </div>
     </form>

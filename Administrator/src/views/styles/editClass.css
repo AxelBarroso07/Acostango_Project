@@ -135,6 +135,16 @@ input[type="time"]{
     border-bottom: 1px #000 solid;
 }
 
+#type_class{
+    background-color: #ffffff;
+    border: none;
+    color: #000000;
+    height: 50px;
+    width: 400px;
+    text-transform: lowercase;
+    border-bottom: 1px #000 solid;
+}
+
 .primary__rows{
     display: flex;
     justify-content:space-between ;

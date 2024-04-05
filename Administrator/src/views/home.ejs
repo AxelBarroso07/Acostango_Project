@@ -31,7 +31,13 @@
                     <% if (currentClass) { %> <!-- if there is a current class -->
                         <td>
                             <% if (currentClass.time12hrsFinishFormat !== null) { %> <!-- if the class has a finish time -->
-                                <%- currentClass.workshop === 0 ? `<span>Class: ${currentClass.title} ${currentClass.time12hrsStartFormat}-${currentClass.time12hrsFinishFormat}</span>` : `<span>Workshop: ${currentClass.title} ${currentClass.time12hrsStartFormat}-${currentClass.time12hrsFinishFormat}</span>` %> <!-- the class or workshop title and time are displayed in the table -->
+                                <% if (currentClass.type_class === 'class') { %> <!-- the class, workshop or milonga title and time are displayed in the table -->
+                                    <span>Class: <%= currentClass.title %> <%= currentClass.time12hrsStartFormat %>-<%= currentClass.time12hrsFinishFormat %></span>
+                                <% } else if (currentClass.type_class === 'workshop') { %>
+                                    <span>Workshop: <%= currentClass.title %> <%= currentClass.time12hrsStartFormat %>-<%= currentClass.time12hrsFinishFormat %></span>
+                                <% } else if (currentClass.type_class === 'milonga') { %>
+                                    <span>Milonga: <%= currentClass.title %> <%= currentClass.time12hrsStartFormat %>-<%= currentClass.time12hrsFinishFormat %></span>
+                                <% } %>
                             <% } else { %>
                                 <%- `<span>Event: ${currentClass.title} ${currentClass.time12hrsStartFormat}</span>` %> <!-- the event title and time are displayed in the table -->
                             <% } %>
@@ -48,9 +54,17 @@
 <% if(rowsParse && rowsParse.length > 0){ %> <!-- if there are classes -->
     <div class="divClassesDB"> <!-- the classes are displayed -->
         <% rowsParse.map(rowParse => { %> <!-- the classes are mapped -->
-            <div class="classesDB <% if (rowParse.workshop) { %> workshop-class <% } %>" id="classCard"> <!-- the class card is displayed -->
+            <div class="classesDB <% if (rowParse.type_class === 'workshop') { %> workshop-class <% } %>" id="classCard"> <!-- the class card is displayed -->
                 <div class="bd__title">
-                    <%- rowParse.workshop === 0 ? `<span id="classtype">Class: ${rowParse.title}</span>` : rowParse.workshop === 1 ? `<span id="workshoptype">Workshop: ${rowParse.title}</span>` : `<span id="eventType">Event: ${rowParse.title}</span>` %> <!-- the class or workshop title is displayed -->
+                    <% if (rowParse.type_class === 'class') { %>
+                        <span id="classtype">Class: <%= rowParse.title %></span>
+                    <% } else if (rowParse.type_class === 'workshop') { %>
+                        <span id="workshoptype">Workshop: <%= rowParse.title %></span>
+                    <% } else if (rowParse.type_class === 'milonga') { %>
+                        <span id="eventType">Milonga: <%= rowParse.title %></span>
+                    <% } else { %>
+                        <span id="defaultType">Event: <%= rowParse.title %></span>
+                    <% } %> <!-- the class, workshop or milonga title is displayed -->
                 </div>
                 <div class="bd__description">
                     <span><%- rowParse.description %></span> <!-- the class or workshop description is displayed -->

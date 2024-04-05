@@ -10,6 +10,7 @@ import calendarRoutes from './src/server/routes/calendar.routes.js';
 import classesRoutes from './src/server/routes/classes.routes.js';
 import eventsRoutes from './src/server/routes/events.routes.js';
 import sendMail from './src/server/routes/sendMail.routes.js';
+import milonga from './src/server/routes/milonga.routes.js';
 
 const app = express()
 
@@ -21,6 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(calendarRoutes);
 app.use(classesRoutes);
 app.use(eventsRoutes);
+app.use(milonga)
 app.use(sendMail);
 
 app.use((req, res, next) => {

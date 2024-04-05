@@ -60,10 +60,10 @@ export const postConfirmCreateClass = async (req, res) => {
             time_start: reqBody.time_start,
             time_finish: reqBody.time_finish,
             category: 'class', // set the category to class
-            workshop: reqBody.workshop === 'true' ? true : false // if the workshop is true, set it to true, else set it to false
+            type_class: reqBody.type_class // if the workshop is true, set it to true, else set it to false
         };
 
-        const [ rows ] = await pool.query("INSERT INTO calendar SET title = ?, description = ?, image = null, day = ?, price = ?, block = ?,  date = ?, location = null,  time_start = ?, time_finish = ?, category = ?, workshop = ?", [data.title, data.description, data.day, data.price, data.block, data.date, data.time_start, data.time_finish, data.category, data.workshop]) // query to the database to insert the data to the calendar table
+        const [ rows ] = await pool.query("INSERT INTO calendar SET title = ?, description = ?, image = null, day = ?, price = ?, block = ?,  date = ?, location = null,  time_start = ?, time_finish = ?, category = ?, type_class = ?", [data.title, data.description, data.day, data.price, data.block, data.date, data.time_start, data.time_finish, data.category, data.type_class]) // query to the database to insert the data to the calendar table
 
         // console.log(rows)
 
@@ -142,7 +142,7 @@ export const getEditClass = async (req,res) =>{
                     time_start: moment(row.time_start, 'HH:mm:ss').format('HH:mm'), // store the time_start in 'HH:mm' format
                     time_finish: moment(row.time_finish, 'hh:mm:ss').format('HH:mm'), // store the time_finish in 'HH:mm' format
                     category: row.category,
-                    workshop: row.workshop
+                    type_class: row.type_class
                 }
             })
         }
@@ -175,10 +175,10 @@ export const putConfirmEditClass = async (req, res) =>{
             block: reqBody.block,
             timeStart: reqBody.timeStart,
             timeFinish: reqBody.timeFinish,
-            workshop: reqBody.workshop === 'true' ? true : false // if the workshop is true, set it to true, else set it to false
+            type_class: reqBody.type_class // if the workshop is true, set it to true, else set it to false
         }
 
-        const [ result ] = await pool.query("UPDATE calendar SET title = ?, description = ?, day = ?, price = ?, block = ?, time_start = ?, time_finish = ?, workshop = ? WHERE id_calendar = ?", [data.title, data.description, data.day, data.price, data.block, data.timeStart, data.timeFinish, data.workshop, idCalendar]); // query to the database to update the class from the calendar table
+        const [ result ] = await pool.query("UPDATE calendar SET title = ?, description = ?, day = ?, price = ?, block = ?, time_start = ?, time_finish = ?, type_class = ? WHERE id_calendar = ?", [data.title, data.description, data.day, data.price, data.block, data.timeStart, data.timeFinish, data.type_class, idCalendar]); // query to the database to update the class from the calendar table
 
         if(result.affectedRows === 0) {
             return res.status(404).json({
