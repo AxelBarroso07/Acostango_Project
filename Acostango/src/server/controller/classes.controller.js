@@ -5,12 +5,12 @@ export const getClasses = async (req, res) => {
     try {
         let data = []
 
-        const [ rows ] = await pool.query(`SELECT id_calendar, title, description, day, price, block, time_start, time_finish, workshop, category,
-        block,
+        const [ rows ] = await pool.query(`SELECT id_calendar, title, description, day, price, block, time_start, time_finish, category,
+        block, type_class,
         FORMAT(block, 2) AS block_formatted,
         FORMAT(price, 2) AS price_formatted
         FROM calendar
-        WHERE category = 'class'
+        WHERE type_class = 'class' OR type_class = 'workshop'
         ORDER BY CASE
             WHEN day = 'Monday' THEN 1
             WHEN day = 'Tuesday' THEN 2
@@ -41,7 +41,7 @@ export const getClasses = async (req, res) => {
                     time12hrsStartFormat: moment(row.time_start, 'hh:mm A').format('hh:mm A'),
                     timeFinishParse: row.time_finish,
                     time12hrsFinishFormat: moment(row.time_finish, 'hh:mm A').format('hh:mm A'),
-                    workshop: row.workshop,
+                    type_class: row.type_class,
                     category: row.category
                 };
             })

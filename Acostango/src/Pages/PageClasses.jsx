@@ -58,7 +58,7 @@ function PageClasses() {
       const workshops = {};
 
       allData.forEach(data => {
-        if (data.workshop) {
+        if (data.type_class === "workshop") {
           if (!workshops[data.title]) {
             workshops[data.title] = [];
           }
