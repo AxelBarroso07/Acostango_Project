@@ -73,47 +73,6 @@ function PageMilonga() {
                           </div>
                         );
                     })}
-                    
-          <div className="container__info-3">
-            <div className="container__block-3">
-                <p className="description__block-3">{t("milonga.description")}</p>
-                <div className="horario__block-3">
-                  <table className='table__block-3'>
-                    <tr className='tr-3'>{t("milonga.day")}: 19:00 - 22:00 <span className='precio-3'>10 €</span></tr>
-                  </table>
-                </div>
-            </div>
-          </div>
-          <div className="container__info-3">
-            <div className="container__block-3">
-                <p className="description__block-3">{t("milonga.description")}</p>
-                <div className="horario__block-3">
-                  <table className='table__block-3'>
-                    <tr className='tr-3'>{t("milonga.day")}: 19:00 - 22:00 <span className='precio-3'>10 €</span></tr>
-                  </table>
-                </div>
-            </div>
-          </div>
-          <div className="container__info-3">
-            <div className="container__block-3">
-                <p className="description__block-3">{t("milonga.description")}</p>
-                <div className="horario__block-3">
-                  <table className='table__block-3'>
-                    <tr className='tr-3'>{t("milonga.day")}: 19:00 - 22:00 <span className='precio-3'>10 €</span></tr>
-                  </table>
-                </div>
-            </div>
-          </div>
-          <div className="container__info-3">
-            <div className="container__block-3">
-                <p className="description__block-3">{t("milonga.description")}</p>
-                <div className="horario__block-3">
-                  <table className='table__block-3'>
-                    <tr className='tr-3'>{t("milonga.day")}: 19:00 - 22:00 <span className='precio-3'>10 €</span></tr>
-                  </table>
-                </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>

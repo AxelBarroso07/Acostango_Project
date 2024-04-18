@@ -4,7 +4,7 @@ import '../Pages/PageRent.css'
 import i18n from '../Translation/i18n.js';
 import { useTranslation } from 'react-i18next';
 
-import ImageRent1 from '../assets/image/image-rent.png'
+import ImageRent1 from '../assets/image/image-rent.jpg'
 
 function PageRent() {
   const { t } = useTranslation('translation');
