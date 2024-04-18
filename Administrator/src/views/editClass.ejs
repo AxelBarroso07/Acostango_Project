@@ -38,17 +38,24 @@
                     <input type="number" id="block" name="block" value="<%= data.block %>" min="0" max="99999" placeholder="BLOCK OF 10 CLASSES"> <!-- the user enters the block of classes of the class -->
                 </div>
                 
-                <div class="workshop">
+                <select name="type_class" id="type_class" required> <!-- the user selects the type class -->
+                    <option disabled selected hidden value="">SELECT TYPE CLASS</option>
+                        <option value="workshop">Workshop</option>
+                        <option value="milonga">Milonga</option>
+                        <option value="class">-</option>
+                </select>
+
+                <!-- <div class="workshop">
                     <label>Workshop</label>
-                    <div class="optionYes"> <!-- the user selects if the class is a workshop -->
-                       <label for="workshopOptionTrue">Yes</label>
+                    <div class="optionYes">  the user selects if the class is a workshop -->
+                       <!-- <label for="workshopOptionTrue">Yes</label>
                        <input type="radio" id="workshopOptionTrue" value="true" name="workshop" <%= data.workshop === 1 ? 'checked' : '' %> required> <!-- the user selects if the class is a workshop -->
-                    </div>
+                    <!-- </div>
                     <div class="optionNo">
                        <label for="workshopOptionFalse">No</label>
                        <input type="radio" id="workshopOptionFalse" value="false" name="workshop" <%= data.workshop === 0 ? 'checked' : '' %> required> <!-- the user selects if the class isn't a workshop -->
-                    </div>
-                </div>
+                    <!-- </div>
+                </div>  -->
                 
                 <div class="hora">
                     <div class="horaStart">
@@ -83,7 +90,7 @@
         const block = formClassEdit.querySelector("#block").value
         const timeStart = formClassEdit.querySelector("#time_start").value
         const timeFinish = formClassEdit.querySelector("#time_finish").value
-        const workshop = formClassEdit.querySelector('input[name="workshop"]:checked').value; // the user selects if the class is a workshop
+        const type_class = formClassEdit.querySelector('#type_class').value; // the user selects if the class is a workshop or milonga
 
         const data = { // data const is set with the class information
             id,
@@ -94,7 +101,7 @@
             block,
             timeStart,
             timeFinish,
-            workshop
+            type_class
         }
         
         const response = await fetch(`/confirmEditClass/${data.id}`, { // the class information is sent to the server for his edition

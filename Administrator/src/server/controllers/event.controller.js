@@ -97,11 +97,11 @@ export const postConfirmCreateEvent = async(req, res) => {
             time_start: reqBody.time_start,
             time_finish: null, // event has no time_finish
             category: category,
-            workshop: null // event has no workshop
+            type_class: 'null' // event has no workshop
         }
 
-        const [ rows ] = await pool.query("INSERT INTO calendar(title, description, image, day, date, location, price, time_start, time_finish, category, workshop) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [data.title, data.description, data.image, data.day, data.date, data.location, data.price, data.time_start, data.time_finish, data.category, data.workshop]) // Insert the data in the database
-
+        const [ rows ] = await pool.query("INSERT INTO calendar(title, description, image, day, date, location, price, time_start, time_finish, category, type_class) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [data.title, data.description, data.image, data.day, data.date, data.location, data.price, data.time_start, data.time_finish, data.category, data.type_class]) // Insert the data in the database
+        console.log(rows)
         return res.redirect('home') // Redirect to home page
     } catch(error) {
         console.error(error);
@@ -214,11 +214,11 @@ export const putConfirmEditEvent = async (req,res) =>{
             price: reqBody.price,
             timeStart: reqBody.timeStart,
             timeFinish: null,
-            workshop: null
+            type_class: 'null'
         }
         // console.log("data:", data)
 
-        const [ result ] = await pool.query("UPDATE calendar SET title = ?, description = ?, image = ?, day = ?, date = ?, location = ?, price = ?, time_start = ?, time_finish = ?, workshop = ? WHERE id_calendar = ?", [data.title, data.description, data.image, data.day, data.date, data.location, data.price, data.timeStart, data.timeFinish, data.workshop, idCalendar]);
+        const [ result ] = await pool.query("UPDATE calendar SET title = ?, description = ?, image = ?, day = ?, date = ?, location = ?, price = ?, time_start = ?, time_finish = ?, type_class = ? WHERE id_calendar = ?", [data.title, data.description, data.image, data.day, data.date, data.location, data.price, data.timeStart, data.timeFinish, data.type_class, idCalendar]);
         
         if (result.affectedRows === 0) {
             return res.status(404).send({ isUpdateRegister: false, redirectTo: '/error' });

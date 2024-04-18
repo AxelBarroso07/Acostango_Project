@@ -71,7 +71,7 @@ export const getHome = async (req, res) => {
                     timeFinishParse: row.time_finish,
                     time12hrsStartFormat: moment(row.time_start, 'hh:mm A').format('hh:mm A'), // we will format the time_start to 12hrs
                     time12hrsFinishFormat: row.time_finish !== null ? moment(row.time_finish, 'hh:mm:ss A').format('hh:mm A') : null, // if time_finish is not null, we will format it to 12hrs
-                    workshop: row.workshop,
+                    type_class: row.type_class,
                     category: row.category
                 };
             })
