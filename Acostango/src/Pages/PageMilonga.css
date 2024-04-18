@@ -15,9 +15,28 @@
     height: 100%;
 }
 
+.container__milongas{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding-bottom: 100px;
+}
+
+.milong{
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    flex-direction: column;
+    gap: 10px;
+    width: 45%;
+}
+
 .milonga__title-3{
     color: #000;
-    font-size: 3.5em;
+    font-size: 3.5vw;
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     text-align: center;
@@ -32,6 +51,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     padding: 20px 0px 100px;
+    width: 45%;
 }
 
 .container__block-3{
@@ -41,9 +61,8 @@
     flex-direction: column;
     gap: 40px;
     width: 60ch;
-    margin: 0 auto;
     color: #000;
-    font-size: 2em;
+    font-size: 1.5vw;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     text-align: center;
@@ -87,9 +106,7 @@
 
     .container__block-3{
         width: 100%;
-
     }
-    
 }
 
 @media (max-width:700px) {
@@ -102,7 +119,7 @@
 
     .milonga__title-3{
         color: #000;
-        font-size: 2.8em;
+        font-size: 10vw;
         font-family: 'Roboto', sans-serif;
         font-weight: 500;
         text-align: center;
@@ -111,9 +128,10 @@
 
     .description__block-3{
         color: #000;
-        font-size: .8em;
+        font-size: 4vw;
         font-family: 'Nunito', sans-serif;
         font-weight: 500;
+        text-align: center;
     }
     
     .tr-3{
@@ -121,10 +139,53 @@
         justify-content: space-between;
         align-items: center;
         color: #000;
-        font-size: .6em;
+        font-size: 4vw;
         font-family: 'Nunito', sans-serif;
         font-weight: 600;
     }
-    
 }
 
+@media (max-width:1000px) {
+    .milong {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .container__milongas{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    
+    .container__info-3{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 20px 0px 20px;
+        width: 100%;
+    }
+    
+    .container__block-3{
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        flex-direction: column;
+        gap: 40px;
+        width: 60ch;
+        color: #000;
+        font-size: 2vw;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+        text-align: center;
+        padding: 40px 0px 50px;
+    }
+}

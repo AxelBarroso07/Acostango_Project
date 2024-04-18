@@ -42,7 +42,7 @@ function PageRent() {
         </div>
 
         <div className="container__precio">
-          <p className="rent__precio">25.000 €</p>
+          <p className="rent__precio">---€</p>
         </div>
       </div>
     </div>
