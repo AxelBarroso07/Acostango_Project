@@ -14,14 +14,11 @@ function PageMilonga() {
 
   const fetchDataMilonga = useCallback(async () => {
     try {
-      // const HOST = import.meta.env.VITE_DB_HOST;
-      // const PORT = import.meta.env.VITE_PORT_SERVER ? import.meta.env.VITE_PORT_SERVER : '';
-      // const PROTOCOL = import.meta.env.VITE_PROTOCOL
-
       const HOST = import.meta.env.VITE_DB_HOST;
-      const PORT = import.meta.env.VITE_PORT_SERVER;
+      const PORT = import.meta.env.VITE_PORT_SERVER ? import.meta.env.VITE_PORT_SERVER : '';
+      const PROTOCOL = import.meta.env.VITE_PROTOCOL;
 
-      const response = await fetch(`http://${HOST}:${PORT}/milonga`, {
+      const response = await fetch(`${PROTOCOL}://${HOST}${PORT}/milonga`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -52,35 +49,28 @@ function PageMilonga() {
         <div className="container__image-milonga">
           <img src={ImageMilonga} alt="img-classes" className='image__milonga' />
         </div>
-        {data &&
-                  data.map((item) => {
-                      return ( 
-                        <div key={item.idMilonga}>
-                          <h1  className="milonga__title-3">{item.title}</h1>
-                            <div className="container__info-3">
-                              <div className="container__block-3">
-                                <p className="description__block-3">{item.description}</p>
-                                  <div className="horario__block-3">
-                                    <table className='table__block-3'>
-                                    <tr className='tr-3'>{item.day}: {item.time12hrsStartFormat} - {item.time12hrsFinishFormat} <span className='precio-3'> {item.price} </span></tr>
-                                    </table>
-                                  </div>
+        <h1 className="milonga__title-3">{t("milonga.title")}</h1>
+
+        <div className='container__milongas'>
+          {data &&
+                    data.map((item) => {
+                        return ( 
+                          <div key={item.idMilonga} className='milong'>
+                            <h1  className="milonga__title-3">{item.title}</h1>
+                              <div className="container__info-3">
+                                <div className="container__block-3">
+                                  <p className="description__block-3">{item.description}</p>
+                                    <div className="horario__block-3">
+                                      <table className='table__block-3'>
+                                      <tr className='tr-3'>{item.day}: {item.time12hrsStartFormat} - {item.time12hrsFinishFormat} <span className='precio-3'> {item.price} </span></tr>
+                                      </table>
+                                    </div>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      );
-                  })}
-        {/* <h1 className="milonga__title-3">{t("milonga.title")}</h1>
-        <div className="container__info-3">
-          <div className="container__block-3">
-              <p className="description__block-3">{t("milonga.description")}</p>
-              <div className="horario__block-3">
-                <table className='table__block-3'>
-                  <tr className='tr-3'>{t("milonga.day")}: 19:00 - 22:00 <span className='precio-3'>10 €</span></tr>
-                </table>
-              </div> */}
-          {/* </div>
-        </div> */}
+                        );
+                    })}
+        </div>
       </div>
     </div>
   )

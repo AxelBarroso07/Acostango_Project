@@ -4,7 +4,7 @@ import NavBar from '../components/NavBar/NavBar'
 import i18n from '../Translation/i18n.js';
 import { useTranslation } from 'react-i18next';
 
-import ImageClases from '../assets/image/image-classes.png'
+import ImageClases from '../assets/image/image-classes.jpg'
 
 function PageClasses() {
   const { t } = useTranslation('translation');
