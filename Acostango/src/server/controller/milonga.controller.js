@@ -21,7 +21,7 @@ export const getMilonga = async (req, res) => {
 
         if(rows && rows.length > 0) {
             data = rows.map(row => {
-                const price = row[0].price_formatted.replace(/\.00$/, '') + '€'
+                const price = row.price_formatted.replace(/\.00$/, '') + '€'
                 return {
                     idMilonga: row.id_calendar,
                     title: row.title,

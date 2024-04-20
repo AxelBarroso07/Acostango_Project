@@ -49,7 +49,7 @@ function PageMilonga() {
         <div className="container__image-milonga">
           <img src={ImageMilonga} alt="img-classes" className='image__milonga' />
         </div>
-        <h1 className="milonga__title-3">{t("milonga.title")}</h1>
+        <h1 className="milonga__title">{t("milonga.title")}</h1>
 
         <div className='container__milongas'>
           {data &&

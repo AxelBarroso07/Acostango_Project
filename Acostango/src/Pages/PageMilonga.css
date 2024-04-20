@@ -31,14 +31,23 @@
     align-items: start;
     flex-direction: column;
     gap: 10px;
-    width: 45%;
+    width: 40%;
 }
 
-.milonga__title-3{
+.milonga__title{
     color: #000;
     font-size: 3.5vw;
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
+    text-align: center;
+    padding: 40px 0px 20px;
+    text-transform: uppercase;
+}
+.milonga__title-3{
+    color: #000;
+    font-size: 1.8vw;
+    font-family: 'Nunito', sans-serif;
+    font-weight: bold;
     text-align: center;
     padding: 40px 0px 20px;
     text-transform: uppercase;
@@ -60,7 +69,7 @@
     align-items: start;
     flex-direction: column;
     gap: 40px;
-    width: 60ch;
+    width: 100ch;
     color: #000;
     font-size: 1.5vw;
     font-family: 'Roboto', sans-serif;
