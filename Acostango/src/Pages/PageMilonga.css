@@ -19,7 +19,7 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     gap: 40px;
     padding-bottom: 100px;
@@ -30,17 +30,27 @@
     justify-content: space-between;
     align-items: start;
     flex-direction: column;
-    gap: 10px;
-    width: 45%;
+    width: 100%;
+    height: 100%;
 }
 
-.milonga__title-3{
+.milonga__title{
     color: #000;
     font-size: 3.5vw;
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     text-align: center;
-    padding: 40px 0px 20px;
+    padding: 20px 0px 20px;
+    text-transform: uppercase;
+}
+
+.milonga__title-3{
+    color: #000;
+    font-size: 1.8vw;
+    font-family: 'Nunito', sans-serif;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px 0px 20px;
     text-transform: uppercase;
 }
 
@@ -50,8 +60,8 @@
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
-    padding: 20px 0px 100px;
-    width: 45%;
+    padding: 20px 0px 20px;
+    width: 100%;
 }
 
 .container__block-3{
@@ -60,20 +70,20 @@
     align-items: start;
     flex-direction: column;
     gap: 40px;
-    width: 60ch;
     color: #000;
     font-size: 1.5vw;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     text-align: center;
-    padding: 40px 0px 50px;
+    padding: 40px 0px 40px;
 }
 
 .description__block-3{
     color: #000;
-    font-size: 1em;
+    font-size: 1.5vw;
     font-family: 'Nunito', sans-serif;
     font-weight: 500;
+    text-align: center;
 }
 
 .horario__block-3{
@@ -119,7 +129,16 @@
 
     .milonga__title-3{
         color: #000;
-        font-size: 10vw;
+        font-size: 4vw;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 500;
+        text-align: center;
+        padding: 10px 0px 10px;
+    }
+
+    .milonga__title{
+        color: #000;
+        font-size: 6vw;
         font-family: 'Roboto', sans-serif;
         font-weight: 500;
         text-align: center;
@@ -159,6 +178,7 @@
         display: flex;
         justify-content: space-between;
         width: 100%;
+        height: 50%;
         flex-direction: column;
         flex-wrap: wrap;
         gap: 20px;
@@ -180,7 +200,6 @@
         align-items: start;
         flex-direction: column;
         gap: 40px;
-        width: 60ch;
         color: #000;
         font-size: 2vw;
         font-family: 'Roboto', sans-serif;
